@@ -1,6 +1,6 @@
 const { data } = require("react-router-dom");
 const User = require("../models/User");
-const jwt = require('jsonwebtoken')
+const jwt = require("jsonwebtoken");
 
 const signUp = async (req, res) => {
   try {
@@ -12,8 +12,8 @@ const signUp = async (req, res) => {
       });
     }
 
-    const user = await User.findOne({ email }); 
-    console.log(user)
+    const user = await User.findOne({ email });
+    console.log(user);
 
     if (user) {
       return res.status(400).json({
@@ -55,17 +55,19 @@ const login = async (req, res) => {
         message: "Password or username incorrect",
       });
     }
-    
+
     const payload = {
       userId: user._id,
       fullName: user.fullName,
       email: user.email,
-    }
-    const token = jwt.sign(payload, process.env.JWT_SECRET, {expiresIn:'1d'})
+    };
+    const token = jwt.sign(payload, process.env.JWT_SECRET, {
+      expiresIn: "1d",
+    });
 
     res.status(200).json({
       message: "Login successful",
-      data: {user,token},
+      data: { user, token },
     });
     console.log("User: ", user);
   } catch (error) {
@@ -74,4 +76,21 @@ const login = async (req, res) => {
   }
 };
 
-module.exports = { signUp, login };
+const getProfile = async (req, res) => {
+  try {
+    const userId = req.user._id;
+
+    const getUser = await User.findById(userId).select("-password");
+
+    res.status(200).json({
+      message: "This is profile page",
+      user:getUser
+    });
+  } catch (error) {
+    res.status(500).json({
+      message: "Server Error"
+    })
+  }
+};
+
+module.exports = { signUp, login, getProfile };
