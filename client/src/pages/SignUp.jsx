@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { toast } from "sonner";
 import {API_BASE_URL} from '../api/config'
@@ -21,6 +21,8 @@ const SignUp = () => {
     email: "",
     password: "",
   });
+
+  const navigate = useNavigate();
 
   const [loading, setLoading] = useState(false);
 
@@ -61,6 +63,7 @@ const SignUp = () => {
         },
       });
       setFormData({fullName:'', password:'', email:''})
+      navigate('/login')
     } catch (error) {
       console.log(error);
       toast.error(

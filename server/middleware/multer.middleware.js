@@ -1,0 +1,16 @@
+const { model } = require('mongoose');
+const multer  = require('multer')
+
+const storage = multer.diskStorage({
+  destination: function (req, file, cb) {
+    cb(null, 'uploads/')
+  },
+  filename: function (req, file, cb) {
+    console.log(file)
+    const uniqueName = Date.now() + '-' + file.originalname
+    cb(null, uniqueName)
+  }
+})
+
+const upload = multer({ storage: storage, limits:{fileSize: 5 * 1024 * 1024} })
+module.exports = upload;

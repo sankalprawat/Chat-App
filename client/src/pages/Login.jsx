@@ -1,6 +1,6 @@
 import axios from "axios";
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { toast } from "sonner";
 import {API_BASE_URL} from '../api/config'
 
@@ -14,6 +14,7 @@ const toastStyle = {
 };
 
 const Login = () => {
+  const navigate = useNavigate();
   const appName = "WhatsApp";
   const [formData, setFormData] = useState({ email: "", password: "" });
   const [loading, setLoading] = useState(false);
@@ -46,7 +47,10 @@ const Login = () => {
           borderRadius: "8px",
         },
       });
+      const token = res.data.data.token
+      localStorage.setItem("token", token)
       setFormData({email:"", password:""})
+      navigate('/')
     } catch (error) {
       console.log(error);
       toast.error(error.response?.data?.message || "Something went wrong!", toastStyle);

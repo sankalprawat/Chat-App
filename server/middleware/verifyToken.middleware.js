@@ -6,13 +6,13 @@ const verifyToken = async (req, res, next) => {
     const authHeader = req.headers.authorization;
 
     const token = authHeader.split(" ")[1];
-    console.log(token);
+    // console.log(token);
 
     const decoded = jwt.verify(token, process.env.JWT_SECRET);
-    console.log(decoded);
+    // console.log(decoded);
 
     const user = await User.findById(decoded.userId).select("-password");
-    console.log(user);
+    // console.log(user);
 
     if (!user) {
       return req.status(400).json({
