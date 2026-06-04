@@ -9,6 +9,7 @@ const Profile = () => {
   const navigate = useNavigate();
   const [formData, setFormData] = useState({ fullName: "", email: "", profilePic: "" });
   const [loading, setLoading] = useState(true);
+  const [selectedImage, setSelectedImage] = useState(null);
 
   const token = localStorage.getItem("token");
 
@@ -25,6 +26,25 @@ const Profile = () => {
       console.log(error.response);
     } finally {
       setLoading(false);
+    }
+  };
+
+  const handleUpdateProfile = async () => {
+    try {
+      const data = new FormData();
+      data.append("fullName", formData.fullName);
+      data.append("email", formData.email);
+      if (selectedImage) {
+        data.append("profileImage", selectedImage);
+      }
+      const res = await axios.put(`${API_BASE_URL}/api/updateProfile`, data, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      console.log(res.data);
+    } catch (error) {
+      console.log(error.response);
     }
   };
 
@@ -52,13 +72,19 @@ const Profile = () => {
         </button>
 
         <div className="flex flex-col items-center justify-center mt-2">
-          <div className="h-28 w-28 bg-neutral-800 rounded-full flex items-center justify-center border-2 border-[#111111] shadow-lg mb-4 text-neutral-500 overflow-hidden">
+          <label className="h-28 w-28 bg-neutral-800 rounded-full flex items-center justify-center border-2 border-[#111111] shadow-lg mb-4 text-neutral-500 overflow-hidden cursor-pointer">
             {formData.profilePic ? (
               <img src={formData.profilePic} alt="profile" className="w-full h-full object-cover" />
             ) : (
               <CgProfile size={64} />
             )}
-          </div>
+            <input
+              type="file"
+              accept="image/*"
+              className="hidden"
+              onChange={(e) => setSelectedImage(e.target.files[0])}
+            />
+          </label>
           <h1 className="text-2xl font-bold text-white tracking-wide">{formData.fullName}</h1>
           <p className="text-neutral-400 mt-1 text-sm">{formData.email}</p>
         </div>
@@ -93,7 +119,9 @@ const Profile = () => {
         </div>
 
         <div className="mt-8 space-y-4">
-          <button className="w-full bg-green-600 hover:bg-green-700 text-white font-semibold py-3.5 rounded-[30px] transition-colors shadow-sm hover:cursor-pointer">
+          <button
+            onClick={handleUpdateProfile}
+            className="w-full bg-green-600 hover:bg-green-700 text-white font-semibold py-3.5 rounded-[30px] transition-colors shadow-sm hover:cursor-pointer">
             Update Profile
           </button>
 
