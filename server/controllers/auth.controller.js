@@ -1,4 +1,3 @@
-const { data } = require("react-router-dom");
 const User = require("../models/User");
 const jwt = require("jsonwebtoken");
 
