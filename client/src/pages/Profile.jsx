@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect} from "react";
 import { IoMdArrowBack } from "react-icons/io";
 import { CgProfile } from "react-icons/cg";
 import { useNavigate } from "react-router-dom";
@@ -12,6 +12,11 @@ const Profile = () => {
   const [selectedImage, setSelectedImage] = useState(null);
 
   const token = localStorage.getItem("token");
+
+  const handleLogout = () => {
+    navigate('/login')
+    localStorage.removeItem('token')
+  }
 
   const fetchProfile = async () => {
     try {
@@ -125,7 +130,9 @@ const Profile = () => {
             Update Profile
           </button>
 
-          <button className="w-full bg-red-500/10 hover:bg-red-500/20 text-red-500 border border-red-500/20 hover:border-red-500/50 font-semibold py-3.5 rounded-[30px] transition-all hover:cursor-pointer">
+          <button
+          onClick={handleLogout}
+          className="w-full bg-red-500/10 hover:bg-red-500/20 text-red-500 border border-red-500/20 hover:border-red-500/50 font-semibold py-3.5 rounded-[30px] transition-all hover:cursor-pointer">
             Logout
           </button>
         </div>
