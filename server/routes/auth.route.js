@@ -13,5 +13,4 @@ router.get("/getAllContacts", verifyToken, getAllContacts)
 router.post("/imageupload" , upload.single("file") ,uploadToCloudinary ,imageUpload )
 
 
-
 module.exports = router
