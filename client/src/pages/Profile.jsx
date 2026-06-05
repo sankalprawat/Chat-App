@@ -1,22 +1,36 @@
-import React, { useState, useEffect} from "react";
+import React, { useState, useEffect } from "react";
 import { IoMdArrowBack } from "react-icons/io";
 import { CgProfile } from "react-icons/cg";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { API_BASE_URL } from "../api/config";
+import { toast } from "sonner";
+
+const toastStyle = {
+  style: {
+    background: "#111827",
+    color: "#ffffff",
+    border: "1px solid #374151",
+    borderRadius: "8px",
+  },
+};
 
 const Profile = () => {
   const navigate = useNavigate();
-  const [formData, setFormData] = useState({ fullName: "", email: "", profilePic: "" });
+  const [formData, setFormData] = useState({
+    fullName: "",
+    email: "",
+    profilePic: "",
+  });
   const [loading, setLoading] = useState(true);
   const [selectedImage, setSelectedImage] = useState(null);
 
   const token = localStorage.getItem("token");
 
   const handleLogout = () => {
-    navigate('/login')
-    localStorage.removeItem('token')
-  }
+    navigate("/login");
+    localStorage.removeItem("token");
+  };
 
   const fetchProfile = async () => {
     try {
@@ -43,11 +57,23 @@ const Profile = () => {
         data.append("profileImage", selectedImage);
       }
       const res = await axios.put(`${API_BASE_URL}/api/updateProfile`, data, {
-        headers: {
-          Authorization: `Bearer ${token}`,
+        headers: { Authorization: `Bearer ${token}` },
+      });
+      if (res.data.user?.profilePic) {
+        setFormData((prev) => ({
+          ...prev,
+          profilePic: res.data.user.profilePic,
+        }));
+      }
+      toast.success("Profile Updated", {
+        style: {
+          background: "#111827",
+          color: "#ffffff",
+          border: "1px solid #16a34a",
+          borderRadius: "8px",
         },
       });
-      console.log(res.data);
+      // console.log(res.data);
     } catch (error) {
       console.log(error.response);
     }
@@ -79,7 +105,11 @@ const Profile = () => {
         <div className="flex flex-col items-center justify-center mt-2">
           <label className="h-28 w-28 bg-neutral-800 rounded-full flex items-center justify-center border-2 border-[#111111] shadow-lg mb-4 text-neutral-500 overflow-hidden cursor-pointer">
             {formData.profilePic ? (
-              <img src={formData.profilePic} alt="profile" className="w-full h-full object-cover" />
+              <img
+                src={formData.profilePic}
+                alt="profile"
+                className="w-full h-full object-cover"
+              />
             ) : (
               <CgProfile size={64} />
             )}
@@ -87,10 +117,19 @@ const Profile = () => {
               type="file"
               accept="image/*"
               className="hidden"
-              onChange={(e) => setSelectedImage(e.target.files[0])}
+              onChange={(e) => {
+                const file = e.target.files[0];
+                setSelectedImage(file);
+                setFormData({
+                  ...formData,
+                  profilePic: URL.createObjectURL(file),
+                });
+              }}
             />
           </label>
-          <h1 className="text-2xl font-bold text-white tracking-wide">{formData.fullName}</h1>
+          <h1 className="text-2xl font-bold text-white tracking-wide">
+            {formData.fullName}
+          </h1>
           <p className="text-neutral-400 mt-1 text-sm">{formData.email}</p>
         </div>
       </div>
@@ -103,21 +142,31 @@ const Profile = () => {
 
         <div className="bg-white/5 rounded-xl border border-neutral-800 p-6 space-y-6">
           <div>
-            <label className="block text-sm font-medium text-neutral-400 mb-2">Full Name</label>
+            <label className="block text-sm font-medium text-neutral-400 mb-2">
+              Full Name
+            </label>
             <input
               type="text"
+              name="fullName"
               value={formData.fullName}
-              onChange={(e) => setFormData({ ...formData, fullName: e.target.value })}
+              onChange={(e) =>
+                setFormData({ ...formData, fullName: e.target.value })
+              }
               className="w-full bg-[#111111] border border-neutral-700 rounded-lg px-4 py-3 text-neutral-100 focus:outline-none focus:border-green-500 focus:ring-1 focus:ring-green-500 transition-all"
             />
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-neutral-400 mb-2">Email</label>
+            <label className="block text-sm font-medium text-neutral-400 mb-2">
+              Email
+            </label>
             <input
               type="email"
+              name="email"
               value={formData.email}
-              onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+              onChange={(e) =>
+                setFormData({ ...formData, email: e.target.value })
+              }
               className="w-full bg-[#111111] border border-neutral-700 rounded-lg px-4 py-3 text-neutral-100 focus:outline-none focus:border-green-500 focus:ring-1 focus:ring-green-500 transition-all"
             />
           </div>
@@ -126,13 +175,15 @@ const Profile = () => {
         <div className="mt-8 space-y-4">
           <button
             onClick={handleUpdateProfile}
-            className="w-full bg-green-600 hover:bg-green-700 text-white font-semibold py-3.5 rounded-[30px] transition-colors shadow-sm hover:cursor-pointer">
+            className="w-full bg-green-600 hover:bg-green-700 text-white font-semibold py-3.5 rounded-[30px] transition-colors shadow-sm hover:cursor-pointer"
+          >
             Update Profile
           </button>
 
           <button
-          onClick={handleLogout}
-          className="w-full bg-red-500/10 hover:bg-red-500/20 text-red-500 border border-red-500/20 hover:border-red-500/50 font-semibold py-3.5 rounded-[30px] transition-all hover:cursor-pointer">
+            onClick={handleLogout}
+            className="w-full bg-red-500/10 hover:bg-red-500/20 text-red-500 border border-red-500/20 hover:border-red-500/50 font-semibold py-3.5 rounded-[30px] transition-all hover:cursor-pointer"
+          >
             Logout
           </button>
         </div>

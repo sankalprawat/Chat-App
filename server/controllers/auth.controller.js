@@ -95,7 +95,20 @@ const getProfile = async (req, res) => {
 const updateProfile = async (req, res) => {
   try {
     const userId = req.user._id;
-    const updateUser = await User.findByIdAndUpdate(userId, req.body, {
+    const updateData = {};
+
+    if (req.body.email) {
+      updateData.email = req.body.email;
+    }
+
+    if (req.body.fullName) {
+      updateData.fullName = req.body.fullName;
+    }
+
+    if (req.imageUrl) {
+      updateData.profilePic = req.imageUrl;
+    }
+    const updateUser = await User.findByIdAndUpdate(userId, updateData, {
       new: true,
     });
 
@@ -103,7 +116,10 @@ const updateProfile = async (req, res) => {
       message: "Profile update successfully",
       data: updateUser,
     });
-  } catch (error) {}
+  } catch (error) {
+    console.log(error.message);
+    res.status(500).json({ message: error.message });
+  }
 };
 
 const getAllContacts = async (req, res) => {
@@ -123,14 +139,22 @@ const getAllContacts = async (req, res) => {
 
 const imageUpload = async (req, res) => {
   try {
-    console.log(req.file)
+    console.log(req.file);
     res.status(200).json({
       message: "Image Upload",
-      file:req.file
+      file: req.file,
+      image: req.imageUrl,
     });
   } catch (error) {
     res.status(500).json({ message: error.message });
   }
 };
 
-module.exports = { signUp, login, getProfile, updateProfile, getAllContacts, imageUpload };
+module.exports = {
+  signUp,
+  login,
+  getProfile,
+  updateProfile,
+  getAllContacts,
+  imageUpload,
+};
