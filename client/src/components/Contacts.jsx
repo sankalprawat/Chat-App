@@ -10,14 +10,14 @@ const Contacts = () => {
   // console.log(token)
 
   const fetchContacts = async () => {
-    console.log("URL hitting:", `${API_BASE_URL}/api/getAllContacts`)
+    // console.log("URL hitting:", `${API_BASE_URL}/api/getAllContacts`)
     try {
       const res = await axios.get(`${API_BASE_URL}/api/getAllContacts`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
       });
-      console.log(res.data.user);
+      // console.log(res.data.user);
       setContacts(res.data.user);
     } catch (error) {}
   };

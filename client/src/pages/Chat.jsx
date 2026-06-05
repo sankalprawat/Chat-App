@@ -7,7 +7,7 @@ import WelcomeScreen from "../components/WelcomeScreen";
 
 const Chat = () => {
   const {userId} = useParams;
-  console.log(userId);
+  // console.log(userId);
 
   return (
     <div className="flex flex-col h-full w-full">

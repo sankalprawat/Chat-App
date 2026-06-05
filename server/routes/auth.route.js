@@ -8,7 +8,7 @@ const uploadToCloudinary = require('../middleware/cloudinary.middleware')
 router.post("/signup", signUp)
 router.post("/login", login)
 router.get("/getProfile", verifyToken, getProfile)
-router.get("/updateProfile", verifyToken, updateProfile)
+router.put("/updateProfile", verifyToken, upload.single("profileImage"), uploadToCloudinary, updateProfile)
 router.get("/getAllContacts", verifyToken, getAllContacts)
 router.post("/imageupload" , upload.single("file") ,uploadToCloudinary ,imageUpload )
 
