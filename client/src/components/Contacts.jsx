@@ -7,7 +7,7 @@ const Contacts = () => {
   const navigate = useNavigate()
   const [contacts, setContacts] = useState([]);
   const token = localStorage.getItem("token");
-  // console.log(token)
+  console.log(token)
 
   const fetchContacts = async () => {
     // console.log("URL hitting:", `${API_BASE_URL}/api/getAllContacts`)
@@ -19,7 +19,9 @@ const Contacts = () => {
       });
       // console.log(res.data.user);
       setContacts(res.data.user);
-    } catch (error) {}
+    } catch (error) {
+       console.log("Contacts error:", error.response?.data || error.message);
+    }
   };
 
   useEffect(() => {
