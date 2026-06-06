@@ -1,5 +1,5 @@
 import React from "react";
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import { createBrowserRouter, RouterProvider, Navigate } from "react-router-dom";
 import SignUp from "./pages/SignUp";
 import Login from "./pages/Login";
 import { Toaster } from "sonner";
@@ -9,22 +9,12 @@ import Group from "./pages/Group";
 import Profile from "./pages/Profile";
 import WelcomeScreen from "./components/WelcomeScreen";
 
+const token = localStorage.getItem("token");
+
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <SignUp />,
-  },
-  {
-    path: "/signup",
-    element: <SignUp />,
-  },
-  {
-    path: "/login",
-    element: <Login />,
-  },
-  {
-    path: "/",
-    element: <MainLayout />,
+    element: token ? <MainLayout /> : <Navigate to="/signup" />,
     children: [
       {
         index: true,
@@ -32,7 +22,7 @@ const router = createBrowserRouter([
       },
       {
         path: "chat",
-        element: <div className="">Select User to start chat</div>,
+        element: <div>Select User to start chat</div>,
       },
       {
         path: "chat/:userId",
@@ -47,6 +37,14 @@ const router = createBrowserRouter([
         element: <Profile />,
       },
     ],
+  },
+  {
+    path: "/signup",
+    element: <SignUp />,
+  },
+  {
+    path: "/login",
+    element: <Login />,
   },
   {
     path: "*",
