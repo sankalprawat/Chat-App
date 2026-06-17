@@ -49,6 +49,7 @@ const Login = () => {
       });
       const token = res.data.data.token
       localStorage.setItem("token", token)
+      localStorage.setItem("user", JSON.stringify(res.data.data))
       setFormData({email:"", password:""})
       navigate('/')
     } catch (error) {
