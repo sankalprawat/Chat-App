@@ -1,4 +1,3 @@
-const { model } = require('mongoose');
 const multer  = require('multer')
 
 const storage = multer.diskStorage({

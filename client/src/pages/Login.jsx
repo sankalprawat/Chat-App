@@ -2,7 +2,8 @@ import axios from "axios";
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { toast } from "sonner";
-import {API_BASE_URL} from '../api/config'
+import { API_BASE_URL } from "../api/config";
+import { signInWithGoogle } from "../config/firebase";
 
 const toastStyle = {
   style: {
@@ -38,7 +39,7 @@ const Login = () => {
         axios.post(`${API_BASE_URL}/api/login`, formData),
         new Promise((resolve) => setTimeout(resolve, 1000)),
       ]);
-      console.log(res);
+      // console.log(res);
       toast.success("Logged in successfully!", {
         style: {
           background: "#111827",
@@ -47,16 +48,46 @@ const Login = () => {
           borderRadius: "8px",
         },
       });
-      const token = res.data.data.token
-      localStorage.setItem("token", token)
-      localStorage.setItem("user", JSON.stringify(res.data.data))
-      setFormData({email:"", password:""})
-      navigate('/')
+      const token = res.data.data.token;
+      localStorage.setItem("token", token);
+      localStorage.setItem("user", JSON.stringify(res.data.data));
+      setFormData({ email: "", password: "" });
+      navigate("/");
     } catch (error) {
       console.log(error);
-      toast.error(error.response?.data?.message || "Something went wrong!", toastStyle);
+      toast.error(
+        error.response?.data?.message || "Something went wrong!",
+        toastStyle,
+      );
     } finally {
       setLoading(false);
+    }
+  };
+
+  const handleGoogleLogin = async () => {
+    try {
+      const googleUser = await signInWithGoogle();
+      const res = await axios.post(`${API_BASE_URL}/api/googleLogin`, {
+        email: googleUser.email,
+        fullName: googleUser.displayName,
+        profilePic: googleUser.photoURL,
+        googleId: googleUser.uid,
+      });
+      toast.success("Logged in successfully!", {
+        style: {
+          background: "#111827",
+          color: "#ffffff",
+          border: "1px solid #16a34a",
+          borderRadius: "8px",
+        },
+      });
+      const token = res.data.data.token;
+      localStorage.setItem("token", token);
+      localStorage.setItem("user", JSON.stringify(res.data.data.user));
+      navigate("/chat");
+    } catch (error) {
+      console.log("google login error", error);
+      toast.error(error.response?.data?.message || "Google login failed!", toastStyle);
     }
   };
 
@@ -80,7 +111,7 @@ const Login = () => {
                 className="w-full border border-gray-600 bg-transparent rounded-md px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
                 name="email"
                 onChange={handleChange}
-                />
+              />
             </div>
 
             <div>
@@ -110,8 +141,19 @@ const Login = () => {
                     fill="none"
                     viewBox="0 0 24 24"
                   >
-                    <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
-                    <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z" />
+                    <circle
+                      className="opacity-25"
+                      cx="12"
+                      cy="12"
+                      r="10"
+                      stroke="currentColor"
+                      strokeWidth="4"
+                    />
+                    <path
+                      className="opacity-75"
+                      fill="currentColor"
+                      d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z"
+                    />
                   </svg>
                   Signing in...
                 </div>
@@ -128,14 +170,24 @@ const Login = () => {
           <hr className="flex-1 border-gray-600" />
         </div>
 
-        <button className="flex items-center justify-center gap-2 w-full border border-gray-600 rounded-md py-2 text-sm font-medium bg-[#212830] text-gray-100 hover:bg-[#2c343e] mt-3 hover:cursor-pointer">
-          <img src="https://www.google.com/favicon.ico" alt="" className="h-5 w-5" />
+        <button
+          onClick={handleGoogleLogin}
+          className="flex items-center justify-center gap-2 w-full border border-gray-600 rounded-md py-2 text-sm font-medium bg-[#212830] text-gray-100 hover:bg-[#2c343e] mt-3 hover:cursor-pointer"
+        >
+          <img
+            src="https://www.google.com/favicon.ico"
+            alt=""
+            className="h-5 w-5"
+          />
           <span>Continue with Google</span>
         </button>
 
         <div className="flex justify-center text-sm text-gray-400 mt-10">
           Don't have an account?
-          <Link to="/signup" className="text-blue-500 font-medium hover:underline ml-1">
+          <Link
+            to="/signup"
+            className="text-blue-500 font-medium hover:underline ml-1"
+          >
             Sign up →
           </Link>
         </div>

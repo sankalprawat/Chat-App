@@ -17,6 +17,7 @@ const toastStyle = {
 
 const Profile = () => {
   const navigate = useNavigate();
+  const [updating, setUpdating] = useState(false);
   const [formData, setFormData] = useState({
     fullName: "",
     email: "",
@@ -50,6 +51,7 @@ const Profile = () => {
 
   const handleUpdateProfile = async () => {
     try {
+      setUpdating(true);
       const data = new FormData();
       data.append("fullName", formData.fullName);
       data.append("email", formData.email);
@@ -76,6 +78,8 @@ const Profile = () => {
       // console.log(res.data);
     } catch (error) {
       console.log(error.response);
+    } finally {
+      setUpdating(false);
     }
   };
 
@@ -175,9 +179,36 @@ const Profile = () => {
         <div className="mt-8 space-y-4">
           <button
             onClick={handleUpdateProfile}
-            className="w-full bg-green-600 hover:bg-green-700 text-white font-semibold py-3.5 rounded-[30px] transition-colors shadow-sm hover:cursor-pointer"
+            disabled={updating}
+            className="w-full bg-green-600 hover:bg-green-700 text-white font-semibold py-3.5 rounded-[30px] transition-colors shadow-sm hover:cursor-pointer disabled:opacity-70"
           >
-            Update Profile
+            {updating ? (
+              <div className="flex items-center justify-center gap-2">
+                <svg
+                  className="animate-spin h-4 w-4 text-white"
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                >
+                  <circle
+                    className="opacity-25"
+                    cx="12"
+                    cy="12"
+                    r="10"
+                    stroke="currentColor"
+                    strokeWidth="4"
+                  />
+                  <path
+                    className="opacity-75"
+                    fill="currentColor"
+                    d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z"
+                  />
+                </svg>
+                Updating...
+              </div>
+            ) : (
+              "Update Profile"
+            )}
           </button>
 
           <button

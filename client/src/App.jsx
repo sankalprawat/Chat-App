@@ -60,11 +60,11 @@ const App = () => {
         auth: { token }
       })
       socketRef.current.on("connect", () => {
-        console.log("Connected with Socket ID:", socketRef.current.id)
+        // console.log("Connected with Socket ID:", socketRef.current.id)
         setSocketConnected(true)
       })
       socketRef.current.on("onlineUser", (users) => {
-        console.log("Online Users:", users)
+        // console.log("Online Users:", users)
         setOnlineUsers(users)
       })
 

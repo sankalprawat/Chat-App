@@ -2,7 +2,8 @@ import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { toast } from "sonner";
-import {API_BASE_URL} from '../api/config'
+import { API_BASE_URL } from "../api/config";
+import { signInWithGoogle } from "../config/firebase";
 
 const toastStyle = {
   style: {
@@ -62,8 +63,8 @@ const SignUp = () => {
           borderRadius: "8px",
         },
       });
-      setFormData({fullName:'', password:'', email:''})
-      navigate('/login')
+      setFormData({ fullName: "", password: "", email: "" });
+      navigate("/login");
     } catch (error) {
       console.log(error);
       toast.error(
@@ -72,6 +73,36 @@ const SignUp = () => {
       );
     } finally {
       setLoading(false);
+    }
+  };
+
+  const handleGoogleLogin = async () => {
+    try {
+      const googleUser = await signInWithGoogle();
+      const res = await axios.post(`${API_BASE_URL}/api/googleLogin`, {
+        email: googleUser.email,
+        fullName: googleUser.displayName,
+        profilePic: googleUser.photoURL,
+        googleId: googleUser.uid,
+      });
+      toast.success("Logged in successfully!", {
+        style: {
+          background: "#111827",
+          color: "#ffffff",
+          border: "1px solid #16a34a",
+          borderRadius: "8px",
+        },
+      });
+      const token = res.data.data.token;
+      localStorage.setItem("token", token);
+      localStorage.setItem("user", JSON.stringify(res.data.data.user));
+      navigate("/chat");
+    } catch (error) {
+      console.log("google login error", error);
+      toast.error(
+        error.response?.data?.message || "Google login failed!",
+        toastStyle,
+      );
     }
   };
 
@@ -98,7 +129,9 @@ const SignUp = () => {
           Sign up for <span className="text-green-500">{appName}</span> today
         </h2>
 
-        <button className="flex items-center justify-center gap-2 w-full border border-gray-300 rounded-md py-2 text-sm font-medium text-gray-800 hover:bg-gray-50 mb-3 hover:cursor-pointer">
+        <button
+        onClick={handleGoogleLogin}
+        className="flex items-center justify-center gap-2 w-full border border-gray-300 rounded-md py-2 text-sm font-medium text-gray-800 hover:bg-gray-50 mb-3 hover:cursor-pointer">
           <img
             src="https://www.google.com/favicon.ico"
             alt=""
@@ -120,7 +153,7 @@ const SignUp = () => {
                 Full Name <sup className="text-red-500">*</sup>
               </label>
               <input
-              value={formData.fullName}
+                value={formData.fullName}
                 onChange={handleChange}
                 type="text"
                 placeholder="Full Name"
@@ -133,7 +166,7 @@ const SignUp = () => {
                 Email <sup className="text-red-500">*</sup>
               </label>
               <input
-              value={formData.email}
+                value={formData.email}
                 onChange={handleChange}
                 type="email"
                 placeholder="Email"
@@ -146,7 +179,7 @@ const SignUp = () => {
                 Password <sup className="text-red-500">*</sup>
               </label>
               <input
-              value={formData.password}
+                value={formData.password}
                 onChange={handleChange}
                 type="password"
                 placeholder="Password"

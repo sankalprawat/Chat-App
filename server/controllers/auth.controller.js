@@ -75,6 +75,42 @@ const login = async (req, res) => {
   }
 };
 
+const googleLogin = async (req, res) => {
+  try {
+    const { email, fullName, profilePic, googleId } = req.body;
+    let user = await User.findOne({ email });
+    if (!user) {
+      user = await User.create({
+        email,
+        fullName,
+        profilePic,
+        googleId,
+      });
+    } else {
+      user.fullName = fullName;
+      user.profilePic = profilePic;
+      user.googleId = googleId;
+      await user.save();
+    }
+    const payload = {
+      userId: user._id,
+      fullName: user.fullName,
+      email: user.email,
+    };
+    const token = jwt.sign(payload, process.env.JWT_SECRET, {
+      expiresIn: "365d",
+    });
+
+    res.status(200).json({
+      message: "login successfully",
+      data: { user, token },
+    });
+  } catch (error) {
+    console.log("google login error", error);
+    res.status(500).json({ message: "server error" });
+  }
+};
+
 const getProfile = async (req, res) => {
   try {
     const userId = req.user._id;
@@ -106,7 +142,7 @@ const updateProfile = async (req, res) => {
     }
 
     if (req.imageUrl) {
-      updateData.profilePic = req.imageUrl;
+      updateData.profilePic = req.imageUrl[0];
     }
     const updateUser = await User.findByIdAndUpdate(userId, updateData, {
       new: true,
@@ -157,4 +193,5 @@ module.exports = {
   updateProfile,
   getAllContacts,
   imageUpload,
+  googleLogin
 };

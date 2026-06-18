@@ -7,7 +7,7 @@ const Contacts = () => {
   const navigate = useNavigate();
   const [contacts, setContacts] = useState([]);
   const token = localStorage.getItem("token");
-  console.log(token);
+  // console.log(token);
 
   const fetchContacts = async () => {
     try {
