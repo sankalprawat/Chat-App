@@ -27,7 +27,7 @@ const sendMessage = async (req, res) => {
 
         const receiver = await User.findById(receiverId)
         if (!receiver) {
-            res.status(404).json({ message: "Receiver not found" })
+            return res.status(404).json({ message: "Receiver not found" })
         }
         const newMessage = await Message.create({
             senderId,

@@ -15,7 +15,7 @@ const verifyToken = async (req, res, next) => {
     // console.log(user);
 
     if (!user) {
-      return req.status(400).json({
+      return res.status(400).json({
         message: "User not found",
       });
     }
@@ -25,6 +25,7 @@ const verifyToken = async (req, res, next) => {
 
   } catch (error) {
     console.log("JWT verification error: ", error.message);
+    return res.status(401).json({ message: "Unauthorized" });
   }
 };
 

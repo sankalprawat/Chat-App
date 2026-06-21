@@ -43,7 +43,7 @@ const MessageArea = ({ messages, setMessages }) => {
   }, [socketConnected]);
 
   useEffect(() => {
-    bottomRef.current.scrollIntoView({
+    bottomRef.current?.scrollIntoView({
       behavior: "smooth",
     });
   }, [messages]);

@@ -13,12 +13,15 @@ import { useEffect, useRef } from 'react'
 import { API_BASE_URL } from './api/config'
 import { SocketContext } from "./context/SocketContext"
 
-const token = localStorage.getItem("token")
+const ProtectedRoute = ({ children }) => {
+  const token = localStorage.getItem("token")
+  return token ? children : <Navigate to="/signup" replace />
+}
 
 const router = createBrowserRouter([
   {
     path: "/",
-    element: token ? <MainLayout /> : <Navigate to="/signup" />,
+    element: <ProtectedRoute><MainLayout /></ProtectedRoute>,
     children: [
       { index: true, element: <WelcomeScreen /> },
       {
@@ -50,6 +53,7 @@ const router = createBrowserRouter([
 ])
 
 const App = () => {
+  const token = localStorage.getItem("token")
   const [socketConnected, setSocketConnected] = useState(false)
   const [onlineUsers, setOnlineUsers] = useState([])
   const socketRef = useRef()
@@ -76,7 +80,7 @@ const App = () => {
 
   return (
     <>
-      <SocketContext.Provider value={{ token, socketConnected, onlineUsers }}>
+      <SocketContext.Provider value={{ token, socketConnected, onlineUsers, socketRef }}>
         <Toaster position="bottom-right" />
         <RouterProvider router={router} />
       </SocketContext.Provider>
