@@ -15,7 +15,7 @@ const toastStyle = {
 };
 
 const SignUp = () => {
-  const appName = "WhatsApp";
+  const appName = "Chat App";
 
   const [formData, setFormData] = useState({
     fullName: "",
@@ -126,7 +126,7 @@ const SignUp = () => {
         </div>
 
         <h2 className="text-2xl font-semibold text-gray-900 mb-6">
-          Sign up for <span className="text-green-500">{appName}</span> today
+          Sign up for <span className="text-[#007aff]">{appName}</span> today
         </h2>
 
         <button
@@ -190,7 +190,7 @@ const SignUp = () => {
             <button
               type="submit"
               disabled={loading}
-              className="w-full bg-green-600 hover:bg-green-700 text-white text-sm font-semibold py-2 rounded-md mt-2 hover:cursor-pointer disabled:opacity-70"
+              className="w-full bg-[#007aff] hover:opacity-95 text-white text-sm font-semibold py-2 rounded-md mt-2 hover:cursor-pointer disabled:opacity-70 transition-all shadow-sm shadow-[#007aff]/15"
             >
               {loading ? (
                 <div className="flex items-center justify-center gap-2">

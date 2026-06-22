@@ -3,17 +3,16 @@ import { IconContext } from "react-icons";
 import { MdOutlineChat } from "react-icons/md";
 
 const WelcomeScreen = () => {
-  const appName = "WhatsApp"; 
+  const appName = "Chat App"; 
 
   return (
-    <div className="flex-1 bg-[#111111] flex flex-col items-center justify-center h-full w-full">
+    <div className="flex-1 bg-zinc-50 dark:bg-zinc-950 flex flex-col items-center justify-center h-full w-full px-6 transition-colors duration-200">
       {/* Subtle Icon Container */}
-      <div className="bg-white/5 p-6 rounded-full mb-6 text-neutral-600 shadow-inner">
+      <div className="bg-white dark:bg-zinc-900 p-5 rounded-3xl mb-5 text-[#007aff] shadow-sm border border-zinc-200 dark:border-zinc-800 flex items-center justify-center">
         <IconContext.Provider
           value={{
-            color: "#d4d4d4",
-            className: "global-class-name",
-            size: "38px",
+            color: "currentColor",
+            size: "34px",
           }}
         >
           <MdOutlineChat />
@@ -21,11 +20,11 @@ const WelcomeScreen = () => {
       </div>
 
       {/* Typography */}
-      <h2 className="text-2xl font-semibold text-neutral-300 tracking-wide">
-        Welcome to <span className="text-green-500">{appName}</span>
+      <h2 className="text-xl font-bold text-zinc-800 dark:text-zinc-100 tracking-tight">
+        Welcome to <span className="text-[#007aff]">{appName}</span>
       </h2>
-      <p className="text-neutral-500 mt-2 text-sm">
-        Select someone from the sidebar to start messaging.
+      <p className="text-zinc-500 dark:text-zinc-400 mt-2 text-sm text-center max-w-xs">
+        Select a conversation from the sidebar list to start messaging.
       </p>
     </div>
   );

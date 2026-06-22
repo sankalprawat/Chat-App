@@ -16,7 +16,7 @@ const toastStyle = {
 
 const Login = () => {
   const navigate = useNavigate();
-  const appName = "WhatsApp";
+  const appName = "Chat App";
   const [formData, setFormData] = useState({ email: "", password: "" });
   const [loading, setLoading] = useState(false);
 
@@ -50,7 +50,7 @@ const Login = () => {
       });
       const token = res.data.data.token;
       localStorage.setItem("token", token);
-      localStorage.setItem("user", JSON.stringify(res.data.data));
+      localStorage.setItem("user", JSON.stringify(res.data.data.user));
       setFormData({ email: "", password: "" });
       navigate("/");
     } catch (error) {
@@ -95,7 +95,7 @@ const Login = () => {
     <div className="flex min-h-screen bg-gray-950 text-white items-center justify-center p-6">
       <div className="w-full max-w-md flex flex-col">
         <h1 className="text-4xl font-semibold mb-6">
-          Login to <span className="text-green-500">{appName}</span>
+          Login to <span className="text-[#007aff]">{appName}</span>
         </h1>
 
         <form onSubmit={handleLogin}>
@@ -131,7 +131,7 @@ const Login = () => {
             <button
               type="submit"
               disabled={loading}
-              className="w-full bg-green-600 hover:bg-green-700 text-white text-sm font-semibold py-2 rounded-md mt-2 hover:cursor-pointer disabled:opacity-70"
+              className="w-full bg-[#007aff] hover:opacity-95 text-white text-sm font-semibold py-2 rounded-md mt-2 hover:cursor-pointer disabled:opacity-70 transition-all shadow-sm shadow-[#007aff]/15"
             >
               {loading ? (
                 <div className="flex items-center justify-center gap-2">
