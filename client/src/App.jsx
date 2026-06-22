@@ -26,9 +26,7 @@ const router = createBrowserRouter([
       { index: true, element: <WelcomeScreen /> },
       {
         path: "chat",
-        element: (
-          <div className='flex items-center justify-center h-full'>Select User to start chat</div>
-        )
+        element: <WelcomeScreen />
       },
       {
         path: "chat/:userId",

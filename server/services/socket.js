@@ -21,7 +21,7 @@ const initSocket = async (server) => {
 
         socket.on("disconnect", () => {
             delete userSocketMap[userId];
-            // io.emit("onlineUser", Object.keys(userSocketMap))
+            io.emit("onlineUser", Object.keys(userSocketMap))
         })
     })
     return io;

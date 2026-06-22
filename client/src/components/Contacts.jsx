@@ -2,11 +2,13 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { API_BASE_URL } from "../api/config";
 import { useNavigate } from "react-router-dom";
+import { useSocket } from "../context/SocketContext";
 
 const Contacts = () => {
   const navigate = useNavigate();
   const [contacts, setContacts] = useState([]);
   const token = localStorage.getItem("token");
+  const { onlineUsers } = useSocket();
   // console.log(token);
 
   const fetchContacts = async () => {
@@ -48,7 +50,9 @@ const Contacts = () => {
           </div>
           <div className="flex flex-col justify-between">
             <p className="text-white font-medium">{contact.fullName}</p>
-            <p className="text-white text-xs">Online</p>
+            <p className={`text-xs font-medium ${onlineUsers?.includes(contact._id) ? "text-green-400" : "text-gray-400"}`}>
+              {onlineUsers?.includes(contact._id) ? "Online" : "Offline"}
+            </p>
           </div>
         </div>
       ))}

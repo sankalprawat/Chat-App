@@ -1,5 +1,6 @@
 const User = require("../models/User");
 const jwt = require("jsonwebtoken");
+const bcrypt = require("bcryptjs");
 
 const signUp = async (req, res) => {
   try {
@@ -19,10 +20,11 @@ const signUp = async (req, res) => {
         message: "User already exists, Please Login!",
       });
     }
+    const hashedPassword = await bcrypt.hash(password, 10);
     const newUser = await User.create({
       fullName,
       email,
-      password,
+      password: hashedPassword,
     });
 
     res.status(201).json({
@@ -49,7 +51,8 @@ const login = async (req, res) => {
     if (!user) {
       return res.status(400).json({ message: "User not found" });
     }
-    if (user.password !== password) {
+    const isMatch = await bcrypt.compare(password, user.password);
+    if (!isMatch) {
       return res.status(400).json({
         message: "Password or username incorrect",
       });
