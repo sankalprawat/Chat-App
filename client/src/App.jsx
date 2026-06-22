@@ -6,12 +6,13 @@ import { Toaster } from "sonner"
 import MainLayout from './layouts/MainLayout'
 import Chat from './pages/Chat'
 import Group from './pages/Group'
-import Profile from './pages/Profile'
+import Settings from './pages/Settings'
 import WelcomeScreen from "./components/WelcomeScreen"
 import { io } from "socket.io-client"
 import { useEffect, useRef } from 'react'
 import { API_BASE_URL } from './api/config'
 import { SocketContext } from "./context/SocketContext"
+import { ThemeProvider } from "./context/ThemeContext"
 
 const ProtectedRoute = ({ children }) => {
   const token = localStorage.getItem("token")
@@ -37,8 +38,8 @@ const router = createBrowserRouter([
         element: <Group />
       },
       {
-        path: "profile",
-        element: <Profile />
+        path: "settings",
+        element: <Settings />
       },
     ]
   },
@@ -77,12 +78,12 @@ const App = () => {
   }, [token])
 
   return (
-    <>
+    <ThemeProvider>
       <SocketContext.Provider value={{ token, socketConnected, onlineUsers, socketRef }}>
         <Toaster position="bottom-right" />
         <RouterProvider router={router} />
       </SocketContext.Provider>
-    </>
+    </ThemeProvider>
   )
 }
 

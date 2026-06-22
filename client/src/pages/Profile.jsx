@@ -1,22 +1,10 @@
 import React, { useState, useEffect } from "react";
-import { IoMdArrowBack } from "react-icons/io";
-import { CgProfile } from "react-icons/cg";
-import { useNavigate } from "react-router-dom";
+import { FiUser, FiCamera } from "react-icons/fi";
 import axios from "axios";
 import { API_BASE_URL } from "../api/config";
 import { toast } from "sonner";
 
-const toastStyle = {
-  style: {
-    background: "#111827",
-    color: "#ffffff",
-    border: "1px solid #374151",
-    borderRadius: "8px",
-  },
-};
-
-const Profile = () => {
-  const navigate = useNavigate();
+const Profile = ({ theme, onUpdate }) => {
   const [updating, setUpdating] = useState(false);
   const [formData, setFormData] = useState({
     fullName: "",
@@ -27,11 +15,6 @@ const Profile = () => {
   const [selectedImage, setSelectedImage] = useState(null);
 
   const token = localStorage.getItem("token");
-
-  const handleLogout = () => {
-    navigate("/login");
-    localStorage.removeItem("token");
-  };
 
   const fetchProfile = async () => {
     try {
@@ -44,6 +27,7 @@ const Profile = () => {
       setFormData(res.data.user);
     } catch (error) {
       console.log(error.response);
+      toast.error("Failed to load profile");
     } finally {
       setLoading(false);
     }
@@ -61,23 +45,36 @@ const Profile = () => {
       const res = await axios.put(`${API_BASE_URL}/api/updateProfile`, data, {
         headers: { Authorization: `Bearer ${token}` },
       });
-      if (res.data.user?.profilePic) {
+      
+      if (res.data.data?.profilePic) {
         setFormData((prev) => ({
           ...prev,
-          profilePic: res.data.user.profilePic,
+          profilePic: res.data.data.profilePic,
         }));
       }
-      toast.success("Profile Updated", {
+      
+      // Update local storage user profile
+      const stored = localStorage.getItem("user");
+      if (stored) {
+        const parsed = JSON.parse(stored);
+        localStorage.setItem("user", JSON.stringify({ ...parsed, ...res.data.data }));
+      }
+
+      if (onUpdate) {
+        onUpdate();
+      }
+
+      toast.success("Profile updated successfully", {
         style: {
-          background: "#111827",
-          color: "#ffffff",
-          border: "1px solid #16a34a",
-          borderRadius: "8px",
+          background: theme === "dark" ? "#18181b" : "#ffffff",
+          color: theme === "dark" ? "#ffffff" : "#18181b",
+          border: "1px solid #007aff",
+          borderRadius: "12px",
         },
       });
-      // console.log(res.data);
     } catch (error) {
-      console.log(error.response);
+      console.log(error);
+      toast.error(error.response?.data?.message || "Failed to update profile");
     } finally {
       setUpdating(false);
     }
@@ -89,136 +86,91 @@ const Profile = () => {
 
   if (loading) {
     return (
-      <div className="flex justify-center items-center h-screen bg-[#111111]">
-        <div className="w-12 h-12 border-4 border-green-500 rounded-full border-t-transparent animate-spin"></div>
+      <div className="flex justify-center items-center py-12">
+        <div className="w-8 h-8 border-3 border-[#007aff] rounded-full border-t-transparent animate-spin"></div>
       </div>
     );
   }
 
   return (
-    <div className="h-full w-full bg-[#111111] flex flex-col overflow-y-auto">
-      {/* Header Banner Area */}
-      <div className="bg-[#161817] pt-5 pb-8 px-6 relative border-b border-neutral-800">
-        <button
-          onClick={() => navigate(-1)}
-          className="absolute top-6 left-6 text-neutral-400 hover:cursor-pointer transition-colors p-2 rounded-full hover:bg-white/5"
-        >
-          <IoMdArrowBack size={24} />
-        </button>
+    <div className="max-w-md mx-auto space-y-6">
+      <div>
+        <h2 className="text-xl font-bold tracking-tight">Edit Profile</h2>
+        <p className="text-sm text-zinc-500 dark:text-zinc-400 mt-1">
+          Update your display name, email address, and avatar image.
+        </p>
+      </div>
 
-        <div className="flex flex-col items-center justify-center mt-2">
-          <label className="h-28 w-28 bg-neutral-800 rounded-full flex items-center justify-center border-2 border-[#111111] shadow-lg mb-4 text-neutral-500 overflow-hidden cursor-pointer">
+      {/* Avatar Uploader */}
+      <div className="flex flex-col items-center justify-center py-4">
+        <div className="relative group">
+          <div className="h-24 w-24 rounded-full overflow-hidden bg-zinc-100 dark:bg-zinc-800 border-2 border-zinc-200 dark:border-zinc-700 shadow-md flex items-center justify-center text-zinc-450 dark:text-zinc-550 shrink-0">
             {formData.profilePic ? (
-              <img
-                src={formData.profilePic}
-                alt="profile"
-                className="w-full h-full object-cover"
-              />
+              <img src={formData.profilePic} alt="Profile Avatar" className="h-full w-full object-cover" />
             ) : (
-              <CgProfile size={64} />
+              <FiUser size={40} />
             )}
+          </div>
+          <label className="absolute inset-0 bg-black/40 text-white rounded-full flex flex-col items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-200 cursor-pointer text-xs gap-1">
+            <FiCamera size={18} />
+            <span>Upload</span>
             <input
               type="file"
               accept="image/*"
               className="hidden"
               onChange={(e) => {
                 const file = e.target.files[0];
-                setSelectedImage(file);
-                setFormData({
-                  ...formData,
-                  profilePic: URL.createObjectURL(file),
-                });
+                if (file) {
+                  setSelectedImage(file);
+                  setFormData({
+                    ...formData,
+                    profilePic: URL.createObjectURL(file),
+                  });
+                }
               }}
             />
           </label>
-          <h1 className="text-2xl font-bold text-white tracking-wide">
-            {formData.fullName}
-          </h1>
-          <p className="text-neutral-400 mt-1 text-sm">{formData.email}</p>
+        </div>
+        {selectedImage && (
+          <span className="text-xs text-[#007aff] font-medium mt-2">New image selected</span>
+        )}
+      </div>
+
+      {/* Inputs */}
+      <div className="space-y-4">
+        <div>
+          <label className="block text-xs font-semibold text-zinc-500 dark:text-zinc-400 uppercase tracking-wider mb-1.5">
+            Full Name
+          </label>
+          <input
+            type="text"
+            value={formData.fullName}
+            onChange={(e) => setFormData({ ...formData, fullName: e.target.value })}
+            className="w-full bg-zinc-50 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 rounded-xl px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-[#007aff]/50 focus:border-[#007aff] transition-all"
+          />
+        </div>
+
+        <div>
+          <label className="block text-xs font-semibold text-zinc-500 dark:text-zinc-400 uppercase tracking-wider mb-1.5">
+            Email Address
+          </label>
+          <input
+            type="email"
+            value={formData.email}
+            onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+            className="w-full bg-zinc-50 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 rounded-xl px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-[#007aff]/50 focus:border-[#007aff] transition-all"
+          />
         </div>
       </div>
 
-      {/* Form Section */}
-      <div className="flex-1 px-6 py-8 max-w-2xl mx-auto w-full">
-        <h2 className="text-xs font-bold text-green-500 tracking-widest mb-4 uppercase">
-          Account Info
-        </h2>
-
-        <div className="bg-white/5 rounded-xl border border-neutral-800 p-6 space-y-6">
-          <div>
-            <label className="block text-sm font-medium text-neutral-400 mb-2">
-              Full Name
-            </label>
-            <input
-              type="text"
-              name="fullName"
-              value={formData.fullName}
-              onChange={(e) =>
-                setFormData({ ...formData, fullName: e.target.value })
-              }
-              className="w-full bg-[#111111] border border-neutral-700 rounded-lg px-4 py-3 text-neutral-100 focus:outline-none focus:border-green-500 focus:ring-1 focus:ring-green-500 transition-all"
-            />
-          </div>
-
-          <div>
-            <label className="block text-sm font-medium text-neutral-400 mb-2">
-              Email
-            </label>
-            <input
-              type="email"
-              name="email"
-              value={formData.email}
-              onChange={(e) =>
-                setFormData({ ...formData, email: e.target.value })
-              }
-              className="w-full bg-[#111111] border border-neutral-700 rounded-lg px-4 py-3 text-neutral-100 focus:outline-none focus:border-green-500 focus:ring-1 focus:ring-green-500 transition-all"
-            />
-          </div>
-        </div>
-
-        <div className="mt-8 space-y-4">
-          <button
-            onClick={handleUpdateProfile}
-            disabled={updating}
-            className="w-full bg-green-600 hover:bg-green-700 text-white font-semibold py-3.5 rounded-[30px] transition-colors shadow-sm hover:cursor-pointer disabled:opacity-70"
-          >
-            {updating ? (
-              <div className="flex items-center justify-center gap-2">
-                <svg
-                  className="animate-spin h-4 w-4 text-white"
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                >
-                  <circle
-                    className="opacity-25"
-                    cx="12"
-                    cy="12"
-                    r="10"
-                    stroke="currentColor"
-                    strokeWidth="4"
-                  />
-                  <path
-                    className="opacity-75"
-                    fill="currentColor"
-                    d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z"
-                  />
-                </svg>
-                Updating...
-              </div>
-            ) : (
-              "Update Profile"
-            )}
-          </button>
-
-          <button
-            onClick={handleLogout}
-            className="w-full bg-red-500/10 hover:bg-red-500/20 text-red-500 border border-red-500/20 hover:border-red-500/50 font-semibold py-3.5 rounded-[30px] transition-all hover:cursor-pointer"
-          >
-            Logout
-          </button>
-        </div>
-      </div>
+      {/* Action Button */}
+      <button
+        onClick={handleUpdateProfile}
+        disabled={updating}
+        className="w-full bg-[#007aff] hover:opacity-95 text-white font-semibold py-3 rounded-xl transition-all shadow-sm shadow-[#007aff]/20 text-sm cursor-pointer disabled:opacity-50"
+      >
+        {updating ? "Saving Changes..." : "Save Profile"}
+      </button>
     </div>
   );
 };

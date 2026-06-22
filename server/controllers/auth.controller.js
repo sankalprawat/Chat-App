@@ -51,6 +51,9 @@ const login = async (req, res) => {
     if (!user) {
       return res.status(400).json({ message: "User not found" });
     }
+    if (!user.password) {
+      return res.status(400).json({ message: "Please login with Google" });
+    }
     const isMatch = await bcrypt.compare(password, user.password);
     if (!isMatch) {
       return res.status(400).json({
@@ -137,6 +140,10 @@ const updateProfile = async (req, res) => {
     const updateData = {};
 
     if (req.body.email) {
+      const existingEmail = await User.findOne({ email: req.body.email, _id: { $ne: userId } });
+      if (existingEmail) {
+        return res.status(400).json({ message: "Email already in use" });
+      }
       updateData.email = req.body.email;
     }
 
@@ -165,7 +172,7 @@ const getAllContacts = async (req, res) => {
   try {
     const loginUserId = req.user._id;
     const query = { _id: { $ne: loginUserId } };
-    const user = await User.find(query);
+    const user = await User.find(query).select("-password");
 
     res.status(200).json({
       message: "All Users",
