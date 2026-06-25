@@ -11,16 +11,26 @@ const firebaseConfig = {
   measurementId: import.meta.env.VITE_FIREBASE_MEASUREMENT_ID
 };
 
+let app;
+let auth;
+let googleProvider;
 
-const app = initializeApp(firebaseConfig);
-const auth = getAuth(app)
-// console.log(auth);
-
-const googleProvider = new GoogleAuthProvider();
-// console.log(googleProvider);
+if (firebaseConfig.apiKey) {
+  try {
+    app = initializeApp(firebaseConfig);
+    auth = getAuth(app);
+    googleProvider = new GoogleAuthProvider();
+  } catch (error) {
+    console.error("Firebase initialization failed:", error);
+  }
+} else {
+  console.warn("Firebase API key is missing. Firebase services and Google authentication will not be available.");
+}
 
 export const signInWithGoogle = async () => {
+    if (!auth || !googleProvider) {
+        throw new Error("Google Authentication is not configured. Please set the Firebase environment variables.");
+    }
     const googleUser = await signInWithPopup(auth, googleProvider)
-    // console.log("googleUser", googleUser);
     return googleUser.user;
 }

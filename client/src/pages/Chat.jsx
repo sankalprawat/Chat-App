@@ -9,7 +9,7 @@ const Chat = () => {
 
   return (
     <>
-      <div className='flex flex-col h-screen'>
+      <div className='flex flex-col h-screen w-full'>
         <ChatHeader />
         <MessageArea  setMessages={setMessages} messages={messages}/>
         <InputBar setMessages={setMessages} />
