@@ -53,18 +53,18 @@ const InputBar = ({ setMessages }) => {
   };
 
   return (
-    <div className="bg-white dark:bg-zinc-900 border-t border-zinc-200 dark:border-zinc-800 px-4 py-3.5 flex items-center gap-2.5 transition-colors duration-200">
-      <button className="w-10 h-10 flex items-center justify-center rounded-xl hover:bg-zinc-100 dark:hover:bg-zinc-800 text-zinc-500 dark:text-zinc-400 hover:text-[#007aff] dark:hover:text-[#007aff] transition-colors cursor-pointer">
+    <div className="bg-white dark:bg-zinc-900 border-t border-zinc-200 dark:border-zinc-800 px-2.5 md:px-4 py-2.5 md:py-3.5 flex items-center gap-1.5 md:gap-2.5 transition-colors duration-200">
+      <button className="w-10 h-10 flex items-center justify-center rounded-xl hover:bg-zinc-100 dark:hover:bg-zinc-800 text-zinc-500 dark:text-zinc-400 hover:text-[#007aff] dark:hover:text-[#007aff] transition-colors cursor-pointer shrink-0">
         <BsEmojiSmile className="text-xl" />
       </button>
 
       <button
         onClick={() => fileInputRef.current.click()}
-        className="w-10 h-10 flex items-center justify-center rounded-xl hover:bg-zinc-100 dark:hover:bg-zinc-800 text-zinc-500 dark:text-zinc-400 hover:text-[#007aff] dark:hover:text-[#007aff] transition-colors cursor-pointer"
+        className="w-10 h-10 flex items-center justify-center rounded-xl hover:bg-zinc-100 dark:hover:bg-zinc-800 text-zinc-500 dark:text-zinc-400 hover:text-[#007aff] dark:hover:text-[#007aff] transition-colors cursor-pointer shrink-0"
       >
         <GrGallery className="text-lg" />
       </button>
-
+ 
       <input
         type="file"
         ref={fileInputRef}
@@ -78,7 +78,7 @@ const InputBar = ({ setMessages }) => {
           setFileUrl((prev) => [...prev, ...newFiles]);
         }}
       />
-
+ 
       {/* Unified pill — previews + text input */}
       <div className="flex-1 bg-zinc-100 dark:bg-zinc-800 border border-zinc-200/50 dark:border-zinc-700/50 focus-within:border-zinc-300 dark:focus-within:border-zinc-650 rounded-2xl px-4 py-2 transition-all">
         {fileUrl.length > 0 && (
@@ -114,7 +114,7 @@ const InputBar = ({ setMessages }) => {
             ))}
           </div>
         )}
-
+ 
         <input
           type="text"
           value={text}
@@ -126,15 +126,15 @@ const InputBar = ({ setMessages }) => {
           className="w-full bg-transparent outline-none placeholder:text-zinc-400 dark:placeholder:text-zinc-500 text-zinc-800 dark:text-zinc-100 text-sm py-0.5"
         />
       </div>
-
-      <button className="w-10 h-10 flex items-center justify-center rounded-xl bg-zinc-100 dark:bg-zinc-800 hover:bg-zinc-200 dark:hover:bg-zinc-700 text-zinc-500 dark:text-zinc-400 transition-colors cursor-pointer">
+ 
+      <button className="w-10 h-10 flex items-center justify-center rounded-xl bg-zinc-100 dark:bg-zinc-800 hover:bg-zinc-200 dark:hover:bg-zinc-700 text-zinc-500 dark:text-zinc-400 transition-colors cursor-pointer shrink-0">
         <FaMicrophone />
       </button>
-
+ 
       <button
         onClick={handleSend}
         disabled={sending}
-        className={`w-10 h-10 flex items-center justify-center rounded-xl transition-all duration-150 cursor-pointer ${
+        className={`w-10 h-10 flex items-center justify-center rounded-xl transition-all duration-150 cursor-pointer shrink-0 ${
           sending
             ? "bg-zinc-200 dark:bg-zinc-800 text-zinc-450 dark:text-zinc-600"
             : "bg-[#007aff] hover:opacity-95 text-white shadow-sm shadow-[#007aff]/15"
