@@ -77,22 +77,15 @@ const Settings = () => {
           <span>Back</span>
         </button>
         <h1 className="font-semibold text-lg">Settings</h1>
-        <button
-          onClick={handleLogout}
-          className="text-red-500 hover:text-red-600 transition-colors font-medium flex items-center gap-1 text-sm md:hidden"
-        >
-          <FiLogOut size={15} />
-          <span>Sign Out</span>
-        </button>
-        <div className="w-12 hidden md:block"></div> {/* spacer to center title */}
+        <div className="w-12"></div> {/* spacer to center title */}
       </div>
 
       {/* Main Settings Container */}
       <div className="flex-1 flex flex-col md:flex-row overflow-hidden max-w-5xl w-full mx-auto md:p-6 gap-4 md:gap-6">
         
-        {/* Left Pane - Navigation List / Horizontal Tabs on Mobile */}
-        <div className="w-full md:w-80 bg-white dark:bg-zinc-900 md:rounded-2xl border-b md:border border-zinc-200 dark:border-zinc-800 p-3 md:p-4 flex flex-row md:flex-col justify-between shrink-0 shadow-sm gap-2">
-          <div className="flex md:flex-col gap-1.5 w-full">
+        {/* Left Pane - Navigation List */}
+        <div className="w-full md:w-80 bg-white dark:bg-zinc-900 md:rounded-2xl border-b md:border border-zinc-200 dark:border-zinc-800 p-4 flex flex-col justify-between shrink-0 shadow-sm gap-2">
+          <div className="flex flex-col gap-1.5 w-full">
             
             {/* Quick Profile Summary - Hidden on Mobile */}
             <div className="hidden md:flex items-center gap-3 p-3 mb-4 rounded-xl bg-zinc-50 dark:bg-zinc-800/40">
@@ -109,10 +102,10 @@ const Settings = () => {
               </div>
             </div>
 
-            {/* Tabs / Buttons */}
+            {/* Sidebar Buttons */}
             <button
               onClick={() => setActiveTab("profile")}
-              className={`flex-1 md:w-full flex items-center justify-center md:justify-start gap-2.5 px-4 py-3 rounded-xl text-sm font-medium transition-all ${
+              className={`w-full flex items-center gap-2.5 px-4 py-3 rounded-xl text-sm font-medium transition-all ${
                 activeTab === "profile"
                   ? "bg-[#007aff] text-white shadow-sm shadow-[#007aff]/20"
                   : "hover:bg-zinc-100 dark:hover:bg-zinc-800 text-zinc-500 dark:text-zinc-400"
@@ -124,7 +117,7 @@ const Settings = () => {
 
             <button
               onClick={() => setActiveTab("appearance")}
-              className={`flex-1 md:w-full flex items-center justify-center md:justify-start gap-2.5 px-4 py-3 rounded-xl text-sm font-medium transition-all ${
+              className={`w-full flex items-center gap-2.5 px-4 py-3 rounded-xl text-sm font-medium transition-all ${
                 activeTab === "appearance"
                   ? "bg-[#007aff] text-white shadow-sm shadow-[#007aff]/20"
                   : "hover:bg-zinc-100 dark:hover:bg-zinc-800 text-zinc-500 dark:text-zinc-400"
@@ -135,10 +128,10 @@ const Settings = () => {
             </button>
           </div>
 
-          {/* Logout Button - Desktop Only */}
+          {/* Logout Button */}
           <button
             onClick={handleLogout}
-            className="hidden md:flex w-full items-center justify-center gap-2 mt-6 md:mt-0 px-4 py-3 rounded-xl text-sm font-medium border border-red-200/60 dark:border-red-900/30 text-red-500 bg-red-500/5 hover:bg-red-500/10 transition-colors cursor-pointer"
+            className="w-full flex items-center justify-center gap-2 mt-6 md:mt-4 px-4 py-3 rounded-xl text-sm font-medium border border-red-200/60 dark:border-red-900/30 text-red-500 bg-red-500/5 hover:bg-red-500/10 transition-colors cursor-pointer"
           >
             <FiLogOut size={16} />
             <span>Sign Out</span>

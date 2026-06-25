@@ -95,7 +95,7 @@ const MainLayout = () => {
 
       {/* Main Content Area */}
       <div className={`flex-1 bg-zinc-50 dark:bg-zinc-950 overflow-hidden transition-colors duration-200 ${
-        isListView ? "hidden md:flex" : "flex"
+        isListView ? "hidden md:block" : "block"
       }`}>
         <Outlet />
       </div>
