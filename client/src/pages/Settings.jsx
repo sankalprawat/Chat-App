@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { API_BASE_URL } from "../api/config";
 import { useTheme } from "../context/ThemeContext";
+import { useSocket } from "../context/SocketContext";
 import { toast } from "sonner";
 import Profile from "./Profile";
 
@@ -20,6 +21,7 @@ const toastStyle = {
 const Settings = () => {
   const navigate = useNavigate();
   const { theme, setTheme } = useTheme();
+  const { token, logout } = useSocket();
   
   const [activeTab, setActiveTab] = useState("profile"); // "profile" | "appearance"
   const [loading, setLoading] = useState(true);
@@ -29,11 +31,8 @@ const Settings = () => {
     profilePic: "",
   });
 
-  const token = localStorage.getItem("token");
-
   const handleLogout = () => {
-    localStorage.removeItem("token");
-    localStorage.removeItem("user");
+    logout();
     navigate("/login");
   };
 

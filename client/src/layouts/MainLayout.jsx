@@ -6,20 +6,34 @@ import { IoSettingsOutline } from "react-icons/io5";
 import { useNavigate, Outlet, useLocation } from "react-router-dom";
 import Contacts from "../components/Contacts";
 import GroupTab from "../components/GroupTab";
+import { useSocket } from "../context/SocketContext";
 
 const MainLayout = () => {
   const appName = "WhatsApp";
   const navigate = useNavigate();
   const location = useLocation();
-
-  const token = localStorage.getItem("token");
+  const { token } = useSocket();
 
   const [userName, setUserName] = useState("");
   const [activeTab, setActiveTab] = useState("chats");
+  const [showShareModal, setShowShareModal] = useState(false);
+  const [copied, setCopied] = useState(false);
+
+  const handleCopyLink = async () => {
+    try {
+      const shareUrl = window.location.origin;
+      await navigator.clipboard.writeText(shareUrl);
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2000);
+    } catch (err) {
+      console.error("Failed to copy link:", err);
+    }
+  };
 
   useEffect(() => {
     const fetchUser = async () => {
       try {
+        if (!token) return;
         const res = await axios.get(`${API_BASE_URL}/api/getProfile`, {
           headers: { Authorization: `Bearer ${token}` },
         });
@@ -29,7 +43,7 @@ const MainLayout = () => {
       }
     };
     fetchUser();
-  }, []);
+  }, [token]);
 
   const isListView = location.pathname === "/" || location.pathname === "/chat" || location.pathname === "/chat/";
 
@@ -57,8 +71,9 @@ const MainLayout = () => {
 
           {/* Right Group: Add Icon */}
           <div
+            onClick={() => setShowShareModal(true)}
             className="text-zinc-500 dark:text-zinc-400 hover:text-[#007aff] dark:hover:text-[#007aff] hover:bg-zinc-100 dark:hover:bg-zinc-850 p-2.5 rounded-full cursor-pointer text-sm transition-all"
-            title="Add New"
+            title="Share App Link"
           >
             <FaPlus />
           </div>
@@ -99,6 +114,44 @@ const MainLayout = () => {
       }`}>
         <Outlet />
       </div>
+
+      {/* Share Modal Dialog Overlay */}
+      {showShareModal && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 backdrop-blur-sm transition-opacity duration-200 animate-message-in">
+          <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-3xl p-6 w-full max-w-sm mx-4 shadow-2xl flex flex-col gap-4 animate-message-in">
+            <h3 className="text-zinc-800 dark:text-zinc-100 font-bold text-lg">Share Chat App</h3>
+            <p className="text-zinc-500 dark:text-zinc-400 text-sm">
+              Copy and share this link with your friends and family to invite them to chat!
+            </p>
+            
+            <div className="flex gap-2 bg-zinc-50 dark:bg-zinc-800/50 border border-zinc-200 dark:border-zinc-700/80 rounded-2xl p-2 items-center">
+              <input
+                type="text"
+                readOnly
+                value={window.location.origin}
+                className="flex-1 bg-transparent outline-none text-zinc-650 dark:text-zinc-305 text-sm px-2 select-all"
+              />
+              <button
+                onClick={handleCopyLink}
+                className={`px-3 py-1.5 rounded-xl text-xs font-semibold cursor-pointer transition-all duration-200 select-none ${
+                  copied
+                    ? "bg-emerald-500 text-white shadow-sm"
+                    : "bg-[#007aff] hover:opacity-95 text-white shadow-sm shadow-[#007aff]/15"
+                }`}
+              >
+                {copied ? "Copied!" : "Copy"}
+              </button>
+            </div>
+
+            <button
+              onClick={() => setShowShareModal(false)}
+              className="mt-1 w-full py-2.5 rounded-xl border border-zinc-200 dark:border-zinc-800 hover:bg-zinc-50 dark:hover:bg-zinc-800/40 text-zinc-500 dark:text-zinc-400 font-semibold text-sm cursor-pointer transition-colors"
+            >
+              Close
+            </button>
+          </div>
+        </div>
+      )}
     </div>
   );
 };

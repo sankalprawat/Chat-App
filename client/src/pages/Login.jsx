@@ -4,6 +4,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { toast } from "sonner";
 import { API_BASE_URL } from "../api/config";
 import { signInWithGoogle } from "../config/firebase";
+import { useSocket } from "../context/SocketContext";
 
 const toastStyle = {
   style: {
@@ -16,6 +17,7 @@ const toastStyle = {
 
 const Login = () => {
   const navigate = useNavigate();
+  const { login } = useSocket();
   const appName = "Chat App";
   const [formData, setFormData] = useState({ email: "", password: "" });
   const [loading, setLoading] = useState(false);
@@ -49,8 +51,7 @@ const Login = () => {
         },
       });
       const token = res.data.data.token;
-      localStorage.setItem("token", token);
-      localStorage.setItem("user", JSON.stringify(res.data.data.user));
+      login(token, res.data.data.user);
       setFormData({ email: "", password: "" });
       navigate("/");
     } catch (error) {
@@ -82,8 +83,7 @@ const Login = () => {
         },
       });
       const token = res.data.data.token;
-      localStorage.setItem("token", token);
-      localStorage.setItem("user", JSON.stringify(res.data.data.user));
+      login(token, res.data.data.user);
       navigate("/chat");
     } catch (error) {
       console.log("google login error", error);

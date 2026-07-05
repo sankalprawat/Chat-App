@@ -5,7 +5,7 @@ import axios from "axios";
 import { API_BASE_URL } from "../../api/config";
 import { useSocket } from "../../context/SocketContext";
 import { useParams } from "react-router-dom";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { toast } from "sonner";
 
 const InputBar = ({ setMessages }) => {
@@ -16,6 +16,11 @@ const InputBar = ({ setMessages }) => {
   const { token } = useSocket();
   const { userId } = useParams();
   const fileInputRef = useRef();
+  const inputRef = useRef();
+
+  useEffect(() => {
+    inputRef.current?.focus();
+  }, [userId]);
 
   const handleSend = async () => {
     if (!text.trim() && fileUrl.length === 0) return;
@@ -117,6 +122,7 @@ const InputBar = ({ setMessages }) => {
  
         <input
           type="text"
+          ref={inputRef}
           value={text}
           onChange={(e) => setText(e.target.value)}
           placeholder="Type a message..."

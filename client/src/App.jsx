@@ -11,11 +11,11 @@ import WelcomeScreen from "./components/WelcomeScreen"
 import { io } from "socket.io-client"
 import { useEffect, useRef } from 'react'
 import { API_BASE_URL } from './api/config'
-import { SocketContext } from "./context/SocketContext"
+import { SocketContext, useSocket } from "./context/SocketContext"
 import { ThemeProvider } from "./context/ThemeContext"
 
 const ProtectedRoute = ({ children }) => {
-  const token = localStorage.getItem("token")
+  const { token } = useSocket()
   return token ? children : <Navigate to="/signup" replace />
 }
 
@@ -52,10 +52,28 @@ const router = createBrowserRouter([
 ])
 
 const App = () => {
-  const token = localStorage.getItem("token")
+  const [token, setToken] = useState(localStorage.getItem("token"))
   const [socketConnected, setSocketConnected] = useState(false)
   const [onlineUsers, setOnlineUsers] = useState([])
   const socketRef = useRef()
+
+  const login = (newToken, newUser) => {
+    localStorage.setItem("token", newToken)
+    localStorage.setItem("user", JSON.stringify(newUser))
+    setToken(newToken)
+  }
+
+  const logout = () => {
+    localStorage.removeItem("token")
+    localStorage.removeItem("user")
+    setToken(null)
+    setOnlineUsers([])
+    setSocketConnected(false)
+    if (socketRef.current) {
+      socketRef.current.disconnect()
+      socketRef.current = null
+    }
+  }
 
   useEffect(() => {
     if (token) {
@@ -63,23 +81,24 @@ const App = () => {
         auth: { token }
       })
       socketRef.current.on("connect", () => {
-        // console.log("Connected with Socket ID:", socketRef.current.id)
         setSocketConnected(true)
       })
       socketRef.current.on("onlineUser", (users) => {
-        // console.log("Online Users:", users)
         setOnlineUsers(users)
       })
 
       return () => {
-        if (socketRef.current) socketRef.current.disconnect()
+        if (socketRef.current) {
+          socketRef.current.disconnect()
+          socketRef.current = null
+        }
       }
     }
   }, [token])
 
   return (
     <ThemeProvider>
-      <SocketContext.Provider value={{ token, socketConnected, onlineUsers, socketRef }}>
+      <SocketContext.Provider value={{ token, login, logout, socketConnected, onlineUsers, socketRef }}>
         <Toaster position="bottom-right" />
         <RouterProvider router={router} />
       </SocketContext.Provider>

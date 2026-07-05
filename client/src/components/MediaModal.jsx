@@ -1,5 +1,6 @@
 import React, { useEffect } from "react";
 import { IoClose } from "react-icons/io5";
+import { LuAudioLines } from "react-icons/lu";
 
 const MediaModal = ({ media, onClose }) => {
   useEffect(() => {
@@ -47,13 +48,10 @@ const MediaModal = ({ media, onClose }) => {
 
         {media.type === "audio" && (
           <div className="bg-zinc-900 border border-zinc-800 p-8 rounded-3xl shadow-2xl flex flex-col items-center gap-6 w-full max-w-md">
-            <div className="w-24 h-24 bg-gradient-to-tr from-[#007aff] to-indigo-500 rounded-full flex items-center justify-center shadow-lg shadow-[#007aff]/30">
-              <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                <path d="M3 18v-6a9 9 0 0 1 18 0v6"></path>
-                <path d="M21 19a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3zM3 19a2 2 0 0 0 2 2h1a2 2 0 0 0 2-2v-3a2 2 0 0 0-2-2H3z"></path>
-              </svg>
+            <div className="w-24 h-24 bg-gradient-to-tr from-[#007aff] to-indigo-500 rounded-full flex items-center justify-center">
+              <LuAudioLines className="text-6xl "/>
             </div>
-            <h3 className="text-white font-medium text-lg">Audio Message</h3>
+            <h3 className="text-white font-medium text-lg">{media.name || "Audio Message"}</h3>
             <audio
               src={media.url}
               controls

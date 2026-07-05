@@ -11,7 +11,7 @@ router.post("/googleLogin" , googleLogin)
 router.get("/getProfile", verifyToken, getProfile)
 router.put("/updateProfile", verifyToken, upload.single("profileImage"), uploadToCloudinary, updateProfile)
 router.get("/getAllContacts", verifyToken, getAllContacts)
-router.post("/imageupload" , upload.single("file") ,uploadToCloudinary ,imageUpload )
+router.post("/imageupload" , verifyToken, upload.single("file") ,uploadToCloudinary ,imageUpload )
 
 
 module.exports = router

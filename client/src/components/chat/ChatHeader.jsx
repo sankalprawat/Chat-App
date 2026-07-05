@@ -11,7 +11,6 @@ const ChatHeader = () => {
   const { token, socketConnected, onlineUsers } = useSocket();
   const navigate = useNavigate();
   const { userId } = useParams();
-  console.log(onlineUsers)
 
   const fetchUser = async () => {
     try {
@@ -29,6 +28,15 @@ const ChatHeader = () => {
   useEffect(() => {
     fetchUser();
   }, [userId]);
+
+  useEffect(() => {
+    if (user?.fullName) {
+      document.title = `${user.fullName}`;
+    }
+    return () => {
+      document.title = "Chat App";
+    };
+  }, [user]);
 
   const name = user?.fullName || "User Name";
   const isOnline = onlineUsers.includes(userId) || false;

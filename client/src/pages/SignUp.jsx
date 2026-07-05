@@ -4,6 +4,7 @@ import axios from "axios";
 import { toast } from "sonner";
 import { API_BASE_URL } from "../api/config";
 import { signInWithGoogle } from "../config/firebase";
+import { useSocket } from "../context/SocketContext";
 
 const toastStyle = {
   style: {
@@ -15,6 +16,7 @@ const toastStyle = {
 };
 
 const SignUp = () => {
+  const { login } = useSocket();
   const appName = "Chat App";
 
   const [formData, setFormData] = useState({
@@ -94,8 +96,7 @@ const SignUp = () => {
         },
       });
       const token = res.data.data.token;
-      localStorage.setItem("token", token);
-      localStorage.setItem("user", JSON.stringify(res.data.data.user));
+      login(token, res.data.data.user);
       navigate("/chat");
     } catch (error) {
       console.log("google login error", error);

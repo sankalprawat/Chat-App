@@ -13,7 +13,6 @@ const signUp = async (req, res) => {
     }
 
     const user = await User.findOne({ email });
-    console.log(user);
 
     if (user) {
       return res.status(400).json({
@@ -168,24 +167,86 @@ const updateProfile = async (req, res) => {
   }
 };
 
+const mongoose = require("mongoose");
+
 const getAllContacts = async (req, res) => {
   try {
-    const loginUserId = req.user._id;
-    const query = { _id: { $ne: loginUserId } };
-    const user = await User.find(query).select("-password");
+    const loginUserId = new mongoose.Types.ObjectId(req.user._id);
+    const users = await User.aggregate([
+      {
+        $match: {
+          _id: { $ne: loginUserId }
+        }
+      },
+      {
+        $lookup: {
+          from: "messages",
+          let: { contactId: "$_id" },
+          pipeline: [
+            {
+              $match: {
+                $expr: {
+                  $or: [
+                    {
+                      $and: [
+                        { $eq: ["$senderId", loginUserId] },
+                        { $eq: ["$receiverId", "$$contactId"] }
+                      ]
+                    },
+                    {
+                      $and: [
+                        { $eq: ["$senderId", "$$contactId"] },
+                        { $eq: ["$receiverId", loginUserId] }
+                      ]
+                    }
+                  ]
+                }
+              }
+            },
+            { $sort: { createdAt: -1 } },
+            { $limit: 1 }
+          ],
+          as: "lastMessage"
+        }
+      },
+      {
+        $addFields: {
+          lastMessageTime: {
+            $cond: {
+              if: { $gt: [{ $size: "$lastMessage" }, 0] },
+              then: { $arrayElemAt: ["$lastMessage.createdAt", 0] },
+              else: new Date(0)
+            }
+          }
+        }
+      },
+      {
+        $sort: {
+          lastMessageTime: -1,
+          fullName: 1
+        }
+      },
+      {
+        $project: {
+          password: 0,
+          lastMessage: 0,
+          lastMessageTime: 0
+        }
+      }
+    ]);
 
     res.status(200).json({
-      message: "All Users",
-      user: user,
+      message: "Fetched all contacts",
+      user: users,
     });
   } catch (error) {
+    console.log(error.message);
     res.status(500).json({ message: error.message });
   }
 };
 
 const imageUpload = async (req, res) => {
   try {
-    console.log(req.file);
     res.status(200).json({
       message: "Image Upload",
       file: req.file,

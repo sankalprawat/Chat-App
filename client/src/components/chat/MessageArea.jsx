@@ -22,9 +22,11 @@ const MessageArea = ({ messages, setMessages }) => {
   const loginUser = JSON.parse(localStorage.getItem("user"));
   const bottomRef = useRef();
   const [selectedMedia, setSelectedMedia] = useState(null);
+  const [loading, setLoading] = useState(true);
 
   const fetchMessages = async () => {
     try {
+      setLoading(true);
       const res = await axios.get(`${API_BASE_URL}/api/get-message/${userId}`, {
         headers: {
           Authorization: `Bearer ${token}`,
@@ -33,6 +35,8 @@ const MessageArea = ({ messages, setMessages }) => {
       setMessages(res.data.data);
     } catch (error) {
       console.log(error.response);
+    } finally {
+      setLoading(false);
     }
   };
   useEffect(() => {
@@ -57,6 +61,29 @@ const MessageArea = ({ messages, setMessages }) => {
     });
   }, [messages]);
 
+  if (loading) {
+    return (
+      <div className="flex-1 overflow-y-auto bg-zinc-50 dark:bg-zinc-950 px-4 py-6 space-y-4 scrollbar-thin scrollbar-thumb-zinc-300 dark:scrollbar-thumb-zinc-800 scrollbar-track-transparent transition-colors duration-200">
+        {[
+          { isMe: false, width: "w-1/2" },
+          { isMe: true, width: "w-1/3" },
+          { isMe: false, width: "w-2/3" },
+          { isMe: true, width: "w-1/4" },
+          { isMe: false, width: "w-2/5" },
+        ].map((bubble, idx) => (
+          <div
+            key={idx}
+            className={`flex w-full ${bubble.isMe ? "justify-end" : "justify-start"}`}
+          >
+            <div
+              className={`h-11 ${bubble.width} rounded-2xl animate-shimmer`}
+            />
+          </div>
+        ))}
+      </div>
+    );
+  }
+
   return (
     <div className="flex-1 overflow-y-auto bg-zinc-50 dark:bg-zinc-950 px-4 py-6 space-y-4 scrollbar-thin scrollbar-thumb-zinc-300 dark:scrollbar-thumb-zinc-800 scrollbar-track-transparent transition-colors duration-200">
       {messages.map((msg) => {
@@ -67,7 +94,7 @@ const MessageArea = ({ messages, setMessages }) => {
             className={`flex w-full ${isMe ? "justify-end" : "justify-start"}`}
           >
             <div
-              className={`px-3.5 py-2.5 rounded-2xl shadow-sm max-w-[70%] flex flex-col gap-1.5 transition-colors duration-200
+              className={`px-3.5 py-2.5 rounded-2xl shadow-sm max-w-[70%] flex flex-col gap-1.5 transition-colors duration-200 animate-message-in
                  ${
                    isMe
                      ? "bg-[#007aff] text-white rounded-tr-sm"
