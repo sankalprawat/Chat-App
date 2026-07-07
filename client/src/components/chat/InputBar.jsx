@@ -16,7 +16,7 @@ const InputBar = ({ setMessages }) => {
   const [sending, setSending] = useState(false);
 
   const { token } = useSocket();
-  const { userId } = useParams();
+  const { userId, groupId } = useParams();
   const fileInputRef = useRef();
   const inputRef = useRef();
   const emojiPickerRef = useRef();
@@ -26,13 +26,14 @@ const InputBar = ({ setMessages }) => {
 
   useEffect(() => {
     inputRef.current?.focus();
-  }, [userId]);
+  }, [userId, groupId]);
 
   // Detect mobile/tablet by checking primary pointer type
   useEffect(() => {
-    const isTouchPrimary = window.matchMedia("(pointer: coarse)").matches;
-    const hasFinePointer = window.matchMedia("(pointer: fine)").matches;
-    setIsMobileOrTablet(isTouchPrimary && !hasFinePointer);
+    const checkMobile = () => setIsMobileOrTablet(window.innerWidth < 768);
+    checkMobile();
+    window.addEventListener("resize", checkMobile);
+    return () => window.removeEventListener("resize", checkMobile);
   }, []);
 
   // Close emoji picker when clicking outside
@@ -62,8 +63,12 @@ const InputBar = ({ setMessages }) => {
       fileUrl.forEach((item) => {
         formData.append("files", item.file);
       });
+      const url = groupId
+        ? `${API_BASE_URL}/api/groups/${groupId}/send`
+        : `${API_BASE_URL}/api/send-message/${userId}`;
+
       const res = await axios.post(
-        `${API_BASE_URL}/api/send-message/${userId}`,
+        url,
         formData,
         {
           headers: {
@@ -71,10 +76,14 @@ const InputBar = ({ setMessages }) => {
           },
         }
       );
-      setMessages((prev) => [...prev, res.data.data]);
+      setMessages((prev) => {
+        if (prev.some((m) => m._id === res.data.data._id)) return prev;
+        return [...prev, res.data.data];
+      });
       setText("");
       fileUrl.forEach((item) => URL.revokeObjectURL(item.previewUrl));
       setFileUrl([]);
+      if (fileInputRef.current) fileInputRef.current.value = "";
     } catch (error) {
       console.log(error.response);
       toast.error(error.response?.data?.message || "Failed to upload media. Please try again.");
@@ -100,7 +109,7 @@ const InputBar = ({ setMessages }) => {
             <BsEmojiSmile className="text-xl" />
           </button>
           {showEmojiPicker && (
-            <div className="absolute bottom-12 left-0 z-50 shadow-2xl border border-zinc-200 dark:border-zinc-800 rounded-2xl overflow-hidden animate-message-in">
+            <div className="absolute bottom-[calc(100%+12px)] left-0 z-50 shadow-2xl border border-zinc-200 dark:border-zinc-800 rounded-2xl overflow-hidden animate-message-in">
               <EmojiPicker
                 onEmojiClick={handleEmojiClick}
                 theme={theme === "dark" ? "dark" : "light"}

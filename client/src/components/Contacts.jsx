@@ -63,7 +63,7 @@ const Contacts = () => {
             onClick={() => navigate(`/chat/${contact._id}`)}
           >
             <div className={`h-11 w-11 rounded-full flex items-center justify-center font-medium shadow-sm shrink-0 ${
-              isActive ? "bg-[#007aff]/20 text-white" : "bg-zinc-250 dark:bg-zinc-800 text-zinc-650 dark:text-zinc-300"
+              isActive ? "bg-[#007aff]/20 text-white" : "bg-zinc-200 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-300"
             }`}>
               {contact.profilePic ? (
                 <img

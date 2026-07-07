@@ -1,6 +1,5 @@
 const Message = require("../models/Message");
 const User = require("../models/User");
-const jwt = require("jsonwebtoken");
 const { getIO } = require("../services/socket")
 
 const getUserById = async (req, res) => {
@@ -40,6 +39,7 @@ const sendMessage = async (req, res) => {
         })
         let io = getIO()
         io.to(receiverId.toString()).emit("newMessage", newMessage)
+        io.to(senderId.toString()).emit("newMessage", newMessage)
         console.log("socket event");
 
         res.status(200).json({

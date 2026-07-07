@@ -1,3 +1,4 @@
+const mongoose = require("mongoose");
 const User = require("../models/User");
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcryptjs");
@@ -166,8 +167,6 @@ const updateProfile = async (req, res) => {
     res.status(500).json({ message: error.message });
   }
 };
-
-const mongoose = require("mongoose");
 
 const getAllContacts = async (req, res) => {
   try {

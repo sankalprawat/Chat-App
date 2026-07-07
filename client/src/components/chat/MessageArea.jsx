@@ -16,44 +16,55 @@ const formatTime = (isoString) => {
   }
 };
 
-const MessageArea = ({ messages, setMessages }) => {
-  const { userId } = useParams();
+const MessageArea = ({ messages, setMessages, setGroupInfo }) => {
+  const { userId, groupId } = useParams();
   const { token, socketConnected, socketRef } = useSocket();
   const loginUser = JSON.parse(localStorage.getItem("user"));
   const bottomRef = useRef();
   const [selectedMedia, setSelectedMedia] = useState(null);
   const [loading, setLoading] = useState(true);
 
-  const fetchMessages = async () => {
-    try {
-      setLoading(true);
-      const res = await axios.get(`${API_BASE_URL}/api/get-message/${userId}`, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
-      setMessages(res.data.data);
-    } catch (error) {
-      console.log(error.response);
-    } finally {
-      setLoading(false);
-    }
-  };
   useEffect(() => {
+    const fetchMessages = async () => {
+      try {
+        setLoading(true);
+        const url = groupId
+          ? `${API_BASE_URL}/api/groups/${groupId}/messages`
+          : `${API_BASE_URL}/api/get-message/${userId}`;
+
+        const res = await axios.get(url, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
+        setMessages(res.data.data);
+        if (groupId && setGroupInfo && res.data.group) {
+          setGroupInfo(res.data.group);
+        }
+      } catch (error) {
+        console.log(error.response || error);
+      } finally {
+        setLoading(false);
+      }
+    };
     fetchMessages();
-  }, [userId]);
+  }, [userId, groupId, token, setMessages, setGroupInfo]);
 
   useEffect(() => {
     if (!socketRef?.current) return;
 
     const handleMessage = (msg) => {
-      setMessages((prev) => [...prev, msg]);
+      setMessages((prev) => {
+        if (prev.some((m) => m._id === msg._id)) return prev;
+        return [...prev, msg];
+      });
     };
-    socketRef?.current.on("newMessage", handleMessage);
+    const socketEvent = groupId ? "newGroupMessage" : "newMessage";
+    socketRef.current.on(socketEvent, handleMessage);
     return () => {
-      socketRef?.current.off("newMessage");
+      socketRef.current.off(socketEvent, handleMessage);
     };
-  }, [socketConnected]);
+  }, [socketConnected, groupId]);
 
   useEffect(() => {
     bottomRef.current?.scrollIntoView({
@@ -85,9 +96,10 @@ const MessageArea = ({ messages, setMessages }) => {
   }
 
   return (
-    <div className="flex-1 overflow-y-auto bg-zinc-50 dark:bg-zinc-950 px-4 py-6 space-y-4 scrollbar-thin scrollbar-thumb-zinc-300 dark:scrollbar-thumb-zinc-800 scrollbar-track-transparent transition-colors duration-200">
+    <div className="flex-1 overflow-y-auto bg-zinc-50 dark:bg-zinc-950 px-4 py-6 space-y-4 transition-colors duration-200">
       {messages.map((msg) => {
-        const isMe = msg.senderId?.toString() === loginUser?._id?.toString();
+        const msgSenderId = msg.senderId?._id || msg.senderId;
+        const isMe = msgSenderId?.toString() === loginUser?._id?.toString();
         return (
           <div
             key={msg._id}
@@ -101,8 +113,14 @@ const MessageArea = ({ messages, setMessages }) => {
                      : "bg-zinc-200 dark:bg-zinc-800 text-zinc-900 dark:text-white rounded-tl-sm"
                  }`}
             >
+              {/* Group Member Sender Name */}
+              {!isMe && groupId && (
+                <span className="text-[10px] font-bold text-[#007aff] dark:text-[#30b0ff] block mb-1">
+                  {msg.senderId?.fullName || "Group Member"}
+                </span>
+              )}
               {/* text  */}
-              {msg.text && <p className="text-[14px] leading-relaxed select-text font-normal">{msg.text}</p>}
+              {msg.text && <p className="text-[14px] leading-relaxed select-text font-normal break-words whitespace-pre-wrap">{msg.text}</p>}
 
               {/* image  */}
               {msg.imageUrl?.length > 0 && (

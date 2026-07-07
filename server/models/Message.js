@@ -23,5 +23,6 @@ const messageSchema = new mongoose.Schema({
     }],
 
 }, { timestamps: true })
-const Message = mongoose.model("Message", messageSchema)
-module.exports = Message
+messageSchema.index({ senderId: 1, receiverId: 1 });
+const Message = mongoose.model("Message", messageSchema);
+module.exports = Message;

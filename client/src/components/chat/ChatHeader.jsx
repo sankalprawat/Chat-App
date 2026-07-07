@@ -46,7 +46,7 @@ const ChatHeader = () => {
 
   return (
     <>
-      <div className="flex items-center px-4 py-3 bg-white/80 dark:bg-zinc-900/80 backdrop-blur-md border-b border-zinc-200 dark:border-zinc-800 transition-colors duration-200">
+      <div className="flex items-center px-4 py-3 bg-white/70 dark:bg-zinc-900/70 backdrop-blur-xl border-b border-zinc-200 dark:border-zinc-800 transition-colors duration-200">
         <button
           onClick={() => navigate("/chat")}
           className="p-1.5 hover:bg-zinc-100 dark:hover:bg-zinc-800 rounded-full text-[#007aff] text-xl mr-2.5 transition-colors cursor-pointer"
@@ -66,12 +66,12 @@ const ChatHeader = () => {
               className="w-9 h-9 rounded-full object-cover border border-zinc-200 dark:border-zinc-700"
             />
           ) : (
-            <div className="w-9 h-9 rounded-full bg-zinc-200 dark:bg-zinc-800 flex items-center justify-center text-zinc-650 dark:text-zinc-350 font-semibold text-sm select-none">
+            <div className="w-9 h-9 rounded-full bg-zinc-200 dark:bg-zinc-800 flex items-center justify-center text-zinc-600 dark:text-zinc-400 font-semibold text-sm select-none">
               {name.charAt(0).toUpperCase()}
             </div>
           )}
         </div>
-        <div className="flex flex-col min-w-0">
+        <div className="flex flex-col min-w-0 flex-1">
           <span className="text-zinc-800 dark:text-zinc-100 font-semibold text-sm truncate">{name}</span>
           <span
             className={`text-[10px] font-medium ${isOnline ? "text-emerald-500" : "text-zinc-400 dark:text-zinc-500"}`}

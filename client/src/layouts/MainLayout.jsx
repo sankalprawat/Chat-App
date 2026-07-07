@@ -117,7 +117,7 @@ const MainLayout = () => {
 
       {/* Share Modal Dialog Overlay */}
       {showShareModal && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 backdrop-blur-sm transition-opacity duration-200 animate-message-in">
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 backdrop-blur-md transition-opacity duration-200 animate-message-in">
           <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-3xl p-6 w-full max-w-sm mx-4 shadow-2xl flex flex-col gap-4 animate-message-in">
             <h3 className="text-zinc-800 dark:text-zinc-100 font-bold text-lg">Share Chat App</h3>
             <p className="text-zinc-500 dark:text-zinc-400 text-sm">
@@ -129,7 +129,7 @@ const MainLayout = () => {
                 type="text"
                 readOnly
                 value={window.location.origin}
-                className="flex-1 bg-transparent outline-none text-zinc-650 dark:text-zinc-305 text-sm px-2 select-all"
+                className="flex-1 bg-transparent outline-none text-zinc-600 dark:text-zinc-300 text-sm px-2 select-all"
               />
               <button
                 onClick={handleCopyLink}
