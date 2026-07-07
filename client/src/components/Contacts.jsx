@@ -84,6 +84,7 @@ const Contacts = () => {
           </div>
         );
       })}
+
     </div>
   );
 };

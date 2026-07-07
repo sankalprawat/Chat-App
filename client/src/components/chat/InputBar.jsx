@@ -7,6 +7,8 @@ import { useSocket } from "../../context/SocketContext";
 import { useParams } from "react-router-dom";
 import { useEffect, useRef, useState } from "react";
 import { toast } from "sonner";
+import EmojiPicker from "emoji-picker-react";
+import { useTheme } from "../../context/ThemeContext";
 
 const InputBar = ({ setMessages }) => {
   const [fileUrl, setFileUrl] = useState([]);
@@ -17,10 +19,39 @@ const InputBar = ({ setMessages }) => {
   const { userId } = useParams();
   const fileInputRef = useRef();
   const inputRef = useRef();
+  const emojiPickerRef = useRef();
+  const [showEmojiPicker, setShowEmojiPicker] = useState(false);
+  const [isMobileOrTablet, setIsMobileOrTablet] = useState(false);
+  const { theme } = useTheme();
 
   useEffect(() => {
     inputRef.current?.focus();
   }, [userId]);
+
+  // Detect mobile/tablet by checking primary pointer type
+  useEffect(() => {
+    const isTouchPrimary = window.matchMedia("(pointer: coarse)").matches;
+    const hasFinePointer = window.matchMedia("(pointer: fine)").matches;
+    setIsMobileOrTablet(isTouchPrimary && !hasFinePointer);
+  }, []);
+
+  // Close emoji picker when clicking outside
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (emojiPickerRef.current && !emojiPickerRef.current.contains(event.target)) {
+        setShowEmojiPicker(false);
+      }
+    };
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
+
+  const handleEmojiClick = (emojiData) => {
+    setText((prev) => prev + emojiData.emoji);
+    inputRef.current?.focus();
+  };
 
   const handleSend = async () => {
     if (!text.trim() && fileUrl.length === 0) return;
@@ -59,9 +90,26 @@ const InputBar = ({ setMessages }) => {
 
   return (
     <div className="bg-white dark:bg-zinc-900 border-t border-zinc-200 dark:border-zinc-800 px-2.5 md:px-4 py-2.5 md:py-3.5 flex items-center gap-1.5 md:gap-2.5 transition-colors duration-200">
-      <button className="w-10 h-10 flex items-center justify-center rounded-xl hover:bg-zinc-100 dark:hover:bg-zinc-800 text-zinc-500 dark:text-zinc-400 hover:text-[#007aff] dark:hover:text-[#007aff] transition-colors cursor-pointer shrink-0">
-        <BsEmojiSmile className="text-xl" />
-      </button>
+      {/* Emoji Picker Popover (Only rendered on desktop/laptops) */}
+      {!isMobileOrTablet && (
+        <div ref={emojiPickerRef} className="relative">
+          <button
+            onClick={() => setShowEmojiPicker((prev) => !prev)}
+            className="w-10 h-10 flex items-center justify-center rounded-xl hover:bg-zinc-100 dark:hover:bg-zinc-800 text-zinc-500 dark:text-zinc-400 hover:text-[#007aff] dark:hover:text-[#007aff] transition-colors cursor-pointer shrink-0"
+          >
+            <BsEmojiSmile className="text-xl" />
+          </button>
+          {showEmojiPicker && (
+            <div className="absolute bottom-12 left-0 z-50 shadow-2xl border border-zinc-200 dark:border-zinc-800 rounded-2xl overflow-hidden animate-message-in">
+              <EmojiPicker
+                onEmojiClick={handleEmojiClick}
+                theme={theme === "dark" ? "dark" : "light"}
+                lazyLoadEmojis={true}
+              />
+            </div>
+          )}
+        </div>
+      )}
 
       <button
         onClick={() => fileInputRef.current.click()}
