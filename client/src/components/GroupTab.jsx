@@ -1,5 +1,6 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import axios from "axios";
+import useSWR from "swr";
 import { API_BASE_URL } from "../api/config";
 import { useNavigate, useParams } from "react-router-dom";
 import { useSocket } from "../context/SocketContext";
@@ -9,31 +10,21 @@ const GroupTab = () => {
   const navigate = useNavigate();
   const { groupId: activeGroupId } = useParams();
   const { token } = useSocket();
-  const [groups, setGroups] = useState([]);
-  const [loading, setLoading] = useState(true);
   const [isModalOpen, setIsModalOpen] = useState(false);
 
-  const fetchGroups = async () => {
-    try {
-      setLoading(true);
-      const res = await axios.get(`${API_BASE_URL}/api/groups`, {
-        headers: { Authorization: `Bearer ${token}` }
-      });
-      setGroups(res.data.groups);
-    } catch (err) {
-      console.error("Failed to load groups:", err);
-    } finally {
-      setLoading(false);
-    }
+  const fetcher = async (url) => {
+    const res = await axios.get(url, { headers: { Authorization: `Bearer ${token}` } });
+    return res.data.groups;
   };
 
-  useEffect(() => {
-    if (token) fetchGroups();
-  }, [token]);
+  const { data: groups = [], error, isLoading: loading, mutate: fetchGroups } = useSWR(
+    token ? `${API_BASE_URL}/api/groups` : null,
+    fetcher
+  );
 
   return (
     <div className="flex-1 flex flex-col mt-4 h-[calc(100vh-140px)] overflow-hidden relative">
-      <div className="flex-1 overflow-y-auto pr-1 space-y-1.5 scrollbar-thin scrollbar-thumb-zinc-300 dark:scrollbar-thumb-zinc-800 scrollbar-track-transparent">
+      <div className="flex-1 overflow-y-auto pr-1 space-y-1.5">
         {loading ? (
           <div className="p-4 text-center text-xs text-zinc-400 animate-pulse">Loading Groups...</div>
         ) : groups.length === 0 ? (
@@ -45,13 +36,15 @@ const GroupTab = () => {
               <div
                 key={group._id}
                 onClick={() => navigate(`/group/${group._id}`)}
-                className={`flex gap-3.5 p-2.5 items-center hover:cursor-pointer rounded-xl transition-all duration-150 ${
+                className={`flex gap-3.5 p-2.5 items-center hover:cursor-pointer rounded-2xl transition-all duration-200 active:scale-[0.98] ${
                   isActive 
-                    ? "bg-[#007aff]/10 dark:bg-[#007aff]/20 text-white font-semibold" 
-                    : "hover:bg-zinc-100 dark:hover:bg-zinc-800/60 text-zinc-800 dark:text-zinc-100"
+                    ? "bg-[#007aff]/15 dark:bg-[#007aff]/25 font-semibold" 
+                    : "hover:bg-white/50 dark:hover:bg-zinc-800/40 text-zinc-800 dark:text-zinc-100"
                 }`}
               >
-                <div className="h-11 w-11 rounded-full bg-zinc-200 dark:bg-zinc-800 dark:text-white text-zinc-900 flex items-center justify-center font-bold shadow-sm shrink-0">
+                <div className={`h-11 w-11 rounded-full flex items-center justify-center font-bold shadow-sm shrink-0 ${
+                  isActive ? "bg-[#007aff] text-white" : "bg-zinc-200 dark:bg-zinc-800 text-zinc-900 dark:text-white"
+                }`}>
                   {group.groupPic ? (
                     <img src={group.groupPic} alt={group.groupName} className="h-full w-full rounded-full object-cover" />
                   ) : (

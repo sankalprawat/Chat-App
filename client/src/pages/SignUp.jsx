@@ -3,7 +3,6 @@ import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { toast } from "sonner";
 import { API_BASE_URL } from "../api/config";
-import { signInWithGoogle } from "../config/firebase";
 import { useSocket } from "../context/SocketContext";
 
 const SignUp = () => {
@@ -57,6 +56,7 @@ const SignUp = () => {
 
   const handleGoogleLogin = async () => {
     try {
+      const { signInWithGoogle } = await import("../config/firebase");
       const googleUser = await signInWithGoogle();
       const res = await axios.post(`${API_BASE_URL}/api/googleLogin`, {
         email: googleUser.email,

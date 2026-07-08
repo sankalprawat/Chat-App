@@ -21,7 +21,7 @@ const toastStyle = {
 const Settings = () => {
   const navigate = useNavigate();
   const { theme, setTheme } = useTheme();
-  const { token, logout } = useSocket();
+  const { token, logout, setUser } = useSocket();
   
   const [activeTab, setActiveTab] = useState("profile"); // "profile" | "appearance"
   const [loading, setLoading] = useState(true);
@@ -45,6 +45,10 @@ const Settings = () => {
         },
       });
       setFormData(res.data.user);
+      if (setUser) {
+         setUser(res.data.user);
+         localStorage.setItem("user", JSON.stringify(res.data.user));
+      }
     } catch (error) {
       console.log(error.response);
     } finally {

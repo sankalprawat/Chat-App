@@ -2,32 +2,25 @@ import { IoArrowBackCircleOutline } from "react-icons/io5";
 import { useNavigate, useParams } from "react-router-dom";
 import { useSocket } from "../../context/SocketContext";
 import axios from "axios";
+import useSWR from "swr";
 import { API_BASE_URL } from "../../api/config";
-import { useEffect, useState } from "react";
+import { useState, useEffect } from "react";
 import MediaModal from "../MediaModal";
 
 const ChatHeader = () => {
-  const [user, setUser] = useState(null);
   const { token, socketConnected, onlineUsers } = useSocket();
   const navigate = useNavigate();
   const { userId } = useParams();
 
-  const fetchUser = async () => {
-    try {
-      const res = await axios.get(`${API_BASE_URL}/api/users/${userId}`, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
-      setUser(res.data.data);
-      // console.log(res.data.data);
-    } catch (error) {
-      console.log(error.response);
-    }
+  const fetcher = async (url) => {
+    const res = await axios.get(url, { headers: { Authorization: `Bearer ${token}` } });
+    return res.data.data;
   };
-  useEffect(() => {
-    fetchUser();
-  }, [userId]);
+
+  const { data: user } = useSWR(
+    userId && token ? `${API_BASE_URL}/api/users/${userId}` : null,
+    fetcher
+  );
 
   useEffect(() => {
     if (user?.fullName) {

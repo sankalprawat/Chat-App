@@ -37,6 +37,7 @@ const CreateGroupModal = ({ onClose, onGroupCreated }) => {
   const handlePicChange = (e) => {
     const file = e.target.files[0];
     if (file) {
+      if (groupPicPreview) URL.revokeObjectURL(groupPicPreview);
       setGroupPicFile(file);
       setGroupPicPreview(URL.createObjectURL(file));
     }

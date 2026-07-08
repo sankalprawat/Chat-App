@@ -105,6 +105,9 @@ const getGroupMessages = async (req, res) => {
   try {
     const { groupId } = req.params;
     const userId = req.user._id;
+    const page = parseInt(req.query.page) || 1;
+    const limit = parseInt(req.query.limit) || 50;
+    const skip = (page - 1) * limit;
 
     // Verify membership
     const group = await Group.findOne({ _id: groupId, members: userId })
@@ -115,9 +118,13 @@ const getGroupMessages = async (req, res) => {
 
     const messages = await GroupMessage.find({ groupId })
       .populate("senderId", "fullName profilePic")
-      .sort({ createdAt: 1 });
+      .sort({ createdAt: -1 })
+      .skip(skip)
+      .limit(limit);
 
-    res.status(200).json({ success: true, group, data: messages });
+    const sortedMessages = messages.reverse();
+
+    res.status(200).json({ success: true, group, data: sortedMessages });
   } catch (error) {
     res.status(500).json({ success: false, message: error.message });
   }

@@ -17,7 +17,7 @@ const Group = () => {
   const membersCount = groupInfo?.members?.length || 0;
 
   return (
-    <div className='flex flex-col h-screen w-full bg-zinc-50 dark:bg-zinc-950 transition-colors duration-200 relative'>
+    <div className='flex flex-col h-screen w-full bg-transparent relative'>
       
       {/* Group Chat Header */}
       <div className="flex items-center px-4 py-3 bg-white/70 dark:bg-zinc-900/70 backdrop-blur-xl border-b border-zinc-200 dark:border-zinc-800 transition-colors duration-200 shadow-sm shrink-0">

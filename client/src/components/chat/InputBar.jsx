@@ -12,7 +12,6 @@ import { useTheme } from "../../context/ThemeContext";
 
 const InputBar = ({ setMessages }) => {
   const [fileUrl, setFileUrl] = useState([]);
-  const [text, setText] = useState("");
   const [sending, setSending] = useState(false);
 
   const { token } = useSocket();
@@ -27,6 +26,13 @@ const InputBar = ({ setMessages }) => {
   useEffect(() => {
     inputRef.current?.focus();
   }, [userId, groupId]);
+
+  // Cleanup object URLs on unmount to prevent memory leaks
+  useEffect(() => {
+    return () => {
+      fileUrl.forEach((item) => URL.revokeObjectURL(item.previewUrl));
+    };
+  }, [fileUrl]);
 
   // Detect mobile/tablet by checking primary pointer type
   useEffect(() => {
@@ -50,16 +56,19 @@ const InputBar = ({ setMessages }) => {
   }, []);
 
   const handleEmojiClick = (emojiData) => {
-    setText((prev) => prev + emojiData.emoji);
-    inputRef.current?.focus();
+    if (inputRef.current) {
+      inputRef.current.value += emojiData.emoji;
+      inputRef.current.focus();
+    }
   };
 
   const handleSend = async () => {
-    if (!text.trim() && fileUrl.length === 0) return;
+    const currentText = inputRef.current?.value || "";
+    if (!currentText.trim() && fileUrl.length === 0) return;
     setSending(true);
     try {
       const formData = new FormData();
-      formData.append("text", text);
+      formData.append("text", currentText);
       fileUrl.forEach((item) => {
         formData.append("files", item.file);
       });
@@ -80,7 +89,7 @@ const InputBar = ({ setMessages }) => {
         if (prev.some((m) => m._id === res.data.data._id)) return prev;
         return [...prev, res.data.data];
       });
-      setText("");
+      if (inputRef.current) inputRef.current.value = "";
       fileUrl.forEach((item) => URL.revokeObjectURL(item.previewUrl));
       setFileUrl([]);
       if (fileInputRef.current) fileInputRef.current.value = "";
@@ -98,7 +107,7 @@ const InputBar = ({ setMessages }) => {
   };
 
   return (
-    <div className="bg-white dark:bg-zinc-900 border-t border-zinc-200 dark:border-zinc-800 px-2.5 md:px-4 py-2.5 md:py-3.5 flex items-center gap-1.5 md:gap-2.5 transition-colors duration-200">
+    <div className="bg-white/70 dark:bg-zinc-900/70 backdrop-blur-xl border-t border-zinc-200 dark:border-zinc-800 px-2.5 md:px-4 py-2.5 md:py-3.5 flex items-center gap-1.5 md:gap-2.5 transition-colors duration-200">
       {/* Emoji Picker Popover (Only rendered on desktop/laptops) */}
       {!isMobileOrTablet && (
         <div ref={emojiPickerRef} className="relative">
@@ -108,15 +117,13 @@ const InputBar = ({ setMessages }) => {
           >
             <BsEmojiSmile className="text-xl" />
           </button>
-          {showEmojiPicker && (
-            <div className="absolute bottom-[calc(100%+12px)] left-0 z-50 shadow-2xl border border-zinc-200 dark:border-zinc-800 rounded-2xl overflow-hidden animate-message-in">
-              <EmojiPicker
-                onEmojiClick={handleEmojiClick}
-                theme={theme === "dark" ? "dark" : "light"}
-                lazyLoadEmojis={true}
-              />
-            </div>
-          )}
+          <div className={`absolute bottom-[calc(100%+12px)] left-0 z-50 shadow-2xl border border-zinc-200 dark:border-zinc-800 rounded-2xl overflow-hidden animate-message-in ${showEmojiPicker ? "block" : "hidden"}`}>
+            <EmojiPicker
+              onEmojiClick={handleEmojiClick}
+              theme={theme === "dark" ? "dark" : "light"}
+              lazyLoadEmojis={true}
+            />
+          </div>
         </div>
       )}
 
@@ -142,7 +149,7 @@ const InputBar = ({ setMessages }) => {
       />
  
       {/* Unified pill — previews + text input */}
-      <div className="flex-1 bg-zinc-100 dark:bg-zinc-800 border border-zinc-200/50 dark:border-zinc-700/50 focus-within:border-zinc-300 dark:focus-within:border-zinc-650 rounded-2xl px-4 py-2 transition-all">
+      <div className="flex-1 bg-white/50 dark:bg-zinc-800/50 backdrop-blur-md border border-zinc-200/50 dark:border-zinc-700/50 focus-within:border-zinc-300 dark:focus-within:border-zinc-600 rounded-3xl px-4 py-2 transition-all">
         {fileUrl.length > 0 && (
           <div className="flex gap-2 mb-2 flex-wrap">
             {fileUrl.map((item, i) => (
@@ -180,8 +187,6 @@ const InputBar = ({ setMessages }) => {
         <input
           type="text"
           ref={inputRef}
-          value={text}
-          onChange={(e) => setText(e.target.value)}
           placeholder="Type a message..."
           onKeyDown={(e) => {
             if (e.key === "Enter" && !sending) handleSend();

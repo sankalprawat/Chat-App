@@ -1,36 +1,61 @@
 import axios from "axios";
-import React, { useEffect, useState } from "react";
+import React, { useCallback } from "react";
+import { Virtuoso } from 'react-virtuoso';
+import useSWR from "swr";
 import { API_BASE_URL } from "../api/config";
 import { useNavigate, useParams } from "react-router-dom";
 import { useSocket } from "../context/SocketContext";
 
+const ContactItem = React.memo(({ contact, isActive, isOnline, onClick }) => (
+  <div
+    className={`flex gap-3.5 p-2.5 items-center hover:cursor-pointer rounded-2xl transition-all duration-200 active:scale-[0.98] ${
+      isActive 
+        ? "bg-[#007aff]/15 dark:bg-[#007aff]/25" 
+        : "hover:bg-white/50 dark:hover:bg-zinc-800/40 text-zinc-800 dark:text-zinc-100"
+    }`}
+    onClick={() => onClick(contact._id)}
+  >
+    <div className={`h-11 w-11 rounded-full flex items-center justify-center font-medium shadow-sm shrink-0 ${
+      isActive ? "bg-[#007aff] text-white" : "bg-zinc-200 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-300"
+    }`}>
+      {contact.profilePic ? (
+        <img
+          src={contact.profilePic}
+          alt={contact.fullName}
+          className="h-11 w-11 rounded-full object-cover"
+        />
+      ) : (
+        contact.fullName.charAt(0).toUpperCase()
+      )}
+    </div>
+    <div className="flex flex-col justify-center min-w-0">
+      <p className={`font-semibold text-sm truncate ${isActive ? "text-white" : "text-zinc-800 dark:text-zinc-100"}`}>{contact.fullName}</p>
+      <p className={`text-[11px] font-medium mt-0.5 ${isOnline ? "text-emerald-500" : "text-zinc-400 dark:text-zinc-500"}`}>
+        {isOnline ? "Online" : "Offline"}
+      </p>
+    </div>
+  </div>
+));
+
 const Contacts = () => {
   const navigate = useNavigate();
-  const { userId } = useParams();
-  const [contacts, setContacts] = useState([]);
-  const [loading, setLoading] = useState(true);
   const { token, onlineUsers } = useSocket();
+  const { userId: activeUserId } = useParams();
 
-  const fetchContacts = async () => {
-    try {
-      if (!token) return;
-      setLoading(true);
-      const res = await axios.get(`${API_BASE_URL}/api/getAllContacts`, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
-      setContacts(res.data.user);
-    } catch (error) {
-      console.log("Contacts error:", error.response?.data || error.message);
-    } finally {
-      setLoading(false);
-    }
+  const fetcher = async (url) => {
+    const res = await axios.get(url, { headers: { Authorization: `Bearer ${token}` } });
+    return res.data.user;
   };
 
-  useEffect(() => {
-    fetchContacts();
-  }, [token]);
+  const { data: contacts = [], isLoading: loading } = useSWR(
+    token ? `${API_BASE_URL}/api/getAllContacts` : null,
+    fetcher
+  );
+
+  // Use useCallback so the function reference doesn't change on every render
+  const handleContactClick = useCallback((id) => {
+    navigate(`/chat/${id}`);
+  }, [navigate]);
 
   if (loading) {
     return (
@@ -49,42 +74,21 @@ const Contacts = () => {
   }
 
   return (
-    <div className="flex-1 overflow-y-auto mt-4 pr-1 space-y-1.5 scrollbar-thin scrollbar-thumb-zinc-300 dark:scrollbar-thumb-zinc-800 scrollbar-track-transparent">
-      {contacts.map((contact) => {
-        const isActive = userId === contact._id;
-        return (
-          <div
-            key={contact._id}
-            className={`flex gap-3.5 p-2.5 items-center hover:cursor-pointer rounded-xl transition-all duration-150 ${
-              isActive 
-                ? "bg-[#007aff]/10 dark:bg-[#007aff]/20 text-white" 
-                : "hover:bg-zinc-100 dark:hover:bg-zinc-800/60 text-zinc-800 dark:text-zinc-100"
-            }`}
-            onClick={() => navigate(`/chat/${contact._id}`)}
-          >
-            <div className={`h-11 w-11 rounded-full flex items-center justify-center font-medium shadow-sm shrink-0 ${
-              isActive ? "bg-[#007aff]/20 text-white" : "bg-zinc-200 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-300"
-            }`}>
-              {contact.profilePic ? (
-                <img
-                  src={contact.profilePic}
-                  alt={contact.fullName}
-                  className="h-11 w-11 rounded-full object-cover"
-                />
-              ) : (
-                contact.fullName.charAt(0).toUpperCase()
-              )}
-            </div>
-            <div className="flex flex-col justify-center min-w-0">
-              <p className={`font-semibold text-sm truncate ${isActive ? "text-white" : "text-zinc-800 dark:text-zinc-100"}`}>{contact.fullName}</p>
-              <p className={`text-[11px] font-medium mt-0.5 ${onlineUsers?.includes(contact._id) ? "text-emerald-500" : "text-zinc-400 dark:text-zinc-500"}`}>
-                {onlineUsers?.includes(contact._id) ? "Online" : "Offline"}
-              </p>
-            </div>
+    <div className="flex-1 mt-4">
+      <Virtuoso
+        style={{ height: '100%' }}
+        data={contacts}
+        itemContent={(index, contact) => (
+          <div className="pr-1 pb-1.5">
+            <ContactItem
+              contact={contact}
+              isActive={activeUserId === contact._id}
+              isOnline={onlineUsers?.includes(contact._id)}
+              onClick={handleContactClick}
+            />
           </div>
-        );
-      })}
-
+        )}
+      />
     </div>
   );
 };

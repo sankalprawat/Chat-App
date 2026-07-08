@@ -12,9 +12,9 @@ const MainLayout = () => {
   const appName = "WhatsApp";
   const navigate = useNavigate();
   const location = useLocation();
-  const { token } = useSocket();
+  const { user } = useSocket();
+  const userName = user?.fullName || "";
 
-  const [userName, setUserName] = useState("");
   const [activeTab, setActiveTab] = useState("chats");
   const [showShareModal, setShowShareModal] = useState(false);
   const [copied, setCopied] = useState(false);
@@ -30,27 +30,14 @@ const MainLayout = () => {
     }
   };
 
-  useEffect(() => {
-    const fetchUser = async () => {
-      try {
-        if (!token) return;
-        const res = await axios.get(`${API_BASE_URL}/api/getProfile`, {
-          headers: { Authorization: `Bearer ${token}` },
-        });
-        setUserName(res.data.user.fullName);
-      } catch (error) {
-        console.log(error.response);
-      }
-    };
-    fetchUser();
-  }, [token]);
+  // User is managed globally
 
   const isListView = location.pathname === "/" || location.pathname === "/chat" || location.pathname === "/chat/";
 
   return (
-    <div className="h-screen w-screen flex bg-zinc-100 dark:bg-zinc-950 text-zinc-900 dark:text-zinc-100 transition-colors duration-200">
+    <div className="h-screen w-screen flex bg-mesh text-zinc-900 dark:text-zinc-100 transition-colors duration-200">
       {/* Sidebar */}
-      <div className={`bg-white dark:bg-zinc-900 w-full md:w-1/4 md:min-w-75 border-r border-zinc-200 dark:border-zinc-800 p-4 flex flex-col transition-colors duration-200 ${
+      <div className={`bg-white/60 dark:bg-zinc-900/60 backdrop-blur-2xl w-full md:w-1/4 md:min-w-75 border-r border-zinc-200/50 dark:border-zinc-800/50 p-4 flex flex-col transition-colors duration-200 shadow-[1px_0_12px_rgba(0,0,0,0.03)] z-10 ${
         isListView ? "flex" : "hidden md:flex"
       }`}>
         {/* Header */}

@@ -55,16 +55,25 @@ const getMessage = async (req, res) => {
     try {
         const logingUserId = req.user._id
         const { userId } = req.params
-        const message = await Message.find({
+        const page = parseInt(req.query.page) || 1;
+        const limit = parseInt(req.query.limit) || 50;
+        const skip = (page - 1) * limit;
+
+        const messages = await Message.find({
             $or: [
                 { senderId: logingUserId, receiverId: userId },
                 { senderId: userId, receiverId: logingUserId }
             ]
-        }).sort({ createdAt: 1 });
+        })
+        .sort({ createdAt: -1 })
+        .skip(skip)
+        .limit(limit);
+
+        const sortedMessages = messages.reverse();
 
         res.status(200).json({
             message: "message get successfully",
-            data: message,
+            data: sortedMessages,
         });
     } catch (error) {
         console.log("error getMessage ", error.message);

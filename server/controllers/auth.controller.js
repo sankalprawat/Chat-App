@@ -171,68 +171,59 @@ const updateProfile = async (req, res) => {
 const getAllContacts = async (req, res) => {
   try {
     const loginUserId = new mongoose.Types.ObjectId(req.user._id);
-    const users = await User.aggregate([
+
+    // 1. Get all recent messages for this user efficiently
+    const recentMessages = await mongoose.model("Message").aggregate([
       {
         $match: {
-          _id: { $ne: loginUserId }
-        }
+          $or: [{ senderId: loginUserId }, { receiverId: loginUserId }],
+        },
       },
       {
-        $lookup: {
-          from: "messages",
-          let: { contactId: "$_id" },
-          pipeline: [
-            {
-              $match: {
-                $expr: {
-                  $or: [
-                    {
-                      $and: [
-                        { $eq: ["$senderId", loginUserId] },
-                        { $eq: ["$receiverId", "$$contactId"] }
-                      ]
-                    },
-                    {
-                      $and: [
-                        { $eq: ["$senderId", "$$contactId"] },
-                        { $eq: ["$receiverId", loginUserId] }
-                      ]
-                    }
-                  ]
-                }
-              }
-            },
-            { $sort: { createdAt: -1 } },
-            { $limit: 1 }
-          ],
-          as: "lastMessage"
-        }
+        $group: {
+          _id: {
+            $cond: [
+              { $eq: ["$senderId", loginUserId] },
+              "$receiverId",
+              "$senderId",
+            ],
+          },
+          lastMessageTime: { $max: "$createdAt" },
+        },
       },
-      {
-        $addFields: {
-          lastMessageTime: {
-            $cond: {
-              if: { $gt: [{ $size: "$lastMessage" }, 0] },
-              then: { $arrayElemAt: ["$lastMessage.createdAt", 0] },
-              else: new Date(0)
-            }
-          }
-        }
-      },
-      {
-        $sort: {
-          lastMessageTime: -1,
-          fullName: 1
-        }
-      },
-      {
-        $project: {
-          password: 0,
-          lastMessage: 0,
-          lastMessageTime: 0
-        }
-      }
     ]);
+
+    const lastMessageMap = {};
+    recentMessages.forEach((msg) => {
+      lastMessageMap[msg._id.toString()] = msg.lastMessageTime;
+    });
+
+    // 2. Get all users
+    let users = await User.find({ _id: { $ne: loginUserId } })
+      .select("-password")
+      .lean();
+
+    // 3. Map and sort in memory
+    users = users.map((user) => {
+      return {
+        ...user,
+        lastMessageTime: lastMessageMap[user._id.toString()] || new Date(0),
+      };
+    });
+
+    users.sort((a, b) => {
+      // Sort by last message time (descending)
+      if (b.lastMessageTime > a.lastMessageTime) return 1;
+      if (b.lastMessageTime < a.lastMessageTime) return -1;
+      // Then sort by name (ascending)
+      return a.fullName.localeCompare(b.fullName);
+    });
+
+    // 4. Remove lastMessageTime to match previous projection
+    users = users.map((user) => {
+      const { lastMessageTime, ...rest } = user;
+      return rest;
+    });
 
     res.status(200).json({
       message: "Fetched all contacts",
