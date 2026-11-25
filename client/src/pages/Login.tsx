@@ -14,7 +14,7 @@ interface LoginForm {
 
 const Login = () => {
   const navigate = useNavigate();
-  const { login } = useSocket();
+  const { login, isServerWaking } = useSocket();
   const appName = "Chat App";
   const [formData, setFormData] = useState<LoginForm>({ email: "", password: "" });
   const [loading, setLoading] = useState<boolean>(false);
@@ -34,7 +34,11 @@ const Login = () => {
 
     setLoading(true);
     try {
-      const res = await axios.post<AuthResponse>(`${API_BASE_URL}/api/login`, formData);
+      const res = await axios.post<AuthResponse>(
+        `${API_BASE_URL}/api/login`,
+        formData,
+        { timeout: 65_000 }
+      );
 
       toast.success("Logged in successfully!");
       const token = res.data.data.token;
@@ -58,9 +62,11 @@ const Login = () => {
       const { signInWithGoogle } = await import("../config/firebase");
       const googleUser = await signInWithGoogle();
       const idToken = await googleUser.getIdToken();
-      const res = await axios.post<AuthResponse>(`${API_BASE_URL}/api/googleLogin`, {
-        idToken,
-      });
+      const res = await axios.post<AuthResponse>(
+        `${API_BASE_URL}/api/googleLogin`,
+        { idToken },
+        { timeout: 65_000 }
+      );
       toast.success("Logged in successfully!");
       const token = res.data.data.token;
       if (token) {
@@ -128,7 +134,7 @@ const Login = () => {
                   <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
                   <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z" />
                 </svg>
-                <span>Signing in...</span>
+                <span>{isServerWaking ? "Waking up server..." : "Signing in..."}</span>
               </div>
             ) : (
               "Sign In"

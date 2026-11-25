@@ -21,6 +21,7 @@ export interface SocketContextType {
   login: (newToken: string, newUser: User) => void;
   logout: () => void;
   socketConnected: boolean;
+  isServerWaking: boolean;
   onlineUsers: string[];
   socket: Socket | null;
   socketRef: RefObject<Socket | null>;
@@ -45,6 +46,7 @@ export const SocketProvider = ({ children }: SocketProviderProps) => {
     }
   });
   const [socketConnected, setSocketConnected] = useState<boolean>(false);
+  const [isServerWaking, setIsServerWaking] = useState<boolean>(false);
   const [onlineUsers, setOnlineUsers] = useState<string[]>([]);
   const [socket, setSocket] = useState<Socket | null>(null);
   const socketRef = useRef<Socket | null>(null);
@@ -68,6 +70,44 @@ export const SocketProvider = ({ children }: SocketProviderProps) => {
       socketRef.current = null;
     }
     setSocket(null);
+  }, []);
+
+  // Early non-blocking wake-up ping so Render cold starts begin immediately on app load
+  useEffect(() => {
+    let cancelled = false;
+    let retryTimer: ReturnType<typeof setTimeout> | null = null;
+    let attempt = 0;
+
+    const wakeTimer = setTimeout(() => {
+      if (!cancelled) {
+        setIsServerWaking(true);
+      }
+    }, 2500);
+
+    const pingHealth = async () => {
+      try {
+        await axios.get(`${API_BASE_URL}/api/health`, { timeout: 65_000 });
+        if (!cancelled) {
+          clearTimeout(wakeTimer);
+          setIsServerWaking(false);
+        }
+      } catch {
+        if (cancelled) return;
+        setIsServerWaking(true);
+        attempt += 1;
+        if (attempt < 12) {
+          retryTimer = setTimeout(pingHealth, 3000);
+        }
+      }
+    };
+
+    pingHealth();
+
+    return () => {
+      cancelled = true;
+      clearTimeout(wakeTimer);
+      if (retryTimer) clearTimeout(retryTimer);
+    };
   }, []);
 
   // Global Axios Interceptor for 401 Unauthorized
@@ -96,6 +136,7 @@ export const SocketProvider = ({ children }: SocketProviderProps) => {
 
     activeSocket.on("connect", () => {
       setSocketConnected(true);
+      setIsServerWaking(false);
     });
 
     activeSocket.on("disconnect", () => {
@@ -133,11 +174,21 @@ export const SocketProvider = ({ children }: SocketProviderProps) => {
       login,
       logout,
       socketConnected,
+      isServerWaking,
       onlineUsers,
       socket,
       socketRef,
     }),
-    [token, user, login, logout, socketConnected, onlineUsers, socket]
+    [
+      token,
+      user,
+      login,
+      logout,
+      socketConnected,
+      isServerWaking,
+      onlineUsers,
+      socket,
+    ]
   );
 
   return (

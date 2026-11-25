@@ -14,7 +14,7 @@ interface SignUpForm {
 }
 
 const SignUp = () => {
-  const { login } = useSocket();
+  const { login, isServerWaking } = useSocket();
   const appName = "Chat App";
   const navigate = useNavigate();
 
@@ -45,7 +45,9 @@ const SignUp = () => {
 
     setLoading(true);
     try {
-      await axios.post(`${API_BASE_URL}/api/signup`, formData);
+      await axios.post(`${API_BASE_URL}/api/signup`, formData, {
+        timeout: 65_000,
+      });
 
       toast.success("Account created successfully!");
       setFormData({ fullName: "", password: "", email: "" });
@@ -65,9 +67,11 @@ const SignUp = () => {
       const { signInWithGoogle } = await import("../config/firebase");
       const googleUser = await signInWithGoogle();
       const idToken = await googleUser.getIdToken();
-      const res = await axios.post<AuthResponse>(`${API_BASE_URL}/api/googleLogin`, {
-        idToken,
-      });
+      const res = await axios.post<AuthResponse>(
+        `${API_BASE_URL}/api/googleLogin`,
+        { idToken },
+        { timeout: 65_000 }
+      );
       toast.success("Logged in successfully!");
       const token = res.data.data.token;
       if (token) {
@@ -146,7 +150,7 @@ const SignUp = () => {
                   <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
                   <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z" />
                 </svg>
-                <span>Creating...</span>
+                <span>{isServerWaking ? "Waking up server..." : "Creating..."}</span>
               </div>
             ) : (
               "Create account"

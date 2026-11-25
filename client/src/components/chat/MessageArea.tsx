@@ -193,9 +193,10 @@ const MessageArea = ({ messages, setMessages, setGroupInfo }: MessageAreaProps) 
 
     const controller = new AbortController();
     let cancelled = false;
+    let retryTimer: ReturnType<typeof setTimeout> | null = null;
 
-    const fetchInitial = async () => {
-      setLoading(true);
+    const fetchInitial = async (attempt = 0) => {
+      if (attempt === 0) setLoading(true);
       try {
         const url = groupId
           ? `${API_BASE_URL}/api/groups/${groupId}/messages?page=1&limit=${PAGE_LIMIT}`
@@ -204,6 +205,7 @@ const MessageArea = ({ messages, setMessages, setGroupInfo }: MessageAreaProps) 
         const res = await axios.get(url, {
           headers: { Authorization: `Bearer ${token}` },
           signal: controller.signal,
+          timeout: 65_000,
         });
 
         if (cancelled) return;
@@ -215,20 +217,29 @@ const MessageArea = ({ messages, setMessages, setGroupInfo }: MessageAreaProps) 
         if (groupId && setGroupInfo && res.data.group) {
           setGroupInfo(res.data.group);
         }
+        setLoading(false);
       } catch (error: any) {
-        if (axios.isCancel(error) || error?.name === "CanceledError") return;
-        console.error("Failed to fetch messages:", error);
-      } finally {
-        if (!cancelled) {
-          setLoading(false);
+        if (axios.isCancel(error) || error?.name === "CanceledError" || cancelled) {
+          return;
         }
+        const status = error?.response?.status;
+        const isTransient = !status || status >= 500;
+        if (isTransient && attempt < 3) {
+          retryTimer = setTimeout(() => {
+            if (!cancelled) fetchInitial(attempt + 1);
+          }, 3000);
+          return;
+        }
+        console.error("Failed to fetch messages:", error);
+        setLoading(false);
       }
     };
 
-    fetchInitial();
+    fetchInitial(0);
 
     return () => {
       cancelled = true;
+      if (retryTimer) clearTimeout(retryTimer);
       controller.abort();
     };
   }, [userId, groupId, token, setMessages, setGroupInfo]);

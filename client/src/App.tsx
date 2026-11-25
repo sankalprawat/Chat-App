@@ -1,8 +1,10 @@
 import React, { Suspense, lazy } from "react";
 import { createBrowserRouter, RouterProvider, Navigate } from "react-router-dom";
 import { Toaster } from "sonner";
+import { SWRConfig } from "swr";
 import { SocketProvider, useSocket } from "./context/SocketContext";
 import { ThemeProvider } from "./context/ThemeContext";
+import ServerWakeBanner from "./components/ServerWakeBanner";
 
 const MainLayout = lazy(() => import("./layouts/MainLayout"));
 const WelcomeScreen = lazy(() => import("./components/WelcomeScreen"));
@@ -119,8 +121,17 @@ const App = () => {
   return (
     <ThemeProvider>
       <SocketProvider>
-        <Toaster position="bottom-right" />
-        <RouterProvider router={router} />
+        <SWRConfig
+          value={{
+            shouldRetryOnError: true,
+            errorRetryCount: 6,
+            errorRetryInterval: 5000,
+          }}
+        >
+          <ServerWakeBanner />
+          <Toaster position="bottom-right" />
+          <RouterProvider router={router} />
+        </SWRConfig>
       </SocketProvider>
     </ThemeProvider>
   );

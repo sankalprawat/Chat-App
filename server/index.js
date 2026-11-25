@@ -2,6 +2,7 @@ const express = require("express");
 const dotenv = require("dotenv");
 const cors = require("cors");
 const multer = require("multer");
+const mongoose = require("mongoose");
 const { createServer } = require("http");
 
 dotenv.config();
@@ -21,6 +22,13 @@ const allowedOrigins = process.env.CLIENT_URL
 
 app.use(express.json({ limit: "1mb" }));
 app.use(cors({ origin: allowedOrigins }));
+
+app.get("/api/health", (_req, res) => {
+  res.status(200).json({
+    ok: true,
+    db: mongoose.connection.readyState === 1 ? "connected" : "connecting",
+  });
+});
 
 app.use("/api", authRoute);
 app.use("/api", messageRoute);
