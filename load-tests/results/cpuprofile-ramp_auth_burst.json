@@ -1,0 +1,181 @@
+{
+  "totalProfiledMs": 16659.55,
+  "sampleCount": 10771,
+  "topSelfTimeFunctions": [
+    {
+      "symbol": "(idle) | :-1",
+      "selfMs": 13482.88,
+      "pct": 80.93
+    },
+    {
+      "symbol": "internalModuleStat | :-1",
+      "selfMs": 448.42,
+      "pct": 2.69
+    },
+    {
+      "symbol": "lstat | :-1",
+      "selfMs": 314.14,
+      "pct": 1.89
+    },
+    {
+      "symbol": "wrapSafe | node:internal/modules/cjs/loader:1626",
+      "selfMs": 254.32,
+      "pct": 1.53
+    },
+    {
+      "symbol": "readFileUtf8 | :-1",
+      "selfMs": 220.27,
+      "pct": 1.32
+    },
+    {
+      "symbol": "getNearestParentPackageJSON | :-1",
+      "selfMs": 161.49,
+      "pct": 0.97
+    },
+    {
+      "symbol": "(program) | :-1",
+      "selfMs": 156.31,
+      "pct": 0.94
+    },
+    {
+      "symbol": "(garbage collector) | :-1",
+      "selfMs": 116.32,
+      "pct": 0.7
+    },
+    {
+      "symbol": "deserializeObject | file:///C:/Users/sanka/OneDrive/Desktop/Chatting%20App/server/node_modules/bson/lib/bson.cjs:3174",
+      "selfMs": 96.94,
+      "pct": 0.58
+    },
+    {
+      "symbol": "writev | :-1",
+      "selfMs": 64.08,
+      "pct": 0.38
+    },
+    {
+      "symbol": "readPackageJSON | :-1",
+      "selfMs": 35.6,
+      "pct": 0.21
+    },
+    {
+      "symbol": "normalizeString | node:path:90",
+      "selfMs": 28.07,
+      "pct": 0.17
+    },
+    {
+      "symbol": "(anonymous) | node:internal/modules/cjs/loader:689",
+      "selfMs": 26.26,
+      "pct": 0.16
+    },
+    {
+      "symbol": "writeFileUtf8 | :-1",
+      "selfMs": 25.67,
+      "pct": 0.15
+    },
+    {
+      "symbol": "parse | file:///C:/Users/sanka/OneDrive/Desktop/Chatting%20App/server/node_modules/content-type/index.js:105",
+      "selfMs": 24.53,
+      "pct": 0.15
+    },
+    {
+      "symbol": "Hash | node:internal/crypto/hash:89",
+      "selfMs": 23.99,
+      "pct": 0.14
+    },
+    {
+      "symbol": "(anonymous) | node:internal/modules/cjs/loader:1195",
+      "selfMs": 23.88,
+      "pct": 0.14
+    },
+    {
+      "symbol": "parserOnIncoming | node:_http_server:1054",
+      "selfMs": 22.72,
+      "pct": 0.14
+    },
+    {
+      "symbol": "handle | file:///C:/Users/sanka/OneDrive/Desktop/Chatting%20App/server/node_modules/express/lib/application.js:151",
+      "selfMs": 20.96,
+      "pct": 0.13
+    },
+    {
+      "symbol": "parserOnHeadersComplete | node:_http_common:70",
+      "selfMs": 19.7,
+      "pct": 0.12
+    },
+    {
+      "symbol": "existsSync | :-1",
+      "selfMs": 18.53,
+      "pct": 0.11
+    },
+    {
+      "symbol": "realpathSync | node:fs:2699",
+      "selfMs": 17.9,
+      "pct": 0.11
+    },
+    {
+      "symbol": "nextTick | node:internal/process/task_queues:112",
+      "selfMs": 17.23,
+      "pct": 0.1
+    },
+    {
+      "symbol": "resolve | node:path:188",
+      "selfMs": 16.51,
+      "pct": 0.1
+    },
+    {
+      "symbol": "readFileSync | node:fs:432",
+      "selfMs": 12.67,
+      "pct": 0.08
+    },
+    {
+      "symbol": "afterWriteDispatched | node:internal/stream_base_commons:153",
+      "selfMs": 12.37,
+      "pct": 0.07
+    },
+    {
+      "symbol": "writeBuffer | :-1",
+      "selfMs": 12.15,
+      "pct": 0.07
+    },
+    {
+      "symbol": "compileForInternalLoader | node:internal/bootstrap/realm:382",
+      "selfMs": 11.96,
+      "pct": 0.07
+    },
+    {
+      "symbol": "send | file:///C:/Users/sanka/OneDrive/Desktop/Chatting%20App/server/node_modules/express/lib/response.js:124",
+      "selfMs": 11.07,
+      "pct": 0.07
+    },
+    {
+      "symbol": "Readable | node:internal/streams/readable:317",
+      "selfMs": 10.99,
+      "pct": 0.07
+    },
+    {
+      "symbol": "runMicrotasks | :-1",
+      "selfMs": 10.84,
+      "pct": 0.07
+    },
+    {
+      "symbol": "toUTF8 | file:///C:/Users/sanka/OneDrive/Desktop/Chatting%20App/server/node_modules/bson/lib/bson.cjs:295",
+      "selfMs": 10.81,
+      "pct": 0.06
+    },
+    {
+      "symbol": "(anonymous) | node:internal/modules/cjs/loader:1326",
+      "selfMs": 10.03,
+      "pct": 0.06
+    },
+    {
+      "symbol": "(anonymous) | node:internal/modules/cjs/loader:1460",
+      "selfMs": 10.02,
+      "pct": 0.06
+    },
+    {
+      "symbol": "(anonymous) | node:internal/modules/cjs/loader:1687",
+      "selfMs": 9.81,
+      "pct": 0.06
+    }
+  ]
+}

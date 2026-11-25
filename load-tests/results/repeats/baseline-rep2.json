@@ -1,0 +1,189 @@
+{
+  "k6_http_reqs": {
+    "count": 64930,
+    "rate": 954.8145155087773
+  },
+  "k6_http_req_duration": {
+    "p(95)": 5.330684999999988,
+    "p(99)": 15.981305999999993,
+    "max": 1123.7068,
+    "avg": 1.686711741875856,
+    "min": 0,
+    "med": 0.9924,
+    "p(90)": 3.7990299999999966
+  },
+  "k6_http_req_failed": {
+    "passes": 0,
+    "fails": 64930,
+    "value": 0
+  },
+  "k6_dropped_iterations": null,
+  "k6_custom_metrics": {
+    "ep_auth_login_ms": {
+      "p(95)": 1104.4497999999999,
+      "p(99)": 1119.8554,
+      "max": 1123.7068,
+      "avg": 325.5318466666667,
+      "min": 69.329,
+      "med": 73.2587,
+      "p(90)": 1045.79792
+    },
+    "ep_group_messages_reqs": {
+      "count": 3056,
+      "rate": 44.939367925378455
+    },
+    "ep_group_messages_err": {
+      "passes": 0,
+      "fails": 3056,
+      "value": 0
+    },
+    "ep_health_reqs": {
+      "count": 51927,
+      "rate": 763.6016224676463
+    },
+    "ep_groups_list_err": {
+      "passes": 0,
+      "fails": 3129,
+      "value": 0
+    },
+    "ep_group_send_err": {
+      "passes": 0,
+      "fails": 1323,
+      "value": 0
+    },
+    "ep_groups_list_reqs": {
+      "count": 3129,
+      "rate": 46.012854135637824
+    },
+    "ep_contacts_err": {
+      "passes": 0,
+      "fails": 1404,
+      "value": 0
+    },
+    "ep_dm_send_reqs": {
+      "count": 1706,
+      "rate": 25.087225680855905
+    },
+    "ep_auth_login_err": {
+      "passes": 0,
+      "fails": 15,
+      "value": 0
+    },
+    "ep_dm_read_reqs": {
+      "rate": 34.8515386070507,
+      "count": 2370
+    },
+    "ep_dm_read_err": {
+      "passes": 0,
+      "fails": 2370,
+      "value": 0
+    },
+    "ep_dm_send_ms": {
+      "p(99)": 13.37467500000001,
+      "max": 42.4059,
+      "avg": 4.219801289566244,
+      "min": 0.9955,
+      "med": 3.7923,
+      "p(90)": 6.11275,
+      "p(95)": 7.460525
+    },
+    "ep_dm_send_err": {
+      "passes": 0,
+      "fails": 1706,
+      "value": 0
+    },
+    "ep_health_err": {
+      "passes": 0,
+      "fails": 51927,
+      "value": 0
+    },
+    "ep_group_messages_ms": {
+      "avg": 3.883449738219904,
+      "min": 0.998,
+      "med": 3.6717500000000003,
+      "p(90)": 5.52435,
+      "p(95)": 6.1930499999999995,
+      "p(99)": 8.595564999999999,
+      "max": 17.2378
+    },
+    "ep_dm_read_ms": {
+      "p(99)": 17.06781199999998,
+      "max": 45.7502,
+      "avg": 4.532992953586498,
+      "min": 0.9972,
+      "med": 3.6372,
+      "p(90)": 7.767809999999998,
+      "p(95)": 10.978949999999992
+    },
+    "ep_auth_login_reqs": {
+      "count": 15,
+      "rate": 0.2205793582724728
+    },
+    "ep_group_send_ms": {
+      "avg": 14.710576568405116,
+      "min": 2.003,
+      "med": 8.6006,
+      "p(90)": 27.24349999999999,
+      "p(95)": 43.709439999999745,
+      "p(99)": 96.76421399999992,
+      "max": 330.4336
+    },
+    "ep_group_send_reqs": {
+      "count": 1323,
+      "rate": 19.4550993996321
+    },
+    "ep_contacts_ms": {
+      "p(99)": 40.232227,
+      "max": 72.0688,
+      "avg": 7.991737962962966,
+      "min": 0,
+      "med": 3.1036,
+      "p(90)": 21.296090000000007,
+      "p(95)": 26.658069999999995
+    },
+    "ep_health_ms": {
+      "avg": 0.6665384828701852,
+      "min": 0,
+      "med": 0.5298,
+      "p(90)": 1.2528,
+      "p(95)": 1.5605,
+      "p(99)": 3.3346439999999884,
+      "max": 23.5689
+    },
+    "ep_contacts_reqs": {
+      "count": 1404,
+      "rate": 20.646227934303454
+    },
+    "ep_groups_list_ms": {
+      "p(90)": 4.593740000000001,
+      "p(95)": 5.51658,
+      "p(99)": 7.405615999999982,
+      "max": 20.7265,
+      "avg": 3.046143272611053,
+      "min": 0,
+      "med": 2.9996
+    }
+  },
+  "system_metrics": {
+    "node_cpu_avg_1core_pct": 103.99,
+    "node_cpu_peak_1core_pct": 247.44,
+    "node_rss_start_mb": 358.63,
+    "node_rss_peak_mb": 373.82,
+    "node_heap_peak_mb": 89.9,
+    "el_lag_p95_peak_ms": 22.66,
+    "el_lag_max_ms": 91.55,
+    "mongo_conns_peak": 13,
+    "mongo_wt_cache_peak_mb": 23.61,
+    "mongo_active_clients_peak": 1,
+    "mongo_queued_peak": 0,
+    "mongo_ops_insert_peak_s": 0,
+    "mongo_ops_query_peak_s": 6,
+    "mongo_ops_update_peak_s": 0,
+    "mongo_os_cpu_avg_pct": 30.12,
+    "mongo_os_cpu_peak_pct": 116.6,
+    "mongo_os_rss_peak_mb": 195.76,
+    "sys_cpu_peak_pct": 98.4,
+    "sys_mem_avail_min_mb": 1108.38
+  },
+  "timeseries_buckets": null
+}

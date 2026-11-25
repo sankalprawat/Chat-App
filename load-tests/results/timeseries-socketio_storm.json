@@ -1,0 +1,68 @@
+[
+  {
+    "tSec": 0,
+    "rps": 0.0,
+    "reqCount": 0,
+    "errCount": 0,
+    "errRatePct": 0.0,
+    "p50Ms": 0.0,
+    "p95Ms": 0.0,
+    "p99Ms": 0.0,
+    "maxMs": 0.0
+  },
+  {
+    "tSec": 5,
+    "rps": 0.0,
+    "reqCount": 0,
+    "errCount": 0,
+    "errRatePct": 0.0,
+    "p50Ms": 0.0,
+    "p95Ms": 0.0,
+    "p99Ms": 0.0,
+    "maxMs": 0.0
+  },
+  {
+    "tSec": 10,
+    "rps": 0.0,
+    "reqCount": 0,
+    "errCount": 0,
+    "errRatePct": 0.0,
+    "p50Ms": 0.0,
+    "p95Ms": 0.0,
+    "p99Ms": 0.0,
+    "maxMs": 0.0
+  },
+  {
+    "tSec": 15,
+    "rps": 0.0,
+    "reqCount": 0,
+    "errCount": 0,
+    "errRatePct": 0.0,
+    "p50Ms": 0.0,
+    "p95Ms": 0.0,
+    "p99Ms": 0.0,
+    "maxMs": 0.0
+  },
+  {
+    "tSec": 20,
+    "rps": 0.0,
+    "reqCount": 0,
+    "errCount": 0,
+    "errRatePct": 0.0,
+    "p50Ms": 0.0,
+    "p95Ms": 0.0,
+    "p99Ms": 0.0,
+    "maxMs": 0.0
+  },
+  {
+    "tSec": 25,
+    "rps": 0.0,
+    "reqCount": 0,
+    "errCount": 0,
+    "errRatePct": 0.0,
+    "p50Ms": 0.0,
+    "p95Ms": 0.0,
+    "p99Ms": 0.0,
+    "maxMs": 0.0
+  }
+]

@@ -158,6 +158,26 @@ export const SocketProvider = ({ children }: SocketProviderProps) => {
       setOnlineUsers(users);
     });
 
+    activeSocket.on(
+      "presenceDelta",
+      ({ online = [], offline = [] }: { online?: string[]; offline?: string[] }) => {
+        setOnlineUsers((prev) => {
+          const next = new Set(prev);
+          online.forEach((id) => next.add(id));
+          offline.forEach((id) => next.delete(id));
+          return Array.from(next);
+        });
+      }
+    );
+
+    activeSocket.on("userOnline", (userId: string) => {
+      setOnlineUsers((prev) => (prev.includes(userId) ? prev : [...prev, userId]));
+    });
+
+    activeSocket.on("userOffline", (userId: string) => {
+      setOnlineUsers((prev) => prev.filter((id) => id !== userId));
+    });
+
     return () => {
       activeSocket.disconnect();
       socketRef.current = null;

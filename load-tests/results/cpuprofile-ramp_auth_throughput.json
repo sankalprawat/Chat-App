@@ -1,0 +1,181 @@
+{
+  "totalProfiledMs": 35035.83,
+  "sampleCount": 22549,
+  "topSelfTimeFunctions": [
+    {
+      "symbol": "(idle) | :-1",
+      "selfMs": 29710.64,
+      "pct": 84.8
+    },
+    {
+      "symbol": "internalModuleStat | :-1",
+      "selfMs": 420.69,
+      "pct": 1.2
+    },
+    {
+      "symbol": "(program) | :-1",
+      "selfMs": 283.45,
+      "pct": 0.81
+    },
+    {
+      "symbol": "lstat | :-1",
+      "selfMs": 269.95,
+      "pct": 0.77
+    },
+    {
+      "symbol": "wrapSafe | node:internal/modules/cjs/loader:1626",
+      "selfMs": 185.73,
+      "pct": 0.53
+    },
+    {
+      "symbol": "readFileUtf8 | :-1",
+      "selfMs": 181.57,
+      "pct": 0.52
+    },
+    {
+      "symbol": "writeBuffer | :-1",
+      "selfMs": 172.75,
+      "pct": 0.49
+    },
+    {
+      "symbol": "deserializeObject | file:///C:/Users/sanka/OneDrive/Desktop/Chatting%20App/server/node_modules/bson/lib/bson.cjs:3174",
+      "selfMs": 172.64,
+      "pct": 0.49
+    },
+    {
+      "symbol": "getNearestParentPackageJSON | :-1",
+      "selfMs": 170.66,
+      "pct": 0.49
+    },
+    {
+      "symbol": "writev | :-1",
+      "selfMs": 130.1,
+      "pct": 0.37
+    },
+    {
+      "symbol": "(garbage collector) | :-1",
+      "selfMs": 126.93,
+      "pct": 0.36
+    },
+    {
+      "symbol": "runMicrotasks | :-1",
+      "selfMs": 66.08,
+      "pct": 0.19
+    },
+    {
+      "symbol": "nextTick | node:internal/process/task_queues:112",
+      "selfMs": 52.83,
+      "pct": 0.15
+    },
+    {
+      "symbol": "existsSync | :-1",
+      "selfMs": 41.06,
+      "pct": 0.12
+    },
+    {
+      "symbol": "readPackageJSON | :-1",
+      "selfMs": 39.57,
+      "pct": 0.11
+    },
+    {
+      "symbol": "forwarded | file:///C:/Users/sanka/OneDrive/Desktop/Chatting%20App/server/node_modules/forwarded/index.js:23",
+      "selfMs": 39.16,
+      "pct": 0.11
+    },
+    {
+      "symbol": "Hmac | node:internal/crypto/hash:162",
+      "selfMs": 37.75,
+      "pct": 0.11
+    },
+    {
+      "symbol": "emit | node:events:454",
+      "selfMs": 35.4,
+      "pct": 0.1
+    },
+    {
+      "symbol": "slice | node:buffer:645",
+      "selfMs": 33.88,
+      "pct": 0.1
+    },
+    {
+      "symbol": "_addListener | node:events:535",
+      "selfMs": 33.66,
+      "pct": 0.1
+    },
+    {
+      "symbol": "(anonymous) | node:internal/modules/cjs/loader:689",
+      "selfMs": 31.96,
+      "pct": 0.09
+    },
+    {
+      "symbol": "writeFileUtf8 | :-1",
+      "selfMs": 29.16,
+      "pct": 0.08
+    },
+    {
+      "symbol": "parse | file:///C:/Users/sanka/OneDrive/Desktop/Chatting%20App/server/node_modules/body-parser/lib/types/json.js:53",
+      "selfMs": 27.98,
+      "pct": 0.08
+    },
+    {
+      "symbol": "executeOperationWithRetries | file:///C:/Users/sanka/OneDrive/Desktop/Chatting%20App/server/node_modules/mongodb/lib/operations/execute_operation.js:140",
+      "selfMs": 26.95,
+      "pct": 0.08
+    },
+    {
+      "symbol": "resolveOptions | file:///C:/Users/sanka/OneDrive/Desktop/Chatting%20App/server/node_modules/mongodb/lib/utils.js:420",
+      "selfMs": 26.16,
+      "pct": 0.07
+    },
+    {
+      "symbol": "parserOnHeadersComplete | node:_http_common:70",
+      "selfMs": 24.2,
+      "pct": 0.07
+    },
+    {
+      "symbol": "json | file:///C:/Users/sanka/OneDrive/Desktop/Chatting%20App/server/node_modules/express/lib/response.js:238",
+      "selfMs": 24.1,
+      "pct": 0.07
+    },
+    {
+      "symbol": "handle | file:///C:/Users/sanka/OneDrive/Desktop/Chatting%20App/server/node_modules/express/lib/application.js:151",
+      "selfMs": 23.29,
+      "pct": 0.07
+    },
+    {
+      "symbol": "realpathSync | node:fs:2699",
+      "selfMs": 22.63,
+      "pct": 0.06
+    },
+    {
+      "symbol": "normalizeString | node:path:90",
+      "selfMs": 22.25,
+      "pct": 0.06
+    },
+    {
+      "symbol": "Readable | node:internal/streams/readable:317",
+      "selfMs": 22.14,
+      "pct": 0.06
+    },
+    {
+      "symbol": "getElement | file:///C:/Users/sanka/OneDrive/Desktop/Chatting%20App/server/node_modules/mongodb/lib/cmap/wire_protocol/on_demand/document.js:56",
+      "selfMs": 21.43,
+      "pct": 0.06
+    },
+    {
+      "symbol": "prepareCommand | file:///C:/Users/sanka/OneDrive/Desktop/Chatting%20App/server/node_modules/mongodb/lib/cmap/connection.js:172",
+      "selfMs": 21.09,
+      "pct": 0.06
+    },
+    {
+      "symbol": "getJwtKey | file:///C:/Users/sanka/OneDrive/Desktop/Chatting%20App/server/services/authCache.js:27",
+      "selfMs": 21.09,
+      "pct": 0.06
+    },
+    {
+      "symbol": "parse | file:///C:/Users/sanka/OneDrive/Desktop/Chatting%20App/server/node_modules/content-type/index.js:105",
+      "selfMs": 20.45,
+      "pct": 0.06
+    }
+  ]
+}

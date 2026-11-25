@@ -41,8 +41,26 @@ const GroupTab = () => {
       }, false);
     };
 
-    const handleNewGroupMessage = () => {
-      fetchGroups();
+    const handleNewGroupMessage = async (msg?: { groupId?: string | { _id?: string } }) => {
+      const msgGroupId =
+        typeof msg?.groupId === "string" ? msg.groupId : msg?.groupId?._id;
+      if (!msgGroupId) {
+        fetchGroups();
+        return;
+      }
+
+      let foundInCache = false;
+      await fetchGroups((prev = []) => {
+        const idx = prev.findIndex((g) => g._id === msgGroupId);
+        if (idx === -1) return prev;
+        foundInCache = true;
+        if (idx === 0) return prev;
+        return [prev[idx], ...prev.slice(0, idx), ...prev.slice(idx + 1)];
+      }, false);
+
+      if (!foundInCache) {
+        fetchGroups();
+      }
     };
 
     socket.on("groupCreated", handleGroupCreated);

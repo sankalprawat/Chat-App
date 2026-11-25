@@ -1,0 +1,2906 @@
+{
+  "baseline": {
+    "k6_http_reqs": {
+      "count": 59078,
+      "rate": 872.201579624412
+    },
+    "k6_http_req_duration": {
+      "min": 0,
+      "med": 0.6508,
+      "p(90)": 6.023960000000001,
+      "p(95)": 8.866829999999975,
+      "p(99)": 17.689519999999902,
+      "max": 1007.4945,
+      "avg": 2.001259783675812
+    },
+    "k6_http_req_failed": {
+      "passes": 0,
+      "fails": 59078,
+      "value": 0
+    },
+    "k6_dropped_iterations": null,
+    "k6_custom_metrics": {
+      "ep_dm_send_reqs": {
+        "count": 1089,
+        "rate": 16.077516507176693
+      },
+      "ep_auth_login_err": {
+        "fails": 15,
+        "passes": 0,
+        "value": 0
+      },
+      "ep_groups_list_err": {
+        "passes": 0,
+        "fails": 1999,
+        "value": 0
+      },
+      "ep_group_messages_err": {
+        "passes": 0,
+        "fails": 1871,
+        "value": 0
+      },
+      "ep_group_send_err": {
+        "passes": 0,
+        "fails": 1755,
+        "value": 0
+      },
+      "ep_group_messages_ms": {
+        "p(90)": 12.1476,
+        "p(95)": 15.0886,
+        "p(99)": 23.764439999999997,
+        "max": 40.5336,
+        "avg": 7.372352752538742,
+        "min": 1,
+        "med": 6.4156
+      },
+      "ep_auth_login_reqs": {
+        "count": 15,
+        "rate": 0.22145339541565692
+      },
+      "ep_auth_login_ms": {
+        "p(99)": 1006.289772,
+        "max": 1007.4945,
+        "avg": 308.09234,
+        "min": 66.219,
+        "med": 70.2689,
+        "p(90)": 987.18286,
+        "p(95)": 1001.47086
+      },
+      "ep_dm_read_err": {
+        "passes": 0,
+        "fails": 1853,
+        "value": 0
+      },
+      "ep_health_ms": {
+        "max": 75.9473,
+        "avg": 0.7124161028583064,
+        "min": 0,
+        "med": 0.5313,
+        "p(90)": 1.1904,
+        "p(95)": 1.5740799999999975,
+        "p(99)": 4.0713599999999985
+      },
+      "ep_groups_list_ms": {
+        "p(95)": 11.5725,
+        "p(99)": 19.69271599999999,
+        "max": 44.095,
+        "avg": 5.559818509254623,
+        "min": 0.9954,
+        "med": 4.8953,
+        "p(90)": 8.88254
+      },
+      "ep_dm_read_ms": {
+        "min": 0.9871,
+        "med": 5.5254,
+        "p(90)": 11.23044,
+        "p(95)": 14.550139999999988,
+        "p(99)": 24.69236,
+        "max": 39.2129,
+        "avg": 6.580330437128982
+      },
+      "ep_contacts_ms": {
+        "max": 90.51,
+        "avg": 8.521864872856293,
+        "min": 0,
+        "med": 5.0346,
+        "p(90)": 21.0724,
+        "p(95)": 31.014850000000003,
+        "p(99)": 51.87952999999993
+      },
+      "ep_dm_read_reqs": {
+        "count": 1853,
+        "rate": 27.35687611368082
+      },
+      "ep_groups_list_reqs": {
+        "count": 1999,
+        "rate": 29.51235582905988
+      },
+      "ep_group_send_reqs": {
+        "count": 1755,
+        "rate": 25.91004726363186
+      },
+      "ep_group_send_ms": {
+        "p(99)": 28.598228000000002,
+        "max": 37.9022,
+        "avg": 10.41149669515669,
+        "min": 2.9972,
+        "med": 9.2828,
+        "p(90)": 15.970580000000002,
+        "p(95)": 18.69747
+      },
+      "ep_group_messages_reqs": {
+        "count": 1871,
+        "rate": 27.622620188179607
+      },
+      "ep_contacts_reqs": {
+        "rate": 24.965179443191726,
+        "count": 1691
+      },
+      "ep_dm_send_ms": {
+        "p(99)": 28.5012,
+        "max": 64.2819,
+        "avg": 8.315721579430662,
+        "min": 1.504,
+        "med": 7.1249,
+        "p(90)": 13.563360000000001,
+        "p(95)": 16.084419999999998
+      },
+      "ep_contacts_err": {
+        "passes": 0,
+        "fails": 1691,
+        "value": 0
+      },
+      "ep_health_reqs": {
+        "count": 48805,
+        "rate": 720.5355308840758
+      },
+      "ep_dm_send_err": {
+        "passes": 0,
+        "fails": 1089,
+        "value": 0
+      },
+      "ep_health_err": {
+        "passes": 0,
+        "fails": 48805,
+        "value": 0
+      }
+    },
+    "system_metrics": {
+      "node_cpu_avg_1core_pct": 82.5,
+      "node_cpu_peak_1core_pct": 109.77,
+      "node_rss_start_mb": 388.75,
+      "node_rss_peak_mb": 400.74,
+      "node_heap_peak_mb": 73.56,
+      "el_lag_p95_peak_ms": 76.22,
+      "el_lag_max_ms": 81.99,
+      "mongo_conns_peak": 13,
+      "mongo_wt_cache_peak_mb": 25.75,
+      "mongo_active_clients_peak": 0,
+      "mongo_queued_peak": 0,
+      "mongo_ops_insert_peak_s": 0,
+      "mongo_ops_query_peak_s": 8,
+      "mongo_ops_update_peak_s": 0,
+      "mongo_os_cpu_avg_pct": 32.0,
+      "mongo_os_cpu_peak_pct": 116.7,
+      "mongo_os_rss_peak_mb": 195.34,
+      "sys_cpu_peak_pct": 91.7,
+      "sys_mem_avail_min_mb": 1245.83
+    },
+    "timeseries_buckets": null
+  },
+  "ramp_auth_burst": {
+    "k6_http_reqs": {
+      "count": 744,
+      "rate": 53.138044733791574
+    },
+    "k6_http_req_duration": {
+      "p(99)": 2280.2389810000004,
+      "max": 2330.9877,
+      "avg": 87.0041461021506,
+      "min": 0,
+      "med": 0.9556,
+      "p(90)": 3.1921200000000014,
+      "p(95)": 16.238995000000017
+    },
+    "k6_http_req_failed": {
+      "fails": 731,
+      "passes": 13,
+      "value": 0.01747311827956989
+    },
+    "k6_dropped_iterations": null,
+    "k6_custom_metrics": {
+      "ep_health_probe_err": {
+        "passes": 0,
+        "fails": 701,
+        "value": 0
+      },
+      "ep_health_probe_reqs": {
+        "count": 701,
+        "rate": 50.06689429890846
+      },
+      "ep_health_probe_ms": {
+        "p(95)": 3.6834,
+        "p(99)": 16.3378,
+        "max": 85.6379,
+        "avg": 1.669940085592013,
+        "min": 0,
+        "med": 0.8795,
+        "p(90)": 2.6136
+      },
+      "ep_auth_login_burst_ms": {
+        "p(99)": 2325.663864,
+        "max": 2330.9877,
+        "avg": 1478.1501558139532,
+        "min": 0.5115,
+        "med": 2240.2005,
+        "p(90)": 2290.08848,
+        "p(95)": 2313.04841
+      },
+      "ep_auth_login_burst_err": {
+        "passes": 13,
+        "fails": 30,
+        "value": 0.3023255813953488
+      },
+      "http_429_count": {
+        "count": 13,
+        "rate": 0.9284873407786162
+      },
+      "ep_auth_login_burst_reqs": {
+        "count": 43,
+        "rate": 3.071150434883115
+      }
+    },
+    "system_metrics": {
+      "node_cpu_avg_1core_pct": 72.44,
+      "node_cpu_peak_1core_pct": 409.08,
+      "node_rss_start_mb": 188.5,
+      "node_rss_peak_mb": 313.71,
+      "node_heap_peak_mb": 42.42,
+      "el_lag_p95_peak_ms": 12.85,
+      "el_lag_max_ms": 598.74,
+      "mongo_conns_peak": 10,
+      "mongo_wt_cache_peak_mb": 26.09,
+      "mongo_active_clients_peak": 0,
+      "mongo_queued_peak": 0,
+      "mongo_ops_insert_peak_s": 0,
+      "mongo_ops_query_peak_s": 28,
+      "mongo_ops_update_peak_s": 0,
+      "mongo_os_cpu_avg_pct": 2.13,
+      "mongo_os_cpu_peak_pct": 4.7,
+      "mongo_os_rss_peak_mb": 81.77,
+      "sys_cpu_peak_pct": 71.5,
+      "sys_mem_avail_min_mb": 1439.29
+    },
+    "timeseries_buckets": [
+      {
+        "tSec": 0,
+        "rps": 50.2,
+        "reqCount": 251,
+        "errCount": 0,
+        "errRatePct": 0.0,
+        "p50Ms": 1.05,
+        "p95Ms": 5.95,
+        "p99Ms": 49.48,
+        "maxMs": 85.64
+      },
+      {
+        "tSec": 5,
+        "rps": 55.6,
+        "reqCount": 278,
+        "errCount": 0,
+        "errRatePct": 0.0,
+        "p50Ms": 0.83,
+        "p95Ms": 2260.68,
+        "p99Ms": 2315.23,
+        "maxMs": 2330.99
+      },
+      {
+        "tSec": 10,
+        "rps": 43.0,
+        "reqCount": 215,
+        "errCount": 13,
+        "errRatePct": 6.05,
+        "p50Ms": 0.79,
+        "p95Ms": 3.03,
+        "p99Ms": 7.08,
+        "maxMs": 77.92
+      }
+    ]
+  },
+  "ramp_auth_throughput": {
+    "k6_http_reqs": {
+      "count": 1198,
+      "rate": 37.27099787353713
+    },
+    "k6_http_req_duration": {
+      "min": 71.5084,
+      "med": 514.3134,
+      "p(90)": 2484.81584,
+      "p(95)": 2613.6602449999996,
+      "p(99)": 4360.518336,
+      "max": 4744.5213,
+      "avg": 981.7176404006681
+    },
+    "k6_http_req_failed": {
+      "passes": 0,
+      "fails": 1198,
+      "value": 0
+    },
+    "k6_dropped_iterations": {
+      "count": 351,
+      "rate": 10.919966822714134
+    },
+    "k6_custom_metrics": {
+      "ep_auth_throughput_err": {
+        "passes": 0,
+        "fails": 1198,
+        "value": 0
+      },
+      "ep_auth_throughput_reqs": {
+        "count": 1198,
+        "rate": 37.27099787353713
+      },
+      "ep_auth_throughput_ms": {
+        "avg": 981.7176404006681,
+        "min": 71.5084,
+        "med": 514.3134,
+        "p(90)": 2484.81584,
+        "p(95)": 2613.6602449999996,
+        "p(99)": 4360.518336,
+        "max": 4744.5213
+      }
+    },
+    "system_metrics": {
+      "node_cpu_avg_1core_pct": 298.75,
+      "node_cpu_peak_1core_pct": 419.58,
+      "node_rss_start_mb": 277.15,
+      "node_rss_peak_mb": 307.35,
+      "node_heap_peak_mb": 41.67,
+      "el_lag_p95_peak_ms": 2917.14,
+      "el_lag_max_ms": 2917.14,
+      "mongo_conns_peak": 10,
+      "mongo_wt_cache_peak_mb": 54.03,
+      "mongo_active_clients_peak": 0,
+      "mongo_queued_peak": 0,
+      "mongo_ops_insert_peak_s": 0,
+      "mongo_ops_query_peak_s": 83,
+      "mongo_ops_update_peak_s": 0,
+      "mongo_os_cpu_avg_pct": 4.35,
+      "mongo_os_cpu_peak_pct": 9.4,
+      "mongo_os_rss_peak_mb": 77.9,
+      "sys_cpu_peak_pct": 84.1,
+      "sys_mem_avail_min_mb": 875.84
+    },
+    "timeseries_buckets": [
+      {
+        "tSec": 0,
+        "rps": 23.8,
+        "reqCount": 119,
+        "errCount": 0,
+        "errRatePct": 0.0,
+        "p50Ms": 76.32,
+        "p95Ms": 1139.34,
+        "p99Ms": 1500.03,
+        "maxMs": 1560.36
+      },
+      {
+        "tSec": 5,
+        "rps": 33.0,
+        "reqCount": 165,
+        "errCount": 0,
+        "errRatePct": 0.0,
+        "p50Ms": 78.15,
+        "p95Ms": 89.41,
+        "p99Ms": 93.29,
+        "maxMs": 110.03
+      },
+      {
+        "tSec": 10,
+        "rps": 45.0,
+        "reqCount": 225,
+        "errCount": 0,
+        "errRatePct": 0.0,
+        "p50Ms": 83.15,
+        "p95Ms": 356.85,
+        "p99Ms": 398.4,
+        "maxMs": 406.83
+      },
+      {
+        "tSec": 15,
+        "rps": 46.8,
+        "reqCount": 234,
+        "errCount": 0,
+        "errRatePct": 0.0,
+        "p50Ms": 588.31,
+        "p95Ms": 1110.95,
+        "p99Ms": 1165.11,
+        "maxMs": 1943.78
+      },
+      {
+        "tSec": 20,
+        "rps": 35.8,
+        "reqCount": 179,
+        "errCount": 0,
+        "errRatePct": 0.0,
+        "p50Ms": 1748.23,
+        "p95Ms": 2652.73,
+        "p99Ms": 2704.1,
+        "maxMs": 2727.84
+      },
+      {
+        "tSec": 25,
+        "rps": 49.2,
+        "reqCount": 246,
+        "errCount": 0,
+        "errRatePct": 0.0,
+        "p50Ms": 2046.86,
+        "p95Ms": 4352.19,
+        "p99Ms": 4474.98,
+        "maxMs": 4564.82
+      },
+      {
+        "tSec": 30,
+        "rps": 6.0,
+        "reqCount": 30,
+        "errCount": 0,
+        "errRatePct": 0.0,
+        "p50Ms": 2585.1,
+        "p95Ms": 2752.73,
+        "p99Ms": 4744.52,
+        "maxMs": 4744.52
+      }
+    ]
+  },
+  "ramp_client_amp": {
+    "k6_http_reqs": {
+      "count": 8169,
+      "rate": 268.4206911194357
+    },
+    "k6_http_req_duration": {
+      "p(90)": 111.46043999999998,
+      "p(95)": 133.90645999999998,
+      "p(99)": 169.43773599999997,
+      "max": 263.7692,
+      "avg": 42.96373551230265,
+      "min": 2.5316,
+      "med": 17.9512
+    },
+    "k6_http_req_failed": {
+      "passes": 0,
+      "fails": 8169,
+      "value": 0
+    },
+    "k6_dropped_iterations": null,
+    "k6_custom_metrics": {
+      "ep_amp_groups_read_ms": {
+        "p(90)": 110.03496000000001,
+        "p(95)": 131.27929499999985,
+        "p(99)": 167.07143200000002,
+        "max": 233.1721,
+        "avg": 42.696252982005134,
+        "min": 4.5347,
+        "med": 18.10595
+      },
+      "ep_client_amplified_group_reqs": {
+        "count": 389,
+        "rate": 12.78193767235408
+      },
+      "ep_amp_groups_read_reqs": {
+        "count": 7780,
+        "rate": 255.63875344708157
+      },
+      "ep_client_amplified_group_err": {
+        "passes": 0,
+        "fails": 389,
+        "value": 0
+      },
+      "ep_amp_groups_read_err": {
+        "passes": 0,
+        "fails": 7780,
+        "value": 0
+      },
+      "ep_client_amplified_group_ms": {
+        "max": 263.7692,
+        "avg": 48.313386118251934,
+        "min": 2.5316,
+        "med": 8.4571,
+        "p(90)": 137.50567999999998,
+        "p(95)": 165.86737999999974,
+        "p(99)": 199.401496
+      }
+    },
+    "system_metrics": {
+      "node_cpu_avg_1core_pct": 67.94,
+      "node_cpu_peak_1core_pct": 117.19,
+      "node_rss_start_mb": 90.96,
+      "node_rss_peak_mb": 322.16,
+      "node_heap_peak_mb": 156.55,
+      "el_lag_p95_peak_ms": 50.36,
+      "el_lag_max_ms": 63.01,
+      "mongo_conns_peak": 84,
+      "mongo_wt_cache_peak_mb": 4.77,
+      "mongo_active_clients_peak": 0,
+      "mongo_queued_peak": 0,
+      "mongo_ops_insert_peak_s": 26,
+      "mongo_ops_query_peak_s": 2125,
+      "mongo_ops_update_peak_s": 0,
+      "mongo_os_cpu_avg_pct": 37.25,
+      "mongo_os_cpu_peak_pct": 78.1,
+      "mongo_os_rss_peak_mb": 171.55,
+      "sys_cpu_peak_pct": 56.2,
+      "sys_mem_avail_min_mb": 829.47
+    },
+    "timeseries_buckets": [
+      {
+        "tSec": 0,
+        "rps": 80.0,
+        "reqCount": 400,
+        "errCount": 0,
+        "errRatePct": 0.0,
+        "p50Ms": 17.47,
+        "p95Ms": 38.12,
+        "p99Ms": 46.39,
+        "maxMs": 84.67
+      },
+      {
+        "tSec": 5,
+        "rps": 146.8,
+        "reqCount": 734,
+        "errCount": 0,
+        "errRatePct": 0.0,
+        "p50Ms": 11.08,
+        "p95Ms": 27.87,
+        "p99Ms": 41.14,
+        "maxMs": 50.85
+      },
+      {
+        "tSec": 10,
+        "rps": 218.4,
+        "reqCount": 1092,
+        "errCount": 0,
+        "errRatePct": 0.0,
+        "p50Ms": 11.13,
+        "p95Ms": 19.3,
+        "p99Ms": 25.51,
+        "maxMs": 30.49
+      },
+      {
+        "tSec": 15,
+        "rps": 300.8,
+        "reqCount": 1504,
+        "errCount": 0,
+        "errRatePct": 0.0,
+        "p50Ms": 10.3,
+        "p95Ms": 16.82,
+        "p99Ms": 19.0,
+        "maxMs": 20.84
+      },
+      {
+        "tSec": 20,
+        "rps": 400.2,
+        "reqCount": 2001,
+        "errCount": 0,
+        "errRatePct": 0.0,
+        "p50Ms": 80.94,
+        "p95Ms": 164.73,
+        "p99Ms": 202.4,
+        "maxMs": 263.77
+      },
+      {
+        "tSec": 25,
+        "rps": 487.6,
+        "reqCount": 2438,
+        "errCount": 0,
+        "errRatePct": 0.0,
+        "p50Ms": 38.98,
+        "p95Ms": 126.13,
+        "p99Ms": 141.83,
+        "maxMs": 211.69
+      }
+    ]
+  },
+  "ramp_contacts": {
+    "k6_http_reqs": {
+      "count": 2178,
+      "rate": 59.72520548130623
+    },
+    "k6_http_req_duration": {
+      "p(95)": 132.11567000000008,
+      "p(99)": 347.008091,
+      "max": 629.4797,
+      "avg": 21.093882966023877,
+      "min": 0,
+      "med": 3.5317,
+      "p(90)": 48.0145299999999
+    },
+    "k6_http_req_failed": {
+      "passes": 0,
+      "fails": 2178,
+      "value": 0
+    },
+    "k6_dropped_iterations": {
+      "count": 161,
+      "rate": 4.414948614550185
+    },
+    "k6_custom_metrics": {
+      "ep_getAllContacts_ms": {
+        "p(90)": 48.0145299999999,
+        "p(95)": 132.11567000000008,
+        "p(99)": 347.008091,
+        "max": 629.4797,
+        "avg": 21.093882966023877,
+        "min": 0,
+        "med": 3.5317
+      },
+      "ep_getAllContacts_reqs": {
+        "rate": 59.72520548130623,
+        "count": 2178
+      },
+      "ep_getAllContacts_err": {
+        "passes": 0,
+        "fails": 2178,
+        "value": 0
+      }
+    },
+    "system_metrics": {
+      "node_cpu_avg_1core_pct": 19.95,
+      "node_cpu_peak_1core_pct": 96.46,
+      "node_rss_start_mb": 112.59,
+      "node_rss_peak_mb": 169.81,
+      "node_heap_peak_mb": 56.55,
+      "el_lag_p95_peak_ms": 167.25,
+      "el_lag_max_ms": 205.65,
+      "mongo_conns_peak": 24,
+      "mongo_wt_cache_peak_mb": 53.86,
+      "mongo_active_clients_peak": 2,
+      "mongo_queued_peak": 0,
+      "mongo_ops_insert_peak_s": 0,
+      "mongo_ops_query_peak_s": 318,
+      "mongo_ops_update_peak_s": 0,
+      "mongo_os_cpu_avg_pct": 17.56,
+      "mongo_os_cpu_peak_pct": 84.6,
+      "mongo_os_rss_peak_mb": 195.77,
+      "sys_cpu_peak_pct": 100.0,
+      "sys_mem_avail_min_mb": 1319.04
+    },
+    "timeseries_buckets": [
+      {
+        "tSec": 0,
+        "rps": 16.6,
+        "reqCount": 83,
+        "errCount": 0,
+        "errRatePct": 0.0,
+        "p50Ms": 4.82,
+        "p95Ms": 7.81,
+        "p99Ms": 19.45,
+        "maxMs": 19.45
+      },
+      {
+        "tSec": 5,
+        "rps": 29.2,
+        "reqCount": 146,
+        "errCount": 0,
+        "errRatePct": 0.0,
+        "p50Ms": 5.37,
+        "p95Ms": 11.15,
+        "p99Ms": 17.84,
+        "maxMs": 19.06
+      },
+      {
+        "tSec": 10,
+        "rps": 42.2,
+        "reqCount": 211,
+        "errCount": 0,
+        "errRatePct": 0.0,
+        "p50Ms": 3.72,
+        "p95Ms": 4.79,
+        "p99Ms": 5.8,
+        "maxMs": 6.18
+      },
+      {
+        "tSec": 15,
+        "rps": 58.8,
+        "reqCount": 294,
+        "errCount": 0,
+        "errRatePct": 0.0,
+        "p50Ms": 3.02,
+        "p95Ms": 4.41,
+        "p99Ms": 5.71,
+        "maxMs": 6.38
+      },
+      {
+        "tSec": 20,
+        "rps": 75.6,
+        "reqCount": 378,
+        "errCount": 0,
+        "errRatePct": 0.0,
+        "p50Ms": 3.08,
+        "p95Ms": 4.58,
+        "p99Ms": 5.05,
+        "maxMs": 5.88
+      },
+      {
+        "tSec": 25,
+        "rps": 98.0,
+        "reqCount": 490,
+        "errCount": 0,
+        "errRatePct": 0.0,
+        "p50Ms": 1.01,
+        "p95Ms": 4.72,
+        "p99Ms": 6.92,
+        "maxMs": 10.88
+      },
+      {
+        "tSec": 30,
+        "rps": 93.2,
+        "reqCount": 466,
+        "errCount": 0,
+        "errRatePct": 0.0,
+        "p50Ms": 9.76,
+        "p95Ms": 195.67,
+        "p99Ms": 352.71,
+        "maxMs": 492.94
+      },
+      {
+        "tSec": 35,
+        "rps": 22.0,
+        "reqCount": 110,
+        "errCount": 0,
+        "errRatePct": 0.0,
+        "p50Ms": 167.71,
+        "p95Ms": 387.37,
+        "p99Ms": 476.5,
+        "maxMs": 629.48
+      }
+    ]
+  },
+  "ramp_get_message": {
+    "k6_http_reqs": {
+      "count": 7143,
+      "rate": 196.64187379603825
+    },
+    "k6_http_req_duration": {
+      "p(90)": 1187.133,
+      "p(95)": 1325.11069,
+      "p(99)": 1567.93889,
+      "max": 2017.4049,
+      "avg": 711.6890109897786,
+      "min": 0,
+      "med": 890.8927
+    },
+    "k6_http_req_failed": {
+      "passes": 0,
+      "fails": 7143,
+      "value": 0
+    },
+    "k6_dropped_iterations": {
+      "count": 7256,
+      "rate": 199.752686023247
+    },
+    "k6_custom_metrics": {
+      "ep_getMessage_err": {
+        "fails": 7143,
+        "passes": 0,
+        "value": 0
+      },
+      "ep_getMessage_ms": {
+        "min": 0,
+        "med": 890.8927,
+        "p(90)": 1187.133,
+        "p(95)": 1325.11069,
+        "p(99)": 1567.93889,
+        "max": 2017.4049,
+        "avg": 711.6890109897786
+      },
+      "ep_getMessage_reqs": {
+        "count": 7143,
+        "rate": 196.64187379603825
+      }
+    },
+    "system_metrics": {
+      "node_cpu_avg_1core_pct": 60.87,
+      "node_cpu_peak_1core_pct": 99.93,
+      "node_rss_start_mb": 90.34,
+      "node_rss_peak_mb": 326.76,
+      "node_heap_peak_mb": 166.65,
+      "el_lag_p95_peak_ms": 424.15,
+      "el_lag_max_ms": 424.15,
+      "mongo_conns_peak": 102,
+      "mongo_wt_cache_peak_mb": 26.09,
+      "mongo_active_clients_peak": 1,
+      "mongo_queued_peak": 0,
+      "mongo_ops_insert_peak_s": 0,
+      "mongo_ops_query_peak_s": 668,
+      "mongo_ops_update_peak_s": 240,
+      "mongo_os_cpu_avg_pct": 45.81,
+      "mongo_os_cpu_peak_pct": 74.2,
+      "mongo_os_rss_peak_mb": 91.42,
+      "sys_cpu_peak_pct": 100.0,
+      "sys_mem_avail_min_mb": 726.12
+    },
+    "timeseries_buckets": [
+      {
+        "tSec": 0,
+        "rps": 92.4,
+        "reqCount": 462,
+        "errCount": 0,
+        "errRatePct": 0.0,
+        "p50Ms": 3.72,
+        "p95Ms": 9.52,
+        "p99Ms": 22.73,
+        "maxMs": 27.23
+      },
+      {
+        "tSec": 5,
+        "rps": 175.0,
+        "reqCount": 875,
+        "errCount": 0,
+        "errRatePct": 0.0,
+        "p50Ms": 3.69,
+        "p95Ms": 10.78,
+        "p99Ms": 25.72,
+        "maxMs": 46.73
+      },
+      {
+        "tSec": 10,
+        "rps": 170.0,
+        "reqCount": 850,
+        "errCount": 0,
+        "errRatePct": 0.0,
+        "p50Ms": 33.88,
+        "p95Ms": 623.8,
+        "p99Ms": 761.26,
+        "maxMs": 1122.84
+      },
+      {
+        "tSec": 15,
+        "rps": 174.4,
+        "reqCount": 872,
+        "errCount": 0,
+        "errRatePct": 0.0,
+        "p50Ms": 1128.28,
+        "p95Ms": 1597.06,
+        "p99Ms": 1786.93,
+        "maxMs": 2017.4
+      },
+      {
+        "tSec": 20,
+        "rps": 216.4,
+        "reqCount": 1082,
+        "errCount": 0,
+        "errRatePct": 0.0,
+        "p50Ms": 1019.07,
+        "p95Ms": 1396.26,
+        "p99Ms": 1458.57,
+        "maxMs": 1703.31
+      },
+      {
+        "tSec": 25,
+        "rps": 249.2,
+        "reqCount": 1246,
+        "errCount": 0,
+        "errRatePct": 0.0,
+        "p50Ms": 970.67,
+        "p95Ms": 1240.61,
+        "p99Ms": 1284.66,
+        "maxMs": 1815.51
+      },
+      {
+        "tSec": 30,
+        "rps": 258.8,
+        "reqCount": 1294,
+        "errCount": 0,
+        "errRatePct": 0.0,
+        "p50Ms": 945.69,
+        "p95Ms": 1130.73,
+        "p99Ms": 1152.08,
+        "maxMs": 1174.69
+      },
+      {
+        "tSec": 35,
+        "rps": 92.4,
+        "reqCount": 462,
+        "errCount": 0,
+        "errRatePct": 0.0,
+        "p50Ms": 865.88,
+        "p95Ms": 1081.14,
+        "p99Ms": 1092.92,
+        "maxMs": 1096.45
+      }
+    ]
+  },
+  "ramp_group_msgs": {
+    "k6_http_reqs": {
+      "count": 4183,
+      "rate": 114.75531650846828
+    },
+    "k6_http_req_duration": {
+      "min": 2.5221,
+      "med": 1156.9957,
+      "p(90)": 1724.2481600000003,
+      "p(95)": 1995.4478399999985,
+      "p(99)": 2444.018668000002,
+      "max": 3140.0046,
+      "avg": 1079.6331291178576
+    },
+    "k6_http_req_failed": {
+      "passes": 0,
+      "fails": 4183,
+      "value": 0
+    },
+    "k6_dropped_iterations": {
+      "count": 3196,
+      "rate": 87.67821935478476
+    },
+    "k6_custom_metrics": {
+      "ep_getGroupMessages_reqs": {
+        "count": 4183,
+        "rate": 114.75531650846828
+      },
+      "ep_getGroupMessages_ms": {
+        "max": 3140.0046,
+        "avg": 1079.6331291178576,
+        "min": 2.5221,
+        "med": 1156.9957,
+        "p(90)": 1724.2481600000003,
+        "p(95)": 1995.4478399999985,
+        "p(99)": 2444.018668000002
+      },
+      "ep_getGroupMessages_err": {
+        "passes": 0,
+        "fails": 4183,
+        "value": 0
+      }
+    },
+    "system_metrics": {
+      "node_cpu_avg_1core_pct": 79.89,
+      "node_cpu_peak_1core_pct": 135.32,
+      "node_rss_start_mb": 90.84,
+      "node_rss_peak_mb": 350.91,
+      "node_heap_peak_mb": 191.04,
+      "el_lag_p95_peak_ms": 758.12,
+      "el_lag_max_ms": 758.12,
+      "mongo_conns_peak": 102,
+      "mongo_wt_cache_peak_mb": 35.88,
+      "mongo_active_clients_peak": 0,
+      "mongo_queued_peak": 0,
+      "mongo_ops_insert_peak_s": 0,
+      "mongo_ops_query_peak_s": 885,
+      "mongo_ops_update_peak_s": 0,
+      "mongo_os_cpu_avg_pct": 38.48,
+      "mongo_os_cpu_peak_pct": 61.9,
+      "mongo_os_rss_peak_mb": 115.24,
+      "sys_cpu_peak_pct": 100.0,
+      "sys_mem_avail_min_mb": 967.58
+    },
+    "timeseries_buckets": [
+      {
+        "tSec": 0,
+        "rps": 54.6,
+        "reqCount": 273,
+        "errCount": 0,
+        "errRatePct": 0.0,
+        "p50Ms": 6.24,
+        "p95Ms": 29.38,
+        "p99Ms": 41.77,
+        "maxMs": 78.2
+      },
+      {
+        "tSec": 5,
+        "rps": 87.0,
+        "reqCount": 435,
+        "errCount": 0,
+        "errRatePct": 0.0,
+        "p50Ms": 5.08,
+        "p95Ms": 11.74,
+        "p99Ms": 17.8,
+        "maxMs": 224.23
+      },
+      {
+        "tSec": 10,
+        "rps": 66.2,
+        "reqCount": 331,
+        "errCount": 0,
+        "errRatePct": 0.0,
+        "p50Ms": 1092.17,
+        "p95Ms": 1671.28,
+        "p99Ms": 2008.93,
+        "maxMs": 2247.02
+      },
+      {
+        "tSec": 15,
+        "rps": 154.6,
+        "reqCount": 773,
+        "errCount": 0,
+        "errRatePct": 0.0,
+        "p50Ms": 1052.82,
+        "p95Ms": 1384.63,
+        "p99Ms": 1515.71,
+        "maxMs": 1828.41
+      },
+      {
+        "tSec": 20,
+        "rps": 144.4,
+        "reqCount": 722,
+        "errCount": 0,
+        "errRatePct": 0.0,
+        "p50Ms": 1342.87,
+        "p95Ms": 1787.31,
+        "p99Ms": 1995.91,
+        "maxMs": 2530.61
+      },
+      {
+        "tSec": 25,
+        "rps": 137.4,
+        "reqCount": 687,
+        "errCount": 0,
+        "errRatePct": 0.0,
+        "p50Ms": 1352.64,
+        "p95Ms": 1852.63,
+        "p99Ms": 2170.21,
+        "maxMs": 2560.33
+      },
+      {
+        "tSec": 30,
+        "rps": 126.6,
+        "reqCount": 633,
+        "errCount": 0,
+        "errRatePct": 0.0,
+        "p50Ms": 1658.3,
+        "p95Ms": 2494.67,
+        "p99Ms": 2873.0,
+        "maxMs": 3140.0
+      },
+      {
+        "tSec": 35,
+        "rps": 65.8,
+        "reqCount": 329,
+        "errCount": 0,
+        "errRatePct": 0.0,
+        "p50Ms": 981.0,
+        "p95Ms": 1370.79,
+        "p99Ms": 1496.89,
+        "maxMs": 1638.47
+      }
+    ]
+  },
+  "ramp_group_msgs_diag": {
+    "k6_http_reqs": {
+      "count": 6462,
+      "rate": 177.62859736633638
+    },
+    "k6_http_req_duration": {
+      "min": 1.5166,
+      "med": 4.9657,
+      "p(90)": 798.31236,
+      "p(95)": 918.279865,
+      "p(99)": 1134.566317,
+      "max": 1512.763,
+      "avg": 226.714438115135
+    },
+    "k6_http_req_failed": {
+      "fails": 6462,
+      "passes": 0,
+      "value": 0
+    },
+    "k6_dropped_iterations": {
+      "count": 917,
+      "rate": 25.206657967336806
+    },
+    "k6_custom_metrics": {
+      "ep_getGroupMessages_ms": {
+        "min": 1.5166,
+        "med": 4.9657,
+        "p(90)": 798.31236,
+        "p(95)": 918.279865,
+        "p(99)": 1134.566317,
+        "max": 1512.763,
+        "avg": 226.714438115135
+      },
+      "ep_getGroupMessages_err": {
+        "passes": 0,
+        "fails": 6462,
+        "value": 0
+      },
+      "ep_getGroupMessages_reqs": {
+        "count": 6462,
+        "rate": 177.62859736633638
+      }
+    },
+    "system_metrics": {
+      "node_cpu_avg_1core_pct": 65.35,
+      "node_cpu_peak_1core_pct": 133.53,
+      "node_rss_start_mb": 102.88,
+      "node_rss_peak_mb": 390.86,
+      "node_heap_peak_mb": 174.06,
+      "el_lag_p95_peak_ms": 290.72,
+      "el_lag_max_ms": 290.72,
+      "mongo_conns_peak": 91,
+      "mongo_wt_cache_peak_mb": 2.27,
+      "mongo_active_clients_peak": 1,
+      "mongo_queued_peak": 0,
+      "mongo_ops_insert_peak_s": 0,
+      "mongo_ops_query_peak_s": 1246,
+      "mongo_ops_update_peak_s": 0,
+      "mongo_os_cpu_avg_pct": 29.98,
+      "mongo_os_cpu_peak_pct": 67.1,
+      "mongo_os_rss_peak_mb": 164.78,
+      "sys_cpu_peak_pct": 78.4,
+      "sys_mem_avail_min_mb": 707.28
+    },
+    "timeseries_buckets": [
+      {
+        "tSec": 0,
+        "rps": 53.8,
+        "reqCount": 269,
+        "errCount": 0,
+        "errRatePct": 0.0,
+        "p50Ms": 4.67,
+        "p95Ms": 7.09,
+        "p99Ms": 12.31,
+        "maxMs": 33.71
+      },
+      {
+        "tSec": 5,
+        "rps": 99.4,
+        "reqCount": 497,
+        "errCount": 0,
+        "errRatePct": 0.0,
+        "p50Ms": 4.14,
+        "p95Ms": 6.26,
+        "p99Ms": 8.39,
+        "maxMs": 11.11
+      },
+      {
+        "tSec": 10,
+        "rps": 146.0,
+        "reqCount": 730,
+        "errCount": 0,
+        "errRatePct": 0.0,
+        "p50Ms": 3.59,
+        "p95Ms": 5.33,
+        "p99Ms": 7.37,
+        "maxMs": 10.08
+      },
+      {
+        "tSec": 15,
+        "rps": 195.6,
+        "reqCount": 978,
+        "errCount": 0,
+        "errRatePct": 0.0,
+        "p50Ms": 3.58,
+        "p95Ms": 5.19,
+        "p99Ms": 6.77,
+        "maxMs": 8.21
+      },
+      {
+        "tSec": 20,
+        "rps": 245.6,
+        "reqCount": 1228,
+        "errCount": 0,
+        "errRatePct": 0.0,
+        "p50Ms": 4.11,
+        "p95Ms": 7.85,
+        "p99Ms": 10.95,
+        "maxMs": 19.32
+      },
+      {
+        "tSec": 25,
+        "rps": 239.4,
+        "reqCount": 1197,
+        "errCount": 0,
+        "errRatePct": 0.0,
+        "p50Ms": 82.81,
+        "p95Ms": 562.37,
+        "p99Ms": 645.46,
+        "maxMs": 819.37
+      },
+      {
+        "tSec": 30,
+        "rps": 225.2,
+        "reqCount": 1126,
+        "errCount": 0,
+        "errRatePct": 0.0,
+        "p50Ms": 803.68,
+        "p95Ms": 1144.85,
+        "p99Ms": 1283.7,
+        "maxMs": 1512.76
+      },
+      {
+        "tSec": 35,
+        "rps": 87.4,
+        "reqCount": 437,
+        "errCount": 0,
+        "errRatePct": 0.0,
+        "p50Ms": 680.06,
+        "p95Ms": 874.56,
+        "p99Ms": 987.68,
+        "maxMs": 1224.83
+      }
+    ]
+  },
+  "ramp_group_msgs_hot": {
+    "k6_http_reqs": {
+      "count": 6045,
+      "rate": 165.4269574126948
+    },
+    "k6_http_req_duration": {
+      "med": 8.7526,
+      "p(90)": 1147.5963000000004,
+      "p(95)": 1439.1705200000001,
+      "p(99)": 1855.565560000001,
+      "max": 3030.8086,
+      "avg": 271.53757874276306,
+      "min": 0.504
+    },
+    "k6_http_req_failed": {
+      "passes": 0,
+      "fails": 6045,
+      "value": 0
+    },
+    "k6_dropped_iterations": {
+      "rate": 36.506130883132315,
+      "count": 1334
+    },
+    "k6_custom_metrics": {
+      "ep_getGroupMessages_hot_ms": {
+        "p(95)": 1439.1705200000001,
+        "p(99)": 1855.565560000001,
+        "max": 3030.8086,
+        "avg": 271.53757874276306,
+        "min": 0.504,
+        "med": 8.7526,
+        "p(90)": 1147.5963000000004
+      },
+      "ep_getGroupMessages_hot_err": {
+        "passes": 0,
+        "fails": 6045,
+        "value": 0
+      },
+      "ep_getGroupMessages_hot_reqs": {
+        "count": 6045,
+        "rate": 165.4269574126948
+      }
+    },
+    "system_metrics": {
+      "node_cpu_avg_1core_pct": 53.47,
+      "node_cpu_peak_1core_pct": 111.03,
+      "node_rss_start_mb": 100.54,
+      "node_rss_peak_mb": 333.86,
+      "node_heap_peak_mb": 140.01,
+      "el_lag_p95_peak_ms": 1056.44,
+      "el_lag_max_ms": 1056.44,
+      "mongo_conns_peak": 70,
+      "mongo_wt_cache_peak_mb": 54.03,
+      "mongo_active_clients_peak": 1,
+      "mongo_queued_peak": 0,
+      "mongo_ops_insert_peak_s": 0,
+      "mongo_ops_query_peak_s": 696,
+      "mongo_ops_update_peak_s": 220,
+      "mongo_os_cpu_avg_pct": 26.52,
+      "mongo_os_cpu_peak_pct": 44.2,
+      "mongo_os_rss_peak_mb": 83.58,
+      "sys_cpu_peak_pct": 99.5,
+      "sys_mem_avail_min_mb": 543.78
+    },
+    "timeseries_buckets": [
+      {
+        "tSec": 0,
+        "rps": 53.8,
+        "reqCount": 269,
+        "errCount": 0,
+        "errRatePct": 0.0,
+        "p50Ms": 4.64,
+        "p95Ms": 12.86,
+        "p99Ms": 24.29,
+        "maxMs": 27.6
+      },
+      {
+        "tSec": 5,
+        "rps": 99.4,
+        "reqCount": 497,
+        "errCount": 0,
+        "errRatePct": 0.0,
+        "p50Ms": 4.09,
+        "p95Ms": 24.06,
+        "p99Ms": 49.85,
+        "maxMs": 82.26
+      },
+      {
+        "tSec": 10,
+        "rps": 145.2,
+        "reqCount": 726,
+        "errCount": 0,
+        "errRatePct": 0.0,
+        "p50Ms": 3.41,
+        "p95Ms": 22.26,
+        "p99Ms": 39.56,
+        "maxMs": 50.51
+      },
+      {
+        "tSec": 15,
+        "rps": 165.2,
+        "reqCount": 826,
+        "errCount": 0,
+        "errRatePct": 0.0,
+        "p50Ms": 94.8,
+        "p95Ms": 301.52,
+        "p99Ms": 386.74,
+        "maxMs": 447.09
+      },
+      {
+        "tSec": 20,
+        "rps": 123.4,
+        "reqCount": 617,
+        "errCount": 0,
+        "errRatePct": 0.0,
+        "p50Ms": 672.22,
+        "p95Ms": 1864.66,
+        "p99Ms": 2086.52,
+        "maxMs": 2434.45
+      },
+      {
+        "tSec": 25,
+        "rps": 321.8,
+        "reqCount": 1609,
+        "errCount": 0,
+        "errRatePct": 0.0,
+        "p50Ms": 4.16,
+        "p95Ms": 1371.74,
+        "p99Ms": 1810.0,
+        "maxMs": 3030.81
+      },
+      {
+        "tSec": 30,
+        "rps": 230.2,
+        "reqCount": 1151,
+        "errCount": 0,
+        "errRatePct": 0.0,
+        "p50Ms": 3.62,
+        "p95Ms": 1448.4,
+        "p99Ms": 1565.25,
+        "maxMs": 1808.52
+      },
+      {
+        "tSec": 35,
+        "rps": 70.0,
+        "reqCount": 350,
+        "errCount": 0,
+        "errRatePct": 0.0,
+        "p50Ms": 1146.42,
+        "p95Ms": 1849.77,
+        "p99Ms": 2288.85,
+        "maxMs": 2817.29
+      }
+    ]
+  },
+  "ramp_group_send_hot": {
+    "k6_http_reqs": {
+      "count": 4767,
+      "rate": 131.98410927936501
+    },
+    "k6_http_req_duration": {
+      "avg": 94.40059081183128,
+      "min": 0.5032,
+      "med": 4.6546,
+      "p(90)": 416.9071,
+      "p(95)": 628.5650799999999,
+      "p(99)": 879.5089680000002,
+      "max": 1316.6824
+    },
+    "k6_http_req_failed": {
+      "passes": 0,
+      "fails": 4767,
+      "value": 0
+    },
+    "k6_dropped_iterations": {
+      "count": 273,
+      "rate": 7.558561324368921
+    },
+    "k6_custom_metrics": {
+      "ep_sendGroupMessage_hot_reqs": {
+        "rate": 131.98410927936501,
+        "count": 4767
+      },
+      "ep_sendGroupMessage_hot_err": {
+        "passes": 0,
+        "fails": 4767,
+        "value": 0
+      },
+      "ep_sendGroupMessage_hot_ms": {
+        "med": 4.6546,
+        "p(90)": 416.9071,
+        "p(95)": 628.5650799999999,
+        "p(99)": 879.5089680000002,
+        "max": 1316.6824,
+        "avg": 94.40059081183128,
+        "min": 0.5032
+      }
+    },
+    "system_metrics": {
+      "node_cpu_avg_1core_pct": 47.31,
+      "node_cpu_peak_1core_pct": 106.12,
+      "node_rss_start_mb": 103.61,
+      "node_rss_peak_mb": 197.99,
+      "node_heap_peak_mb": 67.44,
+      "el_lag_p95_peak_ms": 453.25,
+      "el_lag_max_ms": 453.25,
+      "mongo_conns_peak": 53,
+      "mongo_wt_cache_peak_mb": 34.93,
+      "mongo_active_clients_peak": 1,
+      "mongo_queued_peak": 0,
+      "mongo_ops_insert_peak_s": 348,
+      "mongo_ops_query_peak_s": 683,
+      "mongo_ops_update_peak_s": 0,
+      "mongo_os_cpu_avg_pct": 23.38,
+      "mongo_os_cpu_peak_pct": 52.2,
+      "mongo_os_rss_peak_mb": 200.5,
+      "sys_cpu_peak_pct": 92.1,
+      "sys_mem_avail_min_mb": 1306.2
+    },
+    "timeseries_buckets": [
+      {
+        "tSec": 0,
+        "rps": 33.4,
+        "reqCount": 167,
+        "errCount": 0,
+        "errRatePct": 0.0,
+        "p50Ms": 4.68,
+        "p95Ms": 9.91,
+        "p99Ms": 20.6,
+        "maxMs": 67.71
+      },
+      {
+        "tSec": 5,
+        "rps": 58.2,
+        "reqCount": 291,
+        "errCount": 0,
+        "errRatePct": 0.0,
+        "p50Ms": 4.07,
+        "p95Ms": 7.83,
+        "p99Ms": 11.06,
+        "maxMs": 12.82
+      },
+      {
+        "tSec": 10,
+        "rps": 86.2,
+        "reqCount": 431,
+        "errCount": 0,
+        "errRatePct": 0.0,
+        "p50Ms": 3.81,
+        "p95Ms": 9.04,
+        "p99Ms": 14.06,
+        "maxMs": 24.59
+      },
+      {
+        "tSec": 15,
+        "rps": 126.8,
+        "reqCount": 634,
+        "errCount": 0,
+        "errRatePct": 0.0,
+        "p50Ms": 3.55,
+        "p95Ms": 8.88,
+        "p99Ms": 17.08,
+        "maxMs": 21.62
+      },
+      {
+        "tSec": 20,
+        "rps": 168.6,
+        "reqCount": 843,
+        "errCount": 0,
+        "errRatePct": 0.0,
+        "p50Ms": 3.16,
+        "p95Ms": 8.73,
+        "p99Ms": 13.42,
+        "maxMs": 22.01
+      },
+      {
+        "tSec": 25,
+        "rps": 216.0,
+        "reqCount": 1080,
+        "errCount": 0,
+        "errRatePct": 0.0,
+        "p50Ms": 3.62,
+        "p95Ms": 9.73,
+        "p99Ms": 17.59,
+        "maxMs": 31.71
+      },
+      {
+        "tSec": 30,
+        "rps": 192.6,
+        "reqCount": 963,
+        "errCount": 0,
+        "errRatePct": 0.0,
+        "p50Ms": 412.24,
+        "p95Ms": 878.88,
+        "p99Ms": 959.78,
+        "maxMs": 1316.68
+      },
+      {
+        "tSec": 35,
+        "rps": 71.6,
+        "reqCount": 358,
+        "errCount": 0,
+        "errRatePct": 0.0,
+        "p50Ms": 76.75,
+        "p95Ms": 327.89,
+        "p99Ms": 420.42,
+        "maxMs": 433.1
+      }
+    ]
+  },
+  "ramp_groups_list": {
+    "k6_http_reqs": {
+      "count": 6017,
+      "rate": 165.53647921642596
+    },
+    "k6_http_req_duration": {
+      "med": 149.9202,
+      "p(90)": 809.4612400000001,
+      "p(95)": 953.6630999999999,
+      "p(99)": 1169.82988,
+      "max": 1604.2269,
+      "avg": 307.99548924713287,
+      "min": 1.007
+    },
+    "k6_http_req_failed": {
+      "passes": 0,
+      "fails": 6017,
+      "value": 0
+    },
+    "k6_dropped_iterations": {
+      "count": 882,
+      "rate": 24.265111296142212
+    },
+    "k6_custom_metrics": {
+      "ep_getUserGroups_ms": {
+        "min": 1.007,
+        "med": 149.9202,
+        "p(90)": 809.4612400000001,
+        "p(95)": 953.6630999999999,
+        "p(99)": 1169.82988,
+        "max": 1604.2269,
+        "avg": 307.99548924713287
+      },
+      "ep_getUserGroups_reqs": {
+        "count": 6017,
+        "rate": 165.53647921642596
+      },
+      "ep_getUserGroups_err": {
+        "passes": 0,
+        "fails": 6017,
+        "value": 0
+      }
+    },
+    "system_metrics": {
+      "node_cpu_avg_1core_pct": 64.31,
+      "node_cpu_peak_1core_pct": 125.52,
+      "node_rss_start_mb": 90.43,
+      "node_rss_peak_mb": 306.3,
+      "node_heap_peak_mb": 129.1,
+      "el_lag_p95_peak_ms": 416.02,
+      "el_lag_max_ms": 416.02,
+      "mongo_conns_peak": 102,
+      "mongo_wt_cache_peak_mb": 32.19,
+      "mongo_active_clients_peak": 2,
+      "mongo_queued_peak": 0,
+      "mongo_ops_insert_peak_s": 0,
+      "mongo_ops_query_peak_s": 988,
+      "mongo_ops_update_peak_s": 0,
+      "mongo_os_cpu_avg_pct": 34.2,
+      "mongo_os_cpu_peak_pct": 62.4,
+      "mongo_os_rss_peak_mb": 204.55,
+      "sys_cpu_peak_pct": 87.7,
+      "sys_mem_avail_min_mb": 1140.03
+    },
+    "timeseries_buckets": [
+      {
+        "tSec": 0,
+        "rps": 49.4,
+        "reqCount": 247,
+        "errCount": 0,
+        "errRatePct": 0.0,
+        "p50Ms": 4.52,
+        "p95Ms": 8.15,
+        "p99Ms": 12.98,
+        "maxMs": 21.72
+      },
+      {
+        "tSec": 5,
+        "rps": 86.6,
+        "reqCount": 433,
+        "errCount": 0,
+        "errRatePct": 0.0,
+        "p50Ms": 3.93,
+        "p95Ms": 9.14,
+        "p99Ms": 24.56,
+        "maxMs": 46.88
+      },
+      {
+        "tSec": 10,
+        "rps": 126.6,
+        "reqCount": 633,
+        "errCount": 0,
+        "errRatePct": 0.0,
+        "p50Ms": 4.19,
+        "p95Ms": 12.13,
+        "p99Ms": 18.49,
+        "maxMs": 25.05
+      },
+      {
+        "tSec": 15,
+        "rps": 172.2,
+        "reqCount": 861,
+        "errCount": 0,
+        "errRatePct": 0.0,
+        "p50Ms": 4.6,
+        "p95Ms": 115.51,
+        "p99Ms": 196.35,
+        "maxMs": 320.87
+      },
+      {
+        "tSec": 20,
+        "rps": 212.8,
+        "reqCount": 1064,
+        "errCount": 0,
+        "errRatePct": 0.0,
+        "p50Ms": 82.06,
+        "p95Ms": 205.18,
+        "p99Ms": 254.6,
+        "maxMs": 350.5
+      },
+      {
+        "tSec": 25,
+        "rps": 227.4,
+        "reqCount": 1137,
+        "errCount": 0,
+        "errRatePct": 0.0,
+        "p50Ms": 430.39,
+        "p95Ms": 722.18,
+        "p99Ms": 808.98,
+        "maxMs": 1054.0
+      },
+      {
+        "tSec": 30,
+        "rps": 253.6,
+        "reqCount": 1268,
+        "errCount": 0,
+        "errRatePct": 0.0,
+        "p50Ms": 717.66,
+        "p95Ms": 1028.19,
+        "p99Ms": 1147.26,
+        "maxMs": 1604.23
+      },
+      {
+        "tSec": 35,
+        "rps": 74.8,
+        "reqCount": 374,
+        "errCount": 0,
+        "errRatePct": 0.0,
+        "p50Ms": 779.49,
+        "p95Ms": 1226.1,
+        "p99Ms": 1349.51,
+        "maxMs": 1536.81
+      }
+    ]
+  },
+  "ramp_health": {
+    "k6_http_reqs": {
+      "count": 10396,
+      "rate": 559.336192117326
+    },
+    "k6_http_req_duration": {
+      "avg": 20.859180656021472,
+      "min": 0,
+      "med": 3.20765,
+      "p(90)": 38.8442,
+      "p(95)": 132.113625,
+      "p(99)": 306.7219099999991,
+      "max": 622.0926
+    },
+    "k6_http_req_failed": {
+      "passes": 0,
+      "fails": 10396,
+      "value": 0
+    },
+    "k6_dropped_iterations": {
+      "count": 37234,
+      "rate": 2003.3016330604578
+    },
+    "k6_custom_metrics": {
+      "ep_health_reqs": {
+        "count": 10396,
+        "rate": 559.336192117326
+      },
+      "ep_health_ms": {
+        "avg": 20.85918065602148,
+        "min": 0,
+        "med": 3.20765,
+        "p(90)": 38.8442,
+        "p(95)": 132.113625,
+        "p(99)": 306.7219099999991,
+        "max": 622.0926
+      },
+      "ep_health_err": {
+        "passes": 0,
+        "fails": 10396,
+        "value": 0
+      }
+    },
+    "system_metrics": {
+      "node_cpu_avg_1core_pct": 23.55,
+      "node_cpu_peak_1core_pct": 83.19,
+      "node_rss_start_mb": 90.81,
+      "node_rss_peak_mb": 105.29,
+      "node_heap_peak_mb": 39.77,
+      "el_lag_p95_peak_ms": 19.37,
+      "el_lag_max_ms": 23.97,
+      "mongo_conns_peak": 5,
+      "mongo_wt_cache_peak_mb": 57.88,
+      "mongo_active_clients_peak": 0,
+      "mongo_queued_peak": 0,
+      "mongo_ops_insert_peak_s": 0,
+      "mongo_ops_query_peak_s": 0,
+      "mongo_ops_update_peak_s": 0,
+      "mongo_os_cpu_avg_pct": 0.94,
+      "mongo_os_cpu_peak_pct": 4.6,
+      "mongo_os_rss_peak_mb": 228.74,
+      "sys_cpu_peak_pct": 100.0,
+      "sys_mem_avail_min_mb": 643.2
+    },
+    "timeseries_buckets": [
+      {
+        "tSec": 0,
+        "rps": 621.8,
+        "reqCount": 3109,
+        "errCount": 0,
+        "errRatePct": 0.0,
+        "p50Ms": 3.0,
+        "p95Ms": 60.1,
+        "p99Ms": 191.42,
+        "maxMs": 501.05
+      },
+      {
+        "tSec": 5,
+        "rps": 541.4,
+        "reqCount": 2707,
+        "errCount": 0,
+        "errRatePct": 0.0,
+        "p50Ms": 3.0,
+        "p95Ms": 148.2,
+        "p99Ms": 322.89,
+        "maxMs": 572.3
+      },
+      {
+        "tSec": 10,
+        "rps": 585.0,
+        "reqCount": 2925,
+        "errCount": 0,
+        "errRatePct": 0.0,
+        "p50Ms": 3.29,
+        "p95Ms": 149.08,
+        "p99Ms": 324.36,
+        "maxMs": 622.09
+      },
+      {
+        "tSec": 15,
+        "rps": 331.0,
+        "reqCount": 1655,
+        "errCount": 0,
+        "errRatePct": 0.0,
+        "p50Ms": 4.97,
+        "p95Ms": 212.15,
+        "p99Ms": 345.25,
+        "maxMs": 531.46
+      }
+    ]
+  },
+  "ramp_health_vus": {
+    "k6_http_reqs": {
+      "rate": 6843.784150670903,
+      "count": 137064
+    },
+    "k6_http_req_duration": {
+      "med": 5.379,
+      "p(90)": 20.1517,
+      "p(95)": 22.8971,
+      "p(99)": 29.592947999999904,
+      "max": 50.1047,
+      "avg": 7.895746303916449,
+      "min": 0
+    },
+    "k6_http_req_failed": {
+      "fails": 137064,
+      "passes": 0,
+      "value": 0
+    },
+    "k6_dropped_iterations": null,
+    "k6_custom_metrics": {
+      "ep_health_vus_reqs": {
+        "count": 137064,
+        "rate": 6843.784150670903
+      },
+      "ep_health_vus_ms": {
+        "p(95)": 22.8971,
+        "p(99)": 29.592947999999904,
+        "max": 50.1047,
+        "avg": 7.895746303916449,
+        "min": 0,
+        "med": 5.379,
+        "p(90)": 20.1517
+      },
+      "ep_health_vus_err": {
+        "passes": 0,
+        "fails": 137064,
+        "value": 0
+      }
+    },
+    "system_metrics": {
+      "node_cpu_avg_1core_pct": 87.33,
+      "node_cpu_peak_1core_pct": 115.71,
+      "node_rss_start_mb": 90.68,
+      "node_rss_peak_mb": 111.2,
+      "node_heap_peak_mb": 43.87,
+      "el_lag_p95_peak_ms": 25.59,
+      "el_lag_max_ms": 29.21,
+      "mongo_conns_peak": 5,
+      "mongo_wt_cache_peak_mb": 0.1,
+      "mongo_active_clients_peak": 0,
+      "mongo_queued_peak": 0,
+      "mongo_ops_insert_peak_s": 0,
+      "mongo_ops_query_peak_s": 0,
+      "mongo_ops_update_peak_s": 0,
+      "mongo_os_cpu_avg_pct": 1.04,
+      "mongo_os_cpu_peak_pct": 4.7,
+      "mongo_os_rss_peak_mb": 159.83,
+      "sys_cpu_peak_pct": 82.9,
+      "sys_mem_avail_min_mb": 1135.43
+    },
+    "timeseries_buckets": [
+      {
+        "tSec": 0,
+        "rps": 6844.6,
+        "reqCount": 34223,
+        "errCount": 0,
+        "errRatePct": 0.0,
+        "p50Ms": 0.53,
+        "p95Ms": 1.07,
+        "p99Ms": 1.56,
+        "maxMs": 11.94
+      },
+      {
+        "tSec": 5,
+        "rps": 6861.4,
+        "reqCount": 34307,
+        "errCount": 0,
+        "errRatePct": 0.0,
+        "p50Ms": 2.15,
+        "p95Ms": 5.61,
+        "p99Ms": 8.42,
+        "maxMs": 21.59
+      },
+      {
+        "tSec": 10,
+        "rps": 6557.0,
+        "reqCount": 32785,
+        "errCount": 0,
+        "errRatePct": 0.0,
+        "p50Ms": 8.35,
+        "p95Ms": 13.64,
+        "p99Ms": 16.48,
+        "maxMs": 27.07
+      },
+      {
+        "tSec": 15,
+        "rps": 7120.6,
+        "reqCount": 35603,
+        "errCount": 0,
+        "errRatePct": 0.0,
+        "p50Ms": 18.79,
+        "p95Ms": 28.59,
+        "p99Ms": 34.24,
+        "maxMs": 50.1
+      },
+      {
+        "tSec": 20,
+        "rps": 29.2,
+        "reqCount": 146,
+        "errCount": 0,
+        "errRatePct": 0.0,
+        "p50Ms": 30.2,
+        "p95Ms": 31.42,
+        "p99Ms": 31.48,
+        "maxMs": 45.89
+      }
+    ]
+  },
+  "ramp_send_message": {
+    "k6_http_reqs": {
+      "count": 4499,
+      "rate": 122.52398671886824
+    },
+    "k6_http_req_duration": {
+      "p(90)": 514.2247400000005,
+      "p(95)": 670.9411399999999,
+      "p(99)": 1047.7517399999997,
+      "max": 1570.796,
+      "avg": 164.18373683040673,
+      "min": 1.0068,
+      "med": 56.172
+    },
+    "k6_http_req_failed": {
+      "passes": 0,
+      "fails": 4499,
+      "value": 0
+    },
+    "k6_dropped_iterations": {
+      "count": 3813,
+      "rate": 103.84173402068119
+    },
+    "k6_custom_metrics": {
+      "ep_sendMessage_reqs": {
+        "count": 4499,
+        "rate": 122.52398671886824
+      },
+      "ep_sendMessage_ms": {
+        "avg": 164.18373683040673,
+        "min": 1.0068,
+        "med": 56.172,
+        "p(90)": 514.2247400000005,
+        "p(95)": 670.9411399999999,
+        "p(99)": 1047.7517399999997,
+        "max": 1570.796
+      },
+      "ep_sendMessage_err": {
+        "passes": 0,
+        "fails": 4499,
+        "value": 0
+      }
+    },
+    "system_metrics": {
+      "node_cpu_avg_1core_pct": 50.68,
+      "node_cpu_peak_1core_pct": 97.57,
+      "node_rss_start_mb": 102.58,
+      "node_rss_peak_mb": 204.52,
+      "node_heap_peak_mb": 99.41,
+      "el_lag_p95_peak_ms": 402.13,
+      "el_lag_max_ms": 402.13,
+      "mongo_conns_peak": 45,
+      "mongo_wt_cache_peak_mb": 32.18,
+      "mongo_active_clients_peak": 0,
+      "mongo_queued_peak": 0,
+      "mongo_ops_insert_peak_s": 172,
+      "mongo_ops_query_peak_s": 192,
+      "mongo_ops_update_peak_s": 0,
+      "mongo_os_cpu_avg_pct": 22.46,
+      "mongo_os_cpu_peak_pct": 38.0,
+      "mongo_os_rss_peak_mb": 200.32,
+      "sys_cpu_peak_pct": 100.0,
+      "sys_mem_avail_min_mb": 1127.5
+    },
+    "timeseries_buckets": [
+      {
+        "tSec": 0,
+        "rps": 64.4,
+        "reqCount": 322,
+        "errCount": 0,
+        "errRatePct": 0.0,
+        "p50Ms": 6.23,
+        "p95Ms": 18.2,
+        "p99Ms": 34.17,
+        "maxMs": 64.67
+      },
+      {
+        "tSec": 5,
+        "rps": 107.8,
+        "reqCount": 539,
+        "errCount": 0,
+        "errRatePct": 0.0,
+        "p50Ms": 4.9,
+        "p95Ms": 10.48,
+        "p99Ms": 13.36,
+        "maxMs": 18.92
+      },
+      {
+        "tSec": 10,
+        "rps": 145.2,
+        "reqCount": 726,
+        "errCount": 0,
+        "errRatePct": 0.0,
+        "p50Ms": 9.63,
+        "p95Ms": 65.43,
+        "p99Ms": 110.38,
+        "maxMs": 361.96
+      },
+      {
+        "tSec": 15,
+        "rps": 119.6,
+        "reqCount": 598,
+        "errCount": 0,
+        "errRatePct": 0.0,
+        "p50Ms": 216.4,
+        "p95Ms": 879.64,
+        "p99Ms": 1196.69,
+        "maxMs": 1445.73
+      },
+      {
+        "tSec": 20,
+        "rps": 136.8,
+        "reqCount": 684,
+        "errCount": 0,
+        "errRatePct": 0.0,
+        "p50Ms": 56.37,
+        "p95Ms": 341.26,
+        "p99Ms": 648.22,
+        "maxMs": 1299.24
+      },
+      {
+        "tSec": 25,
+        "rps": 127.4,
+        "reqCount": 637,
+        "errCount": 0,
+        "errRatePct": 0.0,
+        "p50Ms": 373.3,
+        "p95Ms": 933.32,
+        "p99Ms": 1200.01,
+        "maxMs": 1456.75
+      },
+      {
+        "tSec": 30,
+        "rps": 135.2,
+        "reqCount": 676,
+        "errCount": 0,
+        "errRatePct": 0.0,
+        "p50Ms": 166.38,
+        "p95Ms": 540.23,
+        "p99Ms": 1027.19,
+        "maxMs": 1570.8
+      },
+      {
+        "tSec": 35,
+        "rps": 63.4,
+        "reqCount": 317,
+        "errCount": 0,
+        "errRatePct": 0.0,
+        "p50Ms": 86.01,
+        "p95Ms": 402.21,
+        "p99Ms": 938.61,
+        "maxMs": 1570.54
+      }
+    ]
+  },
+  "soak": {
+    "k6_http_reqs": {
+      "count": 8979,
+      "rate": 74.82426796924503
+    },
+    "k6_http_req_duration": {
+      "p(95)": 36.67553000000002,
+      "p(99)": 380.54780799999907,
+      "max": 1184.1056,
+      "avg": 18.46888071054678,
+      "min": 1.0031,
+      "med": 5.7603,
+      "p(90)": 19.023099999999996
+    },
+    "k6_http_req_failed": {
+      "passes": 0,
+      "fails": 8979,
+      "value": 0
+    },
+    "k6_dropped_iterations": {
+      "count": 22,
+      "rate": 0.18333153973976954
+    },
+    "k6_custom_metrics": {
+      "ws_msgs_sent": {
+        "count": 240,
+        "rate": 1.9999804335247586
+      },
+      "ep_soak_grp_send_reqs": {
+        "count": 901,
+        "rate": 7.508259877524198
+      },
+      "ws_connecting": {
+        "p(95)": 69.4679,
+        "p(99)": 70.85447999999998,
+        "max": 73.0807,
+        "avg": 37.58528125,
+        "min": 0,
+        "med": 36.56295,
+        "p(90)": 63.81024000000005
+      },
+      "ep_soak_dm_send_ms": {
+        "med": 3.6375,
+        "p(90)": 10.8893,
+        "p(95)": 28.8406,
+        "p(99)": 354.88188000000224,
+        "max": 958.5796,
+        "avg": 14.384320531292225,
+        "min": 1.0031
+      },
+      "ep_soak_dm_send_err": {
+        "fails": 2221,
+        "passes": 0,
+        "value": 0
+      },
+      "ws_sessions": {
+        "count": 80,
+        "rate": 0.6666601445082528
+      },
+      "ep_soak_grp_msgs_ms": {
+        "med": 8.78205,
+        "p(90)": 25.50675,
+        "p(95)": 46.4502,
+        "p(99)": 346.81902000000326,
+        "max": 1184.1056,
+        "avg": 25.260000074850332,
+        "min": 4.5767
+      },
+      "ep_soak_grp_list_ms": {
+        "avg": 19.36164197802195,
+        "min": 2.0177,
+        "med": 4.647399999999999,
+        "p(90)": 14.09543,
+        "p(95)": 30.783719999999864,
+        "p(99)": 509.62641099999945,
+        "max": 954.2255
+      },
+      "ep_soak_grp_list_err": {
+        "passes": 0,
+        "fails": 910,
+        "value": 0
+      },
+      "ep_soak_contacts_reqs": {
+        "count": 455,
+        "rate": 3.791629571890688
+      },
+      "ep_soak_grp_msgs_err": {
+        "passes": 0,
+        "fails": 1336,
+        "value": 0
+      },
+      "ep_soak_dm_read_reqs": {
+        "count": 3156,
+        "rate": 26.299742700850576
+      },
+      "ep_soak_contacts_ms": {
+        "max": 1071.8055,
+        "avg": 26.784165934065907,
+        "min": 11.7872,
+        "med": 15.9618,
+        "p(90)": 30.15182000000001,
+        "p(95)": 43.51546,
+        "p(99)": 262.62435999999747
+      },
+      "ep_soak_dm_read_ms": {
+        "avg": 16.705825285171116,
+        "min": 2.5231,
+        "med": 5.65335,
+        "p(90)": 16.183500000000002,
+        "p(95)": 35.165575,
+        "p(99)": 377.4664549999991,
+        "max": 816.017
+      },
+      "ep_soak_dm_send_reqs": {
+        "count": 2221,
+        "rate": 18.50815226191037
+      },
+      "ws_msgs_received": {
+        "count": 20351,
+        "rate": 169.59000751109318
+      },
+      "ep_soak_grp_send_ms": {
+        "p(99)": 375.272,
+        "max": 912.5187,
+        "avg": 19.542363596004403,
+        "min": 2.2523,
+        "med": 5.7212,
+        "p(90)": 16.6419,
+        "p(95)": 41.2211
+      },
+      "ep_soak_grp_send_err": {
+        "passes": 0,
+        "fails": 901,
+        "value": 0
+      },
+      "ep_soak_contacts_err": {
+        "passes": 0,
+        "fails": 455,
+        "value": 0
+      },
+      "ep_soak_grp_msgs_reqs": {
+        "count": 1336,
+        "rate": 11.133224413287822
+      },
+      "ws_messages_received": {
+        "rate": 169.59000751109318,
+        "count": 20351
+      },
+      "ep_soak_grp_list_reqs": {
+        "count": 910,
+        "rate": 7.583259143781376
+      },
+      "ep_soak_dm_read_err": {
+        "passes": 0,
+        "fails": 3156,
+        "value": 0
+      },
+      "ws_session_duration": {
+        "p(95)": 85077.44955,
+        "p(99)": 85079.522726,
+        "max": 85079.7203,
+        "avg": 85053.56978750003,
+        "min": 85011.5497,
+        "med": 85059.9172,
+        "p(90)": 85071.76069
+      }
+    },
+    "system_metrics": {
+      "node_cpu_avg_1core_pct": 37.93,
+      "node_cpu_peak_1core_pct": 121.31,
+      "node_rss_start_mb": 103.53,
+      "node_rss_peak_mb": 344.21,
+      "node_heap_peak_mb": 156.52,
+      "el_lag_p95_peak_ms": 182.45,
+      "el_lag_max_ms": 182.45,
+      "mongo_conns_peak": 29,
+      "mongo_wt_cache_peak_mb": 38.67,
+      "mongo_active_clients_peak": 1,
+      "mongo_queued_peak": 0,
+      "mongo_ops_insert_peak_s": 47,
+      "mongo_ops_query_peak_s": 362,
+      "mongo_ops_update_peak_s": 0,
+      "mongo_os_cpu_avg_pct": 24.73,
+      "mongo_os_cpu_peak_pct": 68.6,
+      "mongo_os_rss_peak_mb": 200.14,
+      "sys_cpu_peak_pct": 77.5,
+      "sys_mem_avail_min_mb": 723.27
+    },
+    "timeseries_buckets": [
+      {
+        "tSec": 0,
+        "rps": 96.0,
+        "reqCount": 480,
+        "errCount": 0,
+        "errRatePct": 0.0,
+        "p50Ms": 20.27,
+        "p95Ms": 743.07,
+        "p99Ms": 1071.81,
+        "maxMs": 1184.11
+      },
+      {
+        "tSec": 5,
+        "rps": 99.8,
+        "reqCount": 499,
+        "errCount": 0,
+        "errRatePct": 0.0,
+        "p50Ms": 9.28,
+        "p95Ms": 85.42,
+        "p99Ms": 195.01,
+        "maxMs": 250.29
+      },
+      {
+        "tSec": 10,
+        "rps": 100.0,
+        "reqCount": 500,
+        "errCount": 0,
+        "errRatePct": 0.0,
+        "p50Ms": 6.41,
+        "p95Ms": 20.28,
+        "p99Ms": 31.74,
+        "maxMs": 56.56
+      },
+      {
+        "tSec": 15,
+        "rps": 100.0,
+        "reqCount": 500,
+        "errCount": 0,
+        "errRatePct": 0.0,
+        "p50Ms": 6.46,
+        "p95Ms": 21.0,
+        "p99Ms": 34.4,
+        "maxMs": 53.28
+      },
+      {
+        "tSec": 20,
+        "rps": 99.8,
+        "reqCount": 499,
+        "errCount": 0,
+        "errRatePct": 0.0,
+        "p50Ms": 6.13,
+        "p95Ms": 20.1,
+        "p99Ms": 29.13,
+        "maxMs": 39.77
+      },
+      {
+        "tSec": 25,
+        "rps": 98.8,
+        "reqCount": 494,
+        "errCount": 0,
+        "errRatePct": 0.0,
+        "p50Ms": 5.33,
+        "p95Ms": 15.8,
+        "p99Ms": 25.16,
+        "maxMs": 39.81
+      },
+      {
+        "tSec": 30,
+        "rps": 101.4,
+        "reqCount": 507,
+        "errCount": 0,
+        "errRatePct": 0.0,
+        "p50Ms": 5.22,
+        "p95Ms": 26.37,
+        "p99Ms": 107.55,
+        "maxMs": 120.11
+      },
+      {
+        "tSec": 35,
+        "rps": 100.0,
+        "reqCount": 500,
+        "errCount": 0,
+        "errRatePct": 0.0,
+        "p50Ms": 6.9,
+        "p95Ms": 192.49,
+        "p99Ms": 304.53,
+        "maxMs": 372.25
+      },
+      {
+        "tSec": 40,
+        "rps": 100.2,
+        "reqCount": 501,
+        "errCount": 0,
+        "errRatePct": 0.0,
+        "p50Ms": 6.45,
+        "p95Ms": 24.23,
+        "p99Ms": 43.67,
+        "maxMs": 56.23
+      },
+      {
+        "tSec": 45,
+        "rps": 99.8,
+        "reqCount": 499,
+        "errCount": 0,
+        "errRatePct": 0.0,
+        "p50Ms": 4.72,
+        "p95Ms": 14.85,
+        "p99Ms": 24.65,
+        "maxMs": 35.69
+      },
+      {
+        "tSec": 50,
+        "rps": 100.0,
+        "reqCount": 500,
+        "errCount": 0,
+        "errRatePct": 0.0,
+        "p50Ms": 5.46,
+        "p95Ms": 29.57,
+        "p99Ms": 56.81,
+        "maxMs": 76.58
+      },
+      {
+        "tSec": 55,
+        "rps": 100.2,
+        "reqCount": 501,
+        "errCount": 0,
+        "errRatePct": 0.0,
+        "p50Ms": 4.69,
+        "p95Ms": 14.53,
+        "p99Ms": 17.77,
+        "maxMs": 25.17
+      },
+      {
+        "tSec": 60,
+        "rps": 100.0,
+        "reqCount": 500,
+        "errCount": 0,
+        "errRatePct": 0.0,
+        "p50Ms": 4.73,
+        "p95Ms": 15.36,
+        "p99Ms": 23.2,
+        "maxMs": 32.14
+      },
+      {
+        "tSec": 65,
+        "rps": 100.0,
+        "reqCount": 500,
+        "errCount": 0,
+        "errRatePct": 0.0,
+        "p50Ms": 4.68,
+        "p95Ms": 14.84,
+        "p99Ms": 23.66,
+        "maxMs": 32.97
+      },
+      {
+        "tSec": 70,
+        "rps": 100.0,
+        "reqCount": 500,
+        "errCount": 0,
+        "errRatePct": 0.0,
+        "p50Ms": 4.61,
+        "p95Ms": 14.63,
+        "p99Ms": 18.16,
+        "maxMs": 20.88
+      },
+      {
+        "tSec": 75,
+        "rps": 99.8,
+        "reqCount": 499,
+        "errCount": 0,
+        "errRatePct": 0.0,
+        "p50Ms": 6.19,
+        "p95Ms": 22.16,
+        "p99Ms": 38.48,
+        "maxMs": 61.25
+      },
+      {
+        "tSec": 80,
+        "rps": 100.2,
+        "reqCount": 501,
+        "errCount": 0,
+        "errRatePct": 0.0,
+        "p50Ms": 5.02,
+        "p95Ms": 16.55,
+        "p99Ms": 26.14,
+        "maxMs": 32.49
+      },
+      {
+        "tSec": 85,
+        "rps": 99.8,
+        "reqCount": 499,
+        "errCount": 0,
+        "errRatePct": 0.0,
+        "p50Ms": 5.61,
+        "p95Ms": 37.02,
+        "p99Ms": 80.7,
+        "maxMs": 119.54
+      }
+    ]
+  },
+  "socketio_burst": {
+    "k6_http_reqs": null,
+    "k6_http_req_duration": null,
+    "k6_http_req_failed": null,
+    "k6_dropped_iterations": null,
+    "k6_custom_metrics": {
+      "ws_msgs_received": {
+        "count": 10944,
+        "rate": 475.23906752779783
+      },
+      "ws_payload_bytes_received": {
+        "count": 10636121,
+        "rate": 461869.53820840904
+      },
+      "ws_presence_frames": {
+        "count": 9944,
+        "rate": 431.8144451294245
+      },
+      "ws_online_user_events": {
+        "count": 500,
+        "rate": 21.71231119918667
+      },
+      "ws_sio_connect_ok": {
+        "passes": 500,
+        "fails": 0,
+        "value": 1
+      },
+      "ws_msgs_sent": {
+        "count": 500,
+        "rate": 21.71231119918667
+      },
+      "ws_sio_handshake_ms": {
+        "avg": 3.692,
+        "min": 1,
+        "med": 3,
+        "p(90)": 5,
+        "p(95)": 9,
+        "p(99)": 18.029999999999973,
+        "max": 25
+      },
+      "ws_session_duration": {
+        "max": 17019.7154,
+        "avg": 17002.1963818,
+        "min": 17000.095,
+        "med": 17001.8309,
+        "p(90)": 17002.78718,
+        "p(95)": 17003.977929999997,
+        "p(99)": 17012.249733
+      },
+      "ws_connecting": {
+        "avg": 1.746175999999999,
+        "min": 0,
+        "med": 1.5128,
+        "p(90)": 2.2996600000000003,
+        "p(95)": 3.597749999999991,
+        "p(99)": 11.663852999999996,
+        "max": 19.1447
+      },
+      "ws_sessions": {
+        "count": 500,
+        "rate": 21.71231119918667
+      }
+    },
+    "system_metrics": {
+      "node_cpu_avg_1core_pct": 16.07,
+      "node_cpu_peak_1core_pct": 90.22,
+      "node_rss_start_mb": 112.78,
+      "node_rss_peak_mb": 145.78,
+      "node_heap_peak_mb": 49.2,
+      "el_lag_p95_peak_ms": 13.03,
+      "el_lag_max_ms": 34.28,
+      "mongo_conns_peak": 6,
+      "mongo_wt_cache_peak_mb": 53.77,
+      "mongo_active_clients_peak": 0,
+      "mongo_queued_peak": 0,
+      "mongo_ops_insert_peak_s": 0,
+      "mongo_ops_query_peak_s": 200,
+      "mongo_ops_update_peak_s": 0,
+      "mongo_os_cpu_avg_pct": 2.92,
+      "mongo_os_cpu_peak_pct": 15.6,
+      "mongo_os_rss_peak_mb": 232.54,
+      "sys_cpu_peak_pct": 33.1,
+      "sys_mem_avail_min_mb": 673.0
+    },
+    "timeseries_buckets": null
+  },
+  "socketio_storm": {
+    "k6_http_reqs": null,
+    "k6_http_req_duration": null,
+    "k6_http_req_failed": null,
+    "k6_dropped_iterations": null,
+    "k6_custom_metrics": {
+      "ws_sio_connect_ok": {
+        "passes": 500,
+        "fails": 0,
+        "value": 1
+      },
+      "ws_session_duration": {
+        "p(99)": 44004.933692,
+        "max": 44011.3444,
+        "avg": 44001.847506935075,
+        "min": 44000.0958,
+        "med": 44001.7993,
+        "p(90)": 44002.54142,
+        "p(95)": 44002.88111
+      },
+      "ws_connecting": {
+        "p(99)": 3.411326999999987,
+        "max": 10.9831,
+        "avg": 1.4475269999999982,
+        "min": 0,
+        "med": 1.5082499999999999,
+        "p(90)": 2.0764199999999997,
+        "p(95)": 2.1270249999999997
+      },
+      "ws_sessions": {
+        "count": 500,
+        "rate": 7.076123015183229
+      },
+      "ws_sio_handshake_ms": {
+        "avg": 3.24,
+        "min": 1,
+        "med": 3,
+        "p(90)": 4,
+        "p(95)": 5,
+        "p(99)": 7.009999999999991,
+        "max": 19
+      },
+      "ws_payload_bytes_received": {
+        "count": 2254572493,
+        "rate": 31907264.614232656
+      },
+      "ws_msgs_sent": {
+        "count": 1000,
+        "rate": 14.152246030366458
+      },
+      "ws_online_user_events": {
+        "count": 249998,
+        "rate": 3538.0332030995537
+      },
+      "ws_msgs_received": {
+        "count": 251498,
+        "rate": 3559.2615721451034
+      }
+    },
+    "system_metrics": {
+      "node_cpu_avg_1core_pct": 21.48,
+      "node_cpu_peak_1core_pct": 91.15,
+      "node_rss_start_mb": 103.13,
+      "node_rss_peak_mb": 119.97,
+      "node_heap_peak_mb": 45.42,
+      "el_lag_p95_peak_ms": 30.21,
+      "el_lag_max_ms": 42.24,
+      "mongo_conns_peak": 5,
+      "mongo_wt_cache_peak_mb": 39.89,
+      "mongo_active_clients_peak": 0,
+      "mongo_queued_peak": 0,
+      "mongo_ops_insert_peak_s": 0,
+      "mongo_ops_query_peak_s": 40,
+      "mongo_ops_update_peak_s": 223,
+      "mongo_os_cpu_avg_pct": 1.57,
+      "mongo_os_cpu_peak_pct": 6.2,
+      "mongo_os_rss_peak_mb": 113.88,
+      "sys_cpu_peak_pct": 40.1,
+      "sys_mem_avail_min_mb": 694.62
+    },
+    "timeseries_buckets": [
+      {
+        "tSec": 0,
+        "rps": 0.0,
+        "reqCount": 0,
+        "errCount": 0,
+        "errRatePct": 0.0,
+        "p50Ms": 0.0,
+        "p95Ms": 0.0,
+        "p99Ms": 0.0,
+        "maxMs": 0.0
+      },
+      {
+        "tSec": 5,
+        "rps": 0.0,
+        "reqCount": 0,
+        "errCount": 0,
+        "errRatePct": 0.0,
+        "p50Ms": 0.0,
+        "p95Ms": 0.0,
+        "p99Ms": 0.0,
+        "maxMs": 0.0
+      },
+      {
+        "tSec": 10,
+        "rps": 0.0,
+        "reqCount": 0,
+        "errCount": 0,
+        "errRatePct": 0.0,
+        "p50Ms": 0.0,
+        "p95Ms": 0.0,
+        "p99Ms": 0.0,
+        "maxMs": 0.0
+      },
+      {
+        "tSec": 15,
+        "rps": 0.0,
+        "reqCount": 0,
+        "errCount": 0,
+        "errRatePct": 0.0,
+        "p50Ms": 0.0,
+        "p95Ms": 0.0,
+        "p99Ms": 0.0,
+        "maxMs": 0.0
+      },
+      {
+        "tSec": 20,
+        "rps": 0.0,
+        "reqCount": 0,
+        "errCount": 0,
+        "errRatePct": 0.0,
+        "p50Ms": 0.0,
+        "p95Ms": 0.0,
+        "p99Ms": 0.0,
+        "maxMs": 0.0
+      },
+      {
+        "tSec": 25,
+        "rps": 0.0,
+        "reqCount": 0,
+        "errCount": 0,
+        "errRatePct": 0.0,
+        "p50Ms": 0.0,
+        "p95Ms": 0.0,
+        "p99Ms": 0.0,
+        "maxMs": 0.0
+      }
+    ]
+  },
+  "spike": {
+    "k6_http_reqs": {
+      "count": 5256,
+      "rate": 104.84184012996127
+    },
+    "k6_http_req_duration": {
+      "avg": 324.50321236681856,
+      "min": 0,
+      "med": 169.45954999999998,
+      "p(90)": 906.4600499999999,
+      "p(95)": 1132.19355,
+      "p(99)": 1531.3392549999999,
+      "max": 2484.216
+    },
+    "k6_http_req_failed": {
+      "passes": 0,
+      "fails": 5256,
+      "value": 0
+    },
+    "k6_dropped_iterations": null,
+    "k6_custom_metrics": {
+      "ep_spike_all_reqs": {
+        "count": 5256,
+        "rate": 104.84184012996127
+      },
+      "ep_spike_all_err": {
+        "passes": 0,
+        "fails": 5256,
+        "value": 0
+      },
+      "ep_spike_send_reqs": {
+        "count": 1590,
+        "rate": 31.7158534639723
+      },
+      "ep_spike_send_err": {
+        "passes": 0,
+        "fails": 1590,
+        "value": 0
+      },
+      "ep_spike_all_ms": {
+        "med": 169.45954999999998,
+        "p(90)": 906.4600499999999,
+        "p(95)": 1132.19355,
+        "p(99)": 1531.3392549999999,
+        "max": 2484.216,
+        "avg": 324.50321236681856,
+        "min": 0
+      },
+      "ep_spike_contacts_ms": {
+        "p(90)": 1165.5961200000002,
+        "p(95)": 1384.87653,
+        "p(99)": 1811.984861,
+        "max": 2484.216,
+        "avg": 403.77097062893,
+        "min": 0,
+        "med": 186.35325
+      },
+      "ep_spike_send_ms": {
+        "p(90)": 960.1119800000009,
+        "p(95)": 1135.23587,
+        "p(99)": 1451.9936619999999,
+        "max": 2310.7427,
+        "avg": 354.60322106918204,
+        "min": 0.8009,
+        "med": 191.12720000000002
+      },
+      "ep_spike_contacts_err": {
+        "passes": 0,
+        "fails": 1590,
+        "value": 0
+      },
+      "ep_spike_contacts_reqs": {
+        "count": 1590,
+        "rate": 31.7158534639723
+      }
+    },
+    "system_metrics": {
+      "node_cpu_avg_1core_pct": 44.23,
+      "node_cpu_peak_1core_pct": 103.48,
+      "node_rss_start_mb": 90.7,
+      "node_rss_peak_mb": 316.77,
+      "node_heap_peak_mb": 159.22,
+      "el_lag_p95_peak_ms": 434.63,
+      "el_lag_max_ms": 434.63,
+      "mongo_conns_peak": 73,
+      "mongo_wt_cache_peak_mb": 30.68,
+      "mongo_active_clients_peak": 2,
+      "mongo_queued_peak": 0,
+      "mongo_ops_insert_peak_s": 76,
+      "mongo_ops_query_peak_s": 470,
+      "mongo_ops_update_peak_s": 0,
+      "mongo_os_cpu_avg_pct": 40.45,
+      "mongo_os_cpu_peak_pct": 79.8,
+      "mongo_os_rss_peak_mb": 94.42,
+      "sys_cpu_peak_pct": 100.0,
+      "sys_mem_avail_min_mb": 971.65
+    },
+    "timeseries_buckets": [
+      {
+        "tSec": 0,
+        "rps": 72.2,
+        "reqCount": 361,
+        "errCount": 0,
+        "errRatePct": 0.0,
+        "p50Ms": 8.46,
+        "p95Ms": 46.06,
+        "p99Ms": 91.8,
+        "maxMs": 99.59
+      },
+      {
+        "tSec": 5,
+        "rps": 76.8,
+        "reqCount": 384,
+        "errCount": 0,
+        "errRatePct": 0.0,
+        "p50Ms": 5.36,
+        "p95Ms": 15.69,
+        "p99Ms": 28.37,
+        "maxMs": 31.98
+      },
+      {
+        "tSec": 10,
+        "rps": 87.2,
+        "reqCount": 436,
+        "errCount": 0,
+        "errRatePct": 0.0,
+        "p50Ms": 217.37,
+        "p95Ms": 786.35,
+        "p99Ms": 1019.84,
+        "maxMs": 1285.52
+      },
+      {
+        "tSec": 15,
+        "rps": 143.0,
+        "reqCount": 715,
+        "errCount": 0,
+        "errRatePct": 0.0,
+        "p50Ms": 824.65,
+        "p95Ms": 1598.58,
+        "p99Ms": 2125.44,
+        "maxMs": 2484.22
+      },
+      {
+        "tSec": 20,
+        "rps": 147.0,
+        "reqCount": 735,
+        "errCount": 0,
+        "errRatePct": 0.0,
+        "p50Ms": 706.94,
+        "p95Ms": 1234.7,
+        "p99Ms": 1514.86,
+        "maxMs": 2088.49
+      },
+      {
+        "tSec": 25,
+        "rps": 150.4,
+        "reqCount": 752,
+        "errCount": 0,
+        "errRatePct": 0.0,
+        "p50Ms": 260.76,
+        "p95Ms": 666.44,
+        "p99Ms": 954.55,
+        "maxMs": 1104.98
+      },
+      {
+        "tSec": 30,
+        "rps": 139.8,
+        "reqCount": 699,
+        "errCount": 0,
+        "errRatePct": 0.0,
+        "p50Ms": 183.1,
+        "p95Ms": 626.15,
+        "p99Ms": 1075.69,
+        "maxMs": 1256.42
+      },
+      {
+        "tSec": 35,
+        "rps": 78.6,
+        "reqCount": 393,
+        "errCount": 0,
+        "errRatePct": 0.0,
+        "p50Ms": 4.82,
+        "p95Ms": 11.59,
+        "p99Ms": 26.72,
+        "maxMs": 29.98
+      },
+      {
+        "tSec": 40,
+        "rps": 77.8,
+        "reqCount": 389,
+        "errCount": 0,
+        "errRatePct": 0.0,
+        "p50Ms": 5.37,
+        "p95Ms": 17.12,
+        "p99Ms": 29.28,
+        "maxMs": 33.7
+      },
+      {
+        "tSec": 45,
+        "rps": 78.4,
+        "reqCount": 392,
+        "errCount": 0,
+        "errRatePct": 0.0,
+        "p50Ms": 4.63,
+        "p95Ms": 12.03,
+        "p99Ms": 20.03,
+        "maxMs": 30.77
+      }
+    ]
+  }
+}

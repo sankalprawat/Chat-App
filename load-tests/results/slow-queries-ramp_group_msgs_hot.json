@@ -1,0 +1,6563 @@
+[
+  {
+    "op": "command",
+    "ns": "chatApp_loadtest.messages",
+    "isFromPriorityPortConnection": false,
+    "command": {
+      "aggregate": "messages",
+      "pipeline": [
+        {
+          "$match": {
+            "senderId": "6b072841aaf484a4dd32de64"
+          }
+        },
+        {
+          "$group": {
+            "_id": "$receiverId",
+            "lastMessageTime": {
+              "$max": "$createdAt"
+            }
+          }
+        }
+      ],
+      "cursor": {},
+      "lsid": {
+        "id": "e61670fb-3426-4b7a-8b0f-b0a1669229cb"
+      },
+      "$db": "chatApp_loadtest"
+    },
+    "opid": 96274,
+    "keysExamined": 35,
+    "docsExamined": 0,
+    "peakTrackedMemBytes": 62,
+    "fromPlanCache": true,
+    "cursorExhausted": true,
+    "numYield": 0,
+    "nreturned": 1,
+    "planCacheShapeHash": "E72782FD",
+    "queryHash": "E72782FD",
+    "planCacheKey": "8AF984E3",
+    "queryShapeHash": "05E053F86C62F03DC2D952B6D21BCB9D8153B046A88E70A91AA72A8EA323BE5E",
+    "queryFramework": "sbe",
+    "locks": {
+      "Global": {
+        "acquireCount": {
+          "r": 2
+        }
+      }
+    },
+    "flowControl": {},
+    "storage": {
+      "timeWaitingMicros": {
+        "storageEngineMicros": 64
+      }
+    },
+    "responseLength": 164,
+    "protocol": "op_msg",
+    "millis": 22,
+    "planSummary": "IXSCAN { senderId: 1, receiverId: 1, createdAt: -1, _id: -1 }",
+    "planningTimeMicros": 16565,
+    "ts": "2026-11-25T18:29:24.989Z",
+    "client": "127.0.0.1",
+    "allUsers": [],
+    "user": ""
+  },
+  {
+    "op": "command",
+    "ns": "chatApp_loadtest.messages",
+    "isFromPriorityPortConnection": false,
+    "command": {
+      "aggregate": "messages",
+      "pipeline": [
+        {
+          "$match": {
+            "receiverId": "6b072841aaf484a4dd32de63"
+          }
+        },
+        {
+          "$group": {
+            "_id": "$senderId",
+            "lastMessageTime": {
+              "$max": "$createdAt"
+            }
+          }
+        }
+      ],
+      "cursor": {},
+      "lsid": {
+        "id": "f7ad4ff6-d6be-4c92-997b-78da8b26d15f"
+      },
+      "$db": "chatApp_loadtest"
+    },
+    "opid": 77308,
+    "keysExamined": 70,
+    "docsExamined": 0,
+    "peakTrackedMemBytes": 124,
+    "fromPlanCache": true,
+    "cursorExhausted": true,
+    "numYield": 0,
+    "nreturned": 2,
+    "planCacheShapeHash": "EFEB6015",
+    "queryHash": "EFEB6015",
+    "planCacheKey": "71CAF67B",
+    "queryShapeHash": "E2B5F0B7EA65FA6F24DE930FE6D2CAE7E99F5E73BEC915D980F4790466000F0C",
+    "queryFramework": "sbe",
+    "locks": {
+      "Global": {
+        "acquireCount": {
+          "r": 2
+        }
+      }
+    },
+    "flowControl": {},
+    "storage": {
+      "timeWaitingMicros": {
+        "storageEngineMicros": 54
+      }
+    },
+    "responseLength": 214,
+    "protocol": "op_msg",
+    "millis": 21,
+    "planSummary": "IXSCAN { receiverId: 1, senderId: 1, createdAt: -1, _id: -1 }",
+    "planningTimeMicros": 20085,
+    "ts": "2026-11-25T18:29:24.097Z",
+    "client": "127.0.0.1",
+    "allUsers": [],
+    "user": ""
+  },
+  {
+    "op": "command",
+    "ns": "chatApp_loadtest.messages",
+    "isFromPriorityPortConnection": false,
+    "command": {
+      "aggregate": "messages",
+      "pipeline": [
+        {
+          "$match": {
+            "senderId": "6b072841aaf484a4dd32dea4"
+          }
+        },
+        {
+          "$group": {
+            "_id": "$receiverId",
+            "lastMessageTime": {
+              "$max": "$createdAt"
+            }
+          }
+        }
+      ],
+      "cursor": {},
+      "lsid": {
+        "id": "549ba3f4-3b6c-4e75-bf8b-e9ce5c6b722e"
+      },
+      "$db": "chatApp_loadtest"
+    },
+    "opid": 92200,
+    "keysExamined": 35,
+    "docsExamined": 0,
+    "peakTrackedMemBytes": 62,
+    "fromPlanCache": true,
+    "cursorExhausted": true,
+    "numYield": 1,
+    "nreturned": 1,
+    "planCacheShapeHash": "E72782FD",
+    "queryHash": "E72782FD",
+    "planCacheKey": "8AF984E3",
+    "queryShapeHash": "05E053F86C62F03DC2D952B6D21BCB9D8153B046A88E70A91AA72A8EA323BE5E",
+    "queryFramework": "sbe",
+    "locks": {
+      "Global": {
+        "acquireCount": {
+          "r": 3
+        }
+      }
+    },
+    "flowControl": {},
+    "storage": {
+      "timeWaitingMicros": {
+        "storageEngineMicros": 72
+      }
+    },
+    "responseLength": 164,
+    "protocol": "op_msg",
+    "millis": 20,
+    "planSummary": "IXSCAN { senderId: 1, receiverId: 1, createdAt: -1, _id: -1 }",
+    "planningTimeMicros": 19367,
+    "ts": "2026-11-25T18:29:24.635Z",
+    "client": "127.0.0.1",
+    "allUsers": [],
+    "user": ""
+  },
+  {
+    "op": "command",
+    "ns": "chatApp_loadtest.messages",
+    "isFromPriorityPortConnection": false,
+    "command": {
+      "aggregate": "messages",
+      "pipeline": [
+        {
+          "$match": {
+            "receiverId": "6b072841aaf484a4dd32de56"
+          }
+        },
+        {
+          "$group": {
+            "_id": "$senderId",
+            "lastMessageTime": {
+              "$max": "$createdAt"
+            }
+          }
+        }
+      ],
+      "cursor": {},
+      "lsid": {
+        "id": "f7ad4ff6-d6be-4c92-997b-78da8b26d15f"
+      },
+      "$db": "chatApp_loadtest"
+    },
+    "opid": 77312,
+    "keysExamined": 0,
+    "docsExamined": 0,
+    "fromPlanCache": true,
+    "cursorExhausted": true,
+    "numYield": 0,
+    "nreturned": 0,
+    "planCacheShapeHash": "EFEB6015",
+    "queryHash": "EFEB6015",
+    "planCacheKey": "71CAF67B",
+    "queryShapeHash": "E2B5F0B7EA65FA6F24DE930FE6D2CAE7E99F5E73BEC915D980F4790466000F0C",
+    "queryFramework": "sbe",
+    "locks": {
+      "Global": {
+        "acquireCount": {
+          "r": 2
+        }
+      }
+    },
+    "flowControl": {},
+    "storage": {
+      "timeWaitingMicros": {
+        "storageEngineMicros": 90
+      }
+    },
+    "responseLength": 114,
+    "protocol": "op_msg",
+    "millis": 18,
+    "planSummary": "IXSCAN { receiverId: 1, senderId: 1, createdAt: -1, _id: -1 }",
+    "planningTimeMicros": 12556,
+    "ts": "2026-11-25T18:29:24.473Z",
+    "client": "127.0.0.1",
+    "allUsers": [],
+    "user": ""
+  },
+  {
+    "op": "query",
+    "ns": "chatApp_loadtest.groupmessages",
+    "isFromPriorityPortConnection": false,
+    "command": {
+      "find": "groupmessages",
+      "filter": {
+        "groupId": "6b072842aaf484a4dd33a3a0"
+      },
+      "sort": {
+        "createdAt": -1,
+        "_id": -1
+      },
+      "skip": 0,
+      "limit": 50,
+      "lsid": {
+        "id": "1e8d2caf-5b95-4313-8890-b4d5774014c3"
+      },
+      "$db": "chatApp_loadtest"
+    },
+    "opid": 305213,
+    "keysExamined": 50,
+    "docsExamined": 50,
+    "nBatches": 1,
+    "cursorExhausted": true,
+    "numYield": 1,
+    "nreturned": 50,
+    "planCacheShapeHash": "B5F3F147",
+    "queryHash": "B5F3F147",
+    "planCacheKey": "03CECC9F",
+    "queryShapeHash": "6F87C17F4AA61190BF92BDA9DA54B6FE1F0B1BDA4B966D207577E7A83CEEF91E",
+    "queryFramework": "classic",
+    "locks": {
+      "Global": {
+        "acquireCount": {
+          "r": 3
+        }
+      }
+    },
+    "flowControl": {},
+    "storage": {
+      "timeWaitingMicros": {
+        "storageEngineMicros": 359
+      }
+    },
+    "responseLength": 11209,
+    "protocol": "op_msg",
+    "millis": 17,
+    "planSummary": "IXSCAN { groupId: 1, createdAt: -1, _id: -1 }",
+    "planningTimeMicros": 4990,
+    "execStats": {
+      "isCached": false,
+      "stage": "LIMIT",
+      "nReturned": 50,
+      "executionTimeMillisEstimate": 9,
+      "works": 51,
+      "advanced": 50,
+      "needTime": 0,
+      "needYield": 0,
+      "saveState": 1,
+      "restoreState": 1,
+      "isEOF": 1,
+      "limitAmount": 50,
+      "inputStage": {
+        "stage": "FETCH",
+        "nReturned": 50,
+        "executionTimeMillisEstimate": 9,
+        "works": 50,
+        "advanced": 50,
+        "needTime": 0,
+        "needYield": 0,
+        "saveState": 1,
+        "restoreState": 1,
+        "isEOF": 0,
+        "docsExamined": 50,
+        "alreadyHasObj": 0,
+        "inputStage": {
+          "stage": "IXSCAN",
+          "nReturned": 50,
+          "executionTimeMillisEstimate": 9,
+          "works": 50,
+          "advanced": 50,
+          "needTime": 0,
+          "needYield": 0,
+          "saveState": 1,
+          "restoreState": 1,
+          "isEOF": 0,
+          "keyPattern": {
+            "groupId": 1,
+            "createdAt": -1,
+            "_id": -1
+          },
+          "indexName": "groupId_1_createdAt_-1__id_-1",
+          "isMultiKey": false,
+          "multiKeyPaths": {
+            "groupId": [],
+            "createdAt": [],
+            "_id": []
+          },
+          "isUnique": false,
+          "isSparse": false,
+          "isPartial": false,
+          "indexVersion": 2,
+          "direction": "forward",
+          "indexBounds": {
+            "groupId": [
+              "[ObjectId('6b072842aaf484a4dd33a3a0'), ObjectId('6b072842aaf484a4dd33a3a0')]"
+            ],
+            "createdAt": [
+              "[MaxKey, MinKey]"
+            ],
+            "_id": [
+              "[MaxKey, MinKey]"
+            ]
+          },
+          "keysExamined": 50,
+          "seeks": 1,
+          "dupsTested": 0,
+          "dupsDropped": 0,
+          "peakTrackedMemBytes": 0
+        }
+      }
+    },
+    "ts": "2026-11-25T18:30:42.919Z",
+    "client": "127.0.0.1",
+    "allUsers": [],
+    "user": ""
+  },
+  {
+    "op": "query",
+    "ns": "chatApp_loadtest.groupmessages",
+    "isFromPriorityPortConnection": false,
+    "command": {
+      "find": "groupmessages",
+      "filter": {
+        "groupId": "6b072842aaf484a4dd33a3a0"
+      },
+      "sort": {
+        "createdAt": -1,
+        "_id": -1
+      },
+      "skip": 0,
+      "limit": 50,
+      "lsid": {
+        "id": "97562326-1fc5-4f3a-a21c-b2fe49666d12"
+      },
+      "$db": "chatApp_loadtest"
+    },
+    "opid": 286791,
+    "keysExamined": 50,
+    "docsExamined": 50,
+    "nBatches": 1,
+    "cursorExhausted": true,
+    "numYield": 0,
+    "nreturned": 50,
+    "planCacheShapeHash": "B5F3F147",
+    "queryHash": "B5F3F147",
+    "planCacheKey": "03CECC9F",
+    "queryShapeHash": "6F87C17F4AA61190BF92BDA9DA54B6FE1F0B1BDA4B966D207577E7A83CEEF91E",
+    "queryFramework": "classic",
+    "locks": {
+      "Global": {
+        "acquireCount": {
+          "r": 2
+        }
+      }
+    },
+    "flowControl": {},
+    "storage": {
+      "timeWaitingMicros": {
+        "storageEngineMicros": 108
+      }
+    },
+    "responseLength": 11209,
+    "protocol": "op_msg",
+    "millis": 17,
+    "planSummary": "IXSCAN { groupId: 1, createdAt: -1, _id: -1 }",
+    "planningTimeMicros": 830,
+    "execStats": {
+      "isCached": false,
+      "stage": "LIMIT",
+      "nReturned": 50,
+      "executionTimeMillisEstimate": 0,
+      "works": 51,
+      "advanced": 50,
+      "needTime": 0,
+      "needYield": 0,
+      "saveState": 0,
+      "restoreState": 0,
+      "isEOF": 1,
+      "limitAmount": 50,
+      "inputStage": {
+        "stage": "FETCH",
+        "nReturned": 50,
+        "executionTimeMillisEstimate": 0,
+        "works": 50,
+        "advanced": 50,
+        "needTime": 0,
+        "needYield": 0,
+        "saveState": 0,
+        "restoreState": 0,
+        "isEOF": 0,
+        "docsExamined": 50,
+        "alreadyHasObj": 0,
+        "inputStage": {
+          "stage": "IXSCAN",
+          "nReturned": 50,
+          "executionTimeMillisEstimate": 0,
+          "works": 50,
+          "advanced": 50,
+          "needTime": 0,
+          "needYield": 0,
+          "saveState": 0,
+          "restoreState": 0,
+          "isEOF": 0,
+          "keyPattern": {
+            "groupId": 1,
+            "createdAt": -1,
+            "_id": -1
+          },
+          "indexName": "groupId_1_createdAt_-1__id_-1",
+          "isMultiKey": false,
+          "multiKeyPaths": {
+            "groupId": [],
+            "createdAt": [],
+            "_id": []
+          },
+          "isUnique": false,
+          "isSparse": false,
+          "isPartial": false,
+          "indexVersion": 2,
+          "direction": "forward",
+          "indexBounds": {
+            "groupId": [
+              "[ObjectId('6b072842aaf484a4dd33a3a0'), ObjectId('6b072842aaf484a4dd33a3a0')]"
+            ],
+            "createdAt": [
+              "[MaxKey, MinKey]"
+            ],
+            "_id": [
+              "[MaxKey, MinKey]"
+            ]
+          },
+          "keysExamined": 50,
+          "seeks": 1,
+          "dupsTested": 0,
+          "dupsDropped": 0,
+          "peakTrackedMemBytes": 0
+        }
+      }
+    },
+    "ts": "2026-11-25T18:30:41.292Z",
+    "client": "127.0.0.1",
+    "allUsers": [],
+    "user": ""
+  },
+  {
+    "op": "query",
+    "ns": "chatApp_loadtest.groups",
+    "isFromPriorityPortConnection": false,
+    "command": {
+      "find": "groups",
+      "filter": {
+        "_id": "6b072842aaf484a4dd33a3a0",
+        "members": "6b072841aaf484a4dd32dc6e"
+      },
+      "limit": 1,
+      "singleBatch": true,
+      "lsid": {
+        "id": "672018ea-86f8-4f49-84ae-c797c78ac20f"
+      },
+      "$db": "chatApp_loadtest"
+    },
+    "opid": 317459,
+    "keysExamined": 1,
+    "docsExamined": 1,
+    "nBatches": 1,
+    "cursorExhausted": true,
+    "numYield": 0,
+    "nreturned": 1,
+    "planCacheShapeHash": "09BBEDC3",
+    "queryHash": "09BBEDC3",
+    "planCacheKey": "5B451562",
+    "queryShapeHash": "B1FAF749BD0EDC0241221854B6AB05A087F4B1CB3640DDEF64E79A45D42C5BA8",
+    "queryFramework": "classic",
+    "locks": {
+      "Global": {
+        "acquireCount": {
+          "r": 2
+        }
+      }
+    },
+    "flowControl": {},
+    "storage": {
+      "timeWaitingMicros": {
+        "storageEngineMicros": 140
+      }
+    },
+    "responseLength": 609,
+    "protocol": "op_msg",
+    "millis": 15,
+    "planSummary": "IXSCAN { _id: 1 }",
+    "planningTimeMicros": 1509,
+    "execStats": {
+      "isCached": false,
+      "stage": "LIMIT",
+      "nReturned": 1,
+      "executionTimeMillisEstimate": 0,
+      "works": 2,
+      "advanced": 1,
+      "needTime": 0,
+      "needYield": 0,
+      "saveState": 0,
+      "restoreState": 0,
+      "isEOF": 1,
+      "limitAmount": 1,
+      "inputStage": {
+        "stage": "FETCH",
+        "filter": {
+          "members": {
+            "$eq": "6b072841aaf484a4dd32dc6e"
+          }
+        },
+        "nReturned": 1,
+        "executionTimeMillisEstimate": 0,
+        "works": 1,
+        "advanced": 1,
+        "needTime": 0,
+        "needYield": 0,
+        "saveState": 0,
+        "restoreState": 0,
+        "isEOF": 0,
+        "docsExamined": 1,
+        "alreadyHasObj": 0,
+        "inputStage": {
+          "stage": "IXSCAN",
+          "nReturned": 1,
+          "executionTimeMillisEstimate": 0,
+          "works": 1,
+          "advanced": 1,
+          "needTime": 0,
+          "needYield": 0,
+          "saveState": 0,
+          "restoreState": 0,
+          "isEOF": 0,
+          "keyPattern": {
+            "_id": 1
+          },
+          "indexName": "_id_",
+          "isMultiKey": false,
+          "isUnique": true,
+          "isSparse": false,
+          "isPartial": false,
+          "indexVersion": 2,
+          "direction": "forward",
+          "indexBounds": {
+            "_id": [
+              "[ObjectId('6b072842aaf484a4dd33a3a0'), ObjectId('6b072842aaf484a4dd33a3a0')]"
+            ]
+          },
+          "keysExamined": 1,
+          "seeks": 1,
+          "dupsTested": 0,
+          "dupsDropped": 0,
+          "peakTrackedMemBytes": 0
+        }
+      }
+    },
+    "ts": "2026-11-25T18:30:42.475Z",
+    "client": "127.0.0.1",
+    "allUsers": [],
+    "user": ""
+  },
+  {
+    "op": "command",
+    "ns": "chatApp_loadtest.messages",
+    "isFromPriorityPortConnection": false,
+    "command": {
+      "aggregate": "messages",
+      "pipeline": [
+        {
+          "$match": {
+            "senderId": "6b072841aaf484a4dd32dd6f"
+          }
+        },
+        {
+          "$group": {
+            "_id": "$receiverId",
+            "lastMessageTime": {
+              "$max": "$createdAt"
+            }
+          }
+        }
+      ],
+      "cursor": {},
+      "lsid": {
+        "id": "f7ad4ff6-d6be-4c92-997b-78da8b26d15f"
+      },
+      "$db": "chatApp_loadtest"
+    },
+    "opid": 77322,
+    "keysExamined": 35,
+    "docsExamined": 0,
+    "peakTrackedMemBytes": 62,
+    "fromPlanCache": true,
+    "cursorExhausted": true,
+    "numYield": 0,
+    "nreturned": 1,
+    "planCacheShapeHash": "E72782FD",
+    "queryHash": "E72782FD",
+    "planCacheKey": "8AF984E3",
+    "queryShapeHash": "05E053F86C62F03DC2D952B6D21BCB9D8153B046A88E70A91AA72A8EA323BE5E",
+    "queryFramework": "sbe",
+    "locks": {
+      "Global": {
+        "acquireCount": {
+          "r": 2
+        }
+      }
+    },
+    "flowControl": {},
+    "storage": {
+      "timeWaitingMicros": {
+        "storageEngineMicros": 49
+      }
+    },
+    "responseLength": 164,
+    "protocol": "op_msg",
+    "millis": 15,
+    "planSummary": "IXSCAN { senderId: 1, receiverId: 1, createdAt: -1, _id: -1 }",
+    "planningTimeMicros": 14813,
+    "ts": "2026-11-25T18:29:25.364Z",
+    "client": "127.0.0.1",
+    "allUsers": [],
+    "user": ""
+  },
+  {
+    "op": "query",
+    "ns": "chatApp_loadtest.groups",
+    "isFromPriorityPortConnection": false,
+    "command": {
+      "find": "groups",
+      "filter": {
+        "_id": "6b072842aaf484a4dd33a3a0",
+        "members": "6b072841aaf484a4dd32dc6a"
+      },
+      "limit": 1,
+      "singleBatch": true,
+      "lsid": {
+        "id": "6cdac376-4b75-440c-8e82-2049b1c58ee5"
+      },
+      "$db": "chatApp_loadtest"
+    },
+    "opid": 291950,
+    "keysExamined": 1,
+    "docsExamined": 1,
+    "nBatches": 1,
+    "cursorExhausted": true,
+    "numYield": 0,
+    "nreturned": 1,
+    "planCacheShapeHash": "09BBEDC3",
+    "queryHash": "09BBEDC3",
+    "planCacheKey": "5B451562",
+    "queryShapeHash": "B1FAF749BD0EDC0241221854B6AB05A087F4B1CB3640DDEF64E79A45D42C5BA8",
+    "queryFramework": "classic",
+    "locks": {
+      "Global": {
+        "acquireCount": {
+          "r": 2
+        }
+      }
+    },
+    "flowControl": {},
+    "storage": {
+      "timeWaitingMicros": {
+        "storageEngineMicros": 140
+      }
+    },
+    "responseLength": 609,
+    "protocol": "op_msg",
+    "millis": 15,
+    "planSummary": "IXSCAN { _id: 1 }",
+    "planningTimeMicros": 5855,
+    "execStats": {
+      "isCached": false,
+      "stage": "LIMIT",
+      "nReturned": 1,
+      "executionTimeMillisEstimate": 0,
+      "works": 2,
+      "advanced": 1,
+      "needTime": 0,
+      "needYield": 0,
+      "saveState": 0,
+      "restoreState": 0,
+      "isEOF": 1,
+      "limitAmount": 1,
+      "inputStage": {
+        "stage": "FETCH",
+        "filter": {
+          "members": {
+            "$eq": "6b072841aaf484a4dd32dc6a"
+          }
+        },
+        "nReturned": 1,
+        "executionTimeMillisEstimate": 0,
+        "works": 1,
+        "advanced": 1,
+        "needTime": 0,
+        "needYield": 0,
+        "saveState": 0,
+        "restoreState": 0,
+        "isEOF": 0,
+        "docsExamined": 1,
+        "alreadyHasObj": 0,
+        "inputStage": {
+          "stage": "IXSCAN",
+          "nReturned": 1,
+          "executionTimeMillisEstimate": 0,
+          "works": 1,
+          "advanced": 1,
+          "needTime": 0,
+          "needYield": 0,
+          "saveState": 0,
+          "restoreState": 0,
+          "isEOF": 0,
+          "keyPattern": {
+            "_id": 1
+          },
+          "indexName": "_id_",
+          "isMultiKey": false,
+          "isUnique": true,
+          "isSparse": false,
+          "isPartial": false,
+          "indexVersion": 2,
+          "direction": "forward",
+          "indexBounds": {
+            "_id": [
+              "[ObjectId('6b072842aaf484a4dd33a3a0'), ObjectId('6b072842aaf484a4dd33a3a0')]"
+            ]
+          },
+          "keysExamined": 1,
+          "seeks": 1,
+          "dupsTested": 0,
+          "dupsDropped": 0,
+          "peakTrackedMemBytes": 0
+        }
+      }
+    },
+    "ts": "2026-11-25T18:30:42.240Z",
+    "client": "127.0.0.1",
+    "allUsers": [],
+    "user": ""
+  },
+  {
+    "op": "command",
+    "ns": "chatApp_loadtest.messages",
+    "isFromPriorityPortConnection": false,
+    "command": {
+      "aggregate": "messages",
+      "pipeline": [
+        {
+          "$match": {
+            "receiverId": "6b072841aaf484a4dd32de64"
+          }
+        },
+        {
+          "$group": {
+            "_id": "$senderId",
+            "lastMessageTime": {
+              "$max": "$createdAt"
+            }
+          }
+        }
+      ],
+      "cursor": {},
+      "lsid": {
+        "id": "5b1b28e8-4f12-47eb-8662-8fea14d0a7bd"
+      },
+      "$db": "chatApp_loadtest"
+    },
+    "opid": 79342,
+    "keysExamined": 0,
+    "docsExamined": 0,
+    "fromPlanCache": true,
+    "cursorExhausted": true,
+    "numYield": 0,
+    "nreturned": 0,
+    "planCacheShapeHash": "EFEB6015",
+    "queryHash": "EFEB6015",
+    "planCacheKey": "71CAF67B",
+    "queryShapeHash": "E2B5F0B7EA65FA6F24DE930FE6D2CAE7E99F5E73BEC915D980F4790466000F0C",
+    "queryFramework": "sbe",
+    "locks": {
+      "Global": {
+        "acquireCount": {
+          "r": 2
+        }
+      }
+    },
+    "flowControl": {},
+    "storage": {
+      "timeWaitingMicros": {
+        "storageEngineMicros": 168
+      }
+    },
+    "responseLength": 114,
+    "protocol": "op_msg",
+    "millis": 14,
+    "planSummary": "IXSCAN { receiverId: 1, senderId: 1, createdAt: -1, _id: -1 }",
+    "planningTimeMicros": 12523,
+    "ts": "2026-11-25T18:29:24.988Z",
+    "client": "127.0.0.1",
+    "allUsers": [],
+    "user": ""
+  },
+  {
+    "op": "command",
+    "ns": "chatApp_loadtest.messages",
+    "isFromPriorityPortConnection": false,
+    "command": {
+      "aggregate": "messages",
+      "pipeline": [
+        {
+          "$match": {
+            "senderId": "6b072841aaf484a4dd32de97"
+          }
+        },
+        {
+          "$group": {
+            "_id": "$receiverId",
+            "lastMessageTime": {
+              "$max": "$createdAt"
+            }
+          }
+        }
+      ],
+      "cursor": {},
+      "lsid": {
+        "id": "549ba3f4-3b6c-4e75-bf8b-e9ce5c6b722e"
+      },
+      "$db": "chatApp_loadtest"
+    },
+    "opid": 92203,
+    "keysExamined": 35,
+    "docsExamined": 0,
+    "peakTrackedMemBytes": 62,
+    "fromPlanCache": true,
+    "cursorExhausted": true,
+    "numYield": 1,
+    "nreturned": 1,
+    "planCacheShapeHash": "E72782FD",
+    "queryHash": "E72782FD",
+    "planCacheKey": "8AF984E3",
+    "queryShapeHash": "05E053F86C62F03DC2D952B6D21BCB9D8153B046A88E70A91AA72A8EA323BE5E",
+    "queryFramework": "sbe",
+    "locks": {
+      "Global": {
+        "acquireCount": {
+          "r": 3
+        }
+      }
+    },
+    "flowControl": {},
+    "storage": {
+      "timeWaitingMicros": {
+        "storageEngineMicros": 107
+      }
+    },
+    "responseLength": 164,
+    "protocol": "op_msg",
+    "millis": 14,
+    "planSummary": "IXSCAN { senderId: 1, receiverId: 1, createdAt: -1, _id: -1 }",
+    "planningTimeMicros": 13314,
+    "ts": "2026-11-25T18:29:24.841Z",
+    "client": "127.0.0.1",
+    "allUsers": [],
+    "user": ""
+  },
+  {
+    "op": "command",
+    "ns": "chatApp_loadtest.messages",
+    "isFromPriorityPortConnection": false,
+    "command": {
+      "aggregate": "messages",
+      "pipeline": [
+        {
+          "$match": {
+            "senderId": "6b072841aaf484a4dd32de19"
+          }
+        },
+        {
+          "$group": {
+            "_id": "$receiverId",
+            "lastMessageTime": {
+              "$max": "$createdAt"
+            }
+          }
+        }
+      ],
+      "cursor": {},
+      "lsid": {
+        "id": "a05744ca-6495-4720-b97a-aa52b3ad6c4a"
+      },
+      "$db": "chatApp_loadtest"
+    },
+    "opid": 104459,
+    "keysExamined": 35,
+    "docsExamined": 0,
+    "peakTrackedMemBytes": 62,
+    "fromPlanCache": true,
+    "cursorExhausted": true,
+    "numYield": 1,
+    "nreturned": 1,
+    "planCacheShapeHash": "E72782FD",
+    "queryHash": "E72782FD",
+    "planCacheKey": "8AF984E3",
+    "queryShapeHash": "05E053F86C62F03DC2D952B6D21BCB9D8153B046A88E70A91AA72A8EA323BE5E",
+    "queryFramework": "sbe",
+    "locks": {
+      "Global": {
+        "acquireCount": {
+          "r": 3
+        }
+      }
+    },
+    "flowControl": {},
+    "storage": {
+      "timeWaitingMicros": {
+        "storageEngineMicros": 77
+      }
+    },
+    "responseLength": 164,
+    "protocol": "op_msg",
+    "millis": 14,
+    "planSummary": "IXSCAN { senderId: 1, receiverId: 1, createdAt: -1, _id: -1 }",
+    "planningTimeMicros": 13526,
+    "ts": "2026-11-25T18:29:23.849Z",
+    "client": "127.0.0.1",
+    "allUsers": [],
+    "user": ""
+  },
+  {
+    "op": "command",
+    "ns": "chatApp_loadtest.messages",
+    "isFromPriorityPortConnection": false,
+    "command": {
+      "aggregate": "messages",
+      "pipeline": [
+        {
+          "$match": {
+            "senderId": "6b072841aaf484a4dd32de56"
+          }
+        },
+        {
+          "$group": {
+            "_id": "$receiverId",
+            "lastMessageTime": {
+              "$max": "$createdAt"
+            }
+          }
+        }
+      ],
+      "cursor": {},
+      "lsid": {
+        "id": "549ba3f4-3b6c-4e75-bf8b-e9ce5c6b722e"
+      },
+      "$db": "chatApp_loadtest"
+    },
+    "opid": 92198,
+    "keysExamined": 35,
+    "docsExamined": 0,
+    "peakTrackedMemBytes": 62,
+    "fromPlanCache": true,
+    "cursorExhausted": true,
+    "numYield": 0,
+    "nreturned": 1,
+    "planCacheShapeHash": "E72782FD",
+    "queryHash": "E72782FD",
+    "planCacheKey": "8AF984E3",
+    "queryShapeHash": "05E053F86C62F03DC2D952B6D21BCB9D8153B046A88E70A91AA72A8EA323BE5E",
+    "queryFramework": "sbe",
+    "locks": {
+      "Global": {
+        "acquireCount": {
+          "r": 2
+        }
+      }
+    },
+    "flowControl": {},
+    "storage": {
+      "timeWaitingMicros": {
+        "storageEngineMicros": 68
+      }
+    },
+    "responseLength": 164,
+    "protocol": "op_msg",
+    "millis": 14,
+    "planSummary": "IXSCAN { senderId: 1, receiverId: 1, createdAt: -1, _id: -1 }",
+    "planningTimeMicros": 13166,
+    "ts": "2026-11-25T18:29:24.469Z",
+    "client": "127.0.0.1",
+    "allUsers": [],
+    "user": ""
+  },
+  {
+    "op": "command",
+    "ns": "chatApp_loadtest.messages",
+    "isFromPriorityPortConnection": false,
+    "command": {
+      "aggregate": "messages",
+      "pipeline": [
+        {
+          "$match": {
+            "receiverId": "6b072841aaf484a4dd32de7d"
+          }
+        },
+        {
+          "$group": {
+            "_id": "$senderId",
+            "lastMessageTime": {
+              "$max": "$createdAt"
+            }
+          }
+        }
+      ],
+      "cursor": {},
+      "lsid": {
+        "id": "e61670fb-3426-4b7a-8b0f-b0a1669229cb"
+      },
+      "$db": "chatApp_loadtest"
+    },
+    "opid": 96270,
+    "keysExamined": 70,
+    "docsExamined": 0,
+    "peakTrackedMemBytes": 124,
+    "fromPlanCache": true,
+    "cursorExhausted": true,
+    "numYield": 0,
+    "nreturned": 2,
+    "planCacheShapeHash": "EFEB6015",
+    "queryHash": "EFEB6015",
+    "planCacheKey": "71CAF67B",
+    "queryShapeHash": "E2B5F0B7EA65FA6F24DE930FE6D2CAE7E99F5E73BEC915D980F4790466000F0C",
+    "queryFramework": "sbe",
+    "locks": {
+      "Global": {
+        "acquireCount": {
+          "r": 2
+        }
+      }
+    },
+    "flowControl": {},
+    "storage": {
+      "timeWaitingMicros": {
+        "storageEngineMicros": 76
+      }
+    },
+    "responseLength": 214,
+    "protocol": "op_msg",
+    "millis": 13,
+    "planSummary": "IXSCAN { receiverId: 1, senderId: 1, createdAt: -1, _id: -1 }",
+    "planningTimeMicros": 12546,
+    "ts": "2026-11-25T18:29:24.382Z",
+    "client": "127.0.0.1",
+    "allUsers": [],
+    "user": ""
+  },
+  {
+    "op": "command",
+    "ns": "chatApp_loadtest.messages",
+    "isFromPriorityPortConnection": false,
+    "command": {
+      "aggregate": "messages",
+      "pipeline": [
+        {
+          "$match": {
+            "senderId": "6b072841aaf484a4dd32de7d"
+          }
+        },
+        {
+          "$group": {
+            "_id": "$receiverId",
+            "lastMessageTime": {
+              "$max": "$createdAt"
+            }
+          }
+        }
+      ],
+      "cursor": {},
+      "lsid": {
+        "id": "9581d69b-60e6-4a89-9df4-275f8b5d00be"
+      },
+      "$db": "chatApp_loadtest"
+    },
+    "opid": 95250,
+    "keysExamined": 35,
+    "docsExamined": 0,
+    "peakTrackedMemBytes": 62,
+    "fromPlanCache": true,
+    "cursorExhausted": true,
+    "numYield": 0,
+    "nreturned": 1,
+    "planCacheShapeHash": "E72782FD",
+    "queryHash": "E72782FD",
+    "planCacheKey": "8AF984E3",
+    "queryShapeHash": "05E053F86C62F03DC2D952B6D21BCB9D8153B046A88E70A91AA72A8EA323BE5E",
+    "queryFramework": "sbe",
+    "locks": {
+      "Global": {
+        "acquireCount": {
+          "r": 2
+        }
+      }
+    },
+    "flowControl": {},
+    "storage": {
+      "timeWaitingMicros": {
+        "storageEngineMicros": 44
+      }
+    },
+    "responseLength": 164,
+    "protocol": "op_msg",
+    "millis": 13,
+    "planSummary": "IXSCAN { senderId: 1, receiverId: 1, createdAt: -1, _id: -1 }",
+    "planningTimeMicros": 12836,
+    "ts": "2026-11-25T18:29:24.382Z",
+    "client": "127.0.0.1",
+    "allUsers": [],
+    "user": ""
+  },
+  {
+    "op": "command",
+    "ns": "chatApp_loadtest.messages",
+    "isFromPriorityPortConnection": false,
+    "command": {
+      "aggregate": "messages",
+      "pipeline": [
+        {
+          "$match": {
+            "senderId": "6b072841aaf484a4dd32dea5"
+          }
+        },
+        {
+          "$group": {
+            "_id": "$receiverId",
+            "lastMessageTime": {
+              "$max": "$createdAt"
+            }
+          }
+        }
+      ],
+      "cursor": {},
+      "lsid": {
+        "id": "a05744ca-6495-4720-b97a-aa52b3ad6c4a"
+      },
+      "$db": "chatApp_loadtest"
+    },
+    "opid": 104469,
+    "keysExamined": 35,
+    "docsExamined": 0,
+    "peakTrackedMemBytes": 62,
+    "fromPlanCache": true,
+    "cursorExhausted": true,
+    "numYield": 0,
+    "nreturned": 1,
+    "planCacheShapeHash": "E72782FD",
+    "queryHash": "E72782FD",
+    "planCacheKey": "8AF984E3",
+    "queryShapeHash": "05E053F86C62F03DC2D952B6D21BCB9D8153B046A88E70A91AA72A8EA323BE5E",
+    "queryFramework": "sbe",
+    "locks": {
+      "Global": {
+        "acquireCount": {
+          "r": 2
+        }
+      }
+    },
+    "flowControl": {},
+    "storage": {
+      "timeWaitingMicros": {
+        "storageEngineMicros": 62
+      }
+    },
+    "responseLength": 164,
+    "protocol": "op_msg",
+    "millis": 12,
+    "planSummary": "IXSCAN { senderId: 1, receiverId: 1, createdAt: -1, _id: -1 }",
+    "planningTimeMicros": 10520,
+    "ts": "2026-11-25T18:29:25.115Z",
+    "client": "127.0.0.1",
+    "allUsers": [],
+    "user": ""
+  },
+  {
+    "op": "command",
+    "ns": "chatApp_loadtest.messages",
+    "isFromPriorityPortConnection": false,
+    "command": {
+      "aggregate": "messages",
+      "pipeline": [
+        {
+          "$match": {
+            "senderId": "6b072841aaf484a4dd32dd55"
+          }
+        },
+        {
+          "$group": {
+            "_id": "$receiverId",
+            "lastMessageTime": {
+              "$max": "$createdAt"
+            }
+          }
+        }
+      ],
+      "cursor": {},
+      "lsid": {
+        "id": "914bed35-b519-4d7b-9f18-d818b1d47c27"
+      },
+      "$db": "chatApp_loadtest"
+    },
+    "opid": 72798,
+    "keysExamined": 35,
+    "docsExamined": 0,
+    "peakTrackedMemBytes": 62,
+    "fromPlanCache": true,
+    "cursorExhausted": true,
+    "numYield": 0,
+    "nreturned": 1,
+    "planCacheShapeHash": "E72782FD",
+    "queryHash": "E72782FD",
+    "planCacheKey": "8AF984E3",
+    "queryShapeHash": "05E053F86C62F03DC2D952B6D21BCB9D8153B046A88E70A91AA72A8EA323BE5E",
+    "queryFramework": "sbe",
+    "locks": {
+      "Global": {
+        "acquireCount": {
+          "r": 2
+        }
+      }
+    },
+    "flowControl": {},
+    "storage": {
+      "timeWaitingMicros": {
+        "storageEngineMicros": 67
+      }
+    },
+    "responseLength": 164,
+    "protocol": "op_msg",
+    "millis": 10,
+    "planSummary": "IXSCAN { senderId: 1, receiverId: 1, createdAt: -1, _id: -1 }",
+    "planningTimeMicros": 9074,
+    "ts": "2026-11-25T18:29:25.409Z",
+    "client": "127.0.0.1",
+    "allUsers": [],
+    "user": ""
+  },
+  {
+    "op": "command",
+    "ns": "chatApp_loadtest.messages",
+    "isFromPriorityPortConnection": false,
+    "command": {
+      "aggregate": "messages",
+      "pipeline": [
+        {
+          "$match": {
+            "receiverId": "6b072841aaf484a4dd32dea5"
+          }
+        },
+        {
+          "$group": {
+            "_id": "$senderId",
+            "lastMessageTime": {
+              "$max": "$createdAt"
+            }
+          }
+        }
+      ],
+      "cursor": {},
+      "lsid": {
+        "id": "e2dd44e6-06d7-4803-9618-be30e6ab3d01"
+      },
+      "$db": "chatApp_loadtest"
+    },
+    "opid": 78379,
+    "keysExamined": 70,
+    "docsExamined": 0,
+    "peakTrackedMemBytes": 124,
+    "fromPlanCache": true,
+    "cursorExhausted": true,
+    "numYield": 0,
+    "nreturned": 2,
+    "planCacheShapeHash": "EFEB6015",
+    "queryHash": "EFEB6015",
+    "planCacheKey": "71CAF67B",
+    "queryShapeHash": "E2B5F0B7EA65FA6F24DE930FE6D2CAE7E99F5E73BEC915D980F4790466000F0C",
+    "queryFramework": "sbe",
+    "locks": {
+      "Global": {
+        "acquireCount": {
+          "r": 2
+        }
+      }
+    },
+    "flowControl": {},
+    "storage": {
+      "timeWaitingMicros": {
+        "storageEngineMicros": 76
+      }
+    },
+    "responseLength": 214,
+    "protocol": "op_msg",
+    "millis": 10,
+    "planSummary": "IXSCAN { receiverId: 1, senderId: 1, createdAt: -1, _id: -1 }",
+    "planningTimeMicros": 8632,
+    "ts": "2026-11-25T18:29:25.111Z",
+    "client": "127.0.0.1",
+    "allUsers": [],
+    "user": ""
+  },
+  {
+    "op": "query",
+    "ns": "chatApp_loadtest.groups",
+    "isFromPriorityPortConnection": false,
+    "command": {
+      "find": "groups",
+      "filter": {
+        "_id": "6b072842aaf484a4dd33a3a0",
+        "members": "6b072841aaf484a4dd32dc6c"
+      },
+      "limit": 1,
+      "singleBatch": true,
+      "lsid": {
+        "id": "88071575-7926-4224-99c0-5d15bbd9d62f"
+      },
+      "$db": "chatApp_loadtest"
+    },
+    "opid": 169985,
+    "keysExamined": 1,
+    "docsExamined": 1,
+    "nBatches": 1,
+    "cursorExhausted": true,
+    "numYield": 0,
+    "nreturned": 1,
+    "planCacheShapeHash": "09BBEDC3",
+    "queryHash": "09BBEDC3",
+    "planCacheKey": "5B451562",
+    "queryShapeHash": "B1FAF749BD0EDC0241221854B6AB05A087F4B1CB3640DDEF64E79A45D42C5BA8",
+    "queryFramework": "classic",
+    "locks": {
+      "Global": {
+        "acquireCount": {
+          "r": 2
+        }
+      }
+    },
+    "flowControl": {},
+    "storage": {
+      "timeWaitingMicros": {
+        "storageEngineMicros": 73
+      }
+    },
+    "responseLength": 609,
+    "protocol": "op_msg",
+    "millis": 10,
+    "planSummary": "IXSCAN { _id: 1 }",
+    "planningTimeMicros": 1132,
+    "execStats": {
+      "isCached": false,
+      "stage": "LIMIT",
+      "nReturned": 1,
+      "executionTimeMillisEstimate": 3,
+      "works": 2,
+      "advanced": 1,
+      "needTime": 0,
+      "needYield": 0,
+      "saveState": 0,
+      "restoreState": 0,
+      "isEOF": 1,
+      "limitAmount": 1,
+      "inputStage": {
+        "stage": "FETCH",
+        "filter": {
+          "members": {
+            "$eq": "6b072841aaf484a4dd32dc6c"
+          }
+        },
+        "nReturned": 1,
+        "executionTimeMillisEstimate": 3,
+        "works": 1,
+        "advanced": 1,
+        "needTime": 0,
+        "needYield": 0,
+        "saveState": 0,
+        "restoreState": 0,
+        "isEOF": 0,
+        "docsExamined": 1,
+        "alreadyHasObj": 0,
+        "inputStage": {
+          "stage": "IXSCAN",
+          "nReturned": 1,
+          "executionTimeMillisEstimate": 3,
+          "works": 1,
+          "advanced": 1,
+          "needTime": 0,
+          "needYield": 0,
+          "saveState": 0,
+          "restoreState": 0,
+          "isEOF": 0,
+          "keyPattern": {
+            "_id": 1
+          },
+          "indexName": "_id_",
+          "isMultiKey": false,
+          "isUnique": true,
+          "isSparse": false,
+          "isPartial": false,
+          "indexVersion": 2,
+          "direction": "forward",
+          "indexBounds": {
+            "_id": [
+              "[ObjectId('6b072842aaf484a4dd33a3a0'), ObjectId('6b072842aaf484a4dd33a3a0')]"
+            ]
+          },
+          "keysExamined": 1,
+          "seeks": 1,
+          "dupsTested": 0,
+          "dupsDropped": 0,
+          "peakTrackedMemBytes": 0
+        }
+      }
+    },
+    "ts": "2026-11-25T18:29:42.879Z",
+    "client": "127.0.0.1",
+    "allUsers": [],
+    "user": ""
+  },
+  {
+    "op": "command",
+    "ns": "chatApp_loadtest.messages",
+    "isFromPriorityPortConnection": false,
+    "command": {
+      "aggregate": "messages",
+      "pipeline": [
+        {
+          "$match": {
+            "senderId": "6b072841aaf484a4dd32de07"
+          }
+        },
+        {
+          "$group": {
+            "_id": "$receiverId",
+            "lastMessageTime": {
+              "$max": "$createdAt"
+            }
+          }
+        }
+      ],
+      "cursor": {},
+      "lsid": {
+        "id": "f7ad4ff6-d6be-4c92-997b-78da8b26d15f"
+      },
+      "$db": "chatApp_loadtest"
+    },
+    "opid": 77310,
+    "keysExamined": 35,
+    "docsExamined": 0,
+    "peakTrackedMemBytes": 62,
+    "fromPlanCache": true,
+    "cursorExhausted": true,
+    "numYield": 0,
+    "nreturned": 1,
+    "planCacheShapeHash": "E72782FD",
+    "queryHash": "E72782FD",
+    "planCacheKey": "8AF984E3",
+    "queryShapeHash": "05E053F86C62F03DC2D952B6D21BCB9D8153B046A88E70A91AA72A8EA323BE5E",
+    "queryFramework": "sbe",
+    "locks": {
+      "Global": {
+        "acquireCount": {
+          "r": 2
+        }
+      }
+    },
+    "flowControl": {},
+    "storage": {
+      "timeWaitingMicros": {
+        "storageEngineMicros": 65
+      }
+    },
+    "responseLength": 164,
+    "protocol": "op_msg",
+    "millis": 9,
+    "planSummary": "IXSCAN { senderId: 1, receiverId: 1, createdAt: -1, _id: -1 }",
+    "planningTimeMicros": 8030,
+    "ts": "2026-11-25T18:29:24.322Z",
+    "client": "127.0.0.1",
+    "allUsers": [],
+    "user": ""
+  },
+  {
+    "op": "query",
+    "ns": "chatApp_loadtest.groups",
+    "isFromPriorityPortConnection": false,
+    "command": {
+      "find": "groups",
+      "filter": {
+        "_id": "6b072842aaf484a4dd33a3a0",
+        "members": "6b072841aaf484a4dd32dc6d"
+      },
+      "limit": 1,
+      "singleBatch": true,
+      "lsid": {
+        "id": "9f89740c-2581-42b8-bd13-a2289d905ae8"
+      },
+      "$db": "chatApp_loadtest"
+    },
+    "opid": 298089,
+    "keysExamined": 1,
+    "docsExamined": 1,
+    "nBatches": 1,
+    "cursorExhausted": true,
+    "numYield": 0,
+    "nreturned": 1,
+    "planCacheShapeHash": "09BBEDC3",
+    "queryHash": "09BBEDC3",
+    "planCacheKey": "5B451562",
+    "queryShapeHash": "B1FAF749BD0EDC0241221854B6AB05A087F4B1CB3640DDEF64E79A45D42C5BA8",
+    "queryFramework": "classic",
+    "locks": {
+      "Global": {
+        "acquireCount": {
+          "r": 2
+        }
+      }
+    },
+    "flowControl": {},
+    "storage": {
+      "timeWaitingMicros": {
+        "storageEngineMicros": 3883
+      }
+    },
+    "responseLength": 609,
+    "protocol": "op_msg",
+    "millis": 9,
+    "planSummary": "IXSCAN { _id: 1 }",
+    "planningTimeMicros": 1036,
+    "ts": "2026-11-25T18:30:42.267Z",
+    "client": "127.0.0.1",
+    "allUsers": [],
+    "user": ""
+  },
+  {
+    "op": "command",
+    "ns": "chatApp_loadtest.messages",
+    "isFromPriorityPortConnection": false,
+    "command": {
+      "aggregate": "messages",
+      "pipeline": [
+        {
+          "$match": {
+            "receiverId": "6b072841aaf484a4dd32de07"
+          }
+        },
+        {
+          "$group": {
+            "_id": "$senderId",
+            "lastMessageTime": {
+              "$max": "$createdAt"
+            }
+          }
+        }
+      ],
+      "cursor": {},
+      "lsid": {
+        "id": "549ba3f4-3b6c-4e75-bf8b-e9ce5c6b722e"
+      },
+      "$db": "chatApp_loadtest"
+    },
+    "opid": 92196,
+    "keysExamined": 70,
+    "docsExamined": 0,
+    "peakTrackedMemBytes": 124,
+    "fromPlanCache": true,
+    "cursorExhausted": true,
+    "numYield": 0,
+    "nreturned": 2,
+    "planCacheShapeHash": "EFEB6015",
+    "queryHash": "EFEB6015",
+    "planCacheKey": "71CAF67B",
+    "queryShapeHash": "E2B5F0B7EA65FA6F24DE930FE6D2CAE7E99F5E73BEC915D980F4790466000F0C",
+    "queryFramework": "sbe",
+    "locks": {
+      "Global": {
+        "acquireCount": {
+          "r": 2
+        }
+      }
+    },
+    "flowControl": {},
+    "storage": {
+      "timeWaitingMicros": {
+        "storageEngineMicros": 38
+      }
+    },
+    "responseLength": 214,
+    "protocol": "op_msg",
+    "millis": 8,
+    "planSummary": "IXSCAN { receiverId: 1, senderId: 1, createdAt: -1, _id: -1 }",
+    "planningTimeMicros": 7781,
+    "ts": "2026-11-25T18:29:24.317Z",
+    "client": "127.0.0.1",
+    "allUsers": [],
+    "user": ""
+  },
+  {
+    "op": "command",
+    "ns": "chatApp_loadtest.messages",
+    "isFromPriorityPortConnection": false,
+    "command": {
+      "aggregate": "messages",
+      "pipeline": [
+        {
+          "$match": {
+            "receiverId": "6b072841aaf484a4dd32dea4"
+          }
+        },
+        {
+          "$group": {
+            "_id": "$senderId",
+            "lastMessageTime": {
+              "$max": "$createdAt"
+            }
+          }
+        }
+      ],
+      "cursor": {},
+      "lsid": {
+        "id": "f7ad4ff6-d6be-4c92-997b-78da8b26d15f"
+      },
+      "$db": "chatApp_loadtest"
+    },
+    "opid": 77315,
+    "keysExamined": 0,
+    "docsExamined": 0,
+    "fromPlanCache": true,
+    "cursorExhausted": true,
+    "numYield": 0,
+    "nreturned": 0,
+    "planCacheShapeHash": "EFEB6015",
+    "queryHash": "EFEB6015",
+    "planCacheKey": "71CAF67B",
+    "queryShapeHash": "E2B5F0B7EA65FA6F24DE930FE6D2CAE7E99F5E73BEC915D980F4790466000F0C",
+    "queryFramework": "sbe",
+    "locks": {
+      "Global": {
+        "acquireCount": {
+          "r": 2
+        }
+      }
+    },
+    "flowControl": {},
+    "storage": {
+      "timeWaitingMicros": {
+        "storageEngineMicros": 59
+      }
+    },
+    "responseLength": 114,
+    "protocol": "op_msg",
+    "millis": 8,
+    "planSummary": "IXSCAN { receiverId: 1, senderId: 1, createdAt: -1, _id: -1 }",
+    "planningTimeMicros": 7445,
+    "ts": "2026-11-25T18:29:24.618Z",
+    "client": "127.0.0.1",
+    "allUsers": [],
+    "user": ""
+  },
+  {
+    "op": "query",
+    "ns": "chatApp_loadtest.groupmessages",
+    "isFromPriorityPortConnection": false,
+    "command": {
+      "find": "groupmessages",
+      "filter": {
+        "groupId": "6b072842aaf484a4dd33a3a0"
+      },
+      "sort": {
+        "createdAt": -1,
+        "_id": -1
+      },
+      "skip": 0,
+      "limit": 50,
+      "lsid": {
+        "id": "874ec980-96b3-4029-a772-5e1861b0e540"
+      },
+      "$db": "chatApp_loadtest"
+    },
+    "opid": 171081,
+    "keysExamined": 50,
+    "docsExamined": 50,
+    "nBatches": 1,
+    "cursorExhausted": true,
+    "numYield": 0,
+    "nreturned": 50,
+    "planCacheShapeHash": "B5F3F147",
+    "queryHash": "B5F3F147",
+    "planCacheKey": "03CECC9F",
+    "queryShapeHash": "6F87C17F4AA61190BF92BDA9DA54B6FE1F0B1BDA4B966D207577E7A83CEEF91E",
+    "queryFramework": "classic",
+    "locks": {
+      "Global": {
+        "acquireCount": {
+          "r": 2
+        }
+      }
+    },
+    "flowControl": {},
+    "storage": {
+      "timeWaitingMicros": {
+        "storageEngineMicros": 363
+      }
+    },
+    "responseLength": 11209,
+    "protocol": "op_msg",
+    "millis": 8,
+    "planSummary": "IXSCAN { groupId: 1, createdAt: -1, _id: -1 }",
+    "planningTimeMicros": 2298,
+    "execStats": {
+      "isCached": false,
+      "stage": "LIMIT",
+      "nReturned": 50,
+      "executionTimeMillisEstimate": 0,
+      "works": 51,
+      "advanced": 50,
+      "needTime": 0,
+      "needYield": 0,
+      "saveState": 0,
+      "restoreState": 0,
+      "isEOF": 1,
+      "limitAmount": 50,
+      "inputStage": {
+        "stage": "FETCH",
+        "nReturned": 50,
+        "executionTimeMillisEstimate": 0,
+        "works": 50,
+        "advanced": 50,
+        "needTime": 0,
+        "needYield": 0,
+        "saveState": 0,
+        "restoreState": 0,
+        "isEOF": 0,
+        "docsExamined": 50,
+        "alreadyHasObj": 0,
+        "inputStage": {
+          "stage": "IXSCAN",
+          "nReturned": 50,
+          "executionTimeMillisEstimate": 0,
+          "works": 50,
+          "advanced": 50,
+          "needTime": 0,
+          "needYield": 0,
+          "saveState": 0,
+          "restoreState": 0,
+          "isEOF": 0,
+          "keyPattern": {
+            "groupId": 1,
+            "createdAt": -1,
+            "_id": -1
+          },
+          "indexName": "groupId_1_createdAt_-1__id_-1",
+          "isMultiKey": false,
+          "multiKeyPaths": {
+            "groupId": [],
+            "createdAt": [],
+            "_id": []
+          },
+          "isUnique": false,
+          "isSparse": false,
+          "isPartial": false,
+          "indexVersion": 2,
+          "direction": "forward",
+          "indexBounds": {
+            "groupId": [
+              "[ObjectId('6b072842aaf484a4dd33a3a0'), ObjectId('6b072842aaf484a4dd33a3a0')]"
+            ],
+            "createdAt": [
+              "[MaxKey, MinKey]"
+            ],
+            "_id": [
+              "[MaxKey, MinKey]"
+            ]
+          },
+          "keysExamined": 50,
+          "seeks": 1,
+          "dupsTested": 0,
+          "dupsDropped": 0,
+          "peakTrackedMemBytes": 0
+        }
+      }
+    },
+    "ts": "2026-11-25T18:29:45.029Z",
+    "client": "127.0.0.1",
+    "allUsers": [],
+    "user": ""
+  },
+  {
+    "op": "query",
+    "ns": "chatApp_loadtest.groupmessages",
+    "isFromPriorityPortConnection": false,
+    "command": {
+      "find": "groupmessages",
+      "filter": {
+        "groupId": "6b072842aaf484a4dd33a3a0"
+      },
+      "sort": {
+        "createdAt": -1,
+        "_id": -1
+      },
+      "skip": 0,
+      "limit": 50,
+      "lsid": {
+        "id": "cd850d19-3a82-460b-8196-8ec907408bdb"
+      },
+      "$db": "chatApp_loadtest"
+    },
+    "opid": 209928,
+    "keysExamined": 50,
+    "docsExamined": 50,
+    "nBatches": 1,
+    "cursorExhausted": true,
+    "numYield": 0,
+    "nreturned": 50,
+    "planCacheShapeHash": "B5F3F147",
+    "queryHash": "B5F3F147",
+    "planCacheKey": "03CECC9F",
+    "queryShapeHash": "6F87C17F4AA61190BF92BDA9DA54B6FE1F0B1BDA4B966D207577E7A83CEEF91E",
+    "queryFramework": "classic",
+    "locks": {
+      "Global": {
+        "acquireCount": {
+          "r": 2
+        }
+      }
+    },
+    "flowControl": {},
+    "storage": {
+      "timeWaitingMicros": {
+        "storageEngineMicros": 53
+      }
+    },
+    "responseLength": 11209,
+    "protocol": "op_msg",
+    "millis": 8,
+    "planSummary": "IXSCAN { groupId: 1, createdAt: -1, _id: -1 }",
+    "planningTimeMicros": 4538,
+    "execStats": {
+      "isCached": false,
+      "stage": "LIMIT",
+      "nReturned": 50,
+      "executionTimeMillisEstimate": 0,
+      "works": 51,
+      "advanced": 50,
+      "needTime": 0,
+      "needYield": 0,
+      "saveState": 0,
+      "restoreState": 0,
+      "isEOF": 1,
+      "limitAmount": 50,
+      "inputStage": {
+        "stage": "FETCH",
+        "nReturned": 50,
+        "executionTimeMillisEstimate": 0,
+        "works": 50,
+        "advanced": 50,
+        "needTime": 0,
+        "needYield": 0,
+        "saveState": 0,
+        "restoreState": 0,
+        "isEOF": 0,
+        "docsExamined": 50,
+        "alreadyHasObj": 0,
+        "inputStage": {
+          "stage": "IXSCAN",
+          "nReturned": 50,
+          "executionTimeMillisEstimate": 0,
+          "works": 50,
+          "advanced": 50,
+          "needTime": 0,
+          "needYield": 0,
+          "saveState": 0,
+          "restoreState": 0,
+          "isEOF": 0,
+          "keyPattern": {
+            "groupId": 1,
+            "createdAt": -1,
+            "_id": -1
+          },
+          "indexName": "groupId_1_createdAt_-1__id_-1",
+          "isMultiKey": false,
+          "multiKeyPaths": {
+            "groupId": [],
+            "createdAt": [],
+            "_id": []
+          },
+          "isUnique": false,
+          "isSparse": false,
+          "isPartial": false,
+          "indexVersion": 2,
+          "direction": "forward",
+          "indexBounds": {
+            "groupId": [
+              "[ObjectId('6b072842aaf484a4dd33a3a0'), ObjectId('6b072842aaf484a4dd33a3a0')]"
+            ],
+            "createdAt": [
+              "[MaxKey, MinKey]"
+            ],
+            "_id": [
+              "[MaxKey, MinKey]"
+            ]
+          },
+          "keysExamined": 50,
+          "seeks": 1,
+          "dupsTested": 0,
+          "dupsDropped": 0,
+          "peakTrackedMemBytes": 0
+        }
+      }
+    },
+    "ts": "2026-11-25T18:29:54.166Z",
+    "client": "127.0.0.1",
+    "allUsers": [],
+    "user": ""
+  },
+  {
+    "op": "query",
+    "ns": "chatApp_loadtest.groups",
+    "isFromPriorityPortConnection": false,
+    "command": {
+      "find": "groups",
+      "filter": {
+        "_id": "6b072842aaf484a4dd33a3a0",
+        "members": "6b072841aaf484a4dd32dc77"
+      },
+      "limit": 1,
+      "singleBatch": true,
+      "lsid": {
+        "id": "6c8f31e9-8f80-48bf-8668-8a5ee3d2d2ac"
+      },
+      "$db": "chatApp_loadtest"
+    },
+    "opid": 203792,
+    "keysExamined": 1,
+    "docsExamined": 1,
+    "nBatches": 1,
+    "cursorExhausted": true,
+    "numYield": 0,
+    "nreturned": 1,
+    "planCacheShapeHash": "09BBEDC3",
+    "queryHash": "09BBEDC3",
+    "planCacheKey": "5B451562",
+    "queryShapeHash": "B1FAF749BD0EDC0241221854B6AB05A087F4B1CB3640DDEF64E79A45D42C5BA8",
+    "queryFramework": "classic",
+    "locks": {
+      "Global": {
+        "acquireCount": {
+          "r": 2
+        }
+      }
+    },
+    "flowControl": {},
+    "storage": {
+      "timeWaitingMicros": {
+        "storageEngineMicros": 98
+      }
+    },
+    "responseLength": 609,
+    "protocol": "op_msg",
+    "millis": 8,
+    "planSummary": "IXSCAN { _id: 1 }",
+    "planningTimeMicros": 2166,
+    "execStats": {
+      "isCached": false,
+      "stage": "LIMIT",
+      "nReturned": 1,
+      "executionTimeMillisEstimate": 0,
+      "works": 2,
+      "advanced": 1,
+      "needTime": 0,
+      "needYield": 0,
+      "saveState": 0,
+      "restoreState": 0,
+      "isEOF": 1,
+      "limitAmount": 1,
+      "inputStage": {
+        "stage": "FETCH",
+        "filter": {
+          "members": {
+            "$eq": "6b072841aaf484a4dd32dc77"
+          }
+        },
+        "nReturned": 1,
+        "executionTimeMillisEstimate": 0,
+        "works": 1,
+        "advanced": 1,
+        "needTime": 0,
+        "needYield": 0,
+        "saveState": 0,
+        "restoreState": 0,
+        "isEOF": 0,
+        "docsExamined": 1,
+        "alreadyHasObj": 0,
+        "inputStage": {
+          "stage": "IXSCAN",
+          "nReturned": 1,
+          "executionTimeMillisEstimate": 0,
+          "works": 1,
+          "advanced": 1,
+          "needTime": 0,
+          "needYield": 0,
+          "saveState": 0,
+          "restoreState": 0,
+          "isEOF": 0,
+          "keyPattern": {
+            "_id": 1
+          },
+          "indexName": "_id_",
+          "isMultiKey": false,
+          "isUnique": true,
+          "isSparse": false,
+          "isPartial": false,
+          "indexVersion": 2,
+          "direction": "forward",
+          "indexBounds": {
+            "_id": [
+              "[ObjectId('6b072842aaf484a4dd33a3a0'), ObjectId('6b072842aaf484a4dd33a3a0')]"
+            ]
+          },
+          "keysExamined": 1,
+          "seeks": 1,
+          "dupsTested": 0,
+          "dupsDropped": 0,
+          "peakTrackedMemBytes": 0
+        }
+      }
+    },
+    "ts": "2026-11-25T18:29:55.252Z",
+    "client": "127.0.0.1",
+    "allUsers": [],
+    "user": ""
+  },
+  {
+    "op": "query",
+    "ns": "chatApp_loadtest.groupmessages",
+    "isFromPriorityPortConnection": false,
+    "command": {
+      "find": "groupmessages",
+      "filter": {
+        "groupId": "6b072842aaf484a4dd33a3a0"
+      },
+      "sort": {
+        "createdAt": -1,
+        "_id": -1
+      },
+      "skip": 0,
+      "limit": 50,
+      "lsid": {
+        "id": "c643217d-2ac1-4acf-bb92-0ebc7264c800"
+      },
+      "$db": "chatApp_loadtest"
+    },
+    "opid": 360008,
+    "keysExamined": 50,
+    "docsExamined": 50,
+    "nBatches": 1,
+    "cursorExhausted": true,
+    "numYield": 0,
+    "nreturned": 50,
+    "planCacheShapeHash": "B5F3F147",
+    "queryHash": "B5F3F147",
+    "planCacheKey": "03CECC9F",
+    "queryShapeHash": "6F87C17F4AA61190BF92BDA9DA54B6FE1F0B1BDA4B966D207577E7A83CEEF91E",
+    "queryFramework": "classic",
+    "locks": {
+      "Global": {
+        "acquireCount": {
+          "r": 2
+        }
+      }
+    },
+    "flowControl": {},
+    "storage": {
+      "timeWaitingMicros": {
+        "storageEngineMicros": 68
+      }
+    },
+    "responseLength": 11209,
+    "protocol": "op_msg",
+    "millis": 8,
+    "planSummary": "IXSCAN { groupId: 1, createdAt: -1, _id: -1 }",
+    "planningTimeMicros": 5249,
+    "execStats": {
+      "isCached": false,
+      "stage": "LIMIT",
+      "nReturned": 50,
+      "executionTimeMillisEstimate": 0,
+      "works": 51,
+      "advanced": 50,
+      "needTime": 0,
+      "needYield": 0,
+      "saveState": 0,
+      "restoreState": 0,
+      "isEOF": 1,
+      "limitAmount": 50,
+      "inputStage": {
+        "stage": "FETCH",
+        "nReturned": 50,
+        "executionTimeMillisEstimate": 0,
+        "works": 50,
+        "advanced": 50,
+        "needTime": 0,
+        "needYield": 0,
+        "saveState": 0,
+        "restoreState": 0,
+        "isEOF": 0,
+        "docsExamined": 50,
+        "alreadyHasObj": 0,
+        "inputStage": {
+          "stage": "IXSCAN",
+          "nReturned": 50,
+          "executionTimeMillisEstimate": 0,
+          "works": 50,
+          "advanced": 50,
+          "needTime": 0,
+          "needYield": 0,
+          "saveState": 0,
+          "restoreState": 0,
+          "isEOF": 0,
+          "keyPattern": {
+            "groupId": 1,
+            "createdAt": -1,
+            "_id": -1
+          },
+          "indexName": "groupId_1_createdAt_-1__id_-1",
+          "isMultiKey": false,
+          "multiKeyPaths": {
+            "groupId": [],
+            "createdAt": [],
+            "_id": []
+          },
+          "isUnique": false,
+          "isSparse": false,
+          "isPartial": false,
+          "indexVersion": 2,
+          "direction": "forward",
+          "indexBounds": {
+            "groupId": [
+              "[ObjectId('6b072842aaf484a4dd33a3a0'), ObjectId('6b072842aaf484a4dd33a3a0')]"
+            ],
+            "createdAt": [
+              "[MaxKey, MinKey]"
+            ],
+            "_id": [
+              "[MaxKey, MinKey]"
+            ]
+          },
+          "keysExamined": 50,
+          "seeks": 1,
+          "dupsTested": 0,
+          "dupsDropped": 0,
+          "peakTrackedMemBytes": 0
+        }
+      }
+    },
+    "ts": "2026-11-25T18:31:00.473Z",
+    "client": "127.0.0.1",
+    "allUsers": [],
+    "user": ""
+  },
+  {
+    "op": "command",
+    "ns": "chatApp_loadtest.messages",
+    "isFromPriorityPortConnection": false,
+    "command": {
+      "aggregate": "messages",
+      "pipeline": [
+        {
+          "$match": {
+            "senderId": "6b072841aaf484a4dd32de08"
+          }
+        },
+        {
+          "$group": {
+            "_id": "$receiverId",
+            "lastMessageTime": {
+              "$max": "$createdAt"
+            }
+          }
+        }
+      ],
+      "cursor": {},
+      "lsid": {
+        "id": "642fa72b-33cc-4ad5-99b1-1ceba419f86e"
+      },
+      "$db": "chatApp_loadtest"
+    },
+    "opid": 91150,
+    "keysExamined": 35,
+    "docsExamined": 0,
+    "peakTrackedMemBytes": 62,
+    "fromPlanCache": true,
+    "cursorExhausted": true,
+    "numYield": 0,
+    "nreturned": 1,
+    "planCacheShapeHash": "E72782FD",
+    "queryHash": "E72782FD",
+    "planCacheKey": "8AF984E3",
+    "queryShapeHash": "05E053F86C62F03DC2D952B6D21BCB9D8153B046A88E70A91AA72A8EA323BE5E",
+    "queryFramework": "sbe",
+    "locks": {
+      "Global": {
+        "acquireCount": {
+          "r": 2
+        }
+      }
+    },
+    "flowControl": {},
+    "storage": {
+      "timeWaitingMicros": {
+        "storageEngineMicros": 67
+      }
+    },
+    "responseLength": 164,
+    "protocol": "op_msg",
+    "millis": 7,
+    "planSummary": "IXSCAN { senderId: 1, receiverId: 1, createdAt: -1, _id: -1 }",
+    "planningTimeMicros": 6428,
+    "ts": "2026-11-25T18:29:24.915Z",
+    "client": "127.0.0.1",
+    "allUsers": [],
+    "user": ""
+  },
+  {
+    "op": "query",
+    "ns": "chatApp_loadtest.groupmessages",
+    "isFromPriorityPortConnection": false,
+    "command": {
+      "find": "groupmessages",
+      "filter": {
+        "groupId": "6b072842aaf484a4dd33a3a0"
+      },
+      "sort": {
+        "createdAt": -1,
+        "_id": -1
+      },
+      "skip": 0,
+      "limit": 50,
+      "lsid": {
+        "id": "bb624376-2b4e-4e07-acd2-b0e511395aa4"
+      },
+      "$db": "chatApp_loadtest"
+    },
+    "opid": 262318,
+    "keysExamined": 50,
+    "docsExamined": 50,
+    "nBatches": 1,
+    "cursorExhausted": true,
+    "numYield": 0,
+    "nreturned": 50,
+    "planCacheShapeHash": "B5F3F147",
+    "queryHash": "B5F3F147",
+    "planCacheKey": "03CECC9F",
+    "queryShapeHash": "6F87C17F4AA61190BF92BDA9DA54B6FE1F0B1BDA4B966D207577E7A83CEEF91E",
+    "queryFramework": "classic",
+    "locks": {
+      "Global": {
+        "acquireCount": {
+          "r": 2
+        }
+      }
+    },
+    "flowControl": {},
+    "storage": {
+      "timeWaitingMicros": {
+        "storageEngineMicros": 173
+      }
+    },
+    "responseLength": 11209,
+    "protocol": "op_msg",
+    "millis": 7,
+    "planSummary": "IXSCAN { groupId: 1, createdAt: -1, _id: -1 }",
+    "planningTimeMicros": 2613,
+    "ts": "2026-11-25T18:30:25.671Z",
+    "client": "127.0.0.1",
+    "allUsers": [],
+    "user": ""
+  },
+  {
+    "op": "command",
+    "ns": "chatApp_loadtest.messages",
+    "isFromPriorityPortConnection": false,
+    "command": {
+      "aggregate": "messages",
+      "pipeline": [
+        {
+          "$match": {
+            "senderId": "6b072841aaf484a4dd32dda3"
+          }
+        },
+        {
+          "$group": {
+            "_id": "$receiverId",
+            "lastMessageTime": {
+              "$max": "$createdAt"
+            }
+          }
+        }
+      ],
+      "cursor": {},
+      "lsid": {
+        "id": "806dd069-acce-406b-9a33-a6f0415e2a4a"
+      },
+      "$db": "chatApp_loadtest"
+    },
+    "opid": 94217,
+    "keysExamined": 35,
+    "docsExamined": 0,
+    "peakTrackedMemBytes": 62,
+    "fromPlanCache": true,
+    "cursorExhausted": true,
+    "numYield": 0,
+    "nreturned": 1,
+    "planCacheShapeHash": "E72782FD",
+    "queryHash": "E72782FD",
+    "planCacheKey": "8AF984E3",
+    "queryShapeHash": "05E053F86C62F03DC2D952B6D21BCB9D8153B046A88E70A91AA72A8EA323BE5E",
+    "queryFramework": "sbe",
+    "locks": {
+      "Global": {
+        "acquireCount": {
+          "r": 2
+        }
+      }
+    },
+    "flowControl": {},
+    "storage": {
+      "timeWaitingMicros": {
+        "storageEngineMicros": 72
+      }
+    },
+    "responseLength": 164,
+    "protocol": "op_msg",
+    "millis": 7,
+    "planSummary": "IXSCAN { senderId: 1, receiverId: 1, createdAt: -1, _id: -1 }",
+    "planningTimeMicros": 6714,
+    "ts": "2026-11-25T18:29:25.741Z",
+    "client": "127.0.0.1",
+    "allUsers": [],
+    "user": ""
+  },
+  {
+    "op": "command",
+    "ns": "chatApp_loadtest.messages",
+    "isFromPriorityPortConnection": false,
+    "command": {
+      "aggregate": "messages",
+      "pipeline": [
+        {
+          "$match": {
+            "senderId": "6b072841aaf484a4dd32de8b"
+          }
+        },
+        {
+          "$group": {
+            "_id": "$receiverId",
+            "lastMessageTime": {
+              "$max": "$createdAt"
+            }
+          }
+        }
+      ],
+      "cursor": {},
+      "lsid": {
+        "id": "6c224cb6-dadf-4f95-97fd-c338b1da7a28"
+      },
+      "$db": "chatApp_loadtest"
+    },
+    "opid": 85063,
+    "keysExamined": 35,
+    "docsExamined": 0,
+    "peakTrackedMemBytes": 62,
+    "fromPlanCache": true,
+    "cursorExhausted": true,
+    "numYield": 0,
+    "nreturned": 1,
+    "planCacheShapeHash": "E72782FD",
+    "queryHash": "E72782FD",
+    "planCacheKey": "8AF984E3",
+    "queryShapeHash": "05E053F86C62F03DC2D952B6D21BCB9D8153B046A88E70A91AA72A8EA323BE5E",
+    "queryFramework": "sbe",
+    "locks": {
+      "Global": {
+        "acquireCount": {
+          "r": 2
+        }
+      }
+    },
+    "flowControl": {},
+    "storage": {
+      "timeWaitingMicros": {
+        "storageEngineMicros": 47
+      }
+    },
+    "responseLength": 164,
+    "protocol": "op_msg",
+    "millis": 7,
+    "planSummary": "IXSCAN { senderId: 1, receiverId: 1, createdAt: -1, _id: -1 }",
+    "planningTimeMicros": 6679,
+    "ts": "2026-11-25T18:29:25.044Z",
+    "client": "127.0.0.1",
+    "allUsers": [],
+    "user": ""
+  },
+  {
+    "op": "command",
+    "ns": "chatApp_loadtest.messages",
+    "isFromPriorityPortConnection": false,
+    "command": {
+      "aggregate": "messages",
+      "pipeline": [
+        {
+          "$match": {
+            "senderId": "6b072841aaf484a4dd32dc8d"
+          }
+        },
+        {
+          "$group": {
+            "_id": "$receiverId",
+            "lastMessageTime": {
+              "$max": "$createdAt"
+            }
+          }
+        }
+      ],
+      "cursor": {},
+      "lsid": {
+        "id": "82b1dff8-495d-474d-a5df-7ca0e6d19c68"
+      },
+      "$db": "chatApp_loadtest"
+    },
+    "opid": 80035,
+    "keysExamined": 335,
+    "docsExamined": 0,
+    "peakTrackedMemBytes": 1364,
+    "fromPlanCache": true,
+    "cursorExhausted": true,
+    "numYield": 0,
+    "nreturned": 26,
+    "planCacheShapeHash": "E72782FD",
+    "queryHash": "E72782FD",
+    "planCacheKey": "8AF984E3",
+    "queryShapeHash": "05E053F86C62F03DC2D952B6D21BCB9D8153B046A88E70A91AA72A8EA323BE5E",
+    "queryFramework": "sbe",
+    "locks": {
+      "Global": {
+        "acquireCount": {
+          "r": 2
+        }
+      }
+    },
+    "flowControl": {},
+    "storage": {
+      "timeWaitingMicros": {
+        "storageEngineMicros": 62
+      }
+    },
+    "responseLength": 1430,
+    "protocol": "op_msg",
+    "millis": 7,
+    "planSummary": "IXSCAN { senderId: 1, receiverId: 1, createdAt: -1, _id: -1 }",
+    "planningTimeMicros": 6986,
+    "ts": "2026-11-25T18:29:25.810Z",
+    "client": "127.0.0.1",
+    "allUsers": [],
+    "user": ""
+  },
+  {
+    "op": "command",
+    "ns": "chatApp_loadtest.messages",
+    "isFromPriorityPortConnection": false,
+    "command": {
+      "aggregate": "messages",
+      "pipeline": [
+        {
+          "$match": {
+            "senderId": "6b072841aaf484a4dd32de26"
+          }
+        },
+        {
+          "$group": {
+            "_id": "$receiverId",
+            "lastMessageTime": {
+              "$max": "$createdAt"
+            }
+          }
+        }
+      ],
+      "cursor": {},
+      "lsid": {
+        "id": "642fa72b-33cc-4ad5-99b1-1ceba419f86e"
+      },
+      "$db": "chatApp_loadtest"
+    },
+    "opid": 91154,
+    "keysExamined": 35,
+    "docsExamined": 0,
+    "peakTrackedMemBytes": 62,
+    "fromPlanCache": true,
+    "cursorExhausted": true,
+    "numYield": 0,
+    "nreturned": 1,
+    "planCacheShapeHash": "E72782FD",
+    "queryHash": "E72782FD",
+    "planCacheKey": "8AF984E3",
+    "queryShapeHash": "05E053F86C62F03DC2D952B6D21BCB9D8153B046A88E70A91AA72A8EA323BE5E",
+    "queryFramework": "sbe",
+    "locks": {
+      "Global": {
+        "acquireCount": {
+          "r": 2
+        }
+      }
+    },
+    "flowControl": {},
+    "storage": {
+      "timeWaitingMicros": {
+        "storageEngineMicros": 44
+      }
+    },
+    "responseLength": 164,
+    "protocol": "op_msg",
+    "millis": 7,
+    "planSummary": "IXSCAN { senderId: 1, receiverId: 1, createdAt: -1, _id: -1 }",
+    "planningTimeMicros": 6570,
+    "ts": "2026-11-25T18:29:25.902Z",
+    "client": "127.0.0.1",
+    "allUsers": [],
+    "user": ""
+  },
+  {
+    "op": "command",
+    "ns": "chatApp_loadtest.messages",
+    "isFromPriorityPortConnection": false,
+    "command": {
+      "aggregate": "messages",
+      "pipeline": [
+        {
+          "$match": {
+            "receiverId": "6b072841aaf484a4dd32de8b"
+          }
+        },
+        {
+          "$group": {
+            "_id": "$senderId",
+            "lastMessageTime": {
+              "$max": "$createdAt"
+            }
+          }
+        }
+      ],
+      "cursor": {},
+      "lsid": {
+        "id": "9581d69b-60e6-4a89-9df4-275f8b5d00be"
+      },
+      "$db": "chatApp_loadtest"
+    },
+    "opid": 95252,
+    "keysExamined": 70,
+    "docsExamined": 0,
+    "peakTrackedMemBytes": 124,
+    "fromPlanCache": true,
+    "cursorExhausted": true,
+    "numYield": 0,
+    "nreturned": 2,
+    "planCacheShapeHash": "EFEB6015",
+    "queryHash": "EFEB6015",
+    "planCacheKey": "71CAF67B",
+    "queryShapeHash": "E2B5F0B7EA65FA6F24DE930FE6D2CAE7E99F5E73BEC915D980F4790466000F0C",
+    "queryFramework": "sbe",
+    "locks": {
+      "Global": {
+        "acquireCount": {
+          "r": 2
+        }
+      }
+    },
+    "flowControl": {},
+    "storage": {
+      "timeWaitingMicros": {
+        "storageEngineMicros": 44
+      }
+    },
+    "responseLength": 214,
+    "protocol": "op_msg",
+    "millis": 7,
+    "planSummary": "IXSCAN { receiverId: 1, senderId: 1, createdAt: -1, _id: -1 }",
+    "planningTimeMicros": 6679,
+    "ts": "2026-11-25T18:29:25.041Z",
+    "client": "127.0.0.1",
+    "allUsers": [],
+    "user": ""
+  },
+  {
+    "op": "command",
+    "ns": "chatApp_loadtest.messages",
+    "isFromPriorityPortConnection": false,
+    "command": {
+      "aggregate": "messages",
+      "pipeline": [
+        {
+          "$match": {
+            "receiverId": "6b072841aaf484a4dd32dda3"
+          }
+        },
+        {
+          "$group": {
+            "_id": "$senderId",
+            "lastMessageTime": {
+              "$max": "$createdAt"
+            }
+          }
+        }
+      ],
+      "cursor": {},
+      "lsid": {
+        "id": "9581d69b-60e6-4a89-9df4-275f8b5d00be"
+      },
+      "$db": "chatApp_loadtest"
+    },
+    "opid": 95254,
+    "keysExamined": 70,
+    "docsExamined": 0,
+    "peakTrackedMemBytes": 124,
+    "fromPlanCache": true,
+    "cursorExhausted": true,
+    "numYield": 0,
+    "nreturned": 2,
+    "planCacheShapeHash": "EFEB6015",
+    "queryHash": "EFEB6015",
+    "planCacheKey": "71CAF67B",
+    "queryShapeHash": "E2B5F0B7EA65FA6F24DE930FE6D2CAE7E99F5E73BEC915D980F4790466000F0C",
+    "queryFramework": "sbe",
+    "locks": {
+      "Global": {
+        "acquireCount": {
+          "r": 2
+        }
+      }
+    },
+    "flowControl": {},
+    "storage": {
+      "timeWaitingMicros": {
+        "storageEngineMicros": 47
+      }
+    },
+    "responseLength": 214,
+    "protocol": "op_msg",
+    "millis": 7,
+    "planSummary": "IXSCAN { receiverId: 1, senderId: 1, createdAt: -1, _id: -1 }",
+    "planningTimeMicros": 5949,
+    "ts": "2026-11-25T18:29:25.741Z",
+    "client": "127.0.0.1",
+    "allUsers": [],
+    "user": ""
+  },
+  {
+    "op": "command",
+    "ns": "chatApp_loadtest.messages",
+    "isFromPriorityPortConnection": false,
+    "command": {
+      "aggregate": "messages",
+      "pipeline": [
+        {
+          "$match": {
+            "senderId": "6b072841aaf484a4dd32de63"
+          }
+        },
+        {
+          "$group": {
+            "_id": "$receiverId",
+            "lastMessageTime": {
+              "$max": "$createdAt"
+            }
+          }
+        }
+      ],
+      "cursor": {},
+      "lsid": {
+        "id": "e61670fb-3426-4b7a-8b0f-b0a1669229cb"
+      },
+      "$db": "chatApp_loadtest"
+    },
+    "opid": 96267,
+    "keysExamined": 35,
+    "docsExamined": 0,
+    "peakTrackedMemBytes": 62,
+    "fromPlanCache": true,
+    "cursorExhausted": true,
+    "numYield": 0,
+    "nreturned": 1,
+    "planCacheShapeHash": "E72782FD",
+    "queryHash": "E72782FD",
+    "planCacheKey": "8AF984E3",
+    "queryShapeHash": "05E053F86C62F03DC2D952B6D21BCB9D8153B046A88E70A91AA72A8EA323BE5E",
+    "queryFramework": "sbe",
+    "locks": {
+      "Global": {
+        "acquireCount": {
+          "r": 2
+        }
+      }
+    },
+    "flowControl": {},
+    "storage": {
+      "timeWaitingMicros": {
+        "storageEngineMicros": 91
+      }
+    },
+    "responseLength": 164,
+    "protocol": "op_msg",
+    "millis": 7,
+    "planSummary": "IXSCAN { senderId: 1, receiverId: 1, createdAt: -1, _id: -1 }",
+    "planningTimeMicros": 5952,
+    "ts": "2026-11-25T18:29:24.080Z",
+    "client": "127.0.0.1",
+    "allUsers": [],
+    "user": ""
+  },
+  {
+    "op": "command",
+    "ns": "chatApp_loadtest.messages",
+    "isFromPriorityPortConnection": false,
+    "command": {
+      "aggregate": "messages",
+      "pipeline": [
+        {
+          "$match": {
+            "receiverId": "6b072841aaf484a4dd32de97"
+          }
+        },
+        {
+          "$group": {
+            "_id": "$senderId",
+            "lastMessageTime": {
+              "$max": "$createdAt"
+            }
+          }
+        }
+      ],
+      "cursor": {},
+      "lsid": {
+        "id": "f7ad4ff6-d6be-4c92-997b-78da8b26d15f"
+      },
+      "$db": "chatApp_loadtest"
+    },
+    "opid": 77317,
+    "keysExamined": 70,
+    "docsExamined": 0,
+    "peakTrackedMemBytes": 124,
+    "fromPlanCache": true,
+    "cursorExhausted": true,
+    "numYield": 0,
+    "nreturned": 2,
+    "planCacheShapeHash": "EFEB6015",
+    "queryHash": "EFEB6015",
+    "planCacheKey": "71CAF67B",
+    "queryShapeHash": "E2B5F0B7EA65FA6F24DE930FE6D2CAE7E99F5E73BEC915D980F4790466000F0C",
+    "queryFramework": "sbe",
+    "locks": {
+      "Global": {
+        "acquireCount": {
+          "r": 2
+        }
+      }
+    },
+    "flowControl": {},
+    "storage": {
+      "timeWaitingMicros": {
+        "storageEngineMicros": 100
+      }
+    },
+    "responseLength": 214,
+    "protocol": "op_msg",
+    "millis": 7,
+    "planSummary": "IXSCAN { receiverId: 1, senderId: 1, createdAt: -1, _id: -1 }",
+    "planningTimeMicros": 5891,
+    "ts": "2026-11-25T18:29:24.838Z",
+    "client": "127.0.0.1",
+    "allUsers": [],
+    "user": ""
+  },
+  {
+    "op": "command",
+    "ns": "chatApp_loadtest.messages",
+    "isFromPriorityPortConnection": false,
+    "command": {
+      "aggregate": "messages",
+      "pipeline": [
+        {
+          "$match": {
+            "receiverId": "6b072841aaf484a4dd32ddec"
+          }
+        },
+        {
+          "$group": {
+            "_id": "$senderId",
+            "lastMessageTime": {
+              "$max": "$createdAt"
+            }
+          }
+        }
+      ],
+      "cursor": {},
+      "lsid": {
+        "id": "f7ad4ff6-d6be-4c92-997b-78da8b26d15f"
+      },
+      "$db": "chatApp_loadtest"
+    },
+    "opid": 77302,
+    "keysExamined": 0,
+    "docsExamined": 0,
+    "fromPlanCache": true,
+    "cursorExhausted": true,
+    "numYield": 0,
+    "nreturned": 0,
+    "planCacheShapeHash": "EFEB6015",
+    "queryHash": "EFEB6015",
+    "planCacheKey": "71CAF67B",
+    "queryShapeHash": "E2B5F0B7EA65FA6F24DE930FE6D2CAE7E99F5E73BEC915D980F4790466000F0C",
+    "queryFramework": "sbe",
+    "locks": {
+      "Global": {
+        "acquireCount": {
+          "r": 2
+        }
+      }
+    },
+    "flowControl": {},
+    "storage": {
+      "timeWaitingMicros": {
+        "storageEngineMicros": 36
+      }
+    },
+    "responseLength": 114,
+    "protocol": "op_msg",
+    "millis": 7,
+    "planSummary": "IXSCAN { receiverId: 1, senderId: 1, createdAt: -1, _id: -1 }",
+    "planningTimeMicros": 5279,
+    "ts": "2026-11-25T18:29:22.633Z",
+    "client": "127.0.0.1",
+    "allUsers": [],
+    "user": ""
+  },
+  {
+    "op": "command",
+    "ns": "chatApp_loadtest.messages",
+    "isFromPriorityPortConnection": false,
+    "command": {
+      "aggregate": "messages",
+      "pipeline": [
+        {
+          "$match": {
+            "senderId": "6b072841aaf484a4dd32de8a"
+          }
+        },
+        {
+          "$group": {
+            "_id": "$receiverId",
+            "lastMessageTime": {
+              "$max": "$createdAt"
+            }
+          }
+        }
+      ],
+      "cursor": {},
+      "lsid": {
+        "id": "82b1dff8-495d-474d-a5df-7ca0e6d19c68"
+      },
+      "$db": "chatApp_loadtest"
+    },
+    "opid": 80029,
+    "keysExamined": 35,
+    "docsExamined": 0,
+    "peakTrackedMemBytes": 62,
+    "fromPlanCache": true,
+    "cursorExhausted": true,
+    "numYield": 0,
+    "nreturned": 1,
+    "planCacheShapeHash": "E72782FD",
+    "queryHash": "E72782FD",
+    "planCacheKey": "8AF984E3",
+    "queryShapeHash": "05E053F86C62F03DC2D952B6D21BCB9D8153B046A88E70A91AA72A8EA323BE5E",
+    "queryFramework": "sbe",
+    "locks": {
+      "Global": {
+        "acquireCount": {
+          "r": 2
+        }
+      }
+    },
+    "flowControl": {},
+    "storage": {
+      "timeWaitingMicros": {
+        "storageEngineMicros": 61
+      }
+    },
+    "responseLength": 164,
+    "protocol": "op_msg",
+    "millis": 7,
+    "planSummary": "IXSCAN { senderId: 1, receiverId: 1, createdAt: -1, _id: -1 }",
+    "planningTimeMicros": 5940,
+    "ts": "2026-11-25T18:29:24.115Z",
+    "client": "127.0.0.1",
+    "allUsers": [],
+    "user": ""
+  },
+  {
+    "op": "command",
+    "ns": "chatApp_loadtest.messages",
+    "isFromPriorityPortConnection": false,
+    "command": {
+      "aggregate": "messages",
+      "pipeline": [
+        {
+          "$match": {
+            "receiverId": "6b072841aaf484a4dd32dd96"
+          }
+        },
+        {
+          "$group": {
+            "_id": "$senderId",
+            "lastMessageTime": {
+              "$max": "$createdAt"
+            }
+          }
+        }
+      ],
+      "cursor": {},
+      "lsid": {
+        "id": "10819253-c874-44b0-b8bc-e49ce4d04fde"
+      },
+      "$db": "chatApp_loadtest"
+    },
+    "opid": 80037,
+    "keysExamined": 0,
+    "docsExamined": 0,
+    "fromPlanCache": true,
+    "cursorExhausted": true,
+    "numYield": 0,
+    "nreturned": 0,
+    "planCacheShapeHash": "EFEB6015",
+    "queryHash": "EFEB6015",
+    "planCacheKey": "71CAF67B",
+    "queryShapeHash": "E2B5F0B7EA65FA6F24DE930FE6D2CAE7E99F5E73BEC915D980F4790466000F0C",
+    "queryFramework": "sbe",
+    "locks": {
+      "Global": {
+        "acquireCount": {
+          "r": 2
+        }
+      }
+    },
+    "flowControl": {},
+    "storage": {
+      "timeWaitingMicros": {
+        "storageEngineMicros": 649
+      }
+    },
+    "responseLength": 114,
+    "protocol": "op_msg",
+    "millis": 7,
+    "planSummary": "IXSCAN { receiverId: 1, senderId: 1, createdAt: -1, _id: -1 }",
+    "planningTimeMicros": 6814,
+    "ts": "2026-11-25T18:29:25.901Z",
+    "client": "127.0.0.1",
+    "allUsers": [],
+    "user": ""
+  },
+  {
+    "op": "query",
+    "ns": "chatApp_loadtest.groupmessages",
+    "isFromPriorityPortConnection": false,
+    "command": {
+      "find": "groupmessages",
+      "filter": {
+        "groupId": "6b072842aaf484a4dd33a3a0"
+      },
+      "sort": {
+        "createdAt": -1,
+        "_id": -1
+      },
+      "skip": 0,
+      "limit": 50,
+      "lsid": {
+        "id": "1d7cb8e1-6983-45b4-b488-506003b634f6"
+      },
+      "$db": "chatApp_loadtest"
+    },
+    "opid": 171328,
+    "keysExamined": 50,
+    "docsExamined": 50,
+    "nBatches": 1,
+    "cursorExhausted": true,
+    "numYield": 0,
+    "nreturned": 50,
+    "planCacheShapeHash": "B5F3F147",
+    "queryHash": "B5F3F147",
+    "planCacheKey": "03CECC9F",
+    "queryShapeHash": "6F87C17F4AA61190BF92BDA9DA54B6FE1F0B1BDA4B966D207577E7A83CEEF91E",
+    "queryFramework": "classic",
+    "locks": {
+      "Global": {
+        "acquireCount": {
+          "r": 2
+        }
+      }
+    },
+    "flowControl": {},
+    "storage": {
+      "timeWaitingMicros": {
+        "storageEngineMicros": 25783
+      }
+    },
+    "responseLength": 11209,
+    "protocol": "op_msg",
+    "millis": 7,
+    "planSummary": "IXSCAN { groupId: 1, createdAt: -1, _id: -1 }",
+    "planningTimeMicros": 1947,
+    "execStats": {
+      "isCached": false,
+      "stage": "LIMIT",
+      "nReturned": 50,
+      "executionTimeMillisEstimate": 3,
+      "works": 51,
+      "advanced": 50,
+      "needTime": 0,
+      "needYield": 0,
+      "saveState": 0,
+      "restoreState": 0,
+      "isEOF": 1,
+      "limitAmount": 50,
+      "inputStage": {
+        "stage": "FETCH",
+        "nReturned": 50,
+        "executionTimeMillisEstimate": 3,
+        "works": 50,
+        "advanced": 50,
+        "needTime": 0,
+        "needYield": 0,
+        "saveState": 0,
+        "restoreState": 0,
+        "isEOF": 0,
+        "docsExamined": 50,
+        "alreadyHasObj": 0,
+        "inputStage": {
+          "stage": "IXSCAN",
+          "nReturned": 50,
+          "executionTimeMillisEstimate": 0,
+          "works": 50,
+          "advanced": 50,
+          "needTime": 0,
+          "needYield": 0,
+          "saveState": 0,
+          "restoreState": 0,
+          "isEOF": 0,
+          "keyPattern": {
+            "groupId": 1,
+            "createdAt": -1,
+            "_id": -1
+          },
+          "indexName": "groupId_1_createdAt_-1__id_-1",
+          "isMultiKey": false,
+          "multiKeyPaths": {
+            "groupId": [],
+            "createdAt": [],
+            "_id": []
+          },
+          "isUnique": false,
+          "isSparse": false,
+          "isPartial": false,
+          "indexVersion": 2,
+          "direction": "forward",
+          "indexBounds": {
+            "groupId": [
+              "[ObjectId('6b072842aaf484a4dd33a3a0'), ObjectId('6b072842aaf484a4dd33a3a0')]"
+            ],
+            "createdAt": [
+              "[MaxKey, MinKey]"
+            ],
+            "_id": [
+              "[MaxKey, MinKey]"
+            ]
+          },
+          "keysExamined": 50,
+          "seeks": 1,
+          "dupsTested": 0,
+          "dupsDropped": 0,
+          "peakTrackedMemBytes": 0
+        }
+      }
+    },
+    "ts": "2026-11-25T18:29:55.501Z",
+    "client": "127.0.0.1",
+    "allUsers": [],
+    "user": ""
+  },
+  {
+    "op": "query",
+    "ns": "chatApp_loadtest.groupmessages",
+    "isFromPriorityPortConnection": false,
+    "command": {
+      "find": "groupmessages",
+      "filter": {
+        "groupId": "6b072842aaf484a4dd33a3a0"
+      },
+      "sort": {
+        "createdAt": -1,
+        "_id": -1
+      },
+      "skip": 0,
+      "limit": 50,
+      "lsid": {
+        "id": "89dee7f1-b14d-4b59-a09a-5303b9eaeb31"
+      },
+      "$db": "chatApp_loadtest"
+    },
+    "opid": 293978,
+    "keysExamined": 50,
+    "docsExamined": 50,
+    "nBatches": 1,
+    "cursorExhausted": true,
+    "numYield": 0,
+    "nreturned": 50,
+    "planCacheShapeHash": "B5F3F147",
+    "queryHash": "B5F3F147",
+    "planCacheKey": "03CECC9F",
+    "queryShapeHash": "6F87C17F4AA61190BF92BDA9DA54B6FE1F0B1BDA4B966D207577E7A83CEEF91E",
+    "queryFramework": "classic",
+    "locks": {
+      "Global": {
+        "acquireCount": {
+          "r": 2
+        }
+      }
+    },
+    "flowControl": {},
+    "storage": {
+      "timeWaitingMicros": {
+        "storageEngineMicros": 62
+      }
+    },
+    "responseLength": 11209,
+    "protocol": "op_msg",
+    "millis": 7,
+    "planSummary": "IXSCAN { groupId: 1, createdAt: -1, _id: -1 }",
+    "planningTimeMicros": 1095,
+    "execStats": {
+      "isCached": false,
+      "stage": "LIMIT",
+      "nReturned": 50,
+      "executionTimeMillisEstimate": 6,
+      "works": 51,
+      "advanced": 50,
+      "needTime": 0,
+      "needYield": 0,
+      "saveState": 0,
+      "restoreState": 0,
+      "isEOF": 1,
+      "limitAmount": 50,
+      "inputStage": {
+        "stage": "FETCH",
+        "nReturned": 50,
+        "executionTimeMillisEstimate": 6,
+        "works": 50,
+        "advanced": 50,
+        "needTime": 0,
+        "needYield": 0,
+        "saveState": 0,
+        "restoreState": 0,
+        "isEOF": 0,
+        "docsExamined": 50,
+        "alreadyHasObj": 0,
+        "inputStage": {
+          "stage": "IXSCAN",
+          "nReturned": 50,
+          "executionTimeMillisEstimate": 0,
+          "works": 50,
+          "advanced": 50,
+          "needTime": 0,
+          "needYield": 0,
+          "saveState": 0,
+          "restoreState": 0,
+          "isEOF": 0,
+          "keyPattern": {
+            "groupId": 1,
+            "createdAt": -1,
+            "_id": -1
+          },
+          "indexName": "groupId_1_createdAt_-1__id_-1",
+          "isMultiKey": false,
+          "multiKeyPaths": {
+            "groupId": [],
+            "createdAt": [],
+            "_id": []
+          },
+          "isUnique": false,
+          "isSparse": false,
+          "isPartial": false,
+          "indexVersion": 2,
+          "direction": "forward",
+          "indexBounds": {
+            "groupId": [
+              "[ObjectId('6b072842aaf484a4dd33a3a0'), ObjectId('6b072842aaf484a4dd33a3a0')]"
+            ],
+            "createdAt": [
+              "[MaxKey, MinKey]"
+            ],
+            "_id": [
+              "[MaxKey, MinKey]"
+            ]
+          },
+          "keysExamined": 50,
+          "seeks": 1,
+          "dupsTested": 0,
+          "dupsDropped": 0,
+          "peakTrackedMemBytes": 0
+        }
+      }
+    },
+    "ts": "2026-11-25T18:30:46.365Z",
+    "client": "127.0.0.1",
+    "allUsers": [],
+    "user": ""
+  },
+  {
+    "op": "query",
+    "ns": "chatApp_loadtest.groupmessages",
+    "isFromPriorityPortConnection": false,
+    "command": {
+      "find": "groupmessages",
+      "filter": {
+        "groupId": "6b072842aaf484a4dd33a3a0"
+      },
+      "sort": {
+        "createdAt": -1,
+        "_id": -1
+      },
+      "skip": 0,
+      "limit": 50,
+      "lsid": {
+        "id": "9f2fd0a1-7293-44c5-88a4-e2f8f15dcb1f"
+      },
+      "$db": "chatApp_loadtest"
+    },
+    "opid": 299067,
+    "keysExamined": 50,
+    "docsExamined": 50,
+    "nBatches": 1,
+    "cursorExhausted": true,
+    "numYield": 0,
+    "nreturned": 50,
+    "planCacheShapeHash": "B5F3F147",
+    "queryHash": "B5F3F147",
+    "planCacheKey": "03CECC9F",
+    "queryShapeHash": "6F87C17F4AA61190BF92BDA9DA54B6FE1F0B1BDA4B966D207577E7A83CEEF91E",
+    "queryFramework": "classic",
+    "locks": {
+      "Global": {
+        "acquireCount": {
+          "r": 2
+        }
+      }
+    },
+    "flowControl": {},
+    "storage": {
+      "timeWaitingMicros": {
+        "storageEngineMicros": 51
+      }
+    },
+    "responseLength": 11209,
+    "protocol": "op_msg",
+    "millis": 6,
+    "planSummary": "IXSCAN { groupId: 1, createdAt: -1, _id: -1 }",
+    "planningTimeMicros": 1488,
+    "execStats": {
+      "isCached": false,
+      "stage": "LIMIT",
+      "nReturned": 50,
+      "executionTimeMillisEstimate": 2,
+      "works": 51,
+      "advanced": 50,
+      "needTime": 0,
+      "needYield": 0,
+      "saveState": 0,
+      "restoreState": 0,
+      "isEOF": 1,
+      "limitAmount": 50,
+      "inputStage": {
+        "stage": "FETCH",
+        "nReturned": 50,
+        "executionTimeMillisEstimate": 2,
+        "works": 50,
+        "advanced": 50,
+        "needTime": 0,
+        "needYield": 0,
+        "saveState": 0,
+        "restoreState": 0,
+        "isEOF": 0,
+        "docsExamined": 50,
+        "alreadyHasObj": 0,
+        "inputStage": {
+          "stage": "IXSCAN",
+          "nReturned": 50,
+          "executionTimeMillisEstimate": 0,
+          "works": 50,
+          "advanced": 50,
+          "needTime": 0,
+          "needYield": 0,
+          "saveState": 0,
+          "restoreState": 0,
+          "isEOF": 0,
+          "keyPattern": {
+            "groupId": 1,
+            "createdAt": -1,
+            "_id": -1
+          },
+          "indexName": "groupId_1_createdAt_-1__id_-1",
+          "isMultiKey": false,
+          "multiKeyPaths": {
+            "groupId": [],
+            "createdAt": [],
+            "_id": []
+          },
+          "isUnique": false,
+          "isSparse": false,
+          "isPartial": false,
+          "indexVersion": 2,
+          "direction": "forward",
+          "indexBounds": {
+            "groupId": [
+              "[ObjectId('6b072842aaf484a4dd33a3a0'), ObjectId('6b072842aaf484a4dd33a3a0')]"
+            ],
+            "createdAt": [
+              "[MaxKey, MinKey]"
+            ],
+            "_id": [
+              "[MaxKey, MinKey]"
+            ]
+          },
+          "keysExamined": 50,
+          "seeks": 1,
+          "dupsTested": 0,
+          "dupsDropped": 0,
+          "peakTrackedMemBytes": 0
+        }
+      }
+    },
+    "ts": "2026-11-25T18:30:42.857Z",
+    "client": "127.0.0.1",
+    "allUsers": [],
+    "user": ""
+  },
+  {
+    "op": "command",
+    "ns": "chatApp_loadtest.messages",
+    "isFromPriorityPortConnection": false,
+    "command": {
+      "aggregate": "messages",
+      "pipeline": [
+        {
+          "$match": {
+            "receiverId": "6b072841aaf484a4dd32deb1"
+          }
+        },
+        {
+          "$group": {
+            "_id": "$senderId",
+            "lastMessageTime": {
+              "$max": "$createdAt"
+            }
+          }
+        }
+      ],
+      "cursor": {},
+      "lsid": {
+        "id": "4b23ca90-1a53-4886-96dc-3ca415d7794f"
+      },
+      "$db": "chatApp_loadtest"
+    },
+    "opid": 103436,
+    "keysExamined": 70,
+    "docsExamined": 0,
+    "peakTrackedMemBytes": 124,
+    "fromPlanCache": true,
+    "cursorExhausted": true,
+    "numYield": 0,
+    "nreturned": 2,
+    "planCacheShapeHash": "EFEB6015",
+    "queryHash": "EFEB6015",
+    "planCacheKey": "71CAF67B",
+    "queryShapeHash": "E2B5F0B7EA65FA6F24DE930FE6D2CAE7E99F5E73BEC915D980F4790466000F0C",
+    "queryFramework": "sbe",
+    "locks": {
+      "Global": {
+        "acquireCount": {
+          "r": 2
+        }
+      }
+    },
+    "flowControl": {},
+    "storage": {
+      "timeWaitingMicros": {
+        "storageEngineMicros": 46
+      }
+    },
+    "responseLength": 214,
+    "protocol": "op_msg",
+    "millis": 6,
+    "planSummary": "IXSCAN { receiverId: 1, senderId: 1, createdAt: -1, _id: -1 }",
+    "planningTimeMicros": 5151,
+    "ts": "2026-11-25T18:29:25.115Z",
+    "client": "127.0.0.1",
+    "allUsers": [],
+    "user": ""
+  },
+  {
+    "op": "command",
+    "ns": "chatApp_loadtest.messages",
+    "isFromPriorityPortConnection": false,
+    "command": {
+      "aggregate": "messages",
+      "pipeline": [
+        {
+          "$match": {
+            "senderId": "6b072841aaf484a4dd32de1b"
+          }
+        },
+        {
+          "$group": {
+            "_id": "$receiverId",
+            "lastMessageTime": {
+              "$max": "$createdAt"
+            }
+          }
+        }
+      ],
+      "cursor": {},
+      "lsid": {
+        "id": "e61670fb-3426-4b7a-8b0f-b0a1669229cb"
+      },
+      "$db": "chatApp_loadtest"
+    },
+    "opid": 96277,
+    "keysExamined": 35,
+    "docsExamined": 0,
+    "peakTrackedMemBytes": 62,
+    "fromPlanCache": true,
+    "cursorExhausted": true,
+    "numYield": 0,
+    "nreturned": 1,
+    "planCacheShapeHash": "E72782FD",
+    "queryHash": "E72782FD",
+    "planCacheKey": "8AF984E3",
+    "queryShapeHash": "05E053F86C62F03DC2D952B6D21BCB9D8153B046A88E70A91AA72A8EA323BE5E",
+    "queryFramework": "sbe",
+    "locks": {
+      "Global": {
+        "acquireCount": {
+          "r": 2
+        }
+      }
+    },
+    "flowControl": {},
+    "storage": {
+      "timeWaitingMicros": {
+        "storageEngineMicros": 62
+      }
+    },
+    "responseLength": 164,
+    "protocol": "op_msg",
+    "millis": 6,
+    "planSummary": "IXSCAN { senderId: 1, receiverId: 1, createdAt: -1, _id: -1 }",
+    "planningTimeMicros": 6055,
+    "ts": "2026-11-25T18:29:25.330Z",
+    "client": "127.0.0.1",
+    "allUsers": [],
+    "user": ""
+  },
+  {
+    "op": "command",
+    "ns": "chatApp_loadtest.messages",
+    "isFromPriorityPortConnection": false,
+    "command": {
+      "aggregate": "messages",
+      "pipeline": [
+        {
+          "$match": {
+            "receiverId": "6b072841aaf484a4dd32dd57"
+          }
+        },
+        {
+          "$group": {
+            "_id": "$senderId",
+            "lastMessageTime": {
+              "$max": "$createdAt"
+            }
+          }
+        }
+      ],
+      "cursor": {},
+      "lsid": {
+        "id": "8d26b767-f55a-44fb-afe2-959c3fdfcf0e"
+      },
+      "$db": "chatApp_loadtest"
+    },
+    "opid": 80900,
+    "keysExamined": 70,
+    "docsExamined": 0,
+    "peakTrackedMemBytes": 124,
+    "fromPlanCache": true,
+    "cursorExhausted": true,
+    "numYield": 0,
+    "nreturned": 2,
+    "planCacheShapeHash": "EFEB6015",
+    "queryHash": "EFEB6015",
+    "planCacheKey": "71CAF67B",
+    "queryShapeHash": "E2B5F0B7EA65FA6F24DE930FE6D2CAE7E99F5E73BEC915D980F4790466000F0C",
+    "queryFramework": "sbe",
+    "locks": {
+      "Global": {
+        "acquireCount": {
+          "r": 2
+        }
+      }
+    },
+    "flowControl": {},
+    "storage": {
+      "timeWaitingMicros": {
+        "storageEngineMicros": 28
+      }
+    },
+    "responseLength": 214,
+    "protocol": "op_msg",
+    "millis": 6,
+    "planSummary": "IXSCAN { receiverId: 1, senderId: 1, createdAt: -1, _id: -1 }",
+    "planningTimeMicros": 6187,
+    "ts": "2026-11-25T18:29:20.773Z",
+    "client": "127.0.0.1",
+    "allUsers": [],
+    "user": ""
+  },
+  {
+    "op": "command",
+    "ns": "chatApp_loadtest.messages",
+    "isFromPriorityPortConnection": false,
+    "command": {
+      "aggregate": "messages",
+      "pipeline": [
+        {
+          "$match": {
+            "senderId": "6b072841aaf484a4dd32dd30"
+          }
+        },
+        {
+          "$group": {
+            "_id": "$receiverId",
+            "lastMessageTime": {
+              "$max": "$createdAt"
+            }
+          }
+        }
+      ],
+      "cursor": {},
+      "lsid": {
+        "id": "4b23ca90-1a53-4886-96dc-3ca415d7794f"
+      },
+      "$db": "chatApp_loadtest"
+    },
+    "opid": 77269,
+    "keysExamined": 35,
+    "docsExamined": 0,
+    "peakTrackedMemBytes": 62,
+    "fromPlanCache": true,
+    "cursorExhausted": true,
+    "numYield": 0,
+    "nreturned": 1,
+    "planCacheShapeHash": "E72782FD",
+    "queryHash": "E72782FD",
+    "planCacheKey": "8AF984E3",
+    "queryShapeHash": "05E053F86C62F03DC2D952B6D21BCB9D8153B046A88E70A91AA72A8EA323BE5E",
+    "queryFramework": "sbe",
+    "locks": {
+      "Global": {
+        "acquireCount": {
+          "r": 2
+        }
+      }
+    },
+    "flowControl": {},
+    "storage": {
+      "timeWaitingMicros": {
+        "storageEngineMicros": 30
+      }
+    },
+    "responseLength": 164,
+    "protocol": "op_msg",
+    "millis": 6,
+    "planSummary": "IXSCAN { senderId: 1, receiverId: 1, createdAt: -1, _id: -1 }",
+    "planningTimeMicros": 6329,
+    "ts": "2026-11-25T18:29:20.774Z",
+    "client": "127.0.0.1",
+    "allUsers": [],
+    "user": ""
+  },
+  {
+    "op": "command",
+    "ns": "chatApp_loadtest.messages",
+    "isFromPriorityPortConnection": false,
+    "command": {
+      "aggregate": "messages",
+      "pipeline": [
+        {
+          "$match": {
+            "senderId": "6b072841aaf484a4dd32dd1a"
+          }
+        },
+        {
+          "$group": {
+            "_id": "$receiverId",
+            "lastMessageTime": {
+              "$max": "$createdAt"
+            }
+          }
+        }
+      ],
+      "cursor": {},
+      "lsid": {
+        "id": "7fd87ab1-e673-4776-8a78-0375b4fbf16a"
+      },
+      "$db": "chatApp_loadtest"
+    },
+    "opid": 79331,
+    "keysExamined": 35,
+    "docsExamined": 0,
+    "peakTrackedMemBytes": 62,
+    "fromPlanCache": true,
+    "cursorExhausted": true,
+    "numYield": 0,
+    "nreturned": 1,
+    "planCacheShapeHash": "E72782FD",
+    "queryHash": "E72782FD",
+    "planCacheKey": "8AF984E3",
+    "queryShapeHash": "05E053F86C62F03DC2D952B6D21BCB9D8153B046A88E70A91AA72A8EA323BE5E",
+    "queryFramework": "sbe",
+    "locks": {
+      "Global": {
+        "acquireCount": {
+          "r": 2
+        }
+      }
+    },
+    "flowControl": {},
+    "storage": {
+      "timeWaitingMicros": {
+        "storageEngineMicros": 57
+      }
+    },
+    "responseLength": 164,
+    "protocol": "op_msg",
+    "millis": 6,
+    "planSummary": "IXSCAN { senderId: 1, receiverId: 1, createdAt: -1, _id: -1 }",
+    "planningTimeMicros": 4804,
+    "ts": "2026-11-25T18:29:21.780Z",
+    "client": "127.0.0.1",
+    "allUsers": [],
+    "user": ""
+  },
+  {
+    "op": "command",
+    "ns": "chatApp_loadtest.messages",
+    "isFromPriorityPortConnection": false,
+    "command": {
+      "aggregate": "messages",
+      "pipeline": [
+        {
+          "$match": {
+            "receiverId": "6b072841aaf484a4dd32de19"
+          }
+        },
+        {
+          "$group": {
+            "_id": "$senderId",
+            "lastMessageTime": {
+              "$max": "$createdAt"
+            }
+          }
+        }
+      ],
+      "cursor": {},
+      "lsid": {
+        "id": "9581d69b-60e6-4a89-9df4-275f8b5d00be"
+      },
+      "$db": "chatApp_loadtest"
+    },
+    "opid": 95246,
+    "keysExamined": 70,
+    "docsExamined": 0,
+    "peakTrackedMemBytes": 124,
+    "fromPlanCache": true,
+    "cursorExhausted": true,
+    "numYield": 0,
+    "nreturned": 2,
+    "planCacheShapeHash": "EFEB6015",
+    "queryHash": "EFEB6015",
+    "planCacheKey": "71CAF67B",
+    "queryShapeHash": "E2B5F0B7EA65FA6F24DE930FE6D2CAE7E99F5E73BEC915D980F4790466000F0C",
+    "queryFramework": "sbe",
+    "locks": {
+      "Global": {
+        "acquireCount": {
+          "r": 2
+        }
+      }
+    },
+    "flowControl": {},
+    "storage": {
+      "timeWaitingMicros": {
+        "storageEngineMicros": 59
+      }
+    },
+    "responseLength": 214,
+    "protocol": "op_msg",
+    "millis": 6,
+    "planSummary": "IXSCAN { receiverId: 1, senderId: 1, createdAt: -1, _id: -1 }",
+    "planningTimeMicros": 5501,
+    "ts": "2026-11-25T18:29:23.839Z",
+    "client": "127.0.0.1",
+    "allUsers": [],
+    "user": ""
+  },
+  {
+    "op": "command",
+    "ns": "chatApp_loadtest.messages",
+    "isFromPriorityPortConnection": false,
+    "command": {
+      "aggregate": "messages",
+      "pipeline": [
+        {
+          "$match": {
+            "receiverId": "6b072841aaf484a4dd32de8a"
+          }
+        },
+        {
+          "$group": {
+            "_id": "$senderId",
+            "lastMessageTime": {
+              "$max": "$createdAt"
+            }
+          }
+        }
+      ],
+      "cursor": {},
+      "lsid": {
+        "id": "a05744ca-6495-4720-b97a-aa52b3ad6c4a"
+      },
+      "$db": "chatApp_loadtest"
+    },
+    "opid": 104463,
+    "keysExamined": 0,
+    "docsExamined": 0,
+    "fromPlanCache": true,
+    "cursorExhausted": true,
+    "numYield": 0,
+    "nreturned": 0,
+    "planCacheShapeHash": "EFEB6015",
+    "queryHash": "EFEB6015",
+    "planCacheKey": "71CAF67B",
+    "queryShapeHash": "E2B5F0B7EA65FA6F24DE930FE6D2CAE7E99F5E73BEC915D980F4790466000F0C",
+    "queryFramework": "sbe",
+    "locks": {
+      "Global": {
+        "acquireCount": {
+          "r": 2
+        }
+      }
+    },
+    "flowControl": {},
+    "storage": {
+      "timeWaitingMicros": {
+        "storageEngineMicros": 44
+      }
+    },
+    "responseLength": 114,
+    "protocol": "op_msg",
+    "millis": 6,
+    "planSummary": "IXSCAN { receiverId: 1, senderId: 1, createdAt: -1, _id: -1 }",
+    "planningTimeMicros": 5910,
+    "ts": "2026-11-25T18:29:24.108Z",
+    "client": "127.0.0.1",
+    "allUsers": [],
+    "user": ""
+  },
+  {
+    "op": "query",
+    "ns": "chatApp_loadtest.groupmessages",
+    "isFromPriorityPortConnection": false,
+    "command": {
+      "find": "groupmessages",
+      "filter": {
+        "groupId": "6b072842aaf484a4dd33a3a0"
+      },
+      "sort": {
+        "createdAt": -1,
+        "_id": -1
+      },
+      "skip": 0,
+      "limit": 50,
+      "lsid": {
+        "id": "ee045b6a-99fd-43c7-b89b-44e414af15ea"
+      },
+      "$db": "chatApp_loadtest"
+    },
+    "opid": 338956,
+    "keysExamined": 50,
+    "docsExamined": 50,
+    "nBatches": 1,
+    "cursorExhausted": true,
+    "numYield": 0,
+    "nreturned": 50,
+    "planCacheShapeHash": "B5F3F147",
+    "queryHash": "B5F3F147",
+    "planCacheKey": "03CECC9F",
+    "queryShapeHash": "6F87C17F4AA61190BF92BDA9DA54B6FE1F0B1BDA4B966D207577E7A83CEEF91E",
+    "queryFramework": "classic",
+    "locks": {
+      "Global": {
+        "acquireCount": {
+          "r": 2
+        }
+      }
+    },
+    "flowControl": {},
+    "storage": {
+      "timeWaitingMicros": {
+        "storageEngineMicros": 77
+      }
+    },
+    "responseLength": 11209,
+    "protocol": "op_msg",
+    "millis": 6,
+    "planSummary": "IXSCAN { groupId: 1, createdAt: -1, _id: -1 }",
+    "planningTimeMicros": 1139,
+    "execStats": {
+      "isCached": false,
+      "stage": "LIMIT",
+      "nReturned": 50,
+      "executionTimeMillisEstimate": 0,
+      "works": 51,
+      "advanced": 50,
+      "needTime": 0,
+      "needYield": 0,
+      "saveState": 0,
+      "restoreState": 0,
+      "isEOF": 1,
+      "limitAmount": 50,
+      "inputStage": {
+        "stage": "FETCH",
+        "nReturned": 50,
+        "executionTimeMillisEstimate": 0,
+        "works": 50,
+        "advanced": 50,
+        "needTime": 0,
+        "needYield": 0,
+        "saveState": 0,
+        "restoreState": 0,
+        "isEOF": 0,
+        "docsExamined": 50,
+        "alreadyHasObj": 0,
+        "inputStage": {
+          "stage": "IXSCAN",
+          "nReturned": 50,
+          "executionTimeMillisEstimate": 0,
+          "works": 50,
+          "advanced": 50,
+          "needTime": 0,
+          "needYield": 0,
+          "saveState": 0,
+          "restoreState": 0,
+          "isEOF": 0,
+          "keyPattern": {
+            "groupId": 1,
+            "createdAt": -1,
+            "_id": -1
+          },
+          "indexName": "groupId_1_createdAt_-1__id_-1",
+          "isMultiKey": false,
+          "multiKeyPaths": {
+            "groupId": [],
+            "createdAt": [],
+            "_id": []
+          },
+          "isUnique": false,
+          "isSparse": false,
+          "isPartial": false,
+          "indexVersion": 2,
+          "direction": "forward",
+          "indexBounds": {
+            "groupId": [
+              "[ObjectId('6b072842aaf484a4dd33a3a0'), ObjectId('6b072842aaf484a4dd33a3a0')]"
+            ],
+            "createdAt": [
+              "[MaxKey, MinKey]"
+            ],
+            "_id": [
+              "[MaxKey, MinKey]"
+            ]
+          },
+          "keysExamined": 50,
+          "seeks": 1,
+          "dupsTested": 0,
+          "dupsDropped": 0,
+          "peakTrackedMemBytes": 0
+        }
+      }
+    },
+    "ts": "2026-11-25T18:30:46.282Z",
+    "client": "127.0.0.1",
+    "allUsers": [],
+    "user": ""
+  },
+  {
+    "op": "command",
+    "ns": "chatApp_loadtest.messages",
+    "isFromPriorityPortConnection": false,
+    "command": {
+      "aggregate": "messages",
+      "pipeline": [
+        {
+          "$match": {
+            "senderId": "6b072841aaf484a4dd32de33"
+          }
+        },
+        {
+          "$group": {
+            "_id": "$receiverId",
+            "lastMessageTime": {
+              "$max": "$createdAt"
+            }
+          }
+        }
+      ],
+      "cursor": {},
+      "lsid": {
+        "id": "4b23ca90-1a53-4886-96dc-3ca415d7794f"
+      },
+      "$db": "chatApp_loadtest"
+    },
+    "opid": 103427,
+    "keysExamined": 35,
+    "docsExamined": 0,
+    "peakTrackedMemBytes": 62,
+    "fromPlanCache": true,
+    "cursorExhausted": true,
+    "numYield": 0,
+    "nreturned": 1,
+    "planCacheShapeHash": "E72782FD",
+    "queryHash": "E72782FD",
+    "planCacheKey": "8AF984E3",
+    "queryShapeHash": "05E053F86C62F03DC2D952B6D21BCB9D8153B046A88E70A91AA72A8EA323BE5E",
+    "queryFramework": "sbe",
+    "locks": {
+      "Global": {
+        "acquireCount": {
+          "r": 2
+        }
+      }
+    },
+    "flowControl": {},
+    "storage": {
+      "timeWaitingMicros": {
+        "storageEngineMicros": 58
+      }
+    },
+    "responseLength": 164,
+    "protocol": "op_msg",
+    "millis": 6,
+    "planSummary": "IXSCAN { senderId: 1, receiverId: 1, createdAt: -1, _id: -1 }",
+    "planningTimeMicros": 6030,
+    "ts": "2026-11-25T18:29:24.441Z",
+    "client": "127.0.0.1",
+    "allUsers": [],
+    "user": ""
+  },
+  {
+    "op": "command",
+    "ns": "chatApp_loadtest.messages",
+    "isFromPriorityPortConnection": false,
+    "command": {
+      "aggregate": "messages",
+      "pipeline": [
+        {
+          "$match": {
+            "receiverId": "6b072841aaf484a4dd32de57"
+          }
+        },
+        {
+          "$group": {
+            "_id": "$senderId",
+            "lastMessageTime": {
+              "$max": "$createdAt"
+            }
+          }
+        }
+      ],
+      "cursor": {},
+      "lsid": {
+        "id": "19c8bb02-376b-4a6b-8b04-2c6c706b1e35"
+      },
+      "$db": "chatApp_loadtest"
+    },
+    "opid": 90122,
+    "keysExamined": 70,
+    "docsExamined": 0,
+    "peakTrackedMemBytes": 124,
+    "fromPlanCache": true,
+    "cursorExhausted": true,
+    "numYield": 0,
+    "nreturned": 2,
+    "planCacheShapeHash": "EFEB6015",
+    "queryHash": "EFEB6015",
+    "planCacheKey": "71CAF67B",
+    "queryShapeHash": "E2B5F0B7EA65FA6F24DE930FE6D2CAE7E99F5E73BEC915D980F4790466000F0C",
+    "queryFramework": "sbe",
+    "locks": {
+      "Global": {
+        "acquireCount": {
+          "r": 2
+        }
+      }
+    },
+    "flowControl": {},
+    "storage": {
+      "timeWaitingMicros": {
+        "storageEngineMicros": 114
+      }
+    },
+    "responseLength": 214,
+    "protocol": "op_msg",
+    "millis": 6,
+    "planSummary": "IXSCAN { receiverId: 1, senderId: 1, createdAt: -1, _id: -1 }",
+    "planningTimeMicros": 2865,
+    "ts": "2026-11-25T18:29:25.079Z",
+    "client": "127.0.0.1",
+    "allUsers": [],
+    "user": ""
+  },
+  {
+    "op": "query",
+    "ns": "chatApp_loadtest.groupmessages",
+    "isFromPriorityPortConnection": false,
+    "command": {
+      "find": "groupmessages",
+      "filter": {
+        "groupId": "6b072842aaf484a4dd33a3a0"
+      },
+      "sort": {
+        "createdAt": -1,
+        "_id": -1
+      },
+      "skip": 0,
+      "limit": 50,
+      "lsid": {
+        "id": "d7a559f6-a2cd-4d90-a5e7-1010e3a47cd2"
+      },
+      "$db": "chatApp_loadtest"
+    },
+    "opid": 360455,
+    "keysExamined": 50,
+    "docsExamined": 50,
+    "nBatches": 1,
+    "cursorExhausted": true,
+    "numYield": 0,
+    "nreturned": 50,
+    "planCacheShapeHash": "B5F3F147",
+    "queryHash": "B5F3F147",
+    "planCacheKey": "03CECC9F",
+    "queryShapeHash": "6F87C17F4AA61190BF92BDA9DA54B6FE1F0B1BDA4B966D207577E7A83CEEF91E",
+    "queryFramework": "classic",
+    "locks": {
+      "Global": {
+        "acquireCount": {
+          "r": 2
+        }
+      }
+    },
+    "flowControl": {},
+    "storage": {
+      "timeWaitingMicros": {
+        "storageEngineMicros": 106
+      }
+    },
+    "responseLength": 11209,
+    "protocol": "op_msg",
+    "millis": 6,
+    "planSummary": "IXSCAN { groupId: 1, createdAt: -1, _id: -1 }",
+    "planningTimeMicros": 1500,
+    "execStats": {
+      "isCached": false,
+      "stage": "LIMIT",
+      "nReturned": 50,
+      "executionTimeMillisEstimate": 0,
+      "works": 51,
+      "advanced": 50,
+      "needTime": 0,
+      "needYield": 0,
+      "saveState": 0,
+      "restoreState": 0,
+      "isEOF": 1,
+      "limitAmount": 50,
+      "inputStage": {
+        "stage": "FETCH",
+        "nReturned": 50,
+        "executionTimeMillisEstimate": 0,
+        "works": 50,
+        "advanced": 50,
+        "needTime": 0,
+        "needYield": 0,
+        "saveState": 0,
+        "restoreState": 0,
+        "isEOF": 0,
+        "docsExamined": 50,
+        "alreadyHasObj": 0,
+        "inputStage": {
+          "stage": "IXSCAN",
+          "nReturned": 50,
+          "executionTimeMillisEstimate": 0,
+          "works": 50,
+          "advanced": 50,
+          "needTime": 0,
+          "needYield": 0,
+          "saveState": 0,
+          "restoreState": 0,
+          "isEOF": 0,
+          "keyPattern": {
+            "groupId": 1,
+            "createdAt": -1,
+            "_id": -1
+          },
+          "indexName": "groupId_1_createdAt_-1__id_-1",
+          "isMultiKey": false,
+          "multiKeyPaths": {
+            "groupId": [],
+            "createdAt": [],
+            "_id": []
+          },
+          "isUnique": false,
+          "isSparse": false,
+          "isPartial": false,
+          "indexVersion": 2,
+          "direction": "forward",
+          "indexBounds": {
+            "groupId": [
+              "[ObjectId('6b072842aaf484a4dd33a3a0'), ObjectId('6b072842aaf484a4dd33a3a0')]"
+            ],
+            "createdAt": [
+              "[MaxKey, MinKey]"
+            ],
+            "_id": [
+              "[MaxKey, MinKey]"
+            ]
+          },
+          "keysExamined": 50,
+          "seeks": 1,
+          "dupsTested": 0,
+          "dupsDropped": 0,
+          "peakTrackedMemBytes": 0
+        }
+      }
+    },
+    "ts": "2026-11-25T18:31:01.736Z",
+    "client": "127.0.0.1",
+    "allUsers": [],
+    "user": ""
+  },
+  {
+    "op": "command",
+    "ns": "chatApp_loadtest.messages",
+    "isFromPriorityPortConnection": false,
+    "command": {
+      "aggregate": "messages",
+      "pipeline": [
+        {
+          "$match": {
+            "receiverId": "6b072841aaf484a4dd32de70"
+          }
+        },
+        {
+          "$group": {
+            "_id": "$senderId",
+            "lastMessageTime": {
+              "$max": "$createdAt"
+            }
+          }
+        }
+      ],
+      "cursor": {},
+      "lsid": {
+        "id": "82b1dff8-495d-474d-a5df-7ca0e6d19c68"
+      },
+      "$db": "chatApp_loadtest"
+    },
+    "opid": 80031,
+    "keysExamined": 0,
+    "docsExamined": 0,
+    "fromPlanCache": true,
+    "cursorExhausted": true,
+    "numYield": 0,
+    "nreturned": 0,
+    "planCacheShapeHash": "EFEB6015",
+    "queryHash": "EFEB6015",
+    "planCacheKey": "71CAF67B",
+    "queryShapeHash": "E2B5F0B7EA65FA6F24DE930FE6D2CAE7E99F5E73BEC915D980F4790466000F0C",
+    "queryFramework": "sbe",
+    "locks": {
+      "Global": {
+        "acquireCount": {
+          "r": 2
+        }
+      }
+    },
+    "flowControl": {},
+    "storage": {
+      "timeWaitingMicros": {
+        "storageEngineMicros": 117
+      }
+    },
+    "responseLength": 114,
+    "protocol": "op_msg",
+    "millis": 5,
+    "planSummary": "IXSCAN { receiverId: 1, senderId: 1, createdAt: -1, _id: -1 }",
+    "planningTimeMicros": 3247,
+    "ts": "2026-11-25T18:29:24.362Z",
+    "client": "127.0.0.1",
+    "allUsers": [],
+    "user": ""
+  },
+  {
+    "op": "command",
+    "ns": "chatApp_loadtest.messages",
+    "isFromPriorityPortConnection": false,
+    "command": {
+      "aggregate": "messages",
+      "pipeline": [
+        {
+          "$match": {
+            "receiverId": "6b072841aaf484a4dd32dc8d"
+          }
+        },
+        {
+          "$group": {
+            "_id": "$senderId",
+            "lastMessageTime": {
+              "$max": "$createdAt"
+            }
+          }
+        }
+      ],
+      "cursor": {},
+      "lsid": {
+        "id": "0b0e03f3-597d-4ffd-95b4-06b03905ab77"
+      },
+      "$db": "chatApp_loadtest"
+    },
+    "opid": 93192,
+    "keysExamined": 370,
+    "docsExamined": 0,
+    "peakTrackedMemBytes": 1178,
+    "fromPlanCache": true,
+    "cursorExhausted": true,
+    "numYield": 0,
+    "nreturned": 26,
+    "planCacheShapeHash": "EFEB6015",
+    "queryHash": "EFEB6015",
+    "planCacheKey": "71CAF67B",
+    "queryShapeHash": "E2B5F0B7EA65FA6F24DE930FE6D2CAE7E99F5E73BEC915D980F4790466000F0C",
+    "queryFramework": "sbe",
+    "locks": {
+      "Global": {
+        "acquireCount": {
+          "r": 2
+        }
+      }
+    },
+    "flowControl": {},
+    "storage": {
+      "timeWaitingMicros": {
+        "storageEngineMicros": 91
+      }
+    },
+    "responseLength": 1430,
+    "protocol": "op_msg",
+    "millis": 5,
+    "planSummary": "IXSCAN { receiverId: 1, senderId: 1, createdAt: -1, _id: -1 }",
+    "planningTimeMicros": 4135,
+    "ts": "2026-11-25T18:29:25.810Z",
+    "client": "127.0.0.1",
+    "allUsers": [],
+    "user": ""
+  },
+  {
+    "op": "command",
+    "ns": "chatApp_loadtest.messages",
+    "isFromPriorityPortConnection": false,
+    "command": {
+      "aggregate": "messages",
+      "pipeline": [
+        {
+          "$match": {
+            "receiverId": "6b072841aaf484a4dd32de8c"
+          }
+        },
+        {
+          "$group": {
+            "_id": "$senderId",
+            "lastMessageTime": {
+              "$max": "$createdAt"
+            }
+          }
+        }
+      ],
+      "cursor": {},
+      "lsid": {
+        "id": "e2dd44e6-06d7-4803-9618-be30e6ab3d01"
+      },
+      "$db": "chatApp_loadtest"
+    },
+    "opid": 78384,
+    "keysExamined": 0,
+    "docsExamined": 0,
+    "fromPlanCache": true,
+    "cursorExhausted": true,
+    "numYield": 0,
+    "nreturned": 0,
+    "planCacheShapeHash": "EFEB6015",
+    "queryHash": "EFEB6015",
+    "planCacheKey": "71CAF67B",
+    "queryShapeHash": "E2B5F0B7EA65FA6F24DE930FE6D2CAE7E99F5E73BEC915D980F4790466000F0C",
+    "queryFramework": "sbe",
+    "locks": {
+      "Global": {
+        "acquireCount": {
+          "r": 2
+        }
+      }
+    },
+    "flowControl": {},
+    "storage": {
+      "timeWaitingMicros": {
+        "storageEngineMicros": 38
+      }
+    },
+    "responseLength": 114,
+    "protocol": "op_msg",
+    "millis": 5,
+    "planSummary": "IXSCAN { receiverId: 1, senderId: 1, createdAt: -1, _id: -1 }",
+    "planningTimeMicros": 4628,
+    "ts": "2026-11-25T18:29:25.841Z",
+    "client": "127.0.0.1",
+    "allUsers": [],
+    "user": ""
+  },
+  {
+    "op": "command",
+    "ns": "chatApp_loadtest.messages",
+    "isFromPriorityPortConnection": false,
+    "command": {
+      "aggregate": "messages",
+      "pipeline": [
+        {
+          "$match": {
+            "senderId": "6b072841aaf484a4dd32de8c"
+          }
+        },
+        {
+          "$group": {
+            "_id": "$receiverId",
+            "lastMessageTime": {
+              "$max": "$createdAt"
+            }
+          }
+        }
+      ],
+      "cursor": {},
+      "lsid": {
+        "id": "09d8fa0c-126b-4f91-ba67-0c9a9b4ec21f"
+      },
+      "$db": "chatApp_loadtest"
+    },
+    "opid": 80954,
+    "keysExamined": 35,
+    "docsExamined": 0,
+    "peakTrackedMemBytes": 62,
+    "fromPlanCache": true,
+    "cursorExhausted": true,
+    "numYield": 0,
+    "nreturned": 1,
+    "planCacheShapeHash": "E72782FD",
+    "queryHash": "E72782FD",
+    "planCacheKey": "8AF984E3",
+    "queryShapeHash": "05E053F86C62F03DC2D952B6D21BCB9D8153B046A88E70A91AA72A8EA323BE5E",
+    "queryFramework": "sbe",
+    "locks": {
+      "Global": {
+        "acquireCount": {
+          "r": 2
+        }
+      }
+    },
+    "flowControl": {},
+    "storage": {
+      "timeWaitingMicros": {
+        "storageEngineMicros": 44
+      }
+    },
+    "responseLength": 164,
+    "protocol": "op_msg",
+    "millis": 5,
+    "planSummary": "IXSCAN { senderId: 1, receiverId: 1, createdAt: -1, _id: -1 }",
+    "planningTimeMicros": 4694,
+    "ts": "2026-11-25T18:29:25.842Z",
+    "client": "127.0.0.1",
+    "allUsers": [],
+    "user": ""
+  },
+  {
+    "op": "command",
+    "ns": "chatApp_loadtest.messages",
+    "isFromPriorityPortConnection": false,
+    "command": {
+      "aggregate": "messages",
+      "pipeline": [
+        {
+          "$match": {
+            "senderId": "6b072841aaf484a4dd32dd44"
+          }
+        },
+        {
+          "$group": {
+            "_id": "$receiverId",
+            "lastMessageTime": {
+              "$max": "$createdAt"
+            }
+          }
+        }
+      ],
+      "cursor": {},
+      "lsid": {
+        "id": "806dd069-acce-406b-9a33-a6f0415e2a4a"
+      },
+      "$db": "chatApp_loadtest"
+    },
+    "opid": 80946,
+    "keysExamined": 35,
+    "docsExamined": 0,
+    "peakTrackedMemBytes": 62,
+    "fromPlanCache": true,
+    "cursorExhausted": true,
+    "numYield": 0,
+    "nreturned": 1,
+    "planCacheShapeHash": "E72782FD",
+    "queryHash": "E72782FD",
+    "planCacheKey": "8AF984E3",
+    "queryShapeHash": "05E053F86C62F03DC2D952B6D21BCB9D8153B046A88E70A91AA72A8EA323BE5E",
+    "queryFramework": "sbe",
+    "locks": {
+      "Global": {
+        "acquireCount": {
+          "r": 2
+        }
+      }
+    },
+    "flowControl": {},
+    "storage": {
+      "timeWaitingMicros": {
+        "storageEngineMicros": 102
+      }
+    },
+    "responseLength": 164,
+    "protocol": "op_msg",
+    "millis": 5,
+    "planSummary": "IXSCAN { senderId: 1, receiverId: 1, createdAt: -1, _id: -1 }",
+    "planningTimeMicros": 4455,
+    "ts": "2026-11-25T18:29:22.721Z",
+    "client": "127.0.0.1",
+    "allUsers": [],
+    "user": ""
+  },
+  {
+    "op": "command",
+    "ns": "chatApp_loadtest.messages",
+    "isFromPriorityPortConnection": false,
+    "command": {
+      "aggregate": "messages",
+      "pipeline": [
+        {
+          "$match": {
+            "senderId": "6b072841aaf484a4dd32dcb6"
+          }
+        },
+        {
+          "$group": {
+            "_id": "$receiverId",
+            "lastMessageTime": {
+              "$max": "$createdAt"
+            }
+          }
+        }
+      ],
+      "cursor": {},
+      "lsid": {
+        "id": "642fa72b-33cc-4ad5-99b1-1ceba419f86e"
+      },
+      "$db": "chatApp_loadtest"
+    },
+    "opid": 91148,
+    "keysExamined": 35,
+    "docsExamined": 0,
+    "peakTrackedMemBytes": 62,
+    "fromPlanCache": true,
+    "cursorExhausted": true,
+    "numYield": 0,
+    "nreturned": 1,
+    "planCacheShapeHash": "E72782FD",
+    "queryHash": "E72782FD",
+    "planCacheKey": "8AF984E3",
+    "queryShapeHash": "05E053F86C62F03DC2D952B6D21BCB9D8153B046A88E70A91AA72A8EA323BE5E",
+    "queryFramework": "sbe",
+    "locks": {
+      "Global": {
+        "acquireCount": {
+          "r": 2
+        }
+      }
+    },
+    "flowControl": {},
+    "storage": {
+      "timeWaitingMicros": {
+        "storageEngineMicros": 76
+      }
+    },
+    "responseLength": 164,
+    "protocol": "op_msg",
+    "millis": 5,
+    "planSummary": "IXSCAN { senderId: 1, receiverId: 1, createdAt: -1, _id: -1 }",
+    "planningTimeMicros": 4140,
+    "ts": "2026-11-25T18:29:24.263Z",
+    "client": "127.0.0.1",
+    "allUsers": [],
+    "user": ""
+  },
+  {
+    "op": "command",
+    "ns": "chatApp_loadtest.messages",
+    "isFromPriorityPortConnection": false,
+    "command": {
+      "aggregate": "messages",
+      "pipeline": [
+        {
+          "$match": {
+            "receiverId": "6b072841aaf484a4dd32de26"
+          }
+        },
+        {
+          "$group": {
+            "_id": "$senderId",
+            "lastMessageTime": {
+              "$max": "$createdAt"
+            }
+          }
+        }
+      ],
+      "cursor": {},
+      "lsid": {
+        "id": "8d26b767-f55a-44fb-afe2-959c3fdfcf0e"
+      },
+      "$db": "chatApp_loadtest"
+    },
+    "opid": 86077,
+    "keysExamined": 0,
+    "docsExamined": 0,
+    "fromPlanCache": true,
+    "cursorExhausted": true,
+    "numYield": 0,
+    "nreturned": 0,
+    "planCacheShapeHash": "EFEB6015",
+    "queryHash": "EFEB6015",
+    "planCacheKey": "71CAF67B",
+    "queryShapeHash": "E2B5F0B7EA65FA6F24DE930FE6D2CAE7E99F5E73BEC915D980F4790466000F0C",
+    "queryFramework": "sbe",
+    "locks": {
+      "Global": {
+        "acquireCount": {
+          "r": 2
+        }
+      }
+    },
+    "flowControl": {},
+    "storage": {
+      "timeWaitingMicros": {
+        "storageEngineMicros": 23
+      }
+    },
+    "responseLength": 114,
+    "protocol": "op_msg",
+    "millis": 5,
+    "planSummary": "IXSCAN { receiverId: 1, senderId: 1, createdAt: -1, _id: -1 }",
+    "planningTimeMicros": 4219,
+    "ts": "2026-11-25T18:29:25.908Z",
+    "client": "127.0.0.1",
+    "allUsers": [],
+    "user": ""
+  },
+  {
+    "op": "query",
+    "ns": "chatApp_loadtest.groupmessages",
+    "isFromPriorityPortConnection": false,
+    "command": {
+      "find": "groupmessages",
+      "filter": {
+        "groupId": "6b072842aaf484a4dd33a3a0"
+      },
+      "sort": {
+        "createdAt": -1,
+        "_id": -1
+      },
+      "skip": 0,
+      "limit": 50,
+      "lsid": {
+        "id": "3ea9b06d-6fe5-45bd-a258-3ed941826a9a"
+      },
+      "$db": "chatApp_loadtest"
+    },
+    "opid": 161911,
+    "keysExamined": 50,
+    "docsExamined": 50,
+    "nBatches": 1,
+    "cursorExhausted": true,
+    "numYield": 0,
+    "nreturned": 50,
+    "planCacheShapeHash": "B5F3F147",
+    "queryHash": "B5F3F147",
+    "planCacheKey": "03CECC9F",
+    "queryShapeHash": "6F87C17F4AA61190BF92BDA9DA54B6FE1F0B1BDA4B966D207577E7A83CEEF91E",
+    "queryFramework": "classic",
+    "locks": {
+      "Global": {
+        "acquireCount": {
+          "r": 2
+        }
+      }
+    },
+    "flowControl": {},
+    "storage": {
+      "timeWaitingMicros": {
+        "storageEngineMicros": 112
+      }
+    },
+    "responseLength": 11209,
+    "protocol": "op_msg",
+    "millis": 5,
+    "planSummary": "IXSCAN { groupId: 1, createdAt: -1, _id: -1 }",
+    "planningTimeMicros": 4267,
+    "execStats": {
+      "isCached": false,
+      "stage": "LIMIT",
+      "nReturned": 50,
+      "executionTimeMillisEstimate": 0,
+      "works": 51,
+      "advanced": 50,
+      "needTime": 0,
+      "needYield": 0,
+      "saveState": 0,
+      "restoreState": 0,
+      "isEOF": 1,
+      "limitAmount": 50,
+      "inputStage": {
+        "stage": "FETCH",
+        "nReturned": 50,
+        "executionTimeMillisEstimate": 0,
+        "works": 50,
+        "advanced": 50,
+        "needTime": 0,
+        "needYield": 0,
+        "saveState": 0,
+        "restoreState": 0,
+        "isEOF": 0,
+        "docsExamined": 50,
+        "alreadyHasObj": 0,
+        "inputStage": {
+          "stage": "IXSCAN",
+          "nReturned": 50,
+          "executionTimeMillisEstimate": 0,
+          "works": 50,
+          "advanced": 50,
+          "needTime": 0,
+          "needYield": 0,
+          "saveState": 0,
+          "restoreState": 0,
+          "isEOF": 0,
+          "keyPattern": {
+            "groupId": 1,
+            "createdAt": -1,
+            "_id": -1
+          },
+          "indexName": "groupId_1_createdAt_-1__id_-1",
+          "isMultiKey": false,
+          "multiKeyPaths": {
+            "groupId": [],
+            "createdAt": [],
+            "_id": []
+          },
+          "isUnique": false,
+          "isSparse": false,
+          "isPartial": false,
+          "indexVersion": 2,
+          "direction": "forward",
+          "indexBounds": {
+            "groupId": [
+              "[ObjectId('6b072842aaf484a4dd33a3a0'), ObjectId('6b072842aaf484a4dd33a3a0')]"
+            ],
+            "createdAt": [
+              "[MaxKey, MinKey]"
+            ],
+            "_id": [
+              "[MaxKey, MinKey]"
+            ]
+          },
+          "keysExamined": 50,
+          "seeks": 1,
+          "dupsTested": 0,
+          "dupsDropped": 0,
+          "peakTrackedMemBytes": 0
+        }
+      }
+    },
+    "ts": "2026-11-25T18:29:31.315Z",
+    "client": "127.0.0.1",
+    "allUsers": [],
+    "user": ""
+  },
+  {
+    "op": "command",
+    "ns": "chatApp_loadtest.messages",
+    "isFromPriorityPortConnection": false,
+    "command": {
+      "aggregate": "messages",
+      "pipeline": [
+        {
+          "$match": {
+            "receiverId": "6b072841aaf484a4dd32dcb6"
+          }
+        },
+        {
+          "$group": {
+            "_id": "$senderId",
+            "lastMessageTime": {
+              "$max": "$createdAt"
+            }
+          }
+        }
+      ],
+      "cursor": {},
+      "lsid": {
+        "id": "8d26b767-f55a-44fb-afe2-959c3fdfcf0e"
+      },
+      "$db": "chatApp_loadtest"
+    },
+    "opid": 86072,
+    "keysExamined": 0,
+    "docsExamined": 0,
+    "fromPlanCache": true,
+    "cursorExhausted": true,
+    "numYield": 0,
+    "nreturned": 0,
+    "planCacheShapeHash": "EFEB6015",
+    "queryHash": "EFEB6015",
+    "planCacheKey": "71CAF67B",
+    "queryShapeHash": "E2B5F0B7EA65FA6F24DE930FE6D2CAE7E99F5E73BEC915D980F4790466000F0C",
+    "queryFramework": "sbe",
+    "locks": {
+      "Global": {
+        "acquireCount": {
+          "r": 2
+        }
+      }
+    },
+    "flowControl": {},
+    "storage": {
+      "timeWaitingMicros": {
+        "storageEngineMicros": 54
+      }
+    },
+    "responseLength": 114,
+    "protocol": "op_msg",
+    "millis": 5,
+    "planSummary": "IXSCAN { receiverId: 1, senderId: 1, createdAt: -1, _id: -1 }",
+    "planningTimeMicros": 4834,
+    "ts": "2026-11-25T18:29:24.263Z",
+    "client": "127.0.0.1",
+    "allUsers": [],
+    "user": ""
+  },
+  {
+    "op": "command",
+    "ns": "chatApp_loadtest.messages",
+    "isFromPriorityPortConnection": false,
+    "command": {
+      "aggregate": "messages",
+      "pipeline": [
+        {
+          "$match": {
+            "senderId": "6b072841aaf484a4dd32dd4f"
+          }
+        },
+        {
+          "$group": {
+            "_id": "$receiverId",
+            "lastMessageTime": {
+              "$max": "$createdAt"
+            }
+          }
+        }
+      ],
+      "cursor": {},
+      "lsid": {
+        "id": "a05744ca-6495-4720-b97a-aa52b3ad6c4a"
+      },
+      "$db": "chatApp_loadtest"
+    },
+    "opid": 92180,
+    "keysExamined": 35,
+    "docsExamined": 0,
+    "peakTrackedMemBytes": 62,
+    "fromPlanCache": true,
+    "cursorExhausted": true,
+    "numYield": 0,
+    "nreturned": 1,
+    "planCacheShapeHash": "E72782FD",
+    "queryHash": "E72782FD",
+    "planCacheKey": "8AF984E3",
+    "queryShapeHash": "05E053F86C62F03DC2D952B6D21BCB9D8153B046A88E70A91AA72A8EA323BE5E",
+    "queryFramework": "sbe",
+    "locks": {
+      "Global": {
+        "acquireCount": {
+          "r": 2
+        }
+      }
+    },
+    "flowControl": {},
+    "storage": {
+      "timeWaitingMicros": {
+        "storageEngineMicros": 95
+      }
+    },
+    "responseLength": 164,
+    "protocol": "op_msg",
+    "millis": 5,
+    "planSummary": "IXSCAN { senderId: 1, receiverId: 1, createdAt: -1, _id: -1 }",
+    "planningTimeMicros": 4688,
+    "ts": "2026-11-25T18:29:22.155Z",
+    "client": "127.0.0.1",
+    "allUsers": [],
+    "user": ""
+  },
+  {
+    "op": "command",
+    "ns": "chatApp_loadtest.messages",
+    "isFromPriorityPortConnection": false,
+    "command": {
+      "aggregate": "messages",
+      "pipeline": [
+        {
+          "$match": {
+            "receiverId": "6b072841aaf484a4dd32ddb7"
+          }
+        },
+        {
+          "$group": {
+            "_id": "$senderId",
+            "lastMessageTime": {
+              "$max": "$createdAt"
+            }
+          }
+        }
+      ],
+      "cursor": {},
+      "lsid": {
+        "id": "6c224cb6-dadf-4f95-97fd-c338b1da7a28"
+      },
+      "$db": "chatApp_loadtest"
+    },
+    "opid": 85015,
+    "keysExamined": 70,
+    "docsExamined": 0,
+    "peakTrackedMemBytes": 124,
+    "fromPlanCache": true,
+    "cursorExhausted": true,
+    "numYield": 0,
+    "nreturned": 2,
+    "planCacheShapeHash": "EFEB6015",
+    "queryHash": "EFEB6015",
+    "planCacheKey": "71CAF67B",
+    "queryShapeHash": "E2B5F0B7EA65FA6F24DE930FE6D2CAE7E99F5E73BEC915D980F4790466000F0C",
+    "queryFramework": "sbe",
+    "locks": {
+      "Global": {
+        "acquireCount": {
+          "r": 2
+        }
+      }
+    },
+    "flowControl": {},
+    "storage": {
+      "timeWaitingMicros": {
+        "storageEngineMicros": 40
+      }
+    },
+    "responseLength": 214,
+    "protocol": "op_msg",
+    "millis": 5,
+    "planSummary": "IXSCAN { receiverId: 1, senderId: 1, createdAt: -1, _id: -1 }",
+    "planningTimeMicros": 4319,
+    "ts": "2026-11-25T18:29:22.108Z",
+    "client": "127.0.0.1",
+    "allUsers": [],
+    "user": ""
+  },
+  {
+    "op": "command",
+    "ns": "chatApp_loadtest.messages",
+    "isFromPriorityPortConnection": false,
+    "command": {
+      "aggregate": "messages",
+      "pipeline": [
+        {
+          "$match": {
+            "senderId": "6b072841aaf484a4dd32ddb7"
+          }
+        },
+        {
+          "$group": {
+            "_id": "$receiverId",
+            "lastMessageTime": {
+              "$max": "$createdAt"
+            }
+          }
+        }
+      ],
+      "cursor": {},
+      "lsid": {
+        "id": "a05744ca-6495-4720-b97a-aa52b3ad6c4a"
+      },
+      "$db": "chatApp_loadtest"
+    },
+    "opid": 92177,
+    "keysExamined": 35,
+    "docsExamined": 0,
+    "peakTrackedMemBytes": 62,
+    "fromPlanCache": true,
+    "cursorExhausted": true,
+    "numYield": 0,
+    "nreturned": 1,
+    "planCacheShapeHash": "E72782FD",
+    "queryHash": "E72782FD",
+    "planCacheKey": "8AF984E3",
+    "queryShapeHash": "05E053F86C62F03DC2D952B6D21BCB9D8153B046A88E70A91AA72A8EA323BE5E",
+    "queryFramework": "sbe",
+    "locks": {
+      "Global": {
+        "acquireCount": {
+          "r": 2
+        }
+      }
+    },
+    "flowControl": {},
+    "storage": {
+      "timeWaitingMicros": {
+        "storageEngineMicros": 52
+      }
+    },
+    "responseLength": 164,
+    "protocol": "op_msg",
+    "millis": 5,
+    "planSummary": "IXSCAN { senderId: 1, receiverId: 1, createdAt: -1, _id: -1 }",
+    "planningTimeMicros": 4670,
+    "ts": "2026-11-25T18:29:22.108Z",
+    "client": "127.0.0.1",
+    "allUsers": [],
+    "user": ""
+  },
+  {
+    "op": "query",
+    "ns": "chatApp_loadtest.groupmessages",
+    "isFromPriorityPortConnection": false,
+    "command": {
+      "find": "groupmessages",
+      "filter": {
+        "groupId": "6b072842aaf484a4dd33a3a0"
+      },
+      "sort": {
+        "createdAt": -1,
+        "_id": -1
+      },
+      "skip": 0,
+      "limit": 50,
+      "lsid": {
+        "id": "c755d2dc-077c-4202-a942-bcf18bd42e5d"
+      },
+      "$db": "chatApp_loadtest"
+    },
+    "opid": 185387,
+    "keysExamined": 50,
+    "docsExamined": 50,
+    "nBatches": 1,
+    "cursorExhausted": true,
+    "numYield": 0,
+    "nreturned": 50,
+    "planCacheShapeHash": "B5F3F147",
+    "queryHash": "B5F3F147",
+    "planCacheKey": "03CECC9F",
+    "queryShapeHash": "6F87C17F4AA61190BF92BDA9DA54B6FE1F0B1BDA4B966D207577E7A83CEEF91E",
+    "queryFramework": "classic",
+    "locks": {
+      "Global": {
+        "acquireCount": {
+          "r": 2
+        }
+      }
+    },
+    "flowControl": {},
+    "storage": {
+      "timeWaitingMicros": {
+        "storageEngineMicros": 55
+      }
+    },
+    "responseLength": 11209,
+    "protocol": "op_msg",
+    "millis": 5,
+    "planSummary": "IXSCAN { groupId: 1, createdAt: -1, _id: -1 }",
+    "planningTimeMicros": 697,
+    "execStats": {
+      "isCached": false,
+      "stage": "LIMIT",
+      "nReturned": 50,
+      "executionTimeMillisEstimate": 5,
+      "works": 51,
+      "advanced": 50,
+      "needTime": 0,
+      "needYield": 0,
+      "saveState": 0,
+      "restoreState": 0,
+      "isEOF": 1,
+      "limitAmount": 50,
+      "inputStage": {
+        "stage": "FETCH",
+        "nReturned": 50,
+        "executionTimeMillisEstimate": 5,
+        "works": 50,
+        "advanced": 50,
+        "needTime": 0,
+        "needYield": 0,
+        "saveState": 0,
+        "restoreState": 0,
+        "isEOF": 0,
+        "docsExamined": 50,
+        "alreadyHasObj": 0,
+        "inputStage": {
+          "stage": "IXSCAN",
+          "nReturned": 50,
+          "executionTimeMillisEstimate": 0,
+          "works": 50,
+          "advanced": 50,
+          "needTime": 0,
+          "needYield": 0,
+          "saveState": 0,
+          "restoreState": 0,
+          "isEOF": 0,
+          "keyPattern": {
+            "groupId": 1,
+            "createdAt": -1,
+            "_id": -1
+          },
+          "indexName": "groupId_1_createdAt_-1__id_-1",
+          "isMultiKey": false,
+          "multiKeyPaths": {
+            "groupId": [],
+            "createdAt": [],
+            "_id": []
+          },
+          "isUnique": false,
+          "isSparse": false,
+          "isPartial": false,
+          "indexVersion": 2,
+          "direction": "forward",
+          "indexBounds": {
+            "groupId": [
+              "[ObjectId('6b072842aaf484a4dd33a3a0'), ObjectId('6b072842aaf484a4dd33a3a0')]"
+            ],
+            "createdAt": [
+              "[MaxKey, MinKey]"
+            ],
+            "_id": [
+              "[MaxKey, MinKey]"
+            ]
+          },
+          "keysExamined": 50,
+          "seeks": 1,
+          "dupsTested": 0,
+          "dupsDropped": 0,
+          "peakTrackedMemBytes": 0
+        }
+      }
+    },
+    "ts": "2026-11-25T18:29:55.264Z",
+    "client": "127.0.0.1",
+    "allUsers": [],
+    "user": ""
+  },
+  {
+    "op": "command",
+    "ns": "chatApp_loadtest.messages",
+    "isFromPriorityPortConnection": false,
+    "command": {
+      "aggregate": "messages",
+      "pipeline": [
+        {
+          "$match": {
+            "senderId": "6b072841aaf484a4dd32dce6"
+          }
+        },
+        {
+          "$group": {
+            "_id": "$receiverId",
+            "lastMessageTime": {
+              "$max": "$createdAt"
+            }
+          }
+        }
+      ],
+      "cursor": {},
+      "lsid": {
+        "id": "82b1dff8-495d-474d-a5df-7ca0e6d19c68"
+      },
+      "$db": "chatApp_loadtest"
+    },
+    "opid": 77292,
+    "keysExamined": 35,
+    "docsExamined": 0,
+    "peakTrackedMemBytes": 62,
+    "fromPlanCache": true,
+    "cursorExhausted": true,
+    "numYield": 0,
+    "nreturned": 1,
+    "planCacheShapeHash": "E72782FD",
+    "queryHash": "E72782FD",
+    "planCacheKey": "8AF984E3",
+    "queryShapeHash": "05E053F86C62F03DC2D952B6D21BCB9D8153B046A88E70A91AA72A8EA323BE5E",
+    "queryFramework": "sbe",
+    "locks": {
+      "Global": {
+        "acquireCount": {
+          "r": 2
+        }
+      }
+    },
+    "flowControl": {},
+    "storage": {
+      "timeWaitingMicros": {
+        "storageEngineMicros": 50
+      }
+    },
+    "responseLength": 164,
+    "protocol": "op_msg",
+    "millis": 5,
+    "planSummary": "IXSCAN { senderId: 1, receiverId: 1, createdAt: -1, _id: -1 }",
+    "planningTimeMicros": 3460,
+    "ts": "2026-11-25T18:29:21.764Z",
+    "client": "127.0.0.1",
+    "allUsers": [],
+    "user": ""
+  },
+  {
+    "op": "query",
+    "ns": "chatApp_loadtest.groupmessages",
+    "isFromPriorityPortConnection": false,
+    "command": {
+      "find": "groupmessages",
+      "filter": {
+        "groupId": "6b072842aaf484a4dd33a3a0"
+      },
+      "sort": {
+        "createdAt": -1,
+        "_id": -1
+      },
+      "skip": 0,
+      "limit": 50,
+      "lsid": {
+        "id": "40554425-5fb9-4a1b-8a3e-f23206e25f8c"
+      },
+      "$db": "chatApp_loadtest"
+    },
+    "opid": 177341,
+    "keysExamined": 50,
+    "docsExamined": 50,
+    "nBatches": 1,
+    "cursorExhausted": true,
+    "numYield": 0,
+    "nreturned": 50,
+    "planCacheShapeHash": "B5F3F147",
+    "queryHash": "B5F3F147",
+    "planCacheKey": "03CECC9F",
+    "queryShapeHash": "6F87C17F4AA61190BF92BDA9DA54B6FE1F0B1BDA4B966D207577E7A83CEEF91E",
+    "queryFramework": "classic",
+    "locks": {
+      "Global": {
+        "acquireCount": {
+          "r": 2
+        }
+      }
+    },
+    "flowControl": {},
+    "storage": {
+      "timeWaitingMicros": {
+        "storageEngineMicros": 236
+      }
+    },
+    "responseLength": 11209,
+    "protocol": "op_msg",
+    "millis": 5,
+    "planSummary": "IXSCAN { groupId: 1, createdAt: -1, _id: -1 }",
+    "planningTimeMicros": 4474,
+    "ts": "2026-11-25T18:30:03.560Z",
+    "client": "127.0.0.1",
+    "allUsers": [],
+    "user": ""
+  },
+  {
+    "op": "command",
+    "ns": "chatApp_loadtest.messages",
+    "isFromPriorityPortConnection": false,
+    "command": {
+      "aggregate": "messages",
+      "pipeline": [
+        {
+          "$match": {
+            "receiverId": "6b072841aaf484a4dd32dce6"
+          }
+        },
+        {
+          "$group": {
+            "_id": "$senderId",
+            "lastMessageTime": {
+              "$max": "$createdAt"
+            }
+          }
+        }
+      ],
+      "cursor": {},
+      "lsid": {
+        "id": "09d8fa0c-126b-4f91-ba67-0c9a9b4ec21f"
+      },
+      "$db": "chatApp_loadtest"
+    },
+    "opid": 80902,
+    "keysExamined": 0,
+    "docsExamined": 0,
+    "fromPlanCache": true,
+    "cursorExhausted": true,
+    "numYield": 0,
+    "nreturned": 0,
+    "planCacheShapeHash": "EFEB6015",
+    "queryHash": "EFEB6015",
+    "planCacheKey": "71CAF67B",
+    "queryShapeHash": "E2B5F0B7EA65FA6F24DE930FE6D2CAE7E99F5E73BEC915D980F4790466000F0C",
+    "queryFramework": "sbe",
+    "locks": {
+      "Global": {
+        "acquireCount": {
+          "r": 2
+        }
+      }
+    },
+    "flowControl": {},
+    "storage": {
+      "timeWaitingMicros": {
+        "storageEngineMicros": 236
+      }
+    },
+    "responseLength": 114,
+    "protocol": "op_msg",
+    "millis": 5,
+    "planSummary": "IXSCAN { receiverId: 1, senderId: 1, createdAt: -1, _id: -1 }",
+    "planningTimeMicros": 2793,
+    "ts": "2026-11-25T18:29:21.763Z",
+    "client": "127.0.0.1",
+    "allUsers": [],
+    "user": ""
+  },
+  {
+    "op": "command",
+    "ns": "chatApp_loadtest.messages",
+    "isFromPriorityPortConnection": false,
+    "command": {
+      "aggregate": "messages",
+      "pipeline": [
+        {
+          "$match": {
+            "senderId": "6b072841aaf484a4dd32deb1"
+          }
+        },
+        {
+          "$group": {
+            "_id": "$receiverId",
+            "lastMessageTime": {
+              "$max": "$createdAt"
+            }
+          }
+        }
+      ],
+      "cursor": {},
+      "lsid": {
+        "id": "7fd87ab1-e673-4776-8a78-0375b4fbf16a"
+      },
+      "$db": "chatApp_loadtest"
+    },
+    "opid": 97320,
+    "keysExamined": 35,
+    "docsExamined": 0,
+    "peakTrackedMemBytes": 62,
+    "fromPlanCache": true,
+    "cursorExhausted": true,
+    "numYield": 0,
+    "nreturned": 1,
+    "planCacheShapeHash": "E72782FD",
+    "queryHash": "E72782FD",
+    "planCacheKey": "8AF984E3",
+    "queryShapeHash": "05E053F86C62F03DC2D952B6D21BCB9D8153B046A88E70A91AA72A8EA323BE5E",
+    "queryFramework": "sbe",
+    "locks": {
+      "Global": {
+        "acquireCount": {
+          "r": 2
+        }
+      }
+    },
+    "flowControl": {},
+    "storage": {
+      "timeWaitingMicros": {
+        "storageEngineMicros": 1829
+      }
+    },
+    "responseLength": 164,
+    "protocol": "op_msg",
+    "millis": 5,
+    "planSummary": "IXSCAN { senderId: 1, receiverId: 1, createdAt: -1, _id: -1 }",
+    "planningTimeMicros": 4496,
+    "ts": "2026-11-25T18:29:25.115Z",
+    "client": "127.0.0.1",
+    "allUsers": [],
+    "user": ""
+  },
+  {
+    "op": "command",
+    "ns": "chatApp_loadtest.messages",
+    "isFromPriorityPortConnection": false,
+    "command": {
+      "aggregate": "messages",
+      "pipeline": [
+        {
+          "$match": {
+            "receiverId": "6b072841aaf484a4dd32de3d"
+          }
+        },
+        {
+          "$group": {
+            "_id": "$senderId",
+            "lastMessageTime": {
+              "$max": "$createdAt"
+            }
+          }
+        }
+      ],
+      "cursor": {},
+      "lsid": {
+        "id": "806dd069-acce-406b-9a33-a6f0415e2a4a"
+      },
+      "$db": "chatApp_loadtest"
+    },
+    "opid": 94212,
+    "keysExamined": 70,
+    "docsExamined": 0,
+    "peakTrackedMemBytes": 124,
+    "fromPlanCache": true,
+    "cursorExhausted": true,
+    "numYield": 0,
+    "nreturned": 2,
+    "planCacheShapeHash": "EFEB6015",
+    "queryHash": "EFEB6015",
+    "planCacheKey": "71CAF67B",
+    "queryShapeHash": "E2B5F0B7EA65FA6F24DE930FE6D2CAE7E99F5E73BEC915D980F4790466000F0C",
+    "queryFramework": "sbe",
+    "locks": {
+      "Global": {
+        "acquireCount": {
+          "r": 2
+        }
+      }
+    },
+    "flowControl": {},
+    "storage": {
+      "timeWaitingMicros": {
+        "storageEngineMicros": 60
+      }
+    },
+    "responseLength": 214,
+    "protocol": "op_msg",
+    "millis": 5,
+    "planSummary": "IXSCAN { receiverId: 1, senderId: 1, createdAt: -1, _id: -1 }",
+    "planningTimeMicros": 3054,
+    "ts": "2026-11-25T18:29:25.029Z",
+    "client": "127.0.0.1",
+    "allUsers": [],
+    "user": ""
+  },
+  {
+    "op": "command",
+    "ns": "chatApp_loadtest.messages",
+    "isFromPriorityPortConnection": false,
+    "command": {
+      "aggregate": "messages",
+      "pipeline": [
+        {
+          "$match": {
+            "receiverId": "6b072841aaf484a4dd32dd6f"
+          }
+        },
+        {
+          "$group": {
+            "_id": "$senderId",
+            "lastMessageTime": {
+              "$max": "$createdAt"
+            }
+          }
+        }
+      ],
+      "cursor": {},
+      "lsid": {
+        "id": "6c224cb6-dadf-4f95-97fd-c338b1da7a28"
+      },
+      "$db": "chatApp_loadtest"
+    },
+    "opid": 85065,
+    "keysExamined": 70,
+    "docsExamined": 0,
+    "peakTrackedMemBytes": 124,
+    "fromPlanCache": true,
+    "cursorExhausted": true,
+    "numYield": 0,
+    "nreturned": 2,
+    "planCacheShapeHash": "EFEB6015",
+    "queryHash": "EFEB6015",
+    "planCacheKey": "71CAF67B",
+    "queryShapeHash": "E2B5F0B7EA65FA6F24DE930FE6D2CAE7E99F5E73BEC915D980F4790466000F0C",
+    "queryFramework": "sbe",
+    "locks": {
+      "Global": {
+        "acquireCount": {
+          "r": 2
+        }
+      }
+    },
+    "flowControl": {},
+    "storage": {
+      "timeWaitingMicros": {
+        "storageEngineMicros": 1871
+      }
+    },
+    "responseLength": 214,
+    "protocol": "op_msg",
+    "millis": 5,
+    "planSummary": "IXSCAN { receiverId: 1, senderId: 1, createdAt: -1, _id: -1 }",
+    "planningTimeMicros": 5270,
+    "ts": "2026-11-25T18:29:25.343Z",
+    "client": "127.0.0.1",
+    "allUsers": [],
+    "user": ""
+  },
+  {
+    "op": "command",
+    "ns": "chatApp_loadtest.messages",
+    "isFromPriorityPortConnection": false,
+    "command": {
+      "aggregate": "messages",
+      "pipeline": [
+        {
+          "$match": {
+            "receiverId": "6b072841aaf484a4dd32dcd2"
+          }
+        },
+        {
+          "$group": {
+            "_id": "$senderId",
+            "lastMessageTime": {
+              "$max": "$createdAt"
+            }
+          }
+        }
+      ],
+      "cursor": {},
+      "lsid": {
+        "id": "82b1dff8-495d-474d-a5df-7ca0e6d19c68"
+      },
+      "$db": "chatApp_loadtest"
+    },
+    "opid": 80033,
+    "keysExamined": 0,
+    "docsExamined": 0,
+    "fromPlanCache": true,
+    "cursorExhausted": true,
+    "numYield": 0,
+    "nreturned": 0,
+    "planCacheShapeHash": "EFEB6015",
+    "queryHash": "EFEB6015",
+    "planCacheKey": "71CAF67B",
+    "queryShapeHash": "E2B5F0B7EA65FA6F24DE930FE6D2CAE7E99F5E73BEC915D980F4790466000F0C",
+    "queryFramework": "sbe",
+    "locks": {
+      "Global": {
+        "acquireCount": {
+          "r": 2
+        }
+      }
+    },
+    "flowControl": {},
+    "storage": {
+      "timeWaitingMicros": {
+        "storageEngineMicros": 100
+      }
+    },
+    "responseLength": 114,
+    "protocol": "op_msg",
+    "millis": 5,
+    "planSummary": "IXSCAN { receiverId: 1, senderId: 1, createdAt: -1, _id: -1 }",
+    "planningTimeMicros": 3410,
+    "ts": "2026-11-25T18:29:24.898Z",
+    "client": "127.0.0.1",
+    "allUsers": [],
+    "user": ""
+  },
+  {
+    "op": "command",
+    "ns": "chatApp_loadtest.messages",
+    "isFromPriorityPortConnection": false,
+    "command": {
+      "aggregate": "messages",
+      "pipeline": [
+        {
+          "$match": {
+            "senderId": "6b072841aaf484a4dd32dd57"
+          }
+        },
+        {
+          "$group": {
+            "_id": "$receiverId",
+            "lastMessageTime": {
+              "$max": "$createdAt"
+            }
+          }
+        }
+      ],
+      "cursor": {},
+      "lsid": {
+        "id": "f7ad4ff6-d6be-4c92-997b-78da8b26d15f"
+      },
+      "$db": "chatApp_loadtest"
+    },
+    "opid": 79900,
+    "keysExamined": 35,
+    "docsExamined": 0,
+    "peakTrackedMemBytes": 62,
+    "fromPlanCache": true,
+    "cursorExhausted": true,
+    "numYield": 0,
+    "nreturned": 1,
+    "planCacheShapeHash": "E72782FD",
+    "queryHash": "E72782FD",
+    "planCacheKey": "8AF984E3",
+    "queryShapeHash": "05E053F86C62F03DC2D952B6D21BCB9D8153B046A88E70A91AA72A8EA323BE5E",
+    "queryFramework": "sbe",
+    "locks": {
+      "Global": {
+        "acquireCount": {
+          "r": 2
+        }
+      }
+    },
+    "flowControl": {},
+    "storage": {
+      "timeWaitingMicros": {
+        "storageEngineMicros": 28
+      }
+    },
+    "responseLength": 164,
+    "protocol": "op_msg",
+    "millis": 5,
+    "planSummary": "IXSCAN { senderId: 1, receiverId: 1, createdAt: -1, _id: -1 }",
+    "planningTimeMicros": 4863,
+    "ts": "2026-11-25T18:29:20.772Z",
+    "client": "127.0.0.1",
+    "allUsers": [],
+    "user": ""
+  },
+  {
+    "op": "command",
+    "ns": "chatApp_loadtest.messages",
+    "isFromPriorityPortConnection": false,
+    "command": {
+      "aggregate": "messages",
+      "pipeline": [
+        {
+          "$match": {
+            "senderId": "6b072841aaf484a4dd32de71"
+          }
+        },
+        {
+          "$group": {
+            "_id": "$receiverId",
+            "lastMessageTime": {
+              "$max": "$createdAt"
+            }
+          }
+        }
+      ],
+      "cursor": {},
+      "lsid": {
+        "id": "4b23ca90-1a53-4886-96dc-3ca415d7794f"
+      },
+      "$db": "chatApp_loadtest"
+    },
+    "opid": 103432,
+    "keysExamined": 35,
+    "docsExamined": 0,
+    "peakTrackedMemBytes": 62,
+    "fromPlanCache": true,
+    "cursorExhausted": true,
+    "numYield": 0,
+    "nreturned": 1,
+    "planCacheShapeHash": "E72782FD",
+    "queryHash": "E72782FD",
+    "planCacheKey": "8AF984E3",
+    "queryShapeHash": "05E053F86C62F03DC2D952B6D21BCB9D8153B046A88E70A91AA72A8EA323BE5E",
+    "queryFramework": "sbe",
+    "locks": {
+      "Global": {
+        "acquireCount": {
+          "r": 2
+        }
+      }
+    },
+    "flowControl": {},
+    "storage": {
+      "timeWaitingMicros": {
+        "storageEngineMicros": 58
+      }
+    },
+    "responseLength": 164,
+    "protocol": "op_msg",
+    "millis": 5,
+    "planSummary": "IXSCAN { senderId: 1, receiverId: 1, createdAt: -1, _id: -1 }",
+    "planningTimeMicros": 4075,
+    "ts": "2026-11-25T18:29:24.774Z",
+    "client": "127.0.0.1",
+    "allUsers": [],
+    "user": ""
+  },
+  {
+    "op": "query",
+    "ns": "chatApp_loadtest.groups",
+    "isFromPriorityPortConnection": false,
+    "command": {
+      "find": "groups",
+      "filter": {
+        "_id": "6b072842aaf484a4dd33a3a0",
+        "members": "6b072841aaf484a4dd32dc69"
+      },
+      "limit": 1,
+      "singleBatch": true,
+      "lsid": {
+        "id": "ed9d6d4d-9cb7-4d1f-afd7-5aafee1a3e35"
+      },
+      "$db": "chatApp_loadtest"
+    },
+    "opid": 279661,
+    "keysExamined": 1,
+    "docsExamined": 1,
+    "nBatches": 1,
+    "cursorExhausted": true,
+    "numYield": 0,
+    "nreturned": 1,
+    "planCacheShapeHash": "09BBEDC3",
+    "queryHash": "09BBEDC3",
+    "planCacheKey": "5B451562",
+    "queryShapeHash": "B1FAF749BD0EDC0241221854B6AB05A087F4B1CB3640DDEF64E79A45D42C5BA8",
+    "queryFramework": "classic",
+    "locks": {
+      "Global": {
+        "acquireCount": {
+          "r": 2
+        }
+      }
+    },
+    "flowControl": {},
+    "storage": {
+      "timeWaitingMicros": {
+        "storageEngineMicros": 125
+      }
+    },
+    "responseLength": 609,
+    "protocol": "op_msg",
+    "millis": 5,
+    "planSummary": "IXSCAN { _id: 1 }",
+    "planningTimeMicros": 3964,
+    "ts": "2026-11-25T18:30:44.357Z",
+    "client": "127.0.0.1",
+    "allUsers": [],
+    "user": ""
+  },
+  {
+    "op": "command",
+    "ns": "chatApp_loadtest.messages",
+    "isFromPriorityPortConnection": false,
+    "command": {
+      "aggregate": "messages",
+      "pipeline": [
+        {
+          "$match": {
+            "receiverId": "6b072841aaf484a4dd32dcd3"
+          }
+        },
+        {
+          "$group": {
+            "_id": "$senderId",
+            "lastMessageTime": {
+              "$max": "$createdAt"
+            }
+          }
+        }
+      ],
+      "cursor": {},
+      "lsid": {
+        "id": "e61670fb-3426-4b7a-8b0f-b0a1669229cb"
+      },
+      "$db": "chatApp_loadtest"
+    },
+    "opid": 96279,
+    "keysExamined": 70,
+    "docsExamined": 0,
+    "peakTrackedMemBytes": 124,
+    "fromPlanCache": true,
+    "cursorExhausted": true,
+    "numYield": 0,
+    "nreturned": 2,
+    "planCacheShapeHash": "EFEB6015",
+    "queryHash": "EFEB6015",
+    "planCacheKey": "71CAF67B",
+    "queryShapeHash": "E2B5F0B7EA65FA6F24DE930FE6D2CAE7E99F5E73BEC915D980F4790466000F0C",
+    "queryFramework": "sbe",
+    "locks": {
+      "Global": {
+        "acquireCount": {
+          "r": 2
+        }
+      }
+    },
+    "flowControl": {},
+    "storage": {
+      "timeWaitingMicros": {
+        "storageEngineMicros": 54
+      }
+    },
+    "responseLength": 214,
+    "protocol": "op_msg",
+    "millis": 5,
+    "planSummary": "IXSCAN { receiverId: 1, senderId: 1, createdAt: -1, _id: -1 }",
+    "planningTimeMicros": 3082,
+    "ts": "2026-11-25T18:29:25.691Z",
+    "client": "127.0.0.1",
+    "allUsers": [],
+    "user": ""
+  },
+  {
+    "op": "command",
+    "ns": "chatApp_loadtest.messages",
+    "isFromPriorityPortConnection": false,
+    "command": {
+      "aggregate": "messages",
+      "pipeline": [
+        {
+          "$match": {
+            "senderId": "6b072841aaf484a4dd32dcd3"
+          }
+        },
+        {
+          "$group": {
+            "_id": "$receiverId",
+            "lastMessageTime": {
+              "$max": "$createdAt"
+            }
+          }
+        }
+      ],
+      "cursor": {},
+      "lsid": {
+        "id": "7fd87ab1-e673-4776-8a78-0375b4fbf16a"
+      },
+      "$db": "chatApp_loadtest"
+    },
+    "opid": 97325,
+    "keysExamined": 35,
+    "docsExamined": 0,
+    "peakTrackedMemBytes": 62,
+    "fromPlanCache": true,
+    "cursorExhausted": true,
+    "numYield": 0,
+    "nreturned": 1,
+    "planCacheShapeHash": "E72782FD",
+    "queryHash": "E72782FD",
+    "planCacheKey": "8AF984E3",
+    "queryShapeHash": "05E053F86C62F03DC2D952B6D21BCB9D8153B046A88E70A91AA72A8EA323BE5E",
+    "queryFramework": "sbe",
+    "locks": {
+      "Global": {
+        "acquireCount": {
+          "r": 2
+        }
+      }
+    },
+    "flowControl": {},
+    "storage": {
+      "timeWaitingMicros": {
+        "storageEngineMicros": 1153
+      }
+    },
+    "responseLength": 164,
+    "protocol": "op_msg",
+    "millis": 5,
+    "planSummary": "IXSCAN { senderId: 1, receiverId: 1, createdAt: -1, _id: -1 }",
+    "planningTimeMicros": 3084,
+    "ts": "2026-11-25T18:29:25.691Z",
+    "client": "127.0.0.1",
+    "allUsers": [],
+    "user": ""
+  },
+  {
+    "op": "query",
+    "ns": "chatApp_loadtest.groupmessages",
+    "isFromPriorityPortConnection": false,
+    "command": {
+      "find": "groupmessages",
+      "filter": {
+        "groupId": "6b072842aaf484a4dd33a3a0"
+      },
+      "sort": {
+        "createdAt": -1,
+        "_id": -1
+      },
+      "skip": 0,
+      "limit": 50,
+      "lsid": {
+        "id": "cfd48bb7-4e85-47fa-ac4c-8850e61a5c30"
+      },
+      "$db": "chatApp_loadtest"
+    },
+    "opid": 273678,
+    "keysExamined": 50,
+    "docsExamined": 50,
+    "nBatches": 1,
+    "cursorExhausted": true,
+    "numYield": 0,
+    "nreturned": 50,
+    "planCacheShapeHash": "B5F3F147",
+    "queryHash": "B5F3F147",
+    "planCacheKey": "03CECC9F",
+    "queryShapeHash": "6F87C17F4AA61190BF92BDA9DA54B6FE1F0B1BDA4B966D207577E7A83CEEF91E",
+    "queryFramework": "classic",
+    "locks": {
+      "Global": {
+        "acquireCount": {
+          "r": 2
+        }
+      }
+    },
+    "flowControl": {},
+    "storage": {
+      "timeWaitingMicros": {
+        "storageEngineMicros": 104
+      }
+    },
+    "responseLength": 11209,
+    "protocol": "op_msg",
+    "millis": 5,
+    "planSummary": "IXSCAN { groupId: 1, createdAt: -1, _id: -1 }",
+    "planningTimeMicros": 509,
+    "execStats": {
+      "isCached": false,
+      "stage": "LIMIT",
+      "nReturned": 50,
+      "executionTimeMillisEstimate": 0,
+      "works": 51,
+      "advanced": 50,
+      "needTime": 0,
+      "needYield": 0,
+      "saveState": 0,
+      "restoreState": 0,
+      "isEOF": 1,
+      "limitAmount": 50,
+      "inputStage": {
+        "stage": "FETCH",
+        "nReturned": 50,
+        "executionTimeMillisEstimate": 0,
+        "works": 50,
+        "advanced": 50,
+        "needTime": 0,
+        "needYield": 0,
+        "saveState": 0,
+        "restoreState": 0,
+        "isEOF": 0,
+        "docsExamined": 50,
+        "alreadyHasObj": 0,
+        "inputStage": {
+          "stage": "IXSCAN",
+          "nReturned": 50,
+          "executionTimeMillisEstimate": 0,
+          "works": 50,
+          "advanced": 50,
+          "needTime": 0,
+          "needYield": 0,
+          "saveState": 0,
+          "restoreState": 0,
+          "isEOF": 0,
+          "keyPattern": {
+            "groupId": 1,
+            "createdAt": -1,
+            "_id": -1
+          },
+          "indexName": "groupId_1_createdAt_-1__id_-1",
+          "isMultiKey": false,
+          "multiKeyPaths": {
+            "groupId": [],
+            "createdAt": [],
+            "_id": []
+          },
+          "isUnique": false,
+          "isSparse": false,
+          "isPartial": false,
+          "indexVersion": 2,
+          "direction": "forward",
+          "indexBounds": {
+            "groupId": [
+              "[ObjectId('6b072842aaf484a4dd33a3a0'), ObjectId('6b072842aaf484a4dd33a3a0')]"
+            ],
+            "createdAt": [
+              "[MaxKey, MinKey]"
+            ],
+            "_id": [
+              "[MaxKey, MinKey]"
+            ]
+          },
+          "keysExamined": 50,
+          "seeks": 1,
+          "dupsTested": 0,
+          "dupsDropped": 0,
+          "peakTrackedMemBytes": 0
+        }
+      }
+    },
+    "ts": "2026-11-25T18:30:46.506Z",
+    "client": "127.0.0.1",
+    "allUsers": [],
+    "user": ""
+  },
+  {
+    "op": "query",
+    "ns": "chatApp_loadtest.groupmessages",
+    "isFromPriorityPortConnection": false,
+    "command": {
+      "find": "groupmessages",
+      "filter": {
+        "groupId": "6b072842aaf484a4dd33a3a0"
+      },
+      "sort": {
+        "createdAt": -1,
+        "_id": -1
+      },
+      "skip": 0,
+      "limit": 50,
+      "lsid": {
+        "id": "6cdac376-4b75-440c-8e82-2049b1c58ee5"
+      },
+      "$db": "chatApp_loadtest"
+    },
+    "opid": 305225,
+    "keysExamined": 50,
+    "docsExamined": 50,
+    "nBatches": 1,
+    "cursorExhausted": true,
+    "numYield": 0,
+    "nreturned": 50,
+    "planCacheShapeHash": "B5F3F147",
+    "queryHash": "B5F3F147",
+    "planCacheKey": "03CECC9F",
+    "queryShapeHash": "6F87C17F4AA61190BF92BDA9DA54B6FE1F0B1BDA4B966D207577E7A83CEEF91E",
+    "queryFramework": "classic",
+    "locks": {
+      "Global": {
+        "acquireCount": {
+          "r": 2
+        }
+      }
+    },
+    "flowControl": {},
+    "storage": {
+      "timeWaitingMicros": {
+        "storageEngineMicros": 82
+      }
+    },
+    "responseLength": 11209,
+    "protocol": "op_msg",
+    "millis": 5,
+    "planSummary": "IXSCAN { groupId: 1, createdAt: -1, _id: -1 }",
+    "planningTimeMicros": 3811,
+    "execStats": {
+      "isCached": false,
+      "stage": "LIMIT",
+      "nReturned": 50,
+      "executionTimeMillisEstimate": 1,
+      "works": 51,
+      "advanced": 50,
+      "needTime": 0,
+      "needYield": 0,
+      "saveState": 0,
+      "restoreState": 0,
+      "isEOF": 1,
+      "limitAmount": 50,
+      "inputStage": {
+        "stage": "FETCH",
+        "nReturned": 50,
+        "executionTimeMillisEstimate": 1,
+        "works": 50,
+        "advanced": 50,
+        "needTime": 0,
+        "needYield": 0,
+        "saveState": 0,
+        "restoreState": 0,
+        "isEOF": 0,
+        "docsExamined": 50,
+        "alreadyHasObj": 0,
+        "inputStage": {
+          "stage": "IXSCAN",
+          "nReturned": 50,
+          "executionTimeMillisEstimate": 1,
+          "works": 50,
+          "advanced": 50,
+          "needTime": 0,
+          "needYield": 0,
+          "saveState": 0,
+          "restoreState": 0,
+          "isEOF": 0,
+          "keyPattern": {
+            "groupId": 1,
+            "createdAt": -1,
+            "_id": -1
+          },
+          "indexName": "groupId_1_createdAt_-1__id_-1",
+          "isMultiKey": false,
+          "multiKeyPaths": {
+            "groupId": [],
+            "createdAt": [],
+            "_id": []
+          },
+          "isUnique": false,
+          "isSparse": false,
+          "isPartial": false,
+          "indexVersion": 2,
+          "direction": "forward",
+          "indexBounds": {
+            "groupId": [
+              "[ObjectId('6b072842aaf484a4dd33a3a0'), ObjectId('6b072842aaf484a4dd33a3a0')]"
+            ],
+            "createdAt": [
+              "[MaxKey, MinKey]"
+            ],
+            "_id": [
+              "[MaxKey, MinKey]"
+            ]
+          },
+          "keysExamined": 50,
+          "seeks": 1,
+          "dupsTested": 0,
+          "dupsDropped": 0,
+          "peakTrackedMemBytes": 0
+        }
+      }
+    },
+    "ts": "2026-11-25T18:30:47.073Z",
+    "client": "127.0.0.1",
+    "allUsers": [],
+    "user": ""
+  },
+  {
+    "op": "query",
+    "ns": "chatApp_loadtest.groupmessages",
+    "isFromPriorityPortConnection": false,
+    "command": {
+      "find": "groupmessages",
+      "filter": {
+        "groupId": "6b072842aaf484a4dd33a3a0"
+      },
+      "sort": {
+        "createdAt": -1,
+        "_id": -1
+      },
+      "skip": 0,
+      "limit": 50,
+      "lsid": {
+        "id": "82e782e3-4670-483e-b522-4f845a3028f8"
+      },
+      "$db": "chatApp_loadtest"
+    },
+    "opid": 348169,
+    "keysExamined": 50,
+    "docsExamined": 50,
+    "nBatches": 1,
+    "cursorExhausted": true,
+    "numYield": 0,
+    "nreturned": 50,
+    "planCacheShapeHash": "B5F3F147",
+    "queryHash": "B5F3F147",
+    "planCacheKey": "03CECC9F",
+    "queryShapeHash": "6F87C17F4AA61190BF92BDA9DA54B6FE1F0B1BDA4B966D207577E7A83CEEF91E",
+    "queryFramework": "classic",
+    "locks": {
+      "Global": {
+        "acquireCount": {
+          "r": 2
+        }
+      }
+    },
+    "flowControl": {},
+    "storage": {
+      "timeWaitingMicros": {
+        "storageEngineMicros": 116
+      }
+    },
+    "responseLength": 11209,
+    "protocol": "op_msg",
+    "millis": 5,
+    "planSummary": "IXSCAN { groupId: 1, createdAt: -1, _id: -1 }",
+    "planningTimeMicros": 1496,
+    "execStats": {
+      "isCached": false,
+      "stage": "LIMIT",
+      "nReturned": 50,
+      "executionTimeMillisEstimate": 0,
+      "works": 51,
+      "advanced": 50,
+      "needTime": 0,
+      "needYield": 0,
+      "saveState": 0,
+      "restoreState": 0,
+      "isEOF": 1,
+      "limitAmount": 50,
+      "inputStage": {
+        "stage": "FETCH",
+        "nReturned": 50,
+        "executionTimeMillisEstimate": 0,
+        "works": 50,
+        "advanced": 50,
+        "needTime": 0,
+        "needYield": 0,
+        "saveState": 0,
+        "restoreState": 0,
+        "isEOF": 0,
+        "docsExamined": 50,
+        "alreadyHasObj": 0,
+        "inputStage": {
+          "stage": "IXSCAN",
+          "nReturned": 50,
+          "executionTimeMillisEstimate": 0,
+          "works": 50,
+          "advanced": 50,
+          "needTime": 0,
+          "needYield": 0,
+          "saveState": 0,
+          "restoreState": 0,
+          "isEOF": 0,
+          "keyPattern": {
+            "groupId": 1,
+            "createdAt": -1,
+            "_id": -1
+          },
+          "indexName": "groupId_1_createdAt_-1__id_-1",
+          "isMultiKey": false,
+          "multiKeyPaths": {
+            "groupId": [],
+            "createdAt": [],
+            "_id": []
+          },
+          "isUnique": false,
+          "isSparse": false,
+          "isPartial": false,
+          "indexVersion": 2,
+          "direction": "forward",
+          "indexBounds": {
+            "groupId": [
+              "[ObjectId('6b072842aaf484a4dd33a3a0'), ObjectId('6b072842aaf484a4dd33a3a0')]"
+            ],
+            "createdAt": [
+              "[MaxKey, MinKey]"
+            ],
+            "_id": [
+              "[MaxKey, MinKey]"
+            ]
+          },
+          "keysExamined": 50,
+          "seeks": 1,
+          "dupsTested": 0,
+          "dupsDropped": 0,
+          "peakTrackedMemBytes": 0
+        }
+      }
+    },
+    "ts": "2026-11-25T18:30:48.848Z",
+    "client": "127.0.0.1",
+    "allUsers": [],
+    "user": ""
+  },
+  {
+    "op": "command",
+    "ns": "chatApp_loadtest.messages",
+    "isFromPriorityPortConnection": false,
+    "command": {
+      "aggregate": "messages",
+      "pipeline": [
+        {
+          "$match": {
+            "receiverId": "6b072841aaf484a4dd32de71"
+          }
+        },
+        {
+          "$group": {
+            "_id": "$senderId",
+            "lastMessageTime": {
+              "$max": "$createdAt"
+            }
+          }
+        }
+      ],
+      "cursor": {},
+      "lsid": {
+        "id": "e61670fb-3426-4b7a-8b0f-b0a1669229cb"
+      },
+      "$db": "chatApp_loadtest"
+    },
+    "opid": 96272,
+    "keysExamined": 70,
+    "docsExamined": 0,
+    "peakTrackedMemBytes": 124,
+    "fromPlanCache": true,
+    "cursorExhausted": true,
+    "numYield": 0,
+    "nreturned": 2,
+    "planCacheShapeHash": "EFEB6015",
+    "queryHash": "EFEB6015",
+    "planCacheKey": "71CAF67B",
+    "queryShapeHash": "E2B5F0B7EA65FA6F24DE930FE6D2CAE7E99F5E73BEC915D980F4790466000F0C",
+    "queryFramework": "sbe",
+    "locks": {
+      "Global": {
+        "acquireCount": {
+          "r": 2
+        }
+      }
+    },
+    "flowControl": {},
+    "storage": {
+      "timeWaitingMicros": {
+        "storageEngineMicros": 57
+      }
+    },
+    "responseLength": 214,
+    "protocol": "op_msg",
+    "millis": 5,
+    "planSummary": "IXSCAN { receiverId: 1, senderId: 1, createdAt: -1, _id: -1 }",
+    "planningTimeMicros": 3771,
+    "ts": "2026-11-25T18:29:24.772Z",
+    "client": "127.0.0.1",
+    "allUsers": [],
+    "user": ""
+  },
+  {
+    "op": "command",
+    "ns": "chatApp_loadtest.messages",
+    "isFromPriorityPortConnection": false,
+    "command": {
+      "aggregate": "messages",
+      "pipeline": [
+        {
+          "$match": {
+            "receiverId": "6b072841aaf484a4dd32de33"
+          }
+        },
+        {
+          "$group": {
+            "_id": "$senderId",
+            "lastMessageTime": {
+              "$max": "$createdAt"
+            }
+          }
+        }
+      ],
+      "cursor": {},
+      "lsid": {
+        "id": "a05744ca-6495-4720-b97a-aa52b3ad6c4a"
+      },
+      "$db": "chatApp_loadtest"
+    },
+    "opid": 104466,
+    "keysExamined": 70,
+    "docsExamined": 0,
+    "peakTrackedMemBytes": 124,
+    "fromPlanCache": true,
+    "cursorExhausted": true,
+    "numYield": 0,
+    "nreturned": 2,
+    "planCacheShapeHash": "EFEB6015",
+    "queryHash": "EFEB6015",
+    "planCacheKey": "71CAF67B",
+    "queryShapeHash": "E2B5F0B7EA65FA6F24DE930FE6D2CAE7E99F5E73BEC915D980F4790466000F0C",
+    "queryFramework": "sbe",
+    "locks": {
+      "Global": {
+        "acquireCount": {
+          "r": 2
+        }
+      }
+    },
+    "flowControl": {},
+    "storage": {
+      "timeWaitingMicros": {
+        "storageEngineMicros": 80
+      }
+    },
+    "responseLength": 214,
+    "protocol": "op_msg",
+    "millis": 5,
+    "planSummary": "IXSCAN { receiverId: 1, senderId: 1, createdAt: -1, _id: -1 }",
+    "planningTimeMicros": 4384,
+    "ts": "2026-11-25T18:29:24.440Z",
+    "client": "127.0.0.1",
+    "allUsers": [],
+    "user": ""
+  },
+  {
+    "op": "query",
+    "ns": "chatApp_loadtest.groupmessages",
+    "isFromPriorityPortConnection": false,
+    "command": {
+      "find": "groupmessages",
+      "filter": {
+        "groupId": "6b072842aaf484a4dd33a3a0"
+      },
+      "sort": {
+        "createdAt": -1,
+        "_id": -1
+      },
+      "skip": 0,
+      "limit": 50,
+      "lsid": {
+        "id": "9cab675a-da16-4cf1-bb9d-7665f7387dc8"
+      },
+      "$db": "chatApp_loadtest"
+    },
+    "opid": 365932,
+    "keysExamined": 50,
+    "docsExamined": 50,
+    "nBatches": 1,
+    "cursorExhausted": true,
+    "numYield": 0,
+    "nreturned": 50,
+    "planCacheShapeHash": "B5F3F147",
+    "queryHash": "B5F3F147",
+    "planCacheKey": "03CECC9F",
+    "queryShapeHash": "6F87C17F4AA61190BF92BDA9DA54B6FE1F0B1BDA4B966D207577E7A83CEEF91E",
+    "queryFramework": "classic",
+    "locks": {
+      "Global": {
+        "acquireCount": {
+          "r": 2
+        }
+      }
+    },
+    "flowControl": {},
+    "storage": {
+      "timeWaitingMicros": {
+        "storageEngineMicros": 174
+      }
+    },
+    "responseLength": 11209,
+    "protocol": "op_msg",
+    "millis": 5,
+    "planSummary": "IXSCAN { groupId: 1, createdAt: -1, _id: -1 }",
+    "planningTimeMicros": 2846,
+    "execStats": {
+      "isCached": false,
+      "stage": "LIMIT",
+      "nReturned": 50,
+      "executionTimeMillisEstimate": 0,
+      "works": 51,
+      "advanced": 50,
+      "needTime": 0,
+      "needYield": 0,
+      "saveState": 0,
+      "restoreState": 0,
+      "isEOF": 1,
+      "limitAmount": 50,
+      "inputStage": {
+        "stage": "FETCH",
+        "nReturned": 50,
+        "executionTimeMillisEstimate": 0,
+        "works": 50,
+        "advanced": 50,
+        "needTime": 0,
+        "needYield": 0,
+        "saveState": 0,
+        "restoreState": 0,
+        "isEOF": 0,
+        "docsExamined": 50,
+        "alreadyHasObj": 0,
+        "inputStage": {
+          "stage": "IXSCAN",
+          "nReturned": 50,
+          "executionTimeMillisEstimate": 0,
+          "works": 50,
+          "advanced": 50,
+          "needTime": 0,
+          "needYield": 0,
+          "saveState": 0,
+          "restoreState": 0,
+          "isEOF": 0,
+          "keyPattern": {
+            "groupId": 1,
+            "createdAt": -1,
+            "_id": -1
+          },
+          "indexName": "groupId_1_createdAt_-1__id_-1",
+          "isMultiKey": false,
+          "multiKeyPaths": {
+            "groupId": [],
+            "createdAt": [],
+            "_id": []
+          },
+          "isUnique": false,
+          "isSparse": false,
+          "isPartial": false,
+          "indexVersion": 2,
+          "direction": "forward",
+          "indexBounds": {
+            "groupId": [
+              "[ObjectId('6b072842aaf484a4dd33a3a0'), ObjectId('6b072842aaf484a4dd33a3a0')]"
+            ],
+            "createdAt": [
+              "[MaxKey, MinKey]"
+            ],
+            "_id": [
+              "[MaxKey, MinKey]"
+            ]
+          },
+          "keysExamined": 50,
+          "seeks": 1,
+          "dupsTested": 0,
+          "dupsDropped": 0,
+          "peakTrackedMemBytes": 0
+        }
+      }
+    },
+    "ts": "2026-11-25T18:31:13.886Z",
+    "client": "127.0.0.1",
+    "allUsers": [],
+    "user": ""
+  }
+]

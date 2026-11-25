@@ -1,7 +1,15 @@
 const mongoose = require("mongoose");
 const User = require("../models/User");
 const jwt = require("jsonwebtoken");
-const bcrypt = require("bcryptjs");
+const {
+  getJwtKey,
+  invalidateUserCache,
+  getCachedDirectoryTop,
+  getCachedContactsPage,
+  setCachedContactsPage,
+  invalidateDirectoryCache,
+} = require("../services/authCache");
+const { hashPassword, comparePassword } = require("../services/passwordHasher");
 const { verifyFirebaseIdToken } = require("../services/firebaseAuth");
 
 const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -13,7 +21,7 @@ const signAuthToken = (user) =>
       fullName: user.fullName,
       email: user.email,
     },
-    process.env.JWT_SECRET,
+    getJwtKey(),
     { expiresIn: "365d" }
   );
 
@@ -57,12 +65,13 @@ const signUp = async (req, res) => {
       });
     }
 
-    const hashedPassword = await bcrypt.hash(password, 10);
+    const hashedPassword = await hashPassword(password, 10);
     const newUser = await User.create({
       fullName: trimmedName,
       email: normalizedEmail,
       password: hashedPassword,
     });
+    invalidateDirectoryCache();
 
     res.status(201).json({
       message: "User created successfully",
@@ -103,7 +112,7 @@ const login = async (req, res) => {
       return res.status(400).json({ message: "Please login with Google" });
     }
 
-    const isMatch = await bcrypt.compare(password, user.password);
+    const isMatch = await comparePassword(password, user.password);
     if (!isMatch) {
       return res.status(400).json({
         message: "Password or username incorrect",
@@ -232,6 +241,8 @@ const updateProfile = async (req, res) => {
       return res.status(404).json({ message: "User not found" });
     }
 
+    invalidateUserCache(userId);
+
     res.status(200).json({
       message: "Profile updated successfully",
       data: updateUser.toJSON(),
@@ -242,54 +253,144 @@ const updateProfile = async (req, res) => {
   }
 };
 
+const compareContactNames = (a, b) => {
+  const nameA = (a.fullName || "").toLowerCase();
+  const nameB = (b.fullName || "").toLowerCase();
+  if (nameA < nameB) return -1;
+  if (nameA > nameB) return 1;
+  return 0;
+};
+
 const getAllContacts = async (req, res) => {
   try {
     const loginUserId = new mongoose.Types.ObjectId(req.user._id);
+    const loginUserStr = loginUserId.toString();
+    const limit = Math.min(Math.max(parseInt(req.query.limit, 10) || 30, 1), 100);
+    const page = Math.max(parseInt(req.query.page, 10) || 1, 1);
+    const skip = (page - 1) * limit;
 
-    // 1. Get all recent messages for this user efficiently using separate indexed branches
-    const recentMessages = await mongoose.model("Message").aggregate([
-      {
-        $match: {
-          $or: [{ senderId: loginUserId }, { receiverId: loginUserId }],
-        },
-      },
-      {
-        $group: {
-          _id: {
-            $cond: [
-              { $eq: ["$senderId", loginUserId] },
-              "$receiverId",
-              "$senderId",
-            ],
-          },
-          lastMessageTime: { $max: "$createdAt" },
-        },
-      },
+    const cached = getCachedContactsPage(loginUserStr, page, limit);
+    if (cached) {
+      return res.status(200).json({
+        message: "Fetched all contacts",
+        user: cached,
+      });
+    }
+
+    // 1. Fetch last message timestamps per partner via raw driver covered index scans
+    const MessageModel = mongoose.model("Message");
+    const runAggregate = (pipeline) =>
+      MessageModel.collection
+        ? MessageModel.collection.aggregate(pipeline).toArray()
+        : MessageModel.aggregate(pipeline);
+
+    const [sentStats, receivedStats] = await Promise.all([
+      runAggregate([
+        { $match: { senderId: loginUserId } },
+        { $group: { _id: "$receiverId", lastMessageTime: { $max: "$createdAt" } } },
+      ]),
+      runAggregate([
+        { $match: { receiverId: loginUserId } },
+        { $group: { _id: "$senderId", lastMessageTime: { $max: "$createdAt" } } },
+      ]),
     ]);
 
     const lastMessageMap = new Map();
-    recentMessages.forEach((msg) => {
-      if (msg._id) {
-        lastMessageMap.set(msg._id.toString(), msg.lastMessageTime);
+    const recordPartners = (rows) => {
+      for (const row of rows) {
+        if (!row._id) continue;
+        const partnerId = row._id.toString();
+        if (partnerId === loginUserStr) continue;
+        const ts = row.lastMessageTime ? new Date(row.lastMessageTime).getTime() : 0;
+        const prev = lastMessageMap.get(partnerId) || 0;
+        if (ts > prev) {
+          lastMessageMap.set(partnerId, ts);
+        }
       }
-    });
+    };
+    recordPartners(sentStats);
+    recordPartners(receivedStats);
 
-    // 2. Get all other users
-    const users = await User.find({ _id: { $ne: loginUserId } })
-      .select("-password")
-      .lean();
+    const partnerIds = Array.from(lastMessageMap.keys()).map(
+      (id) => new mongoose.Types.ObjectId(id)
+    );
 
-    // 3. Sort in memory by lastMessageTime descending, then fullName ascending
-    users.sort((a, b) => {
-      const timeA = lastMessageMap.get(a._id.toString())?.getTime() || 0;
-      const timeB = lastMessageMap.get(b._id.toString())?.getTime() || 0;
-      if (timeB !== timeA) return timeB - timeA;
-      return (a.fullName || "").localeCompare(b.fullName || "");
-    });
+    // 2. Sort only active conversation partners by recency
+    let partnerSlice = [];
+    if (partnerIds.length > 0 && skip < partnerIds.length) {
+      const partnerUsers = User.collection
+        ? await User.collection
+            .find(
+              { _id: { $in: partnerIds } },
+              { projection: { fullName: 1, email: 1, profilePic: 1 } }
+            )
+            .toArray()
+        : await User.find({ _id: { $in: partnerIds } })
+            .select("fullName email profilePic")
+            .lean();
+
+      partnerUsers.sort((a, b) => {
+        const timeA = lastMessageMap.get(a._id.toString()) || 0;
+        const timeB = lastMessageMap.get(b._id.toString()) || 0;
+        if (timeB !== timeA) return timeB - timeA;
+        return compareContactNames(a, b);
+      });
+
+      partnerSlice = partnerUsers.slice(skip, skip + limit);
+    }
+
+    // 3. Fill remaining page slots from shared cached directory slice when possible
+    const remainingLimit = limit - partnerSlice.length;
+    let otherUsers = [];
+    if (remainingLimit > 0) {
+      const otherSkip = Math.max(0, skip - partnerIds.length);
+      if (User.collection && otherSkip + remainingLimit <= 100) {
+        const topDirectory = await getCachedDirectoryTop(() =>
+          User.collection
+            .find({}, { projection: { fullName: 1, email: 1, profilePic: 1 } })
+            .sort({ fullName: 1, _id: 1 })
+            .limit(150)
+            .toArray()
+        );
+        const filtered = [];
+        for (const u of topDirectory) {
+          const idStr = u._id.toString();
+          if (idStr === loginUserStr || lastMessageMap.has(idStr)) continue;
+          filtered.push(u);
+          if (filtered.length >= otherSkip + remainingLimit) break;
+        }
+        if (filtered.length >= otherSkip + remainingLimit || topDirectory.length < 150) {
+          otherUsers = filtered.slice(otherSkip, otherSkip + remainingLimit);
+        }
+      }
+
+      if (otherUsers.length === 0) {
+        const excludeIds = [loginUserId, ...partnerIds];
+        otherUsers = User.collection
+          ? await User.collection
+              .find(
+                { _id: { $nin: excludeIds } },
+                { projection: { fullName: 1, email: 1, profilePic: 1 } }
+              )
+              .sort({ fullName: 1, _id: 1 })
+              .skip(otherSkip)
+              .limit(remainingLimit)
+              .toArray()
+          : await User.find({ _id: { $nin: excludeIds } })
+              .select("fullName email profilePic")
+              .sort({ fullName: 1, _id: 1 })
+              .skip(otherSkip)
+              .limit(remainingLimit)
+              .lean();
+      }
+    }
+
+    const resultUsers = [...partnerSlice, ...otherUsers];
+    setCachedContactsPage(loginUserStr, page, limit, resultUsers);
 
     res.status(200).json({
       message: "Fetched all contacts",
-      user: users,
+      user: resultUsers,
     });
   } catch (error) {
     console.log(error.message);

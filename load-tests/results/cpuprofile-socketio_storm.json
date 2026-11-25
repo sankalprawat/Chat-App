@@ -1,0 +1,181 @@
+{
+  "totalProfiledMs": 73423.92,
+  "sampleCount": 48579,
+  "topSelfTimeFunctions": [
+    {
+      "symbol": "(idle) | :-1",
+      "selfMs": 59399.01,
+      "pct": 80.9
+    },
+    {
+      "symbol": "writev | :-1",
+      "selfMs": 7826.97,
+      "pct": 10.66
+    },
+    {
+      "symbol": "(program) | :-1",
+      "selfMs": 480.01,
+      "pct": 0.65
+    },
+    {
+      "symbol": "nextTick | node:internal/process/task_queues:112",
+      "selfMs": 331.21,
+      "pct": 0.45
+    },
+    {
+      "symbol": "internalModuleStat | :-1",
+      "selfMs": 329.86,
+      "pct": 0.45
+    },
+    {
+      "symbol": "flush | file:///C:/Users/sanka/OneDrive/Desktop/Chatting%20App/server/node_modules/engine.io/build/socket.js:384",
+      "selfMs": 274.85,
+      "pct": 0.37
+    },
+    {
+      "symbol": "lstat | :-1",
+      "selfMs": 263.91,
+      "pct": 0.36
+    },
+    {
+      "symbol": "apply | file:///C:/Users/sanka/OneDrive/Desktop/Chatting%20App/server/node_modules/socket.io-adapter/dist/in-memory-adapter.js:250",
+      "selfMs": 208.72,
+      "pct": 0.28
+    },
+    {
+      "symbol": "send | file:///C:/Users/sanka/OneDrive/Desktop/Chatting%20App/server/node_modules/engine.io/build/transports/websocket.js:58",
+      "selfMs": 183.56,
+      "pct": 0.25
+    },
+    {
+      "symbol": "deserializeObject | file:///C:/Users/sanka/OneDrive/Desktop/Chatting%20App/server/node_modules/bson/lib/bson.cjs:3174",
+      "selfMs": 177.3,
+      "pct": 0.24
+    },
+    {
+      "symbol": "readFileUtf8 | :-1",
+      "selfMs": 160.7,
+      "pct": 0.22
+    },
+    {
+      "symbol": "getNearestParentPackageJSON | :-1",
+      "selfMs": 149.03,
+      "pct": 0.2
+    },
+    {
+      "symbol": "(garbage collector) | :-1",
+      "selfMs": 143.07,
+      "pct": 0.19
+    },
+    {
+      "symbol": "doWrite | node:internal/streams/writable:584",
+      "selfMs": 135.38,
+      "pct": 0.18
+    },
+    {
+      "symbol": "wrapSafe | node:internal/modules/cjs/loader:1626",
+      "selfMs": 125.49,
+      "pct": 0.17
+    },
+    {
+      "symbol": "WebSocket._onSentLast | file:///C:/Users/sanka/OneDrive/Desktop/Chatting%20App/server/node_modules/engine.io/build/transports/websocket.js:25",
+      "selfMs": 124.23,
+      "pct": 0.17
+    },
+    {
+      "symbol": "sendPacket | file:///C:/Users/sanka/OneDrive/Desktop/Chatting%20App/server/node_modules/engine.io/build/socket.js:355",
+      "selfMs": 115.14,
+      "pct": 0.16
+    },
+    {
+      "symbol": "write | file:///C:/Users/sanka/OneDrive/Desktop/Chatting%20App/server/node_modules/engine.io/build/socket.js:341",
+      "selfMs": 93.69,
+      "pct": 0.13
+    },
+    {
+      "symbol": "emit | node:events:454",
+      "selfMs": 89.46,
+      "pct": 0.12
+    },
+    {
+      "symbol": "clearBuffer | node:internal/streams/writable:741",
+      "selfMs": 87.1,
+      "pct": 0.12
+    },
+    {
+      "symbol": "createWriteWrap | node:internal/stream_base_commons:107",
+      "selfMs": 80.91,
+      "pct": 0.11
+    },
+    {
+      "symbol": "writeBuffer | :-1",
+      "selfMs": 73.36,
+      "pct": 0.1
+    },
+    {
+      "symbol": "writevGeneric | node:internal/stream_base_commons:120",
+      "selfMs": 60.52,
+      "pct": 0.08
+    },
+    {
+      "symbol": "createPublicKey | node:internal/crypto/keys:748",
+      "selfMs": 59.58,
+      "pct": 0.08
+    },
+    {
+      "symbol": "writeUtf8String | :-1",
+      "selfMs": 57.77,
+      "pct": 0.08
+    },
+    {
+      "symbol": "onDrain | file:///C:/Users/sanka/OneDrive/Desktop/Chatting%20App/server/node_modules/engine.io/build/socket.js:190",
+      "selfMs": 55.9,
+      "pct": 0.08
+    },
+    {
+      "symbol": "afterWrite | node:internal/streams/writable:696",
+      "selfMs": 47.8,
+      "pct": 0.07
+    },
+    {
+      "symbol": "onwrite | node:internal/streams/writable:612",
+      "selfMs": 46.68,
+      "pct": 0.06
+    },
+    {
+      "symbol": "afterWriteTick | node:internal/streams/writable:690",
+      "selfMs": 45.43,
+      "pct": 0.06
+    },
+    {
+      "symbol": "runMicrotasks | :-1",
+      "selfMs": 41.98,
+      "pct": 0.06
+    },
+    {
+      "symbol": "processTicksAndRejections | node:internal/process/task_queues:71",
+      "selfMs": 41.65,
+      "pct": 0.06
+    },
+    {
+      "symbol": "debug | file:///C:/Users/sanka/OneDrive/Desktop/Chatting%20App/server/node_modules/debug/src/common.js:65",
+      "selfMs": 35.04,
+      "pct": 0.05
+    },
+    {
+      "symbol": "writeFileUtf8 | :-1",
+      "selfMs": 34.92,
+      "pct": 0.05
+    },
+    {
+      "symbol": "set | node:internal/streams/writable:259",
+      "selfMs": 34.35,
+      "pct": 0.05
+    },
+    {
+      "symbol": "callback | node:internal/streams/writable:761",
+      "selfMs": 32.8,
+      "pct": 0.04
+    }
+  ]
+}

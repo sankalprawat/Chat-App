@@ -1,0 +1,86 @@
+{
+  "k6_http_reqs": null,
+  "k6_http_req_duration": null,
+  "k6_http_req_failed": null,
+  "k6_dropped_iterations": null,
+  "k6_custom_metrics": {
+    "ws_msgs_received": {
+      "count": 10944,
+      "rate": 475.23906752779783
+    },
+    "ws_payload_bytes_received": {
+      "count": 10636121,
+      "rate": 461869.53820840904
+    },
+    "ws_presence_frames": {
+      "count": 9944,
+      "rate": 431.8144451294245
+    },
+    "ws_online_user_events": {
+      "count": 500,
+      "rate": 21.71231119918667
+    },
+    "ws_sio_connect_ok": {
+      "passes": 500,
+      "fails": 0,
+      "value": 1
+    },
+    "ws_msgs_sent": {
+      "count": 500,
+      "rate": 21.71231119918667
+    },
+    "ws_sio_handshake_ms": {
+      "avg": 3.692,
+      "min": 1,
+      "med": 3,
+      "p(90)": 5,
+      "p(95)": 9,
+      "p(99)": 18.029999999999973,
+      "max": 25
+    },
+    "ws_session_duration": {
+      "max": 17019.7154,
+      "avg": 17002.1963818,
+      "min": 17000.095,
+      "med": 17001.8309,
+      "p(90)": 17002.78718,
+      "p(95)": 17003.977929999997,
+      "p(99)": 17012.249733
+    },
+    "ws_connecting": {
+      "avg": 1.746175999999999,
+      "min": 0,
+      "med": 1.5128,
+      "p(90)": 2.2996600000000003,
+      "p(95)": 3.597749999999991,
+      "p(99)": 11.663852999999996,
+      "max": 19.1447
+    },
+    "ws_sessions": {
+      "count": 500,
+      "rate": 21.71231119918667
+    }
+  },
+  "system_metrics": {
+    "node_cpu_avg_1core_pct": 16.07,
+    "node_cpu_peak_1core_pct": 90.22,
+    "node_rss_start_mb": 112.78,
+    "node_rss_peak_mb": 145.78,
+    "node_heap_peak_mb": 49.2,
+    "el_lag_p95_peak_ms": 13.03,
+    "el_lag_max_ms": 34.28,
+    "mongo_conns_peak": 6,
+    "mongo_wt_cache_peak_mb": 53.77,
+    "mongo_active_clients_peak": 0,
+    "mongo_queued_peak": 0,
+    "mongo_ops_insert_peak_s": 0,
+    "mongo_ops_query_peak_s": 200,
+    "mongo_ops_update_peak_s": 0,
+    "mongo_os_cpu_avg_pct": 2.92,
+    "mongo_os_cpu_peak_pct": 15.6,
+    "mongo_os_rss_peak_mb": 232.54,
+    "sys_cpu_peak_pct": 33.1,
+    "sys_mem_avail_min_mb": 673.0
+  },
+  "timeseries_buckets": null
+}

@@ -5,6 +5,7 @@ const FIREBASE_CERTS_URL =
 
 let cachedCerts = null;
 let cacheExpiresAt = 0;
+let inflightCertsPromise = null;
 
 /**
  * Fetches and caches Google's public x509 certificates for Firebase ID token verification.
@@ -14,19 +15,36 @@ async function getFirebasePublicCerts(forceRefresh = false) {
     return cachedCerts;
   }
 
-  const response = await fetch(FIREBASE_CERTS_URL);
-  if (!response.ok) {
-    throw new Error(`Failed to fetch Firebase public keys (${response.status})`);
+  if (!forceRefresh && inflightCertsPromise) {
+    return inflightCertsPromise;
   }
 
-  const certs = await response.json();
-  const cacheControl = response.headers.get("cache-control") || "";
-  const maxAgeMatch = cacheControl.match(/max-age=(\d+)/i);
-  const maxAgeSeconds = maxAgeMatch ? Number(maxAgeMatch[1]) : 3600;
+  const fetchPromise = (async () => {
+    const response = await fetch(FIREBASE_CERTS_URL, {
+      signal: AbortSignal.timeout(5000),
+    });
+    if (!response.ok) {
+      throw new Error(`Failed to fetch Firebase public keys (${response.status})`);
+    }
 
-  cachedCerts = certs;
-  cacheExpiresAt = Date.now() + maxAgeSeconds * 1000;
-  return certs;
+    const certs = await response.json();
+    const cacheControl = response.headers.get("cache-control") || "";
+    const maxAgeMatch = cacheControl.match(/max-age=(\d+)/i);
+    const maxAgeSeconds = maxAgeMatch ? Number(maxAgeMatch[1]) : 3600;
+
+    cachedCerts = certs;
+    cacheExpiresAt = Date.now() + maxAgeSeconds * 1000;
+    return certs;
+  })();
+
+  inflightCertsPromise = fetchPromise;
+  try {
+    return await fetchPromise;
+  } finally {
+    if (inflightCertsPromise === fetchPromise) {
+      inflightCertsPromise = null;
+    }
+  }
 }
 
 /**

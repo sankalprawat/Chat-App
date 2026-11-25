@@ -1,0 +1,718 @@
+{
+  "getAllContacts_messageAggregate": {
+    "explainVersion": "2",
+    "queryPlanner": {
+      "namespace": "chatApp_loadtest.messages",
+      "parsedQuery": {
+        "$or": [
+          {
+            "receiverId": {
+              "$eq": "6b06e0fb5f6bf507d89fedd3"
+            }
+          },
+          {
+            "senderId": {
+              "$eq": "6b06e0fb5f6bf507d89fedd3"
+            }
+          }
+        ]
+      },
+      "indexFilterSet": false,
+      "queryHash": "5A68D20F",
+      "planCacheShapeHash": "5A68D20F",
+      "planCacheKey": "6596A1C3",
+      "optimizationTimeMillis": 1,
+      "optimizedPipeline": true,
+      "maxIndexedOrSolutionsReached": false,
+      "maxIndexedAndSolutionsReached": false,
+      "maxScansToExplodeReached": false,
+      "prunedSimilarIndexes": false,
+      "winningPlan": {
+        "isCached": false,
+        "queryPlan": {
+          "stage": "GROUP",
+          "planNodeId": 5,
+          "inputStage": {
+            "stage": "OR",
+            "planNodeId": 3,
+            "inputStages": [
+              {
+                "stage": "IXSCAN",
+                "planNodeId": 1,
+                "nss": "chatApp_loadtest.messages",
+                "keyPattern": {
+                  "senderId": 1,
+                  "receiverId": 1,
+                  "createdAt": -1
+                },
+                "indexName": "senderId_1_receiverId_1_createdAt_-1",
+                "isMultiKey": false,
+                "multiKeyPaths": {
+                  "senderId": [],
+                  "receiverId": [],
+                  "createdAt": []
+                },
+                "isUnique": false,
+                "isSparse": false,
+                "isPartial": false,
+                "indexVersion": 2,
+                "direction": "forward",
+                "indexBounds": {
+                  "senderId": [
+                    "[ObjectId('6b06e0fb5f6bf507d89fedd3'), ObjectId('6b06e0fb5f6bf507d89fedd3')]"
+                  ],
+                  "receiverId": [
+                    "[MinKey, MaxKey]"
+                  ],
+                  "createdAt": [
+                    "[MaxKey, MinKey]"
+                  ]
+                }
+              },
+              {
+                "stage": "IXSCAN",
+                "planNodeId": 2,
+                "nss": "chatApp_loadtest.messages",
+                "keyPattern": {
+                  "receiverId": 1,
+                  "senderId": 1,
+                  "createdAt": -1
+                },
+                "indexName": "receiverId_1_senderId_1_createdAt_-1",
+                "isMultiKey": false,
+                "multiKeyPaths": {
+                  "receiverId": [],
+                  "senderId": [],
+                  "createdAt": []
+                },
+                "isUnique": false,
+                "isSparse": false,
+                "isPartial": false,
+                "indexVersion": 2,
+                "direction": "forward",
+                "indexBounds": {
+                  "receiverId": [
+                    "[ObjectId('6b06e0fb5f6bf507d89fedd3'), ObjectId('6b06e0fb5f6bf507d89fedd3')]"
+                  ],
+                  "senderId": [
+                    "[MinKey, MaxKey]"
+                  ],
+                  "createdAt": [
+                    "[MaxKey, MinKey]"
+                  ]
+                }
+              }
+            ]
+          }
+        },
+        "slotBasedPlan": {
+          "slots": "$$RESULT=s17 env: {  }",
+          "stages": "[5] project [s17 = newBsonObj(\"_id\", s15, \"lastMessageTime\", s16)] \n[5] project [s16 = (s14 ?: null)] \n[5] group [s15] [s14 = max(fillType(s10, 1088, Nothing))] spillSlots[s13] mergingExprs[max(fillType(s13, 1088, Nothing))] \n[5] project [s15 = (\n    if (((s12 <=> ObjectId(\"6b06e0fb5f6bf507d89fedd3\")) == 0) ?: (exists(s12) && typeMatch(s12, -65))) \n    then s11 \n    else s12 \n?: null)] \n[3] unique_roaring s9 \n[3] union [s9, s10, s11, s12] \n    branch0 [s1, s4, s3, s2] \n        [1] ixseek seekKeyLow = KS(646B06E0FB5F6BF507D89FEDD30A0F01) seekKeyHigh = KS(646B06E0FB5F6BF507D89FEDD3F0F5FE) [s1 = recordId] [s2 = 0, s3 = 1, s4 = 2] @\"5c194cd5-841f-4bff-9b64-d25c9112ad2a\" @\"senderId_1_receiverId_1_createdAt_-1\" forward \n    branch1 [s5, s8, s6, s7] \n        [2] ixseek seekKeyLow = KS(646B06E0FB5F6BF507D89FEDD30A0F01) seekKeyHigh = KS(646B06E0FB5F6BF507D89FEDD3F0F5FE) [s5 = recordId] [s6 = 0, s7 = 1, s8 = 2] @\"5c194cd5-841f-4bff-9b64-d25c9112ad2a\" @\"receiverId_1_senderId_1_createdAt_-1\" forward \n"
+        }
+      },
+      "rejectedPlans": []
+    },
+    "executionStats": {
+      "executionSuccess": true,
+      "nReturned": 25,
+      "executionTimeMillis": 10,
+      "totalKeysExamined": 335,
+      "totalDocsExamined": 0,
+      "executionStages": {
+        "stage": "project",
+        "planNodeId": 5,
+        "nReturned": 25,
+        "executionTimeMillisEstimate": 5,
+        "opens": 1,
+        "closes": 1,
+        "saveState": 0,
+        "restoreState": 0,
+        "isEOF": 1,
+        "projections": {
+          "17": "newBsonObj(\"_id\", s15, \"lastMessageTime\", s16) "
+        },
+        "inputStage": {
+          "stage": "project",
+          "planNodeId": 5,
+          "nReturned": 25,
+          "executionTimeMillisEstimate": 5,
+          "opens": 1,
+          "closes": 1,
+          "saveState": 0,
+          "restoreState": 0,
+          "isEOF": 1,
+          "projections": {
+            "16": "(s14 ?: null) "
+          },
+          "inputStage": {
+            "stage": "group",
+            "planNodeId": 5,
+            "nReturned": 25,
+            "executionTimeMillisEstimate": 5,
+            "opens": 1,
+            "closes": 1,
+            "saveState": 0,
+            "restoreState": 0,
+            "isEOF": 1,
+            "groupBySlots": [
+              15
+            ],
+            "expressions": {
+              "14": "max(fillType(s10, 1088, Nothing)) ",
+              "initExprs": {
+                "14": null,
+                "mergingExprs": {
+                  "13": "max(fillType(s13, 1088, Nothing)) "
+                }
+              }
+            },
+            "usedDisk": false,
+            "spills": 0,
+            "spilledBytes": 0,
+            "spilledRecords": 0,
+            "spilledDataStorageSize": 0,
+            "peakTrackedMemBytes": 1178,
+            "inputStage": {
+              "stage": "project",
+              "planNodeId": 5,
+              "nReturned": 335,
+              "executionTimeMillisEstimate": 2,
+              "opens": 1,
+              "closes": 1,
+              "saveState": 0,
+              "restoreState": 0,
+              "isEOF": 1,
+              "projections": {
+                "15": "(\n    if (((s12 <=> ObjectId(\"6b06e0fb5f6bf507d89fedd3\")) == 0) ?: (exists(s12) && typeMatch(s12, -65))) \n    then s11 \n    else s12 \n?: null) "
+              },
+              "inputStage": {
+                "stage": "unique_roaring",
+                "planNodeId": 3,
+                "nReturned": 335,
+                "executionTimeMillisEstimate": 2,
+                "opens": 1,
+                "closes": 1,
+                "saveState": 0,
+                "restoreState": 0,
+                "isEOF": 1,
+                "dupsTested": 335,
+                "dupsDropped": 0,
+                "keySlot": 9,
+                "peakTrackedMemBytes": 3407,
+                "inputStage": {
+                  "stage": "union",
+                  "planNodeId": 3,
+                  "nReturned": 335,
+                  "executionTimeMillisEstimate": 1,
+                  "opens": 1,
+                  "closes": 1,
+                  "saveState": 0,
+                  "restoreState": 0,
+                  "isEOF": 1,
+                  "inputSlots": [
+                    1,
+                    4,
+                    3,
+                    2,
+                    5,
+                    8,
+                    6,
+                    7
+                  ],
+                  "outputSlots": [
+                    9,
+                    10,
+                    11,
+                    12
+                  ],
+                  "inputStages": [
+                    {
+                      "stage": "ixseek",
+                      "planNodeId": 1,
+                      "nReturned": 335,
+                      "executionTimeMillisEstimate": 1,
+                      "opens": 1,
+                      "closes": 1,
+                      "saveState": 0,
+                      "restoreState": 0,
+                      "isEOF": 1,
+                      "indexName": "senderId_1_receiverId_1_createdAt_-1",
+                      "keysExamined": 335,
+                      "seeks": 1,
+                      "numReads": 336,
+                      "recordIdSlot": 1,
+                      "outputSlots": [
+                        2,
+                        3,
+                        4
+                      ],
+                      "indexKeysToInclude": "00000000000000000000000000000111",
+                      "seekKeyLow": "KS(646B06E0FB5F6BF507D89FEDD30A0F01) ",
+                      "seekKeyHigh": "KS(646B06E0FB5F6BF507D89FEDD3F0F5FE) "
+                    },
+                    {
+                      "stage": "ixseek",
+                      "planNodeId": 2,
+                      "nReturned": 0,
+                      "executionTimeMillisEstimate": 0,
+                      "opens": 1,
+                      "closes": 1,
+                      "saveState": 0,
+                      "restoreState": 0,
+                      "isEOF": 1,
+                      "indexName": "receiverId_1_senderId_1_createdAt_-1",
+                      "keysExamined": 0,
+                      "seeks": 1,
+                      "numReads": 1,
+                      "recordIdSlot": 5,
+                      "outputSlots": [
+                        6,
+                        7,
+                        8
+                      ],
+                      "indexKeysToInclude": "00000000000000000000000000000111",
+                      "seekKeyLow": "KS(646B06E0FB5F6BF507D89FEDD30A0F01) ",
+                      "seekKeyHigh": "KS(646B06E0FB5F6BF507D89FEDD3F0F5FE) "
+                    }
+                  ]
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "queryShapeHash": "683DB1FD5F42B38C7654F6AAFD92AB6942612F60156E2D5C66A8652067B1B583",
+    "peakTrackedMemBytes": 1178,
+    "command": {
+      "aggregate": "messages",
+      "pipeline": [
+        {
+          "$match": {
+            "$or": [
+              {
+                "senderId": "6b06e0fb5f6bf507d89fedd3"
+              },
+              {
+                "receiverId": "6b06e0fb5f6bf507d89fedd3"
+              }
+            ]
+          }
+        },
+        {
+          "$group": {
+            "_id": {
+              "$cond": [
+                {
+                  "$eq": [
+                    "$senderId",
+                    "6b06e0fb5f6bf507d89fedd3"
+                  ]
+                },
+                "$receiverId",
+                "$senderId"
+              ]
+            },
+            "lastMessageTime": {
+              "$max": "$createdAt"
+            }
+          }
+        }
+      ],
+      "cursor": {},
+      "$db": "chatApp_loadtest"
+    },
+    "serverInfo": {
+      "host": "Sankalp",
+      "port": 27018,
+      "version": "8.3.1",
+      "gitVersion": "094e631246d5b5bee5bd5f20b12f882bc8e286ea"
+    },
+    "serverParameters": {
+      "internalQueryFacetBufferSizeBytes": 104857600,
+      "internalDocumentSourceGroupMaxMemoryBytes": 104857600,
+      "internalQueryMaxBlockingSortMemoryUsageBytes": 104857600,
+      "internalDocumentSourceSetWindowFieldsMaxMemoryBytes": 104857600,
+      "internalQueryFacetMaxOutputDocSizeBytes": 104857600,
+      "internalLookupStageIntermediateDocumentMaxSizeBytes": 104857600,
+      "internalQueryProhibitBlockingMergeOnMongoS": 0,
+      "internalQueryMaxAddToSetBytes": 104857600,
+      "internalQueryFrameworkControl": "trySbeRestricted",
+      "internalQueryPlannerIgnoreIndexWithCollationForRegex": 1
+    },
+    "ok": 1
+  },
+  "getAllContacts_userFind": {
+    "winningPlan": {
+      "isCached": false,
+      "stage": "PROJECTION_SIMPLE",
+      "transformBy": {
+        "password": 0
+      },
+      "inputStage": {
+        "stage": "FETCH",
+        "nss": "chatApp_loadtest.users",
+        "inputStage": {
+          "stage": "IXSCAN",
+          "nss": "chatApp_loadtest.users",
+          "keyPattern": {
+            "_id": 1
+          },
+          "indexName": "_id_",
+          "isMultiKey": false,
+          "isUnique": true,
+          "isSparse": false,
+          "isPartial": false,
+          "indexVersion": 2,
+          "direction": "forward",
+          "indexBounds": {
+            "_id": [
+              "[MinKey, ObjectId('6b06e0fb5f6bf507d89fedd3'))",
+              "(ObjectId('6b06e0fb5f6bf507d89fedd3'), MaxKey]"
+            ]
+          }
+        }
+      }
+    },
+    "nReturned": 999,
+    "executionTimeMillis": 2,
+    "totalKeysExamined": 1000,
+    "totalDocsExamined": 999
+  },
+  "getMessage_page1": {
+    "winningPlan": {
+      "isCached": false,
+      "stage": "SUBPLAN",
+      "inputStage": {
+        "stage": "SORT",
+        "sortPattern": {
+          "createdAt": -1,
+          "_id": -1
+        },
+        "memLimit": 104857600,
+        "limitAmount": 50,
+        "type": "simple",
+        "inputStage": {
+          "stage": "FETCH",
+          "inputStage": {
+            "stage": "OR",
+            "inputStages": [
+              {
+                "stage": "IXSCAN",
+                "keyPattern": {
+                  "senderId": 1,
+                  "receiverId": 1,
+                  "createdAt": -1
+                },
+                "indexName": "senderId_1_receiverId_1_createdAt_-1",
+                "isMultiKey": false,
+                "multiKeyPaths": {
+                  "senderId": [],
+                  "receiverId": [],
+                  "createdAt": []
+                },
+                "isUnique": false,
+                "isSparse": false,
+                "isPartial": false,
+                "indexVersion": 2,
+                "direction": "forward",
+                "indexBounds": {
+                  "senderId": [
+                    "[ObjectId('6b06e0fb5f6bf507d89fedd3'), ObjectId('6b06e0fb5f6bf507d89fedd3')]"
+                  ],
+                  "receiverId": [
+                    "[ObjectId('6b06e0fb5f6bf507d89fedd4'), ObjectId('6b06e0fb5f6bf507d89fedd4')]"
+                  ],
+                  "createdAt": [
+                    "[MaxKey, MinKey]"
+                  ]
+                }
+              },
+              {
+                "stage": "IXSCAN",
+                "keyPattern": {
+                  "senderId": 1,
+                  "receiverId": 1,
+                  "createdAt": -1
+                },
+                "indexName": "senderId_1_receiverId_1_createdAt_-1",
+                "isMultiKey": false,
+                "multiKeyPaths": {
+                  "senderId": [],
+                  "receiverId": [],
+                  "createdAt": []
+                },
+                "isUnique": false,
+                "isSparse": false,
+                "isPartial": false,
+                "indexVersion": 2,
+                "direction": "forward",
+                "indexBounds": {
+                  "senderId": [
+                    "[ObjectId('6b06e0fb5f6bf507d89fedd4'), ObjectId('6b06e0fb5f6bf507d89fedd4')]"
+                  ],
+                  "receiverId": [
+                    "[ObjectId('6b06e0fb5f6bf507d89fedd3'), ObjectId('6b06e0fb5f6bf507d89fedd3')]"
+                  ],
+                  "createdAt": [
+                    "[MaxKey, MinKey]"
+                  ]
+                }
+              }
+            ]
+          }
+        }
+      }
+    },
+    "nReturned": 47,
+    "executionTimeMillis": 8,
+    "totalKeysExamined": 47,
+    "totalDocsExamined": 47
+  },
+  "getMessage_page20_skip": {
+    "winningPlan": {
+      "isCached": false,
+      "stage": "SUBPLAN",
+      "inputStage": {
+        "stage": "SKIP",
+        "skipAmount": 950,
+        "inputStage": {
+          "stage": "SORT",
+          "sortPattern": {
+            "createdAt": -1,
+            "_id": -1
+          },
+          "memLimit": 104857600,
+          "limitAmount": 1000,
+          "type": "simple",
+          "inputStage": {
+            "stage": "FETCH",
+            "inputStage": {
+              "stage": "OR",
+              "inputStages": [
+                {
+                  "stage": "IXSCAN",
+                  "keyPattern": {
+                    "senderId": 1,
+                    "receiverId": 1,
+                    "createdAt": -1
+                  },
+                  "indexName": "senderId_1_receiverId_1_createdAt_-1",
+                  "isMultiKey": false,
+                  "multiKeyPaths": {
+                    "senderId": [],
+                    "receiverId": [],
+                    "createdAt": []
+                  },
+                  "isUnique": false,
+                  "isSparse": false,
+                  "isPartial": false,
+                  "indexVersion": 2,
+                  "direction": "forward",
+                  "indexBounds": {
+                    "senderId": [
+                      "[ObjectId('6b06e0fb5f6bf507d89fedd3'), ObjectId('6b06e0fb5f6bf507d89fedd3')]"
+                    ],
+                    "receiverId": [
+                      "[ObjectId('6b06e0fb5f6bf507d89fedd4'), ObjectId('6b06e0fb5f6bf507d89fedd4')]"
+                    ],
+                    "createdAt": [
+                      "[MaxKey, MinKey]"
+                    ]
+                  }
+                },
+                {
+                  "stage": "IXSCAN",
+                  "keyPattern": {
+                    "senderId": 1,
+                    "receiverId": 1,
+                    "createdAt": -1
+                  },
+                  "indexName": "senderId_1_receiverId_1_createdAt_-1",
+                  "isMultiKey": false,
+                  "multiKeyPaths": {
+                    "senderId": [],
+                    "receiverId": [],
+                    "createdAt": []
+                  },
+                  "isUnique": false,
+                  "isSparse": false,
+                  "isPartial": false,
+                  "indexVersion": 2,
+                  "direction": "forward",
+                  "indexBounds": {
+                    "senderId": [
+                      "[ObjectId('6b06e0fb5f6bf507d89fedd4'), ObjectId('6b06e0fb5f6bf507d89fedd4')]"
+                    ],
+                    "receiverId": [
+                      "[ObjectId('6b06e0fb5f6bf507d89fedd3'), ObjectId('6b06e0fb5f6bf507d89fedd3')]"
+                    ],
+                    "createdAt": [
+                      "[MaxKey, MinKey]"
+                    ]
+                  }
+                }
+              ]
+            }
+          }
+        }
+      }
+    },
+    "nReturned": 0,
+    "executionTimeMillis": 3,
+    "totalKeysExamined": 47,
+    "totalDocsExamined": 47
+  },
+  "getUserGroups": {
+    "winningPlan": {
+      "isCached": false,
+      "stage": "FETCH",
+      "nss": "chatApp_loadtest.groups",
+      "inputStage": {
+        "stage": "IXSCAN",
+        "nss": "chatApp_loadtest.groups",
+        "keyPattern": {
+          "members": 1,
+          "updatedAt": -1
+        },
+        "indexName": "members_1_updatedAt_-1",
+        "isMultiKey": true,
+        "multiKeyPaths": {
+          "members": [
+            "members"
+          ],
+          "updatedAt": []
+        },
+        "isUnique": false,
+        "isSparse": false,
+        "isPartial": false,
+        "indexVersion": 2,
+        "direction": "forward",
+        "indexBounds": {
+          "members": [
+            "[ObjectId('6b06e0fb5f6bf507d89fedd3'), ObjectId('6b06e0fb5f6bf507d89fedd3')]"
+          ],
+          "updatedAt": [
+            "[MaxKey, MinKey]"
+          ]
+        }
+      }
+    },
+    "nReturned": 10,
+    "executionTimeMillis": 0,
+    "totalKeysExamined": 10,
+    "totalDocsExamined": 10
+  },
+  "getGroupMessages_page1": {
+    "winningPlan": {
+      "isCached": false,
+      "stage": "SORT",
+      "sortPattern": {
+        "createdAt": -1,
+        "_id": -1
+      },
+      "memLimit": 104857600,
+      "limitAmount": 50,
+      "type": "simple",
+      "inputStage": {
+        "stage": "FETCH",
+        "nss": "chatApp_loadtest.groupmessages",
+        "inputStage": {
+          "stage": "IXSCAN",
+          "nss": "chatApp_loadtest.groupmessages",
+          "keyPattern": {
+            "groupId": 1,
+            "createdAt": -1
+          },
+          "indexName": "groupId_1_createdAt_-1",
+          "isMultiKey": false,
+          "multiKeyPaths": {
+            "groupId": [],
+            "createdAt": []
+          },
+          "isUnique": false,
+          "isSparse": false,
+          "isPartial": false,
+          "indexVersion": 2,
+          "direction": "forward",
+          "indexBounds": {
+            "groupId": [
+              "[ObjectId('6b06e0fc5f6bf507d8a0b50b'), ObjectId('6b06e0fc5f6bf507d8a0b50b')]"
+            ],
+            "createdAt": [
+              "[MaxKey, MinKey]"
+            ]
+          }
+        }
+      }
+    },
+    "nReturned": 50,
+    "executionTimeMillis": 1,
+    "totalKeysExamined": 500,
+    "totalDocsExamined": 500
+  },
+  "getGroupMessages_page9_skip": {
+    "winningPlan": {
+      "isCached": false,
+      "stage": "SKIP",
+      "skipAmount": 400,
+      "inputStage": {
+        "stage": "SORT",
+        "sortPattern": {
+          "createdAt": -1,
+          "_id": -1
+        },
+        "memLimit": 104857600,
+        "limitAmount": 450,
+        "type": "simple",
+        "inputStage": {
+          "stage": "FETCH",
+          "nss": "chatApp_loadtest.groupmessages",
+          "inputStage": {
+            "stage": "IXSCAN",
+            "nss": "chatApp_loadtest.groupmessages",
+            "keyPattern": {
+              "groupId": 1,
+              "createdAt": -1
+            },
+            "indexName": "groupId_1_createdAt_-1",
+            "isMultiKey": false,
+            "multiKeyPaths": {
+              "groupId": [],
+              "createdAt": []
+            },
+            "isUnique": false,
+            "isSparse": false,
+            "isPartial": false,
+            "indexVersion": 2,
+            "direction": "forward",
+            "indexBounds": {
+              "groupId": [
+                "[ObjectId('6b06e0fc5f6bf507d8a0b50b'), ObjectId('6b06e0fc5f6bf507d8a0b50b')]"
+              ],
+              "createdAt": [
+                "[MaxKey, MinKey]"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "nReturned": 50,
+    "executionTimeMillis": 1,
+    "totalKeysExamined": 500,
+    "totalDocsExamined": 500
+  },
+  "login_findUser": {
+    "winningPlan": {
+      "isCached": false,
+      "stage": "EXPRESS_IXSCAN",
+      "keyPattern": "{ email: 1 }",
+      "indexName": "email_1"
+    },
+    "nReturned": 1,
+    "executionTimeMillis": 0,
+    "totalKeysExamined": 1,
+    "totalDocsExamined": 1
+  }
+}

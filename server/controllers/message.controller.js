@@ -2,6 +2,7 @@ const mongoose = require("mongoose");
 const Message = require("../models/Message");
 const User = require("../models/User");
 const { getIO } = require("../services/socket");
+const { invalidateContactsForUsers } = require("../services/authCache");
 
 const getUserById = async (req, res) => {
   try {
@@ -61,6 +62,7 @@ const sendMessage = async (req, res) => {
       videoUrl,
       audioUrl,
     });
+    invalidateContactsForUsers(senderId, receiverId);
 
     const io = getIO();
     if (io) {
@@ -102,7 +104,7 @@ const getMessage = async (req, res) => {
       ],
     };
 
-    let query;
+    let messages;
     if (before) {
       const beforeDate = new Date(before);
       if (Number.isNaN(beforeDate.getTime())) {
@@ -121,21 +123,36 @@ const getMessage = async (req, res) => {
             }
           : { createdAt: { $lt: beforeDate } };
 
-      query = Message.find({ $and: [participantsMatch, cursorCondition] })
+      messages = await Message.find({ $and: [participantsMatch, cursorCondition] })
         .sort({ createdAt: -1, _id: -1 })
         .limit(limit)
         .lean();
     } else {
       const page = Math.max(parseInt(req.query.page, 10) || 1, 1);
       const skip = (page - 1) * limit;
-      query = Message.find(participantsMatch)
-        .sort({ createdAt: -1, _id: -1 })
-        .skip(skip)
-        .limit(limit)
-        .lean();
+      if (process.env.NODE_ENV !== "test" && Message.collection) {
+        const loginObjId = new mongoose.Types.ObjectId(loginUserId);
+        const peerObjId = new mongoose.Types.ObjectId(userId);
+        messages = await Message.collection
+          .find({
+            $or: [
+              { senderId: loginObjId, receiverId: peerObjId },
+              { senderId: peerObjId, receiverId: loginObjId },
+            ],
+          })
+          .sort({ createdAt: -1, _id: -1 })
+          .skip(skip)
+          .limit(limit)
+          .toArray();
+      } else {
+        messages = await Message.find(participantsMatch)
+          .sort({ createdAt: -1, _id: -1 })
+          .skip(skip)
+          .limit(limit)
+          .lean();
+      }
     }
 
-    const messages = await query;
     const sortedMessages = messages.reverse();
 
     res.status(200).json({

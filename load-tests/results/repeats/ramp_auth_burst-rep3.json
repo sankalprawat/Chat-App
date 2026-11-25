@@ -1,0 +1,119 @@
+{
+  "k6_http_reqs": {
+    "count": 744,
+    "rate": 53.138044733791574
+  },
+  "k6_http_req_duration": {
+    "p(99)": 2280.2389810000004,
+    "max": 2330.9877,
+    "avg": 87.0041461021506,
+    "min": 0,
+    "med": 0.9556,
+    "p(90)": 3.1921200000000014,
+    "p(95)": 16.238995000000017
+  },
+  "k6_http_req_failed": {
+    "fails": 731,
+    "passes": 13,
+    "value": 0.01747311827956989
+  },
+  "k6_dropped_iterations": null,
+  "k6_custom_metrics": {
+    "ep_health_probe_err": {
+      "passes": 0,
+      "fails": 701,
+      "value": 0
+    },
+    "ep_health_probe_reqs": {
+      "count": 701,
+      "rate": 50.06689429890846
+    },
+    "ep_health_probe_ms": {
+      "p(95)": 3.6834,
+      "p(99)": 16.3378,
+      "max": 85.6379,
+      "avg": 1.669940085592013,
+      "min": 0,
+      "med": 0.8795,
+      "p(90)": 2.6136
+    },
+    "ep_auth_login_burst_ms": {
+      "p(99)": 2325.663864,
+      "max": 2330.9877,
+      "avg": 1478.1501558139532,
+      "min": 0.5115,
+      "med": 2240.2005,
+      "p(90)": 2290.08848,
+      "p(95)": 2313.04841
+    },
+    "ep_auth_login_burst_err": {
+      "passes": 13,
+      "fails": 30,
+      "value": 0.3023255813953488
+    },
+    "http_429_count": {
+      "count": 13,
+      "rate": 0.9284873407786162
+    },
+    "ep_auth_login_burst_reqs": {
+      "count": 43,
+      "rate": 3.071150434883115
+    }
+  },
+  "system_metrics": {
+    "node_cpu_avg_1core_pct": 72.44,
+    "node_cpu_peak_1core_pct": 409.08,
+    "node_rss_start_mb": 188.5,
+    "node_rss_peak_mb": 313.71,
+    "node_heap_peak_mb": 42.42,
+    "el_lag_p95_peak_ms": 12.85,
+    "el_lag_max_ms": 598.74,
+    "mongo_conns_peak": 10,
+    "mongo_wt_cache_peak_mb": 26.09,
+    "mongo_active_clients_peak": 0,
+    "mongo_queued_peak": 0,
+    "mongo_ops_insert_peak_s": 0,
+    "mongo_ops_query_peak_s": 28,
+    "mongo_ops_update_peak_s": 0,
+    "mongo_os_cpu_avg_pct": 2.13,
+    "mongo_os_cpu_peak_pct": 4.7,
+    "mongo_os_rss_peak_mb": 81.77,
+    "sys_cpu_peak_pct": 71.5,
+    "sys_mem_avail_min_mb": 1439.29
+  },
+  "timeseries_buckets": [
+    {
+      "tSec": 0,
+      "rps": 50.2,
+      "reqCount": 251,
+      "errCount": 0,
+      "errRatePct": 0.0,
+      "p50Ms": 1.05,
+      "p95Ms": 5.95,
+      "p99Ms": 49.48,
+      "maxMs": 85.64
+    },
+    {
+      "tSec": 5,
+      "rps": 55.6,
+      "reqCount": 278,
+      "errCount": 0,
+      "errRatePct": 0.0,
+      "p50Ms": 0.83,
+      "p95Ms": 2260.68,
+      "p99Ms": 2315.23,
+      "maxMs": 2330.99
+    },
+    {
+      "tSec": 10,
+      "rps": 43.0,
+      "reqCount": 215,
+      "errCount": 13,
+      "errRatePct": 6.05,
+      "p50Ms": 0.79,
+      "p95Ms": 3.03,
+      "p99Ms": 7.08,
+      "maxMs": 77.92
+    }
+  ]
+}

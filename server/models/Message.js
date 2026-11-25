@@ -34,9 +34,9 @@ const messageSchema = new mongoose.Schema(
   { timestamps: true }
 );
 
-// Compound indexes covering both $or branches and createdAt sort order
-messageSchema.index({ senderId: 1, receiverId: 1, createdAt: -1 });
-messageSchema.index({ receiverId: 1, senderId: 1, createdAt: -1 });
+// Compound indexes covering both $or branches and createdAt + _id sort order
+messageSchema.index({ senderId: 1, receiverId: 1, createdAt: -1, _id: -1 });
+messageSchema.index({ receiverId: 1, senderId: 1, createdAt: -1, _id: -1 });
 messageSchema.index({ senderId: 1, createdAt: -1 });
 messageSchema.index({ receiverId: 1, createdAt: -1 });
 

@@ -1,9 +1,39 @@
 const { Server } = require("socket.io");
+const mongoose = require("mongoose");
 const socketAuth = require("../middleware/socket.auth.middleware");
 const Group = require("../models/Group");
 
+const PRESENCE_FLUSH_MS = 250;
+
 let io;
-const userSocketMap = {}; // Maps userId to a Set of socketIds
+const userSocketMap = new Map(); // Maps userId to a Set of socketIds
+const pendingOnline = new Set();
+const pendingOffline = new Set();
+let presenceFlushTimer = null;
+
+function flushPresenceDeltas() {
+  presenceFlushTimer = null;
+  if (!io || (pendingOnline.size === 0 && pendingOffline.size === 0)) {
+    pendingOnline.clear();
+    pendingOffline.clear();
+    return;
+  }
+  const delta = {
+    online: Array.from(pendingOnline),
+    offline: Array.from(pendingOffline),
+  };
+  pendingOnline.clear();
+  pendingOffline.clear();
+  io.emit("presenceDelta", delta);
+}
+
+function schedulePresenceFlush() {
+  if (presenceFlushTimer) return;
+  presenceFlushTimer = setTimeout(flushPresenceDeltas, PRESENCE_FLUSH_MS);
+  if (typeof presenceFlushTimer.unref === "function") {
+    presenceFlushTimer.unref();
+  }
+}
 
 const initSocket = async (server, corsOrigin = "*") => {
   io = new Server(server, {
@@ -12,44 +42,52 @@ const initSocket = async (server, corsOrigin = "*") => {
   io.use(socketAuth);
 
   io.on("connection", async (socket) => {
-    console.log("user connected", socket.user.fullName);
-
     const userId = socket.userId.toString();
-    const wasOffline = !userSocketMap[userId];
+    let sockets = userSocketMap.get(userId);
+    const wasOffline = !sockets;
 
     if (wasOffline) {
-      userSocketMap[userId] = new Set();
+      sockets = new Set();
+      userSocketMap.set(userId, sockets);
     }
-    userSocketMap[userId].add(socket.id);
+    sockets.add(socket.id);
 
     socket.join(userId);
 
-    // Join user to all group rooms they are members of
+    // Join user to all group rooms they are members of via raw driver query
     try {
-      const userGroups = await Group.find({ members: userId }).select("_id").lean();
-      userGroups.forEach((group) => {
+      const memberFilter = mongoose.isValidObjectId(userId)
+        ? new mongoose.Types.ObjectId(userId)
+        : socket.userId;
+      const userGroups = Group.collection
+        ? await Group.collection
+            .find({ members: memberFilter }, { projection: { _id: 1 } })
+            .toArray()
+        : await Group.find({ members: userId }).select("_id").lean();
+      for (const group of userGroups) {
         socket.join(group._id.toString());
-      });
+      }
     } catch (err) {
       console.error("Error joining group socket rooms on connection:", err);
     }
 
-    const onlineUserIds = Object.keys(userSocketMap);
+    // Send full online snapshot only to the connecting socket; coalesce presence deltas
+    socket.emit("onlineUser", Array.from(userSocketMap.keys()));
     if (wasOffline) {
-      // Broadcast only when a user actually transitions from offline -> online
-      io.emit("onlineUser", onlineUserIds);
-    } else {
-      // New tab of an already-online user only needs the current snapshot
-      socket.emit("onlineUser", onlineUserIds);
+      pendingOffline.delete(userId);
+      pendingOnline.add(userId);
+      schedulePresenceFlush();
     }
 
     socket.on("disconnect", () => {
-      if (userSocketMap[userId]) {
-        userSocketMap[userId].delete(socket.id);
-        if (userSocketMap[userId].size === 0) {
-          delete userSocketMap[userId];
-          // Broadcast only when the user's last socket disconnects
-          io.emit("onlineUser", Object.keys(userSocketMap));
+      const userSockets = userSocketMap.get(userId);
+      if (userSockets) {
+        userSockets.delete(socket.id);
+        if (userSockets.size === 0) {
+          userSocketMap.delete(userId);
+          pendingOnline.delete(userId);
+          pendingOffline.add(userId);
+          schedulePresenceFlush();
         }
       }
     });
@@ -67,7 +105,7 @@ const getIO = () => {
 const joinGroupRoom = (groupId, memberIds) => {
   if (!io) return;
   memberIds.forEach((memberId) => {
-    const socketIds = userSocketMap[memberId.toString()];
+    const socketIds = userSocketMap.get(memberId.toString());
     if (socketIds) {
       socketIds.forEach((socketId) => {
         const socketInstance = io.sockets.sockets.get(socketId);

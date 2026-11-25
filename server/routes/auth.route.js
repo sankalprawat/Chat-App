@@ -16,7 +16,7 @@ const router = express.Router();
 
 const authLimiter = createRateLimiter({
   windowMs: 15 * 60 * 1000,
-  max: 30,
+  max: Math.max(parseInt(process.env.AUTH_RATE_LIMIT_MAX || "", 10) || 30, 1),
   message: "Too many authentication attempts. Please try again later.",
 });
 

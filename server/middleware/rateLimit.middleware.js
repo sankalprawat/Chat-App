@@ -1,7 +1,12 @@
 /**
  * Lightweight fixed-window in-memory rate limiter middleware.
  */
-function createRateLimiter({ windowMs = 60_000, max = 30, message = "Too many requests, please try again later." } = {}) {
+function createRateLimiter({
+  windowMs = 60_000,
+  max = 30,
+  maxEntries = 10_000,
+  message = "Too many requests, please try again later.",
+} = {}) {
   const hits = new Map();
 
   const cleanupInterval = setInterval(() => {
@@ -18,12 +23,29 @@ function createRateLimiter({ windowMs = 60_000, max = 30, message = "Too many re
     cleanupInterval.unref();
   }
 
+  const evictIfFull = (now) => {
+    if (hits.size < maxEntries) return;
+    for (const [k, entry] of hits.entries()) {
+      if (now >= entry.resetAt) {
+        hits.delete(k);
+      }
+      if (hits.size < maxEntries) return;
+    }
+    const oldestKey = hits.keys().next().value;
+    if (oldestKey !== undefined) {
+      hits.delete(oldestKey);
+    }
+  };
+
   return (req, res, next) => {
     const key = req.ip || req.socket?.remoteAddress || "unknown";
     const now = Date.now();
     const existing = hits.get(key);
 
     if (!existing || now >= existing.resetAt) {
+      if (!existing) {
+        evictIfFull(now);
+      }
       hits.set(key, { count: 1, resetAt: now + windowMs });
       return next();
     }

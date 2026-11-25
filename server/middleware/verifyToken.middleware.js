@@ -1,5 +1,4 @@
-const jwt = require("jsonwebtoken");
-const User = require("../models/User");
+const { authenticateJwtToken } = require("../services/authCache");
 
 const verifyToken = async (req, res, next) => {
   try {
@@ -13,8 +12,7 @@ const verifyToken = async (req, res, next) => {
       return res.status(401).json({ message: "Unauthorized" });
     }
 
-    const decoded = jwt.verify(token, process.env.JWT_SECRET);
-    const user = await User.findById(decoded.userId).select("-password").lean();
+    const user = await authenticateJwtToken(token);
 
     if (!user) {
       return res.status(401).json({

@@ -73,7 +73,7 @@ const contactsFetcher = async ([url, authToken]: [string, string]): Promise<User
 
 const Contacts = () => {
   const navigate = useNavigate();
-  const { token, onlineUsers, socket } = useSocket();
+  const { token, user, onlineUsers, socket } = useSocket();
   const { userId: activeUserId } = useParams();
 
   const {
@@ -86,17 +86,40 @@ const Contacts = () => {
     contactsFetcher
   );
 
-  // Revalidate contacts order when a direct message arrives or is sent
+  // Optimistically bubble active DM partner to top on newMessage without full HTTP refetch
   useEffect(() => {
     if (!socket) return;
-    const handleNewMessage = () => {
-      mutate();
+    const handleNewMessage = async (msg?: { senderId?: string; receiverId?: string }) => {
+      const partnerId =
+        msg && user?._id
+          ? msg.senderId === user._id
+            ? msg.receiverId
+            : msg.senderId
+          : msg?.senderId || msg?.receiverId;
+
+      if (!partnerId) {
+        mutate();
+        return;
+      }
+
+      let foundInCache = false;
+      await mutate((prev = []) => {
+        const idx = prev.findIndex((c) => c._id === partnerId);
+        if (idx === -1) return prev;
+        foundInCache = true;
+        if (idx === 0) return prev;
+        return [prev[idx], ...prev.slice(0, idx), ...prev.slice(idx + 1)];
+      }, false);
+
+      if (!foundInCache) {
+        mutate();
+      }
     };
     socket.on("newMessage", handleNewMessage);
     return () => {
       socket.off("newMessage", handleNewMessage);
     };
-  }, [socket, mutate]);
+  }, [socket, user?._id, mutate]);
 
   const onlineUsersSet = useMemo(() => new Set(onlineUsers), [onlineUsers]);
 

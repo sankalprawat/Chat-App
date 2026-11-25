@@ -47,5 +47,7 @@ userSchema.set("toObject", {
   },
 });
 
+userSchema.index({ fullName: 1, _id: 1 });
+
 const User = mongoose.model("User", userSchema);
 module.exports = User;

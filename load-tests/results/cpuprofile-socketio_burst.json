@@ -1,0 +1,181 @@
+{
+  "totalProfiledMs": 25967.35,
+  "sampleCount": 17065,
+  "topSelfTimeFunctions": [
+    {
+      "symbol": "(idle) | :-1",
+      "selfMs": 22403.66,
+      "pct": 86.28
+    },
+    {
+      "symbol": "writev | :-1",
+      "selfMs": 334.14,
+      "pct": 1.29
+    },
+    {
+      "symbol": "internalModuleStat | :-1",
+      "selfMs": 296.63,
+      "pct": 1.14
+    },
+    {
+      "symbol": "lstat | :-1",
+      "selfMs": 228.19,
+      "pct": 0.88
+    },
+    {
+      "symbol": "(program) | :-1",
+      "selfMs": 221.42,
+      "pct": 0.85
+    },
+    {
+      "symbol": "readFileUtf8 | :-1",
+      "selfMs": 171.5,
+      "pct": 0.66
+    },
+    {
+      "symbol": "getNearestParentPackageJSON | :-1",
+      "selfMs": 149.43,
+      "pct": 0.58
+    },
+    {
+      "symbol": "wrapSafe | node:internal/modules/cjs/loader:1626",
+      "selfMs": 143.12,
+      "pct": 0.55
+    },
+    {
+      "symbol": "deserializeObject | file:///C:/Users/sanka/OneDrive/Desktop/Chatting%20App/server/node_modules/bson/lib/bson.cjs:3174",
+      "selfMs": 86.62,
+      "pct": 0.33
+    },
+    {
+      "symbol": "(garbage collector) | :-1",
+      "selfMs": 74.0,
+      "pct": 0.28
+    },
+    {
+      "symbol": "writeBuffer | :-1",
+      "selfMs": 48.88,
+      "pct": 0.19
+    },
+    {
+      "symbol": "nextTick | node:internal/process/task_queues:112",
+      "selfMs": 48.84,
+      "pct": 0.19
+    },
+    {
+      "symbol": "runMicrotasks | :-1",
+      "selfMs": 46.59,
+      "pct": 0.18
+    },
+    {
+      "symbol": "writeUtf8String | :-1",
+      "selfMs": 39.9,
+      "pct": 0.15
+    },
+    {
+      "symbol": "NodeError | node:internal/errors:499",
+      "selfMs": 33.73,
+      "pct": 0.13
+    },
+    {
+      "symbol": "emit | node:events:454",
+      "selfMs": 29.53,
+      "pct": 0.11
+    },
+    {
+      "symbol": "readPackageJSON | :-1",
+      "selfMs": 24.19,
+      "pct": 0.09
+    },
+    {
+      "symbol": "completeUpgrade | file:///C:/Users/sanka/OneDrive/Desktop/Chatting%20App/server/node_modules/ws/lib/websocket-server.js:365",
+      "selfMs": 23.12,
+      "pct": 0.09
+    },
+    {
+      "symbol": "realpathSync | node:fs:2699",
+      "selfMs": 22.66,
+      "pct": 0.09
+    },
+    {
+      "symbol": "handleUpgrade | file:///C:/Users/sanka/OneDrive/Desktop/Chatting%20App/server/node_modules/ws/lib/websocket-server.js:237",
+      "selfMs": 20.66,
+      "pct": 0.08
+    },
+    {
+      "symbol": "close | :-1",
+      "selfMs": 20.18,
+      "pct": 0.08
+    },
+    {
+      "symbol": "writevGeneric | node:internal/stream_base_commons:120",
+      "selfMs": 19.57,
+      "pct": 0.08
+    },
+    {
+      "symbol": "_addListener | node:events:535",
+      "selfMs": 16.91,
+      "pct": 0.07
+    },
+    {
+      "symbol": "Hash | node:internal/crypto/hash:89",
+      "selfMs": 16.91,
+      "pct": 0.07
+    },
+    {
+      "symbol": "(anonymous) | node:internal/modules/cjs/loader:689",
+      "selfMs": 16.32,
+      "pct": 0.06
+    },
+    {
+      "symbol": "onconnection | node:net:2234",
+      "selfMs": 16.17,
+      "pct": 0.06
+    },
+    {
+      "symbol": "resolve | node:path:188",
+      "selfMs": 15.33,
+      "pct": 0.06
+    },
+    {
+      "symbol": "Hmac | node:internal/crypto/hash:162",
+      "selfMs": 15.05,
+      "pct": 0.06
+    },
+    {
+      "symbol": "onStreamRead | node:internal/stream_base_commons:165",
+      "selfMs": 14.07,
+      "pct": 0.05
+    },
+    {
+      "symbol": "authenticateJwtToken | file:///C:/Users/sanka/OneDrive/Desktop/Chatting%20App/server/services/authCache.js:52",
+      "selfMs": 13.53,
+      "pct": 0.05
+    },
+    {
+      "symbol": "encodeAsString | file:///C:/Users/sanka/OneDrive/Desktop/Chatting%20App/server/node_modules/socket.io-parser/build/cjs/index.js:73",
+      "selfMs": 13.49,
+      "pct": 0.05
+    },
+    {
+      "symbol": "defaultPrepareStackTrace | node:internal/errors:94",
+      "selfMs": 12.89,
+      "pct": 0.05
+    },
+    {
+      "symbol": "Emitter.off.Emitter.removeListener.Emitter.removeAllListeners.Emitter.removeEventListener | file:///C:/Users/sanka/OneDrive/Desktop/Chatting%20App/server/node_modules/@socket.io/component-emitter/lib/cjs/index.js:83",
+      "selfMs": 12.86,
+      "pct": 0.05
+    },
+    {
+      "symbol": "removeListener | node:events:669",
+      "selfMs": 12.8,
+      "pct": 0.05
+    },
+    {
+      "symbol": "_initialize | file:///C:/Users/sanka/OneDrive/Desktop/Chatting%20App/server/node_modules/mongodb/lib/cursor/find_cursor.js:45",
+      "selfMs": 11.67,
+      "pct": 0.04
+    }
+  ]
+}

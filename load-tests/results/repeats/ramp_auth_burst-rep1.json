@@ -1,0 +1,119 @@
+{
+  "k6_http_reqs": {
+    "count": 744,
+    "rate": 53.139955321725466
+  },
+  "k6_http_req_duration": {
+    "max": 2092.3106,
+    "avg": 79.65320739247312,
+    "min": 0,
+    "med": 1.2596500000000002,
+    "p(90)": 3.21875,
+    "p(95)": 16.534945000000015,
+    "p(99)": 2077.3223820000003
+  },
+  "k6_http_req_failed": {
+    "passes": 13,
+    "fails": 731,
+    "value": 0.01747311827956989
+  },
+  "k6_dropped_iterations": null,
+  "k6_custom_metrics": {
+    "ep_auth_login_burst_err": {
+      "passes": 13,
+      "fails": 30,
+      "value": 0.3023255813953488
+    },
+    "ep_auth_login_burst_reqs": {
+      "count": 43,
+      "rate": 3.0712608586481114
+    },
+    "http_429_count": {
+      "count": 13,
+      "rate": 0.9285207247075686
+    },
+    "ep_health_probe_ms": {
+      "p(99)": 16.6246,
+      "max": 57.7091,
+      "avg": 1.8520574893009965,
+      "min": 0,
+      "med": 1.211,
+      "p(90)": 2.8206,
+      "p(95)": 3.4584
+    },
+    "ep_auth_login_burst_ms": {
+      "avg": 1347.99288372093,
+      "min": 0.5087,
+      "med": 2049.4682,
+      "p(90)": 2084.65934,
+      "p(95)": 2088.87245,
+      "p(99)": 2091.635072,
+      "max": 2092.3106
+    },
+    "ep_health_probe_reqs": {
+      "rate": 50.06869446307735,
+      "count": 701
+    },
+    "ep_health_probe_err": {
+      "passes": 0,
+      "fails": 701,
+      "value": 0
+    }
+  },
+  "system_metrics": {
+    "node_cpu_avg_1core_pct": 55.15,
+    "node_cpu_peak_1core_pct": 382.51,
+    "node_rss_start_mb": 151.97,
+    "node_rss_peak_mb": 258.14,
+    "node_heap_peak_mb": 40.9,
+    "el_lag_p95_peak_ms": 31.18,
+    "el_lag_max_ms": 549.45,
+    "mongo_conns_peak": 10,
+    "mongo_wt_cache_peak_mb": 26.09,
+    "mongo_active_clients_peak": 0,
+    "mongo_queued_peak": 0,
+    "mongo_ops_insert_peak_s": 0,
+    "mongo_ops_query_peak_s": 28,
+    "mongo_ops_update_peak_s": 0,
+    "mongo_os_cpu_avg_pct": 2.23,
+    "mongo_os_cpu_peak_pct": 6.2,
+    "mongo_os_rss_peak_mb": 81.8,
+    "sys_cpu_peak_pct": 72.0,
+    "sys_mem_avail_min_mb": 1484.11
+  },
+  "timeseries_buckets": [
+    {
+      "tSec": 0,
+      "rps": 50.2,
+      "reqCount": 251,
+      "errCount": 0,
+      "errRatePct": 0.0,
+      "p50Ms": 1.49,
+      "p95Ms": 8.21,
+      "p99Ms": 41.95,
+      "maxMs": 57.71
+    },
+    {
+      "tSec": 5,
+      "rps": 55.6,
+      "reqCount": 278,
+      "errCount": 0,
+      "errRatePct": 0.0,
+      "p50Ms": 1.2,
+      "p95Ms": 2066.32,
+      "p99Ms": 2089.02,
+      "maxMs": 2092.31
+    },
+    {
+      "tSec": 10,
+      "rps": 43.0,
+      "reqCount": 215,
+      "errCount": 13,
+      "errRatePct": 6.05,
+      "p50Ms": 1.12,
+      "p95Ms": 3.09,
+      "p99Ms": 5.95,
+      "maxMs": 72.25
+    }
+  ]
+}

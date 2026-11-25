@@ -1,0 +1,14 @@
+{"ts": "2026-11-25T18:40:16Z", "systemCpuPct": 22.2, "systemMemUsedPct": 77.4, "systemMemAvailMB": 1702.88, "nodeOsCpuPct": 12.5, "nodeOsRssMB": 109.03, "mongoOsCpuPct": 0.0, "mongoOsRssMB": 81.61}
+{"ts": "2026-11-25T18:40:17Z", "systemCpuPct": 29.3, "systemMemUsedPct": 77.3, "systemMemAvailMB": 1706.98, "nodeOsCpuPct": 7.8, "nodeOsRssMB": 112.22, "mongoOsCpuPct": 0.0, "mongoOsRssMB": 81.61}
+{"ts": "2026-11-25T18:40:18Z", "systemCpuPct": 35.2, "systemMemUsedPct": 77.9, "systemMemAvailMB": 1661.32, "nodeOsCpuPct": 26.5, "nodeOsRssMB": 115.58, "mongoOsCpuPct": 4.7, "mongoOsRssMB": 81.65}
+{"ts": "2026-11-25T18:40:19Z", "systemCpuPct": 71.5, "systemMemUsedPct": 79.9, "systemMemAvailMB": 1515.91, "nodeOsCpuPct": 396.4, "nodeOsRssMB": 251.45, "mongoOsCpuPct": 4.7, "mongoOsRssMB": 81.73}
+{"ts": "2026-11-25T18:40:20Z", "systemCpuPct": 62.8, "systemMemUsedPct": 80.7, "systemMemAvailMB": 1455.69, "nodeOsCpuPct": 396.1, "nodeOsRssMB": 299.29, "mongoOsCpuPct": 1.6, "mongoOsRssMB": 81.73}
+{"ts": "2026-11-25T18:40:21Z", "systemCpuPct": 32.5, "systemMemUsedPct": 80.8, "systemMemAvailMB": 1446.19, "nodeOsCpuPct": 96.8, "nodeOsRssMB": 311.6, "mongoOsCpuPct": 1.6, "mongoOsRssMB": 81.73}
+{"ts": "2026-11-25T18:40:22Z", "systemCpuPct": 21.2, "systemMemUsedPct": 80.8, "systemMemAvailMB": 1446.85, "nodeOsCpuPct": 21.9, "nodeOsRssMB": 311.86, "mongoOsCpuPct": 3.1, "mongoOsRssMB": 81.73}
+{"ts": "2026-11-25T18:40:23Z", "systemCpuPct": 23.7, "systemMemUsedPct": 80.8, "systemMemAvailMB": 1448.41, "nodeOsCpuPct": 18.7, "nodeOsRssMB": 312.02, "mongoOsCpuPct": 1.6, "mongoOsRssMB": 81.73}
+{"ts": "2026-11-25T18:40:24Z", "systemCpuPct": 27.6, "systemMemUsedPct": 80.8, "systemMemAvailMB": 1443.77, "nodeOsCpuPct": 20.3, "nodeOsRssMB": 312.11, "mongoOsCpuPct": 0.0, "mongoOsRssMB": 81.73}
+{"ts": "2026-11-25T18:40:25Z", "systemCpuPct": 36.0, "systemMemUsedPct": 80.9, "systemMemAvailMB": 1439.29, "nodeOsCpuPct": 59.3, "nodeOsRssMB": 313.81, "mongoOsCpuPct": 4.7, "mongoOsRssMB": 81.77}
+{"ts": "2026-11-25T18:40:26Z", "systemCpuPct": 33.8, "systemMemUsedPct": 80.1, "systemMemAvailMB": 1499.07, "nodeOsCpuPct": 53.0, "nodeOsRssMB": 284.89, "mongoOsCpuPct": 0.0, "mongoOsRssMB": 81.77}
+{"ts": "2026-11-25T18:40:27Z", "systemCpuPct": 30.2, "systemMemUsedPct": 79.3, "systemMemAvailMB": 1562.1, "nodeOsCpuPct": 45.1, "nodeOsRssMB": 232.75, "mongoOsCpuPct": 0.0, "mongoOsRssMB": 81.77}
+{"ts": "2026-11-25T18:40:28Z", "systemCpuPct": 31.4, "systemMemUsedPct": 79.3, "systemMemAvailMB": 1561.84, "nodeOsCpuPct": 24.9, "nodeOsRssMB": 229.43, "mongoOsCpuPct": 3.1, "mongoOsRssMB": 81.77}
+{"ts": "2026-11-25T18:40:29Z", "systemCpuPct": 33.3, "systemMemUsedPct": 78.8, "systemMemAvailMB": 1598.68, "nodeOsCpuPct": 40.6, "nodeOsRssMB": 238.45, "mongoOsCpuPct": 4.7, "mongoOsRssMB": 81.77}
