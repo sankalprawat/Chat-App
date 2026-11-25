@@ -1,67 +1,93 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { FiUser, FiCamera } from "react-icons/fi";
 import axios from "axios";
 import { API_BASE_URL } from "../api/config";
 import { toast } from "sonner";
+import { useSocket } from "../context/SocketContext";
+import { User } from "../types";
 
-const Profile = ({ theme, onUpdate }) => {
+interface ProfileProps {
+  theme?: string;
+  initialUser?: {
+    fullName: string;
+    email: string;
+    profilePic?: string;
+  };
+  onUserUpdated?: (updatedUser: User) => void;
+}
+
+const Profile = ({ theme, initialUser, onUserUpdated }: ProfileProps) => {
+  const { token, user: contextUser, setUser } = useSocket();
   const [updating, setUpdating] = useState(false);
   const [formData, setFormData] = useState({
-    fullName: "",
-    email: "",
-    profilePic: "",
+    fullName: initialUser?.fullName ?? contextUser?.fullName ?? "",
+    email: initialUser?.email ?? contextUser?.email ?? "",
+    profilePic: initialUser?.profilePic ?? contextUser?.profilePic ?? "",
   });
-  const [loading, setLoading] = useState(true);
-  const [selectedImage, setSelectedImage] = useState(null);
+  const [selectedImage, setSelectedImage] = useState<File | null>(null);
+  const previewUrlRef = useRef<string | null>(null);
 
-  const token = localStorage.getItem("token");
-
-  const fetchProfile = async () => {
-    try {
-      setLoading(true);
-      const res = await axios.get(`${API_BASE_URL}/api/getProfile`, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
-      setFormData(res.data.user);
-    } catch (error) {
-      console.log(error.response);
-      toast.error("Failed to load profile");
-    } finally {
-      setLoading(false);
+  useEffect(() => {
+    if (initialUser) {
+      setFormData((prev) => ({
+        fullName: initialUser.fullName ?? prev.fullName,
+        email: initialUser.email ?? prev.email,
+        profilePic: selectedImage ? prev.profilePic : initialUser.profilePic ?? "",
+      }));
     }
-  };
+  }, [initialUser, selectedImage]);
+
+  useEffect(() => {
+    return () => {
+      if (previewUrlRef.current) {
+        URL.revokeObjectURL(previewUrlRef.current);
+      }
+    };
+  }, []);
 
   const handleUpdateProfile = async () => {
+    const trimmedName = formData.fullName.trim();
+    const trimmedEmail = formData.email.trim();
+    if (!trimmedName || !trimmedEmail) {
+      toast.error("Full name and email cannot be empty.");
+      return;
+    }
+
     try {
       setUpdating(true);
       const data = new FormData();
-      data.append("fullName", formData.fullName);
-      data.append("email", formData.email);
+      data.append("fullName", trimmedName);
+      data.append("email", trimmedEmail);
       if (selectedImage) {
         data.append("profileImage", selectedImage);
       }
-      const res = await axios.put(`${API_BASE_URL}/api/updateProfile`, data, {
+
+      const res = await axios.put<{ data: User }>(`${API_BASE_URL}/api/updateProfile`, data, {
         headers: { Authorization: `Bearer ${token}` },
       });
-      
-      if (res.data.data?.profilePic) {
-        setFormData((prev) => ({
-          ...prev,
-          profilePic: res.data.data.profilePic,
-        }));
-      }
-      
-      // Update local storage user profile
-      const stored = localStorage.getItem("user");
-      if (stored) {
-        const parsed = JSON.parse(stored);
-        localStorage.setItem("user", JSON.stringify({ ...parsed, ...res.data.data }));
-      }
 
-      if (onUpdate) {
-        onUpdate();
+      const updatedUser = res.data.data;
+
+      if (previewUrlRef.current) {
+        URL.revokeObjectURL(previewUrlRef.current);
+        previewUrlRef.current = null;
+      }
+      setSelectedImage(null);
+
+      setFormData({
+        fullName: updatedUser.fullName || "",
+        email: updatedUser.email || "",
+        profilePic: updatedUser.profilePic || "",
+      });
+
+      setUser((prev) => {
+        const merged = prev ? { ...prev, ...updatedUser } : updatedUser;
+        localStorage.setItem("user", JSON.stringify(merged));
+        return merged;
+      });
+
+      if (onUserUpdated) {
+        onUserUpdated(updatedUser);
       }
 
       toast.success("Profile updated successfully", {
@@ -72,25 +98,13 @@ const Profile = ({ theme, onUpdate }) => {
           borderRadius: "12px",
         },
       });
-    } catch (error) {
-      console.log(error);
+    } catch (error: any) {
+      console.error(error);
       toast.error(error.response?.data?.message || "Failed to update profile");
     } finally {
       setUpdating(false);
     }
   };
-
-  useEffect(() => {
-    fetchProfile();
-  }, []);
-
-  if (loading) {
-    return (
-      <div className="flex justify-center items-center py-12">
-        <div className="w-8 h-8 border-3 border-[#007aff] rounded-full border-t-transparent animate-spin"></div>
-      </div>
-    );
-  }
 
   return (
     <div className="max-w-md mx-auto space-y-6">
@@ -104,9 +118,13 @@ const Profile = ({ theme, onUpdate }) => {
       {/* Avatar Uploader */}
       <div className="flex flex-col items-center justify-center py-4">
         <div className="relative group">
-          <div className="h-24 w-24 rounded-full overflow-hidden bg-zinc-100 dark:bg-zinc-800 border-2 border-zinc-200 dark:border-zinc-700 shadow-md flex items-center justify-center text-zinc-450 dark:text-zinc-550 shrink-0">
+          <div className="h-24 w-24 rounded-full overflow-hidden bg-zinc-100 dark:bg-zinc-800 border-2 border-zinc-200 dark:border-zinc-700 shadow-md flex items-center justify-center text-zinc-400 dark:text-zinc-500 shrink-0">
             {formData.profilePic ? (
-              <img src={formData.profilePic} alt="Profile Avatar" className="h-full w-full object-cover" />
+              <img
+                src={formData.profilePic}
+                alt="Profile Avatar"
+                className="h-full w-full object-cover"
+              />
             ) : (
               <FiUser size={40} />
             )}
@@ -119,20 +137,28 @@ const Profile = ({ theme, onUpdate }) => {
               accept="image/*"
               className="hidden"
               onChange={(e) => {
-                const file = e.target.files[0];
+                const file = e.target.files?.[0];
                 if (file) {
+                  if (previewUrlRef.current) {
+                    URL.revokeObjectURL(previewUrlRef.current);
+                  }
+                  const objectUrl = URL.createObjectURL(file);
+                  previewUrlRef.current = objectUrl;
                   setSelectedImage(file);
-                  setFormData({
-                    ...formData,
-                    profilePic: URL.createObjectURL(file),
-                  });
+                  setFormData((prev) => ({
+                    ...prev,
+                    profilePic: objectUrl,
+                  }));
                 }
+                e.target.value = "";
               }}
             />
           </label>
         </div>
         {selectedImage && (
-          <span className="text-xs text-[#007aff] font-medium mt-2">New image selected</span>
+          <span className="text-xs text-[#007aff] font-medium mt-2">
+            New image selected
+          </span>
         )}
       </div>
 
@@ -145,7 +171,9 @@ const Profile = ({ theme, onUpdate }) => {
           <input
             type="text"
             value={formData.fullName}
-            onChange={(e) => setFormData({ ...formData, fullName: e.target.value })}
+            onChange={(e) =>
+              setFormData((prev) => ({ ...prev, fullName: e.target.value }))
+            }
             className="w-full bg-zinc-50 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 rounded-xl px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-[#007aff]/50 focus:border-[#007aff] transition-all"
           />
         </div>
@@ -157,7 +185,9 @@ const Profile = ({ theme, onUpdate }) => {
           <input
             type="email"
             value={formData.email}
-            onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+            onChange={(e) =>
+              setFormData((prev) => ({ ...prev, email: e.target.value }))
+            }
             className="w-full bg-zinc-50 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 rounded-xl px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-[#007aff]/50 focus:border-[#007aff] transition-all"
           />
         </div>
@@ -165,6 +195,7 @@ const Profile = ({ theme, onUpdate }) => {
 
       {/* Action Button */}
       <button
+        type="button"
         onClick={handleUpdateProfile}
         disabled={updating}
         className="w-full bg-[#007aff] hover:opacity-95 text-white font-semibold py-3 rounded-xl transition-all shadow-sm shadow-[#007aff]/20 text-sm cursor-pointer disabled:opacity-50"

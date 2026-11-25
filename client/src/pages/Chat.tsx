@@ -1,11 +1,13 @@
 import React from 'react'
 import ChatHeader from '../components/chat/ChatHeader'
-import MessageArea from '../components/chat/MessageArea'
 import InputBar from '../components/chat/InputBar'
 import { useState } from 'react'
+import MessageArea, { ChatMessage } from '../components/chat/MessageArea';
+
+
 
 const Chat = () => {
-  const [messages, setMessages] = useState([])
+  const [messages, setMessages] = useState<ChatMessage[]>([])
 
   return (
     <>

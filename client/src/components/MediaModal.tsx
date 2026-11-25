@@ -2,9 +2,20 @@ import React, { useEffect } from "react";
 import { IoClose } from "react-icons/io5";
 import { LuAudioLines } from "react-icons/lu";
 
-const MediaModal = ({ media, onClose }) => {
+export interface MediaItem {
+  type: "image" | "video" | "audio";
+  url: string;
+  name?: string ;
+}
+
+interface MediaModalProps {
+  media: MediaItem | null; 
+  onClose: () => void;
+}
+
+const MediaModal = ({ media, onClose }: MediaModalProps) => {
   useEffect(() => {
-    const handleKeyDown = (e) => {
+    const handleKeyDown = (e: KeyboardEvent) => {
       if (e.key === "Escape") onClose();
     };
     document.addEventListener("keydown", handleKeyDown);
@@ -16,6 +27,8 @@ const MediaModal = ({ media, onClose }) => {
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/90 backdrop-blur-sm transition-opacity duration-300">
       <button
+        type="button"
+        aria-label="Close media preview"
         onClick={onClose}
         className="absolute top-6 right-6 p-2 rounded-full bg-white/10 hover:bg-white/20 text-white transition-colors z-50 cursor-pointer"
       >
@@ -49,7 +62,7 @@ const MediaModal = ({ media, onClose }) => {
         {media.type === "audio" && (
           <div className="bg-zinc-900 border border-zinc-800 p-8 rounded-3xl shadow-2xl flex flex-col items-center gap-6 w-full max-w-md">
             <div className="w-24 h-24 bg-gradient-to-tr from-[#007aff] to-indigo-500 rounded-full flex items-center justify-center">
-              <LuAudioLines className="text-6xl "/>
+              <LuAudioLines className="text-6xl text-white" />
             </div>
             <h3 className="text-white font-medium text-lg">{media.name || "Audio Message"}</h3>
             <audio

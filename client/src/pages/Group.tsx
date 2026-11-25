@@ -1,29 +1,39 @@
-import React, { useState } from 'react'
-import { useParams, useNavigate } from 'react-router-dom'
+import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { IoArrowBackCircleOutline } from "react-icons/io5";
-import MessageArea from '../components/chat/MessageArea'
-import InputBar from '../components/chat/InputBar'
-import GroupInfoModal from '../components/GroupInfoModal'
+import MessageArea, { ChatMessage } from "../components/chat/MessageArea";
+import InputBar from "../components/chat/InputBar";
+import GroupInfoModal from "../components/GroupInfoModal";
+import { Group as GroupType } from "../types";
 
 const Group = () => {
   const navigate = useNavigate();
-  const [messages, setMessages] = useState([]);
-  const [groupInfo, setGroupInfo] = useState(null);
-  const [showInfoModal, setShowInfoModal] = useState(false);
+  const [messages, setMessages] = useState<ChatMessage[]>([]);
+  const [groupInfo, setGroupInfo] = useState<GroupType | null>(null);
+  const [showInfoModal, setShowInfoModal] = useState<boolean>(false);
 
   const groupName = groupInfo?.groupName || "Loading Group...";
   const groupPic = groupInfo?.groupPic || null;
   const description = groupInfo?.description || "";
   const membersCount = groupInfo?.members?.length || 0;
 
+  useEffect(() => {
+    if (groupInfo?.groupName) {
+      document.title = groupInfo.groupName;
+    }
+    return () => {
+      document.title = "Chat App";
+    };
+  }, [groupInfo?.groupName]);
+
   return (
-    <div className='flex flex-col h-screen w-full bg-transparent relative'>
-      
+    <div className="flex flex-col h-screen w-full bg-transparent relative">
       {/* Group Chat Header */}
       <div className="flex items-center px-4 py-3 bg-white/70 dark:bg-zinc-900/70 backdrop-blur-xl border-b border-zinc-200 dark:border-zinc-800 transition-colors duration-200 shadow-sm shrink-0">
-        
         {/* Back navigation CTA for Mobile View */}
         <button
+          type="button"
+          aria-label="Back to chats"
           onClick={() => navigate("/")}
           className="p-1.5 hover:bg-zinc-100 dark:hover:bg-zinc-800 rounded-full text-[#007aff] text-xl mr-2.5 transition-colors cursor-pointer"
         >
@@ -31,7 +41,7 @@ const Group = () => {
         </button>
 
         {/* Group Profile Photo (Clickable to view Group Info) */}
-        <div 
+        <div
           onClick={() => setShowInfoModal(true)}
           className="mr-3 shrink-0 select-none cursor-pointer hover:opacity-85 active:scale-95 transition-all duration-150"
           title="View Group Info"
@@ -50,12 +60,14 @@ const Group = () => {
         </div>
 
         {/* Group Info Name & Description (Clickable to view Group Info) */}
-        <div 
+        <div
           onClick={() => setShowInfoModal(true)}
           className="flex flex-col min-w-0 flex-1 cursor-pointer hover:opacity-80 transition-all duration-150"
           title="View Group Info"
         >
-          <span className="text-zinc-800 dark:text-zinc-100 font-semibold text-sm truncate hover:text-[#007aff] dark:hover:text-[#007aff] transition-colors">{groupName}</span>
+          <span className="text-zinc-800 dark:text-zinc-100 font-semibold text-sm truncate hover:text-[#007aff] dark:hover:text-[#007aff] transition-colors">
+            {groupName}
+          </span>
           <span className="text-[10px] text-zinc-400 dark:text-zinc-500 font-medium truncate mt-0.5">
             {membersCount} members {description && `• ${description}`}
           </span>
@@ -63,20 +75,24 @@ const Group = () => {
       </div>
 
       {/* Messages Scroll Area */}
-      <MessageArea setMessages={setMessages} messages={messages} setGroupInfo={setGroupInfo} />
+      <MessageArea
+        setMessages={setMessages}
+        messages={messages}
+        setGroupInfo={setGroupInfo}
+      />
 
       {/* Message Text Input Area */}
       <InputBar setMessages={setMessages} />
 
       {/* Group Info Modal */}
       {showInfoModal && (
-        <GroupInfoModal 
-          group={groupInfo} 
-          onClose={() => setShowInfoModal(false)} 
+        <GroupInfoModal
+          group={groupInfo}
+          onClose={() => setShowInfoModal(false)}
         />
       )}
     </div>
-  )
-}
+  );
+};
 
-export default Group
+export default Group;

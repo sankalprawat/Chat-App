@@ -6,28 +6,35 @@ const groupMessageSchema = new mongoose.Schema(
       type: mongoose.Schema.Types.ObjectId,
       ref: "Group",
       required: true,
-      index: true // Indexed for fast message retrieval
     },
     senderId: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "User",
-      required: true
+      required: true,
     },
     text: {
       type: String,
-      default: ""
+      default: "",
     },
-    imageUrl: [{
-      type: String
-    }],
-    videoUrl: [{
-      type: String
-    }],
-    audioUrl: [{
-      type: String
-    }]
+    imageUrl: [
+      {
+        type: String,
+      },
+    ],
+    videoUrl: [
+      {
+        type: String,
+      },
+    ],
+    audioUrl: [
+      {
+        type: String,
+      },
+    ],
   },
   { timestamps: true }
 );
+
+groupMessageSchema.index({ groupId: 1, createdAt: -1 });
 
 module.exports = mongoose.model("GroupMessage", groupMessageSchema);

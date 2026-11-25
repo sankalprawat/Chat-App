@@ -6,31 +6,32 @@ const groupSchema = new mongoose.Schema(
       type: String,
       required: [true, "Group name is required"],
       trim: true,
-      maxlength: [50, "Group name cannot exceed 50 characters"]
+      maxlength: [50, "Group name cannot exceed 50 characters"],
     },
     description: {
       type: String,
       trim: true,
-      default: ""
+      default: "",
     },
     groupPic: {
       type: String,
-      default: ""
+      default: "",
     },
     admin: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "User",
-      required: true
+      required: true,
     },
     members: [
       {
         type: mongoose.Schema.Types.ObjectId,
-        ref: "User"
-      }
-    ]
+        ref: "User",
+      },
+    ],
   },
   { timestamps: true }
 );
 
-groupSchema.index({ members: 1 });
+groupSchema.index({ members: 1, updatedAt: -1 });
+
 module.exports = mongoose.model("Group", groupSchema);

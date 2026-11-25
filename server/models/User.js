@@ -18,6 +18,7 @@ const userSchema = new mongoose.Schema(
       type: String,
       minlength: 6,
       required: false,
+      select: false,
     },
     profilePic: {
       type: String,
@@ -31,6 +32,20 @@ const userSchema = new mongoose.Schema(
     timestamps: true,
   },
 );
+
+userSchema.set("toJSON", {
+  transform: (_doc, ret) => {
+    delete ret.password;
+    return ret;
+  },
+});
+
+userSchema.set("toObject", {
+  transform: (_doc, ret) => {
+    delete ret.password;
+    return ret;
+  },
+});
 
 const User = mongoose.model("User", userSchema);
 module.exports = User;

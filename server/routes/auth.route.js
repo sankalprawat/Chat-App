@@ -1,17 +1,36 @@
-const express = require('express')
-const {signUp, login, getProfile, updateProfile, getAllContacts, imageUpload, googleLogin} = require('../controllers/auth.controller')
-const verifyToken = require('../middleware/verifyToken.middleware')
-const upload = require('../middleware/multer.middleware')
-const router = express.Router()
-const uploadToCloudinary = require('../middleware/cloudinary.middleware')
+const express = require("express");
+const {
+  signUp,
+  login,
+  getProfile,
+  updateProfile,
+  getAllContacts,
+  googleLogin,
+} = require("../controllers/auth.controller");
+const verifyToken = require("../middleware/verifyToken.middleware");
+const upload = require("../middleware/multer.middleware");
+const uploadToCloudinary = require("../middleware/cloudinary.middleware");
+const { createRateLimiter } = require("../middleware/rateLimit.middleware");
 
-router.post("/signup", signUp)
-router.post("/login", login)
-router.post("/googleLogin" , googleLogin)
-router.get("/getProfile", verifyToken, getProfile)
-router.put("/updateProfile", verifyToken, upload.single("profileImage"), uploadToCloudinary, updateProfile)
-router.get("/getAllContacts", verifyToken, getAllContacts)
-router.post("/imageupload" , verifyToken, upload.single("file") ,uploadToCloudinary ,imageUpload )
+const router = express.Router();
 
+const authLimiter = createRateLimiter({
+  windowMs: 15 * 60 * 1000,
+  max: 30,
+  message: "Too many authentication attempts. Please try again later.",
+});
 
-module.exports = router
+router.post("/signup", authLimiter, signUp);
+router.post("/login", authLimiter, login);
+router.post("/googleLogin", authLimiter, googleLogin);
+router.get("/getProfile", verifyToken, getProfile);
+router.put(
+  "/updateProfile",
+  verifyToken,
+  upload.single("profileImage"),
+  uploadToCloudinary,
+  updateProfile
+);
+router.get("/getAllContacts", verifyToken, getAllContacts);
+
+module.exports = router;

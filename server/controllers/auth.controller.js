@@ -2,39 +2,79 @@ const mongoose = require("mongoose");
 const User = require("../models/User");
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcryptjs");
+const { verifyFirebaseIdToken } = require("../services/firebaseAuth");
+
+const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+const signAuthToken = (user) =>
+  jwt.sign(
+    {
+      userId: user._id,
+      fullName: user.fullName,
+      email: user.email,
+    },
+    process.env.JWT_SECRET,
+    { expiresIn: "365d" }
+  );
 
 const signUp = async (req, res) => {
   try {
     const { fullName, email, password } = req.body;
 
-    if (!fullName || !email || !password) {
+    if (
+      typeof fullName !== "string" ||
+      typeof email !== "string" ||
+      typeof password !== "string"
+    ) {
+      return res.status(400).json({ message: "Invalid input types" });
+    }
+
+    const trimmedName = fullName.trim();
+    const normalizedEmail = email.trim().toLowerCase();
+
+    if (!trimmedName || !normalizedEmail || !password) {
       return res.status(400).json({
-        message: "required fields not filled",
+        message: "Required fields not filled",
       });
     }
 
-    const user = await User.findOne({ email });
+    if (!EMAIL_REGEX.test(normalizedEmail)) {
+      return res.status(400).json({
+        message: "Please enter a valid email address",
+      });
+    }
 
-    if (user) {
+    if (password.length < 6) {
+      return res.status(400).json({
+        message: "Password must be at least 6 characters",
+      });
+    }
+
+    const existingUser = await User.findOne({ email: normalizedEmail }).lean();
+    if (existingUser) {
       return res.status(400).json({
         message: "User already exists, Please Login!",
       });
     }
+
     const hashedPassword = await bcrypt.hash(password, 10);
     const newUser = await User.create({
-      fullName,
-      email,
+      fullName: trimmedName,
+      email: normalizedEmail,
       password: hashedPassword,
     });
 
     res.status(201).json({
       message: "User created successfully",
-      data: newUser,
+      data: newUser.toJSON(),
     });
   } catch (error) {
+    if (error.code === 11000) {
+      return res.status(400).json({ message: "User already exists, Please Login!" });
+    }
     console.log(error.message);
     res.status(500).json({
-      message: error.message,
+      message: "Internal server error",
     });
   }
 };
@@ -42,18 +82,27 @@ const signUp = async (req, res) => {
 const login = async (req, res) => {
   try {
     const { email, password } = req.body;
-    if (!email || !password) {
+    if (typeof email !== "string" || typeof password !== "string") {
       return res.status(400).json({
         message: "All fields are required",
       });
     }
-    const user = await User.findOne({ email });
+
+    const normalizedEmail = email.trim().toLowerCase();
+    if (!normalizedEmail || !password) {
+      return res.status(400).json({
+        message: "All fields are required",
+      });
+    }
+
+    const user = await User.findOne({ email: normalizedEmail }).select("+password");
     if (!user) {
       return res.status(400).json({ message: "User not found" });
     }
     if (!user.password) {
       return res.status(400).json({ message: "Please login with Google" });
     }
+
     const isMatch = await bcrypt.compare(password, user.password);
     if (!isMatch) {
       return res.status(400).json({
@@ -61,57 +110,63 @@ const login = async (req, res) => {
       });
     }
 
-    const payload = {
-      userId: user._id,
-      fullName: user.fullName,
-      email: user.email,
-    };
-    const token = jwt.sign(payload, process.env.JWT_SECRET, {
-      expiresIn: "365d",
-    });
+    const token = signAuthToken(user);
 
     res.status(200).json({
       message: "Login successful",
-      data: { user, token },
+      data: { user: user.toJSON(), token },
     });
-    // console.log("User: ", user);
   } catch (error) {
     console.log(error.message);
-    res.status(500).json({ message: error.message });
+    res.status(500).json({ message: "Internal server error" });
   }
 };
 
 const googleLogin = async (req, res) => {
   try {
-    const { email, fullName, profilePic, googleId } = req.body;
-    let user = await User.findOne({ email });
+    const { idToken } = req.body;
+    const verified = await verifyFirebaseIdToken(idToken);
+
+    let user = await User.findOne({ email: verified.email });
     if (!user) {
       user = await User.create({
-        email,
-        fullName,
-        profilePic,
-        googleId,
+        email: verified.email,
+        fullName: verified.fullName || verified.email.split("@")[0],
+        profilePic: verified.profilePic || "",
+        googleId: verified.googleId,
       });
     } else {
-      user.fullName = fullName;
-      user.profilePic = profilePic;
-      user.googleId = googleId;
-      await user.save();
+      if (user.googleId && user.googleId !== verified.googleId) {
+        return res.status(403).json({ message: "Google account mismatch" });
+      }
+      let dirty = false;
+      if (!user.googleId) {
+        user.googleId = verified.googleId;
+        dirty = true;
+      }
+      if (!user.fullName && verified.fullName) {
+        user.fullName = verified.fullName;
+        dirty = true;
+      }
+      if (!user.profilePic && verified.profilePic) {
+        user.profilePic = verified.profilePic;
+        dirty = true;
+      }
+      if (dirty) {
+        await user.save();
+      }
     }
-    const payload = {
-      userId: user._id,
-      fullName: user.fullName,
-      email: user.email,
-    };
-    const token = jwt.sign(payload, process.env.JWT_SECRET, {
-      expiresIn: "365d",
-    });
+
+    const token = signAuthToken(user);
 
     res.status(200).json({
-      message: "login successfully",
-      data: { user, token },
+      message: "Login successful",
+      data: { user: user.toJSON(), token },
     });
   } catch (error) {
+    if (error.statusCode) {
+      return res.status(error.statusCode).json({ message: error.message });
+    }
     console.log("google login error", error);
     res.status(500).json({ message: "server error" });
   }
@@ -119,13 +174,9 @@ const googleLogin = async (req, res) => {
 
 const getProfile = async (req, res) => {
   try {
-    const userId = req.user._id;
-
-    const getUser = await User.findById(userId).select("-password");
-
     res.status(200).json({
       message: "This is profile page",
-      user: getUser,
+      user: req.user,
     });
   } catch (error) {
     res.status(500).json({
@@ -139,28 +190,51 @@ const updateProfile = async (req, res) => {
     const userId = req.user._id;
     const updateData = {};
 
-    if (req.body.email) {
-      const existingEmail = await User.findOne({ email: req.body.email, _id: { $ne: userId } });
+    if (req.body.email !== undefined) {
+      if (typeof req.body.email !== "string") {
+        return res.status(400).json({ message: "Invalid email" });
+      }
+      const normalizedEmail = req.body.email.trim().toLowerCase();
+      if (!EMAIL_REGEX.test(normalizedEmail)) {
+        return res.status(400).json({ message: "Please enter a valid email address" });
+      }
+      const existingEmail = await User.findOne({
+        email: normalizedEmail,
+        _id: { $ne: userId },
+      }).lean();
       if (existingEmail) {
         return res.status(400).json({ message: "Email already in use" });
       }
-      updateData.email = req.body.email;
+      updateData.email = normalizedEmail;
     }
 
-    if (req.body.fullName) {
-      updateData.fullName = req.body.fullName;
+    if (req.body.fullName !== undefined) {
+      if (typeof req.body.fullName !== "string" || !req.body.fullName.trim()) {
+        return res.status(400).json({ message: "Full name cannot be empty" });
+      }
+      updateData.fullName = req.body.fullName.trim();
     }
 
-    if (req.imageUrl) {
+    if (Array.isArray(req.imageUrl) && req.imageUrl.length > 0) {
       updateData.profilePic = req.imageUrl[0];
     }
+
+    if (Object.keys(updateData).length === 0) {
+      return res.status(400).json({ message: "No valid fields provided to update" });
+    }
+
     const updateUser = await User.findByIdAndUpdate(userId, updateData, {
       new: true,
-    });
+      runValidators: true,
+    }).select("-password");
+
+    if (!updateUser) {
+      return res.status(404).json({ message: "User not found" });
+    }
 
     res.status(200).json({
-      message: "Profile update successfully",
-      data: updateUser,
+      message: "Profile updated successfully",
+      data: updateUser.toJSON(),
     });
   } catch (error) {
     console.log(error.message);
@@ -172,7 +246,7 @@ const getAllContacts = async (req, res) => {
   try {
     const loginUserId = new mongoose.Types.ObjectId(req.user._id);
 
-    // 1. Get all recent messages for this user efficiently
+    // 1. Get all recent messages for this user efficiently using separate indexed branches
     const recentMessages = await mongoose.model("Message").aggregate([
       {
         $match: {
@@ -193,36 +267,24 @@ const getAllContacts = async (req, res) => {
       },
     ]);
 
-    const lastMessageMap = {};
+    const lastMessageMap = new Map();
     recentMessages.forEach((msg) => {
-      lastMessageMap[msg._id.toString()] = msg.lastMessageTime;
+      if (msg._id) {
+        lastMessageMap.set(msg._id.toString(), msg.lastMessageTime);
+      }
     });
 
-    // 2. Get all users
-    let users = await User.find({ _id: { $ne: loginUserId } })
+    // 2. Get all other users
+    const users = await User.find({ _id: { $ne: loginUserId } })
       .select("-password")
       .lean();
 
-    // 3. Map and sort in memory
-    users = users.map((user) => {
-      return {
-        ...user,
-        lastMessageTime: lastMessageMap[user._id.toString()] || new Date(0),
-      };
-    });
-
+    // 3. Sort in memory by lastMessageTime descending, then fullName ascending
     users.sort((a, b) => {
-      // Sort by last message time (descending)
-      if (b.lastMessageTime > a.lastMessageTime) return 1;
-      if (b.lastMessageTime < a.lastMessageTime) return -1;
-      // Then sort by name (ascending)
-      return a.fullName.localeCompare(b.fullName);
-    });
-
-    // 4. Remove lastMessageTime to match previous projection
-    users = users.map((user) => {
-      const { lastMessageTime, ...rest } = user;
-      return rest;
+      const timeA = lastMessageMap.get(a._id.toString())?.getTime() || 0;
+      const timeB = lastMessageMap.get(b._id.toString())?.getTime() || 0;
+      if (timeB !== timeA) return timeB - timeA;
+      return (a.fullName || "").localeCompare(b.fullName || "");
     });
 
     res.status(200).json({
@@ -235,24 +297,11 @@ const getAllContacts = async (req, res) => {
   }
 };
 
-const imageUpload = async (req, res) => {
-  try {
-    res.status(200).json({
-      message: "Image Upload",
-      file: req.file,
-      image: req.imageUrl,
-    });
-  } catch (error) {
-    res.status(500).json({ message: error.message });
-  }
-};
-
 module.exports = {
   signUp,
   login,
   getProfile,
   updateProfile,
   getAllContacts,
-  imageUpload,
-  googleLogin
+  googleLogin,
 };

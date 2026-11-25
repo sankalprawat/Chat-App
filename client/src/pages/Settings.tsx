@@ -1,34 +1,33 @@
 import React, { useState, useEffect } from "react";
 import { IoChevronBack, IoSunnyOutline, IoMoonOutline } from "react-icons/io5";
-import { FiUser, FiSliders, FiLogOut, FiCheck, FiCamera } from "react-icons/fi";
+import { FiUser, FiSliders, FiLogOut, FiCheck } from "react-icons/fi";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { API_BASE_URL } from "../api/config";
 import { useTheme } from "../context/ThemeContext";
 import { useSocket } from "../context/SocketContext";
-import { toast } from "sonner";
+import { User } from "../types";
 import Profile from "./Profile";
 
-const toastStyle = {
-  style: {
-    background: "var(--toast-bg)",
-    color: "var(--toast-color)",
-    border: "1px solid var(--toast-border)",
-    borderRadius: "12px",
-  },
-};
+type SettingsTab = "profile" | "appearance";
+
+interface SettingProfileData {
+  fullName: string;
+  profilePic: string;
+  email: string;
+}
 
 const Settings = () => {
   const navigate = useNavigate();
   const { theme, setTheme } = useTheme();
-  const { token, logout, setUser } = useSocket();
-  
-  const [activeTab, setActiveTab] = useState("profile"); // "profile" | "appearance"
-  const [loading, setLoading] = useState(true);
-  const [formData, setFormData] = useState({
-    fullName: "",
-    email: "",
-    profilePic: "",
+  const { token, user, logout, setUser } = useSocket();
+
+  const [activeTab, setActiveTab] = useState<SettingsTab>("profile");
+  const [loading, setLoading] = useState<boolean>(!user);
+  const [formData, setFormData] = useState<SettingProfileData>({
+    fullName: user?.fullName || "",
+    email: user?.email || "",
+    profilePic: user?.profilePic || "",
   });
 
   const handleLogout = () => {
@@ -36,29 +35,46 @@ const Settings = () => {
     navigate("/login");
   };
 
-  const fetchProfile = async () => {
-    try {
-      setLoading(true);
-      const res = await axios.get(`${API_BASE_URL}/api/getProfile`, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
-      setFormData(res.data.user);
-      if (setUser) {
-         setUser(res.data.user);
-         localStorage.setItem("user", JSON.stringify(res.data.user));
-      }
-    } catch (error) {
-      console.log(error.response);
-    } finally {
-      setLoading(false);
-    }
-  };
-
   useEffect(() => {
-    fetchProfile();
-  }, []);
+    if (!token) return;
+    let cancelled = false;
+
+    const syncProfile = async () => {
+      try {
+        const res = await axios.get<{ user: User }>(`${API_BASE_URL}/api/getProfile`, {
+          headers: { Authorization: `Bearer ${token}` },
+        });
+        if (cancelled || !res.data.user) return;
+        const freshUser = res.data.user;
+        setFormData({
+          fullName: freshUser.fullName || "",
+          email: freshUser.email || "",
+          profilePic: freshUser.profilePic || "",
+        });
+        setUser(freshUser);
+        localStorage.setItem("user", JSON.stringify(freshUser));
+      } catch (error) {
+        console.error("Failed to fetch profile:", error);
+      } finally {
+        if (!cancelled) {
+          setLoading(false);
+        }
+      }
+    };
+
+    syncProfile();
+    return () => {
+      cancelled = true;
+    };
+  }, [token, setUser]);
+
+  const handleUserUpdated = (updatedUser: User) => {
+    setFormData({
+      fullName: updatedUser.fullName || "",
+      email: updatedUser.email || "",
+      profilePic: updatedUser.profilePic || "",
+    });
+  };
 
   if (loading) {
     return (
@@ -70,45 +86,53 @@ const Settings = () => {
 
   return (
     <div className="h-screen w-full bg-zinc-50 dark:bg-zinc-950 flex flex-col text-zinc-900 dark:text-zinc-100 transition-colors duration-200">
-      {/* Top Apple Navigation Bar */}
+      {/* Top Navigation Bar */}
       <div className="bg-white/80 dark:bg-zinc-900/80 backdrop-blur-md border-b border-zinc-200/80 dark:border-zinc-800/80 px-6 py-4 flex items-center justify-between sticky top-0 z-10">
         <button
-          onClick={() => navigate(-1)}
-          className="flex items-center gap-1.5 text-[#007aff] hover:opacity-80 transition-opacity font-medium"
+          type="button"
+          onClick={() => (window.history.length > 1 ? navigate(-1) : navigate("/"))}
+          className="flex items-center gap-1.5 text-[#007aff] hover:opacity-80 transition-opacity font-medium cursor-pointer"
         >
           <IoChevronBack size={20} />
           <span>Back</span>
         </button>
         <h1 className="font-semibold text-lg">Settings</h1>
-        <div className="w-12"></div> {/* spacer to center title */}
+        <div className="w-12"></div>
       </div>
 
       {/* Main Settings Container */}
       <div className="flex-1 flex flex-col md:flex-row overflow-hidden max-w-5xl w-full mx-auto md:p-6 gap-4 md:gap-6">
-        
         {/* Left Pane - Navigation List */}
         <div className="w-full md:w-80 bg-white dark:bg-zinc-900 md:rounded-2xl border-b md:border border-zinc-200 dark:border-zinc-800 p-4 flex flex-col justify-between shrink-0 shadow-sm gap-2">
           <div className="flex flex-col gap-1.5 w-full">
-            
             {/* Quick Profile Summary - Hidden on Mobile */}
             <div className="hidden md:flex items-center gap-3 p-3 mb-4 rounded-xl bg-zinc-50 dark:bg-zinc-800/40">
               <div className="h-12 w-12 rounded-full overflow-hidden bg-zinc-200 dark:bg-zinc-700 flex items-center justify-center text-zinc-500 shrink-0">
                 {formData.profilePic ? (
-                  <img src={formData.profilePic} alt="Profile" className="h-full w-full object-cover" />
+                  <img
+                    src={formData.profilePic}
+                    alt="Profile"
+                    className="h-full w-full object-cover"
+                  />
                 ) : (
                   <FiUser size={22} />
                 )}
               </div>
               <div className="min-w-0">
-                <h3 className="font-semibold text-sm truncate">{formData.fullName || "User"}</h3>
-                <p className="text-xs text-zinc-500 dark:text-zinc-400 truncate">{formData.email}</p>
+                <h3 className="font-semibold text-sm truncate">
+                  {formData.fullName || "User"}
+                </h3>
+                <p className="text-xs text-zinc-500 dark:text-zinc-400 truncate">
+                  {formData.email}
+                </p>
               </div>
             </div>
 
             {/* Sidebar Buttons */}
             <button
+              type="button"
               onClick={() => setActiveTab("profile")}
-              className={`w-full flex items-center gap-2.5 px-4 py-3 rounded-xl text-sm font-medium transition-all ${
+              className={`w-full flex items-center gap-2.5 px-4 py-3 rounded-xl text-sm font-medium transition-all cursor-pointer ${
                 activeTab === "profile"
                   ? "bg-[#007aff] text-white shadow-sm shadow-[#007aff]/20"
                   : "hover:bg-zinc-100 dark:hover:bg-zinc-800 text-zinc-500 dark:text-zinc-400"
@@ -119,8 +143,9 @@ const Settings = () => {
             </button>
 
             <button
+              type="button"
               onClick={() => setActiveTab("appearance")}
-              className={`w-full flex items-center gap-2.5 px-4 py-3 rounded-xl text-sm font-medium transition-all ${
+              className={`w-full flex items-center gap-2.5 px-4 py-3 rounded-xl text-sm font-medium transition-all cursor-pointer ${
                 activeTab === "appearance"
                   ? "bg-[#007aff] text-white shadow-sm shadow-[#007aff]/20"
                   : "hover:bg-zinc-100 dark:hover:bg-zinc-800 text-zinc-500 dark:text-zinc-400"
@@ -133,6 +158,7 @@ const Settings = () => {
 
           {/* Logout Button */}
           <button
+            type="button"
             onClick={handleLogout}
             className="w-full flex items-center justify-center gap-2 mt-6 md:mt-4 px-4 py-3 rounded-xl text-sm font-medium border border-red-200/60 dark:border-red-900/30 text-red-500 bg-red-500/5 hover:bg-red-500/10 transition-colors cursor-pointer"
           >
@@ -143,9 +169,12 @@ const Settings = () => {
 
         {/* Right Pane - Detail View */}
         <div className="flex-1 bg-white dark:bg-zinc-900 md:rounded-2xl border border-zinc-200 dark:border-zinc-800 p-6 overflow-y-auto shadow-sm">
-          
           {activeTab === "profile" && (
-            <Profile theme={theme} onUpdate={fetchProfile} />
+            <Profile
+              theme={theme}
+              initialUser={formData}
+              onUserUpdated={handleUserUpdated}
+            />
           )}
 
           {activeTab === "appearance" && (
@@ -159,7 +188,6 @@ const Settings = () => {
 
               {/* Theme Selector Grid */}
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-2">
-                
                 {/* Light Theme Card */}
                 <div
                   onClick={() => setTheme("light")}
@@ -180,8 +208,7 @@ const Settings = () => {
                       </span>
                     )}
                   </div>
-                  
-                  {/* Miniature UI View */}
+
                   <div className="bg-white border border-zinc-200 rounded-lg p-2 flex gap-1.5 items-center select-none opacity-80">
                     <div className="h-4 w-4 bg-[#007aff] rounded-full shrink-0"></div>
                     <div className="space-y-1 w-full">
@@ -211,13 +238,12 @@ const Settings = () => {
                       </span>
                     )}
                   </div>
-                  
-                  {/* Miniature UI View */}
+
                   <div className="bg-zinc-800 border border-zinc-700 rounded-lg p-2 flex gap-1.5 items-center select-none opacity-80">
                     <div className="h-4 w-4 bg-[#007aff] rounded-full shrink-0"></div>
                     <div className="space-y-1 w-full">
                       <div className="h-1.5 bg-zinc-700 rounded w-1/3"></div>
-                      <div className="h-1.5 bg-zinc-650 rounded w-2/3"></div>
+                      <div className="h-1.5 bg-zinc-600 rounded w-2/3"></div>
                     </div>
                   </div>
                 </div>
@@ -226,15 +252,14 @@ const Settings = () => {
                 <div className="border border-dashed border-zinc-200 dark:border-zinc-800 rounded-2xl p-4 flex flex-col justify-center items-center text-center text-zinc-400 dark:text-zinc-500 h-40 select-none">
                   <FiSliders size={24} className="mb-2 opacity-50" />
                   <span className="font-medium text-xs">More Themes</span>
-                  <span className="text-[10px] opacity-75 mt-0.5">Sepia, Slate & custom colors coming soon</span>
+                  <span className="text-[10px] opacity-75 mt-0.5">
+                    Sepia, Slate & custom colors coming soon
+                  </span>
                 </div>
-
               </div>
             </div>
           )}
-
         </div>
-
       </div>
     </div>
   );

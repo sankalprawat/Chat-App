@@ -5,48 +5,53 @@ import axios from "axios";
 import useSWR from "swr";
 import { API_BASE_URL } from "../../api/config";
 import { useState, useEffect } from "react";
-import MediaModal from "../MediaModal";
+import MediaModal, { MediaItem } from "../MediaModal";
+import { User } from "../../types";
+
+const userFetcher = async ([url, authToken]: [string, string]): Promise<User> => {
+  const res = await axios.get(url, {
+    headers: { Authorization: `Bearer ${authToken}` },
+  });
+  return res.data.data;
+};
 
 const ChatHeader = () => {
-  const { token, socketConnected, onlineUsers } = useSocket();
+  const { token, onlineUsers } = useSocket();
   const navigate = useNavigate();
-  const { userId } = useParams();
+  const { userId } = useParams<{ userId: string }>();
 
-  const fetcher = async (url) => {
-    const res = await axios.get(url, { headers: { Authorization: `Bearer ${token}` } });
-    return res.data.data;
-  };
-
-  const { data: user } = useSWR(
-    userId && token ? `${API_BASE_URL}/api/users/${userId}` : null,
-    fetcher
+  const { data: user } = useSWR<User>(
+    userId && token ? [`${API_BASE_URL}/api/users/${userId}`, token] : null,
+    userFetcher
   );
 
   useEffect(() => {
     if (user?.fullName) {
-      document.title = `${user.fullName}`;
+      document.title = user.fullName;
     }
     return () => {
       document.title = "Chat App";
     };
-  }, [user]);
+  }, [user?.fullName]);
 
   const name = user?.fullName || "User Name";
-  const isOnline = onlineUsers.includes(userId) || false;
+  const isOnline = userId ? onlineUsers.includes(userId) : false;
   const profile = user?.profilePic || null;
 
-  const [selectedMedia, setSelectedMedia] = useState(null);
+  const [selectedMedia, setSelectedMedia] = useState<MediaItem | null>(null);
 
   return (
     <>
       <div className="flex items-center px-4 py-3 bg-white/70 dark:bg-zinc-900/70 backdrop-blur-xl border-b border-zinc-200 dark:border-zinc-800 transition-colors duration-200">
         <button
+          type="button"
+          aria-label="Back to chats"
           onClick={() => navigate("/chat")}
           className="p-1.5 hover:bg-zinc-100 dark:hover:bg-zinc-800 rounded-full text-[#007aff] text-xl mr-2.5 transition-colors cursor-pointer"
         >
           <IoArrowBackCircleOutline />
         </button>
-        <div 
+        <div
           className="relative cursor-pointer mr-3 shrink-0"
           onClick={() => {
             if (profile) setSelectedMedia({ url: profile, type: "image" });
@@ -65,9 +70,13 @@ const ChatHeader = () => {
           )}
         </div>
         <div className="flex flex-col min-w-0 flex-1">
-          <span className="text-zinc-800 dark:text-zinc-100 font-semibold text-sm truncate">{name}</span>
+          <span className="text-zinc-800 dark:text-zinc-100 font-semibold text-sm truncate">
+            {name}
+          </span>
           <span
-            className={`text-[10px] font-medium ${isOnline ? "text-emerald-500" : "text-zinc-400 dark:text-zinc-500"}`}
+            className={`text-[10px] font-medium ${
+              isOnline ? "text-emerald-500" : "text-zinc-400 dark:text-zinc-500"
+            }`}
           >
             {isOnline ? "Online" : "Offline"}
           </span>
